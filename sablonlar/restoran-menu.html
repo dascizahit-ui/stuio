@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menü — Restoran</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #fdfcf9;
+            --bg-warm: #f6f1ea;
+            --bg-card: #ffffff;
+            --text: #2a2521;
+            --text-mid: #6d6359;
+            --text-light: #9c9189;
+            --accent: #b35a2c;
+            --accent-soft: rgba(179,90,44,0.08);
+            --gold: #c4a265;
+            --border: #e8e0d5;
+            --dark: #1e1b18;
+
+            --ff-display: 'Cormorant Garamond', Georgia, serif;
+            --ff-body: 'Outfit', system-ui, sans-serif;
+
+            --radius: 10px;
+            --shadow: 0 2px 16px rgba(42,37,33,0.05);
+            --shadow-hover: 0 6px 28px rgba(42,37,33,0.1);
+            --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--ff-body);
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img { display: block; max-width: 100%; }
+        a { text-decoration: none; color: inherit; }
+
+        .container {
+            width: min(1080px, 90%);
+            margin: 0 auto;
+        }
+
+        /* ========== HEADER ========== */
+        .header {
+            position: relative;
+            text-align: center;
+            padding: clamp(5rem, 12vw, 8rem) 0 clamp(2.5rem, 5vw, 4rem);
+            background: var(--dark);
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=75') center/cover no-repeat;
+            opacity: 0.25;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to top, var(--bg), transparent);
+        }
+
+        .header-inner {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-logo {
+            font-family: var(--ff-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .header h1 {
+            font-family: var(--ff-display);
+            font-size: clamp(2.6rem, 6vw, 4rem);
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.15;
+            margin-bottom: 0.75rem;
+        }
+
+        .header h1 em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .header-sub {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.45);
+            letter-spacing: 0.3px;
+        }
+
+        .header-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.35);
+            letter-spacing: 0.5px;
+        }
+
+        .header-note span {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--gold);
+            opacity: 0.6;
+        }
+
+        /* ========== STICKY CATEGORY NAV ========== */
+        .cat-nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(253,252,249,0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .cat-nav.shadow {
+            box-shadow: 0 2px 12px rgba(42,37,33,0.06);
+        }
+
+        .cat-nav-inner {
+            display: flex;
+            gap: 0.25rem;
+            padding: 0.6rem 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .cat-nav-inner::-webkit-scrollbar { display: none; }
+
+        .cat-btn {
+            flex-shrink: 0;
+            padding: 0.55rem 1.2rem;
+            font-family: var(--ff-body);
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-light);
+            background: transparent;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.25s var(--ease);
+            white-space: nowrap;
+        }
+
+        .cat-btn:hover {
+            color: var(--text);
+            background: var(--accent-soft);
+        }
+
+        .cat-btn.active {
+            color: #fff;
+            background: var(--accent);
+            font-weight: 600;
+        }
+
+        /* ========== MENU SECTION ========== */
+        .menu-section {
+            padding: clamp(2rem, 4vw, 3.5rem) 0 1rem;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .section-icon {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent-soft);
+            border-radius: 10px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .section-head h2 {
+            font-family: var(--ff-display);
+            font-size: clamp(1.4rem, 2.8vw, 1.8rem);
+            font-weight: 600;
+        }
+
+        .section-head h2 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* ========== MENU GRID ========== */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .menu-card {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            transition: all 0.3s var(--ease);
+        }
+
+        .menu-card:hover {
+            border-color: transparent;
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .card-img {
+            width: 88px;
+            height: 88px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s var(--ease);
+        }
+
+        .menu-card:hover .card-img img {
+            transform: scale(1.08);
+        }
+
+        .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0;
+        }
+
+        .card-name {
+            font-family: var(--ff-display);
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            line-height: 1.3;
+        }
+
+        .card-desc {
+            font-size: 0.76rem;
+            color: var(--text-mid);
+            line-height: 1.5;
+            margin-bottom: 0.4rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+        }
+
+        .card-price {
+            font-family: var(--ff-display);
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .tag {
+            font-size: 0.6rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 3px;
+            background: var(--bg-warm);
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .tag.popular {
+            background: rgba(196, 162, 101, 0.15);
+            color: var(--gold);
+        }
+
+        .tag.spicy {
+            background: rgba(200, 60, 40, 0.08);
+            color: #c24832;
+        }
+
+        .tag.vegan {
+            background: rgba(76, 140, 60, 0.1);
+            color: #4a8a3a;
+        }
+
+        /* ========== DIVIDER ========== */
+        .divider {
+            border: none;
+            height: 1px;
+            background: var(--border);
+            margin: 0.5rem 0;
+        }
+
+        /* ========== BACK LINK ========== */
+        .back-bar {
+            text-align: center;
+            padding: 2.5rem 0 3rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: color 0.25s ease;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .back-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: var(--dark);
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-brand {
+            font-family: var(--ff-display);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-info {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.3);
+            line-height: 1.8;
+        }
+
+        .footer-info a { transition: color 0.2s; }
+        .footer-info a:hover { color: var(--gold); }
+
+        .footer-copy {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.18);
+        }
+
+        /* ========== FADE ANIMATION ========== */
+        .fade {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .fade.in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 700px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-img {
+                width: 76px;
+                height: 76px;
+            }
+
+            .cat-nav-inner {
+                padding: 0.5rem 0;
+            }
+
+            .cat-btn {
+                padding: 0.45rem 1rem;
+                font-size: 0.78rem;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="header-inner">
+        <div class="header-logo">☰ RESTORAN</div>
+        <h1>Lezzetli <em>Menümüz</em></h1>
+        <p class="header-sub">Taze malzemeler · Geleneksel tarifler · Mevsimsel lezzetler</p>
+        <div class="header-note">
+            🌿 Vegan <span></span> 🌶️ Acılı <span></span> ⭐ Popüler
+        </div>
+    </div>
+</header>
+
+<!-- STICKY CATEGORY NAV -->
+<nav class="cat-nav" id="catNav">
+    <div class="container">
+        <div class="cat-nav-inner" id="catTabs">
+            <button class="cat-btn active" data-target="baslangiclar">🥗 Başlangıçlar</button>
+            <button class="cat-btn" data-target="ana-yemekler">🍖 Ana Yemekler</button>
+            <button class="cat-btn" data-target="deniz">🐟 Deniz Ürünleri</button>
+            <button class="cat-btn" data-target="tatlilar">🍯 Tatlılar</button>
+            <button class="cat-btn" data-target="icecekler">☕ İçecekler</button>
+        </div>
+    </div>
+</nav>
+
+<!-- MENU CONTENT -->
+<main class="container">
+
+    <!-- BAŞLANGIÇLAR -->
+    <section class="menu-section" id="baslangiclar">
+        <div class="section-head">
+            <div class="section-icon">🥗</div>
+            <h2>Başlangıçlar <em>& Mezeler</em></h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=300&q=80" alt="Meze Tabağı" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Mevsim Meze Tabağı</div>
+                    <div class="card-desc">8 çeşit ev yapımı meze: haydari, cacık, acı ezme, humus, patlıcan ezmesi ve daha fazlası.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺285</div>
+                        <div class="card-tags"><span class="tag popular">⭐ Popüler</span><span class="tag vegan">🌿</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&q=80" alt="Sigara Böreği" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Sigara Böreği</div>
+                    <div class="card-desc">Lor peyniri ve maydanozlu, ince yufkadan el yapımı çıtır börekler. 6'lı porsiyon.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺165</div>
+                        <div class="card-tags"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=300&q=80" alt="Karides Kokteyl" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Karides Kokteyl</div>
+                    <div class="card-desc">Taze karides, avokado, limon mayonezi ve roka eşliğinde zarif sunum.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺285</div>
+                        <div class="card-tags"><span class="tag popular">⭐ Popüler</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=300&q=80" alt="Mercimek Çorbası" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Mercimek Çorbası</div>
+                    <div class="card-desc">Geleneksel tarif, limon ve kırmızı pul biber yağıyla servis edilir.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺145</div>
+                        <div class="card-tags"><span class="tag vegan">🌿</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ANA YEMEKLER -->
+    <section class="menu-section" id="ana-yemekler">
+        <div class="section-head">
+            <div class="section-icon">🍖</div>
+            <h2>Ana <em>Yemekler</em></h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=300&q=80" alt="Kuzu Tandır" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Kuzu Tandır</div>
+                    <div class="card-desc">12 saat tandırda pişirilmiş kuzu, közlenmiş sebzeler, pilav ve yoğurt ile.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺620</div>
+                        <div class="card-tags"><span class="tag popular">⭐ Popüler</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=300&q=80" alt="Dana Güveç" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Dana Güveç</div>
+                    <div class="card-desc">Toprak güveçte yavaş pişirilmiş dana eti, kuru fasulye, kekik ve domates.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺580</div>
+                        <div class="card-tags"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1558030006-450675393462?w=300&q=80" alt="Adana Kebap" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Adana Kebap</div>
+                    <div class="card-desc">El kıyması ile hazırlanan kebap, közlenmiş domates ve biber eşliğinde.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺445</div>
+                        <div class="card-tags"><span class="tag spicy">🌶️ Acılı</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=300&q=80" alt="Kuzu Kaburga" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Kuzu Kaburga</div>
+                    <div class="card-desc">Fırında 8 saat pişirilmiş kuzu kaburga, nar ekşili sos ve taze otlar ile.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺695</div>
+                        <div class="card-tags"><span class="tag popular">⭐ Popüler</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=300&q=80" alt="İskender" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">İskender Kebap</div>
+                    <div class="card-desc">İnce dilimlenmiş döner, pide üzerinde domates sosu ve tereyağı ile.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺425</div>
+                        <div class="card-tags"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&q=80" alt="Köfte" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Ev Yapımı Köfte</div>
+                    <div class="card-desc">Dana ve kuzu karışımı, özel baharatlarla yoğrulmuş el yapımı köfteler.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺395</div>
+                        <div class="card-tags"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- DENİZ ÜRÜNLERİ -->
+    <section class="menu-section" id="deniz">
+        <div class="section-head">
+            <div class="section-icon">🐟</div>
+            <h2>Deniz <em>Ürünleri</em></h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=300&q=80" alt="Levrek" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Levrek Izgara</div>
+                    <div class="card-desc">Günlük Boğaz levreği, kapari sosu, enginar ve limon ile servis edilir.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺545</div>
+                        <div class="card-tags"><span class="tag popular">⭐ Popüler</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=300&q=80" alt="Karides Güveç" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Karides Güveç</div>
+                    <div class="card-desc">Tereyağı, sarımsak ve domates ile güveçte pişirilmiş taze karides.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺495</div>
+                        <div class="card-tags"><span class="tag spicy">🌶️ Hafif</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=300&q=80" alt="Çipura" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Çipura Fırın</div>
+                    <div class="card-desc">Kaya tuzu üzerinde fırında pişirilmiş taze çipura balığı.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺510</div>
+                        <div class="card-tags"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=300&q=80" alt="Ahtapot" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Izgara Ahtapot</div>
+                    <div class="card-desc">Marine edilmiş, ızgarada pişirilmiş ahtapot. Roka ve limon sosu ile.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺595</div>
+                        <div class="card-tags"><span class="tag popular">⭐ Popüler</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- TATLILAR -->
+    <section class="menu-section" id="tatlilar">
+        <div class="section-head">
+            <div class="section-icon">🍯</div>
+            <h2>Tatlılar</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=300&q=80" alt="Baklava" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Fıstıklı Baklava</div>
+                    <div class="card-desc">Günlük ev yapımı baklava, Antep fıstığı, kaymak ile servis edilir.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺185</div>
+                        <div class="card-tags"><span class="tag popular">⭐ Popüler</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=300&q=80" alt="Sütlaç" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Fırın Sütlaç</div>
+                    <div class="card-desc">Geleneksel tarife sadık taze fırın sütlaç, üzüm karamel kaplamalı.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺165</div>
+                        <div class="card-tags"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=300&q=80" alt="Künefe" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Hatay Usulü Künefe</div>
+                    <div class="card-desc">Taze tel kadayıf ve peynir, sıcak servis, dondurma eşliğinde.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺195</div>
+                        <div class="card-tags"><span class="tag popular">⭐ Popüler</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1564355808539-22fda35bed7e?w=300&q=80" alt="Kazandibi" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Kazandibi</div>
+                    <div class="card-desc">Karamelize süt tatlısı, tavuk göğsü ile hazırlanan geleneksel lezzet.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺155</div>
+                        <div class="card-tags"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- İÇECEKLER -->
+    <section class="menu-section" id="icecekler">
+        <div class="section-head">
+            <div class="section-icon">☕</div>
+            <h2>İçecekler</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=300&q=80" alt="Türk Çayı" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Türk Çayı (Demlik)</div>
+                    <div class="card-desc">Rize'nin en kaliteli yapraklarından demlenen geleneksel çay.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺65</div>
+                        <div class="card-tags"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=300&q=80" alt="Türk Kahvesi" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Türk Kahvesi</div>
+                    <div class="card-desc">Geleneksel cezvede pişirilmiş kahve, lokum eşliğinde.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺85</div>
+                        <div class="card-tags"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1571950006418-82c5d9b45bdd?w=300&q=80" alt="Ayran" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Ev Yapımı Ayran</div>
+                    <div class="card-desc">Günlük taze yoğurttan el çırpması ayran. Köpüklü ve soğuk servis.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺75</div>
+                        <div class="card-tags"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-card fade">
+                <div class="card-img"><img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?w=300&q=80" alt="Şarap" loading="lazy"></div>
+                <div class="card-body">
+                    <div class="card-name">Şarap Seçkisi</div>
+                    <div class="card-desc">Türk bağlarından seçkin kırmızı ve beyaz şaraplar. Tavsiye alabilirsiniz.</div>
+                    <div class="card-bottom">
+                        <div class="card-price">₺285+</div>
+                        <div class="card-tags"><span class="tag popular">⭐ Özel</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BACK -->
+    <div class="back-bar">
+        <a href="#" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Ana Sayfaya Dön
+        </a>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-brand">☰ Restoran</div>
+        <div class="footer-info">
+            Kuruçeşme Cad. No:42, Beşiktaş, İstanbul<br>
+            <a href="tel:+902121234567">+90 (212) 123 45 67</a> · 
+            <a href="mailto:info@restoran.com">info@restoran.com</a>
+        </div>
+        <div class="footer-copy">&copy; 2025 Restoran. Tüm hakları saklıdır. · Fiyatlara KDV dahildir. Menü mevsimsel olarak değişebilir.</div>
+    </div>
+</footer>
+
+<script>
+    // Sticky nav shadow
+    const catNav = document.getElementById('catNav');
+    const observer1 = new IntersectionObserver(
+        ([e]) => catNav.classList.toggle('shadow', !e.isIntersecting),
+        { threshold: 0 }
+    );
+    observer1.observe(document.querySelector('.header'));
+
+    // Category tab click → scroll to section
+    const tabs = document.querySelectorAll('.cat-btn');
+    tabs.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = document.getElementById(btn.dataset.target);
+            if (target) {
+                const offset = catNav.offsetHeight + 12;
+                const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }
+        });
+    });
+
+    // Highlight active tab on scroll
+    const sections = document.querySelectorAll('.menu-section');
+    const io = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                tabs.forEach(t => t.classList.remove('active'));
+                const match = document.querySelector(`.cat-btn[data-target="${entry.target.id}"]`);
+                if (match) {
+                    match.classList.add('active');
+                    // Scroll tab into view
+                    match.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+            }
+        });
+    }, { rootMargin: `-${catNav.offsetHeight + 20}px 0px -60% 0px`, threshold: 0 });
+
+    sections.forEach(s => io.observe(s));
+
+    // Fade in cards
+    const fadeEls = document.querySelectorAll('.fade');
+    const fadeObs = new IntersectionObserver(entries => {
+        entries.forEach((e, i) => {
+            if (e.isIntersecting) {
+                const siblings = [...e.target.parentElement.querySelectorAll('.fade')];
+                const idx = siblings.indexOf(e.target);
+                setTimeout(() => e.target.classList.add('in'), idx * 80);
+                fadeObs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    fadeEls.forEach(el => fadeObs.observe(el));
+</script>
+</body>
+</html>

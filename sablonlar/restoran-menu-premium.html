@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dölapi Restaurant — Menü</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A0;
+    --gold-dark: #8B6914;
+    --bg-dark: #0F0E0C;
+    --bg-card: #1A1916;
+    --bg-section: #141310;
+    --text-primary: #F5F0E8;
+    --text-secondary: #A09882;
+    --text-muted: #6B6352;
+    --border: #2A2720;
+    --accent-red: #A63D2F;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(201,168,76,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, rgba(166,61,47,0.06) 0%, transparent 50%),
+      linear-gradient(180deg, var(--bg-dark) 0%, #0a0908 100%);
+    z-index: 1;
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 30L30 55L5 30Z' fill='none' stroke='%23C9A84C' stroke-width='0.5'/%3E%3C/svg%3E");
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 1.2s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-ornament {
+    width: 80px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 30px;
+    position: relative;
+  }
+  .hero-ornament::before {
+    content: '◆';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--gold);
+    font-size: 10px;
+    background: var(--bg-dark);
+    padding: 0 12px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(0.85rem, 2vw, 1.05rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+
+  .hero-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--gold-light);
+    opacity: 0.7;
+    margin-bottom: 50px;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 14px 40px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+  }
+  .hero-cta:hover {
+    background: var(--gold);
+    color: var(--bg-dark);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: bounce 2s ease infinite;
+  }
+  .scroll-indicator span {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+  .scroll-indicator div {
+    width: 1px;
+    height: 30px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ===== NAV BAR ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,14,12,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-link {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 100px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+  }
+  .nav-link:hover, .nav-link.active {
+    color: var(--gold);
+    border-color: var(--gold-dark);
+    background: rgba(201,168,76,0.06);
+  }
+
+  /* ===== SECTIONS ===== */
+  .menu-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .menu-section {
+    padding: 80px 0 40px;
+  }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+    align-items: center;
+    animation: fadeIn 0.6s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .section-img {
+    width: 100%;
+    height: 280px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+  }
+  .section-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85) contrast(1.05);
+    transition: transform 0.8s ease;
+  }
+  .section-img:hover img {
+    transform: scale(1.05);
+  }
+  .section-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 12px;
+    pointer-events: none;
+  }
+
+  .section-info {
+    padding: 20px 0;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ===== MENU ITEMS ===== */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 18px 22px;
+    background: var(--bg-card);
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    gap: 12px;
+  }
+  .menu-item:hover {
+    border-color: var(--border);
+    background: var(--bg-section);
+    transform: translateY(-1px);
+  }
+
+  .item-info {
+    flex: 1;
+  }
+
+  .item-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 3px;
+  }
+
+  .item-detail {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 300;
+  }
+
+  .item-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    color: var(--gold);
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .item-price::after {
+    content: ' ₺';
+    font-size: 0.7em;
+    font-weight: 400;
+    opacity: 0.7;
+  }
+
+  .item-badge {
+    display: inline-block;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent-red);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* ===== SPECIAL HIGHLIGHT ===== */
+  .highlight-item {
+    background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.02));
+    border: 1px solid rgba(201,168,76,0.2);
+  }
+  .highlight-item:hover {
+    border-color: rgba(201,168,76,0.35);
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
+  }
+
+  /* ===== DIVIDER ===== */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 0;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border), transparent);
+  }
+  .section-divider span {
+    color: var(--gold);
+    font-size: 14px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 80px 20px;
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .footer-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+  }
+  .footer-note {
+    margin-top: 12px;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .section-header {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .section-img { height: 200px; }
+    .menu-grid {
+      grid-template-columns: 1fr;
+    }
+    .menu-section { padding: 50px 0 30px; }
+    .nav-link { padding: 6px 12px; font-size: 0.65rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-ornament"></div>
+    <h1>Döla<span>p</span>i</h1>
+    <p class="hero-subtitle">Restaurant</p>
+    <p class="hero-tagline">Geleneksel lezzetler, özenle hazırlanmış sofralar</p>
+    <a href="#menu" class="hero-cta">Menüyü Keşfet</a>
+  </div>
+  <div class="scroll-indicator">
+    <span>Aşağı</span>
+    <div></div>
+  </div>
+</section>
+
+<!-- ===== NAV ===== -->
+<nav class="nav-bar" id="menu">
+  <div class="nav-inner">
+    <a href="#kapali-pide" class="nav-link">Kapalı Pide</a>
+    <a href="#acik-pide" class="nav-link">Açık Pide</a>
+    <a href="#doner" class="nav-link">Döner</a>
+    <a href="#izgara" class="nav-link">Izgara</a>
+    <a href="#corba" class="nav-link">Çorba</a>
+    <a href="#tatli" class="nav-link">Tatlı</a>
+  </div>
+</nav>
+
+<div class="menu-container">
+
+  <!-- ========== KAPALI PİDELER ========== -->
+  <section class="menu-section" id="kapali-pide">
+    <div class="section-header">
+      <div class="section-img">
+        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=700&h=400&fit=crop&q=80" alt="Kapalı Pide" loading="lazy"
+             onerror="this.style.display='none'">
+      </div>
+      <div class="section-info">
+        <div class="section-label">Fırından</div>
+        <h2 class="section-title">Kapalı Pideler</h2>
+        <p class="section-desc">Özel hamurumuzla hazırlanan, bol malzemeli kapalı pidelerimiz taş fırında pişirilir.</p>
+      </div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Kapalı Kıymalı</div></div>
+        <div class="item-price">300</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Kapalı Bafra</div></div>
+        <div class="item-price">310</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Kapalı Kaşarlı</div></div>
+        <div class="item-price">300</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Kapalı B. Peynirli</div></div>
+        <div class="item-price">300</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Kapalı Çökelekli</div></div>
+        <div class="item-price">300</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- ========== AÇIK PİDELER ========== -->
+  <section class="menu-section" id="acik-pide">
+    <div class="section-header" style="direction: rtl;">
+      <div class="section-info" style="direction: ltr; text-align: right;">
+        <div class="section-label">Geleneksel</div>
+        <h2 class="section-title">Açık Pideler</h2>
+        <p class="section-desc">Klasik tekne şeklinde, üstü açık pidelerimiz taze malzemelerle zenginleştirilir.</p>
+      </div>
+      <div class="section-img" style="direction: ltr;">
+        <img src="https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=700&h=400&fit=crop&q=80" alt="Açık Pide" loading="lazy"
+             onerror="this.style.display='none'">
+      </div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Açık Kıymalı</div></div>
+        <div class="item-price">370</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Açık Mantarlı Peynirli</div></div>
+        <div class="item-price">370</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Açık Kavurmalı</div></div>
+        <div class="item-price">550</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Açık Sucuklu</div></div>
+        <div class="item-price">400</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Açık Pastırmalı</div></div>
+        <div class="item-price">550</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Açık Kuşbaşılı</div>
+          <div class="item-detail">120 gr.</div>
+        </div>
+        <div class="item-price">450</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Açık Çökelekli</div>
+          <div class="item-detail">120 gr.</div>
+        </div>
+        <div class="item-price">370</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Açık Beyaz Peynirli</div>
+          <div class="item-detail">150 gr.</div>
+        </div>
+        <div class="item-price">370</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Açık Kaşar Peynirli</div></div>
+        <div class="item-price">370</div>
+      </div>
+      <div class="menu-item highlight-item">
+        <div class="item-info">
+          <div class="item-name">Special Pide <span class="item-badge">Özel</span></div>
+        </div>
+        <div class="item-price">550</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Lahmacun</div></div>
+        <div class="item-price">100</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- ========== DÖNER ÇEŞİTLERİ ========== -->
+  <section class="menu-section" id="doner">
+    <div class="section-header">
+      <div class="section-img">
+        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=700&h=400&fit=crop&q=80" alt="Döner" loading="lazy"
+             onerror="this.style.display='none'">
+      </div>
+      <div class="section-info">
+        <div class="section-label">Ustadan</div>
+        <h2 class="section-title">Döner Çeşitleri</h2>
+        <p class="section-desc">Taze et, geleneksel marinasyon ve odun ateşinde pişirme ustalığıyla hazırlanan dönerlerimiz.</p>
+      </div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Dürüm Döner</div>
+          <div class="item-detail">100 gr.</div>
+        </div>
+        <div class="item-price">420</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Dürüm Tek Lavaş</div>
+          <div class="item-detail">50 gr.</div>
+        </div>
+        <div class="item-price">200</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Dürüm Çift Lavaş</div>
+          <div class="item-detail">50 gr.</div>
+        </div>
+        <div class="item-price">210</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Porsiyon Döner</div>
+          <div class="item-detail">100 gr.</div>
+        </div>
+        <div class="item-price">420</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Pilav Üstü Döner</div>
+          <div class="item-detail">100 gr.</div>
+        </div>
+        <div class="item-price">450</div>
+      </div>
+      <div class="menu-item highlight-item">
+        <div class="item-info">
+          <div class="item-name">İskender <span class="item-badge">Favori</span></div>
+          <div class="item-detail">100 gr.</div>
+        </div>
+        <div class="item-price">450</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Döner Beyti</div>
+          <div class="item-detail">100 gr.</div>
+        </div>
+        <div class="item-price">450</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">F.K. Döner</div>
+          <div class="item-detail">100 gr.</div>
+        </div>
+        <div class="item-price">450</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- ========== IZGARA ÇEŞİTLERİ ========== -->
+  <section class="menu-section" id="izgara">
+    <div class="section-header" style="direction: rtl;">
+      <div class="section-info" style="direction: ltr; text-align: right;">
+        <div class="section-label">Mangaldan</div>
+        <h2 class="section-title">Izgara Çeşitleri</h2>
+        <p class="section-desc">Közde pişirilen, seçkin etlerden hazırlanan ızgara lezzetlerimiz lavash ekmek ve garnitürle servis edilir.</p>
+      </div>
+      <div class="section-img" style="direction: ltr;">
+        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=700&h=400&fit=crop&q=80" alt="Izgara" loading="lazy"
+             onerror="this.style.display='none'">
+      </div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Adana Kebap</div></div>
+        <div class="item-price">520</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Adana Yoğurtlu</div></div>
+        <div class="item-price">650</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Urfa Kebap</div>
+          <div class="item-detail">120 gr.</div>
+        </div>
+        <div class="item-price">420</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Et Şiş</div>
+          <div class="item-detail">120 gr.</div>
+        </div>
+        <div class="item-price">550</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Tavuk Şiş</div>
+          <div class="item-detail">150 gr.</div>
+        </div>
+        <div class="item-price">370</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Tavuk Pirzola</div></div>
+        <div class="item-price">370</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Tavuk Kanat</div></div>
+        <div class="item-price">350</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Beyti</div></div>
+        <div class="item-price">450</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Beyti Güveç</div></div>
+        <div class="item-price">550</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Patlıcan Kebap</div></div>
+        <div class="item-price">460</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Domatesli Kebap</div></div>
+        <div class="item-price">380</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Izgara Köfte</div>
+          <div class="item-detail">120 gr.</div>
+        </div>
+        <div class="item-price">380</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">F.K. Köfte</div></div>
+        <div class="item-price">400</div>
+      </div>
+      <div class="menu-item highlight-item">
+        <div class="item-info">
+          <div class="item-name">Karışık Izgara <span class="item-badge">Özel</span></div>
+        </div>
+        <div class="item-price">900</div>
+      </div>
+      <div class="menu-item highlight-item">
+        <div class="item-info">
+          <div class="item-name">Vali Kebap <span class="item-badge">2 Kişilik</span></div>
+        </div>
+        <div class="item-price">1800</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- ========== ÇORBALAR ========== -->
+  <section class="menu-section" id="corba">
+    <div class="section-header">
+      <div class="section-img">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=700&h=400&fit=crop&q=80" alt="Çorba" loading="lazy"
+             onerror="this.style.display='none'">
+      </div>
+      <div class="section-info">
+        <div class="section-label">Sıcacık</div>
+        <h2 class="section-title">Çorbalar</h2>
+        <p class="section-desc">Her gün taze hazırlanan, ev yapımı çorbalarımızla sofraya başlayın.</p>
+      </div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Ezogelin Çorbası</div></div>
+        <div class="item-price">100</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Mercimek Çorbası</div></div>
+        <div class="item-price">100</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Tavuk Suyu Çorbası</div></div>
+        <div class="item-price">100</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span>◆</span></div>
+
+  <!-- ========== TATLILAR ========== -->
+  <section class="menu-section" id="tatli">
+    <div class="section-header" style="direction: rtl;">
+      <div class="section-info" style="direction: ltr; text-align: right;">
+        <div class="section-label">Tatlı Bir Son</div>
+        <h2 class="section-title">Tatlılar</h2>
+        <p class="section-desc">Yemeğinizi geleneksel tatlılarımızla taçlandırın.</p>
+      </div>
+      <div class="section-img" style="direction: ltr;">
+        <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?w=700&h=400&fit=crop&q=80" alt="Tatlı" loading="lazy"
+             onerror="this.style.display='none'">
+      </div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item highlight-item">
+        <div class="item-info"><div class="item-name">Künefe</div></div>
+        <div class="item-price">160</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Fırın Sütlaç</div></div>
+        <div class="item-price">160</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-logo">Dölapi Restaurant</div>
+  <p class="footer-text">Geleneksel Türk Mutfağı</p>
+  <p class="footer-note">Fiyatlarımız Türk Lirası (₺) cinsindendir. Servis ücreti dahil değildir.</p>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.menu-item').forEach((item, i) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(16px)';
+    item.style.transition = `all 0.5s ease ${i % 6 * 0.06}s`;
+    observer.observe(item);
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('.menu-section');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => link.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-100px 0px -50% 0px' });
+
+  sections.forEach(section => navObserver.observe(section));
+</script>
+</body>
+</html>

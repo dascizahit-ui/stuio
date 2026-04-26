@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio — Sektörünüze Özel Web Siteleri</title>
+<meta name="description" content="Estetikten avukatlığa, restorandan emlağa — işletmenize birebir uyan, hızlı ve modern web siteleri.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --bg-elev: #16161a;
+    --bg-elev-2: #1d1d22;
+    --border: #28282e;
+    --border-soft: #1f1f24;
+    --text: #f5f5ef;
+    --text-mute: #8a8a85;
+    --text-dim: #5a5a55;
+    --accent: #d4ff3e;
+    --accent-warm: #ff6b35;
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "Manrope", -apple-system, sans-serif;
+    --mono: "JetBrains Mono", monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+
+  /* NAV */
+  nav.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 32px;
+    backdrop-filter: blur(20px);
+    background: rgba(13,13,15,0.7);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  nav.top .inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 26px; font-style: italic;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 36px; font-size: 14px; font-weight: 500; }
+  .nav-links a { color: var(--text-mute); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    padding: 10px 18px;
+    background: var(--accent); color: #0d0d0f;
+    border-radius: 100px;
+    font-size: 13px; font-weight: 600;
+    transition: transform 0.2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); }
+  @media (max-width: 768px) { .nav-links { display: none; } }
+
+  /* HERO */
+  .hero { padding: 180px 0 100px; position: relative; overflow: hidden; }
+  .hero::after {
+    content: ""; position: absolute;
+    top: 20%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(212,255,62,0.08) 0%, transparent 70%);
+    filter: blur(60px); pointer-events: none;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-mute);
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    margin-bottom: 32px;
+  }
+  .eyebrow .dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--accent);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  h1.hero-title {
+    font-family: var(--serif);
+    font-size: clamp(54px, 9vw, 132px);
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    font-weight: 400;
+    max-width: 14ch;
+    margin-bottom: 32px;
+  }
+  h1.hero-title em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 19px;
+    color: var(--text-mute);
+    max-width: 540px;
+    line-height: 1.55;
+    margin-bottom: 48px;
+  }
+
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 80px; }
+  .btn {
+    padding: 16px 28px;
+    border-radius: 100px;
+    font-size: 15px; font-weight: 600;
+    transition: all 0.25s;
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--accent); color: #0d0d0f; }
+  .btn-primary:hover {
+    background: #e2ff5e;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px -10px rgba(212,255,62,0.4);
+  }
+  .btn-ghost { border-color: var(--border); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--text); background: rgba(255,255,255,0.03); }
+  .btn .arrow { transition: transform 0.2s; }
+  .btn:hover .arrow { transform: translate(3px, -3px); }
+
+  /* MARQUEE */
+  .marquee {
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    padding: 22px 0;
+    overflow: hidden;
+    margin-top: 60px;
+  }
+  .marquee-track {
+    display: flex; gap: 64px;
+    animation: scroll 40s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: var(--serif);
+    font-size: 28px; font-style: italic;
+    color: var(--text-mute);
+    display: flex; align-items: center; gap: 64px;
+  }
+  .marquee-item::after {
+    content: "✦"; color: var(--accent);
+    font-style: normal; font-size: 16px;
+  }
+  @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+  /* SECTIONS */
+  section { padding: 140px 0; position: relative; }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 80px;
+    margin-bottom: 80px;
+    align-items: end;
+  }
+  @media (max-width: 768px) {
+    .section-head { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
+  }
+  .section-num {
+    font-family: var(--mono);
+    font-size: 13px; color: var(--text-dim);
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1; letter-spacing: -0.03em;
+    font-weight: 400;
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+  .section-lead {
+    color: var(--text-mute);
+    max-width: 540px;
+    margin-top: 20px;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+
+  /* SECTORS */
+  .sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  @media (max-width: 1024px) { .sectors-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .sectors-grid { grid-template-columns: 1fr; } }
+
+  .sector-card {
+    background: var(--bg);
+    padding: 36px 28px;
+    min-height: 280px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: background 0.3s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .sector-card.live:hover { background: var(--bg-elev); }
+  .sector-card.live::before {
+    content: ""; position: absolute;
+    top: 0; left: 0; width: 100%; height: 2px;
+    background: var(--accent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .sector-card.live:hover::before { transform: scaleX(1); }
+
+  .sector-card.soon { opacity: 0.6; cursor: default; }
+  .sector-card.soon:hover { background: var(--bg); }
+
+  .sector-icon {
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg-elev-2);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    color: var(--accent);
+    transition: all 0.3s;
+  }
+  .sector-card.live:hover .sector-icon { background: var(--accent); color: var(--bg); }
+  .sector-icon svg { width: 22px; height: 22px; }
+
+  .sector-name {
+    font-family: var(--serif);
+    font-size: 28px; line-height: 1.1;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .sector-desc {
+    font-size: 14px; color: var(--text-mute);
+    line-height: 1.5; margin-bottom: 20px;
+  }
+  .sector-link {
+    font-family: var(--mono);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--text-mute);
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: auto;
+  }
+  .sector-card.live:hover .sector-link { color: var(--accent); }
+  .badge-soon {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-dim);
+  }
+
+  /* TEMPLATES SHOWCASE */
+  .templates-section {
+    background: var(--bg-elev);
+  }
+  .template-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  .template-card {
+    background: var(--bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.4s, border-color 0.3s, box-shadow 0.4s;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column;
+  }
+  .template-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+  }
+  .template-card.l { grid-column: span 7; }
+  .template-card.s { grid-column: span 5; }
+  @media (max-width: 900px) { .template-card.l, .template-card.s { grid-column: span 12; } }
+
+  .template-preview {
+    aspect-ratio: 16/10;
+    background: var(--bg-elev-2);
+    position: relative;
+    overflow: hidden;
+  }
+  .template-preview svg { width: 100%; height: 100%; display: block; }
+  .template-preview::after {
+    content: "Şablonu aç →";
+    position: absolute;
+    bottom: 16px; right: 16px;
+    background: var(--accent); color: var(--bg);
+    padding: 10px 16px;
+    border-radius: 100px;
+    font-size: 12px; font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+  }
+  .template-card:hover .template-preview::after { opacity: 1; transform: translateY(0); }
+
+  .template-info { padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .template-info h3 { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -0.01em; }
+  .template-info p { font-size: 13px; color: var(--text-mute); margin-top: 4px; }
+  .template-tag {
+    font-family: var(--mono);
+    font-size: 11px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+  }
+
+  /* WHY US */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+  }
+  @media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }
+
+  .why-item {
+    border-top: 1px solid var(--border);
+    padding-top: 32px;
+  }
+  .why-num {
+    font-family: var(--serif);
+    font-size: 64px; font-style: italic;
+    color: var(--accent);
+    line-height: 1; margin-bottom: 16px;
+  }
+  .why-item h3 {
+    font-family: var(--serif);
+    font-size: 28px; font-weight: 400;
+    margin-bottom: 12px; letter-spacing: -0.01em;
+  }
+  .why-item p { color: var(--text-mute); font-size: 15px; line-height: 1.6; }
+
+  /* STATS */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border-soft);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+  }
+  @media (max-width: 768px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  .stat { background: var(--bg); padding: 40px 28px; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 56px; line-height: 1;
+    margin-bottom: 8px; letter-spacing: -0.02em;
+  }
+  .stat-num em { font-style: italic; color: var(--accent); }
+  .stat-label { font-size: 13px; color: var(--text-mute); }
+
+  /* PROCESS */
+  .process-list {
+    display: grid; gap: 1px;
+    background: var(--border-soft);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .process-row {
+    background: var(--bg);
+    padding: 36px 32px;
+    display: grid;
+    grid-template-columns: 80px 1fr 2fr;
+    gap: 32px;
+    align-items: center;
+    transition: background 0.3s;
+  }
+  .process-row:hover { background: var(--bg-elev); }
+  @media (max-width: 768px) {
+    .process-row { grid-template-columns: 1fr; gap: 12px; }
+  }
+  .process-row .step-num {
+    font-family: var(--mono);
+    font-size: 14px; color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+  .process-row .step-title {
+    font-family: var(--serif);
+    font-size: 28px; font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .process-row .step-desc { color: var(--text-mute); font-size: 15px; line-height: 1.55; }
+
+  /* FAQ */
+  .faq-list { max-width: 900px; }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 28px 0;
+    cursor: pointer;
+  }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 24px;
+    font-family: var(--serif);
+    font-size: 24px; font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .faq-q .plus {
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    color: var(--text-mute);
+    font-size: 18px;
+  }
+  .faq-item.open .faq-q .plus {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    transform: rotate(45deg);
+  }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    color: var(--text-mute);
+    font-size: 16px; line-height: 1.6;
+    padding-right: 56px;
+  }
+  .faq-item.open .faq-a { max-height: 240px; padding-top: 16px; }
+
+  /* CTA */
+  .cta-block {
+    text-align: center;
+    padding: 120px 32px;
+    position: relative;
+    background: var(--bg-elev);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid var(--border-soft);
+  }
+  .cta-block::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, rgba(212,255,62,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cta-block h2 {
+    font-family: var(--serif);
+    font-size: clamp(40px, 7vw, 88px);
+    line-height: 1; letter-spacing: -0.03em;
+    font-weight: 400;
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .cta-block h2 em { font-style: italic; color: var(--accent); }
+  .cta-block .lead {
+    color: var(--text-mute);
+    font-size: 18px;
+    max-width: 540px;
+    margin: 0 auto 40px;
+    position: relative;
+  }
+  .cta-block .btn { position: relative; }
+  .cta-contacts {
+    display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+    margin-top: 60px;
+    position: relative;
+  }
+  .cta-contact { display: flex; flex-direction: column; gap: 4px; }
+  .cta-contact .label {
+    font-family: var(--mono);
+    font-size: 11px; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .cta-contact .val {
+    font-family: var(--serif);
+    font-size: 22px; font-style: italic;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--border-soft);
+    margin-top: 80px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 60px;
+  }
+  @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+  .footer-col h4 {
+    font-family: var(--mono);
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+  }
+  .footer-col a {
+    display: block;
+    color: var(--text-mute);
+    font-size: 14px; padding: 4px 0;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--text); }
+  .footer-tagline {
+    font-family: var(--serif);
+    font-size: 22px; line-height: 1.4;
+    color: var(--text-mute);
+    max-width: 380px; margin-top: 16px;
+  }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-soft);
+    font-size: 13px;
+    color: var(--text-dim);
+    flex-wrap: wrap; gap: 12px;
+  }
+
+  /* SECTOR PREVIEW SVG ART styles */
+  .preview-cafe { background: linear-gradient(135deg, #2e1a0e 0%, #1a0e08 100%); }
+  .preview-menu { background: linear-gradient(135deg, #0a1f1c 0%, #050d0c 100%); }
+  .preview-menu-prem { background: linear-gradient(135deg, #1a1208 0%, #0d0905 100%); }
+  .preview-orta { background: linear-gradient(135deg, #2c1810 0%, #1a0d08 100%); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="inner">
+    <a href="#" class="logo">studio<span>.</span></a>
+    <div class="nav-links">
+      <a href="#sektorler">Sektörler</a>
+      <a href="#sablonlar">Şablonlar</a>
+      <a href="#nasil">Nasıl Çalışır</a>
+      <a href="#sss">SSS</a>
+    </div>
+    <a href="#iletisim" class="nav-cta">Teklif Al</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">
+      <span class="dot"></span>
+      Teslim süresi: 5-10 gün
+    </div>
+    <h1 class="hero-title">
+      İşine <em>özel</em> bir<br>web sitesi.
+    </h1>
+    <p class="hero-sub">
+      Klişe şablonlardan değil, sektörünüze birebir uyan tasarımlardan başlıyoruz. Restoran, klinik, emlak ya da hukuk bürosu — siteniz işiniz gibi davranır.
+    </p>
+    <div class="hero-cta">
+      <a href="#sablonlar" class="btn btn-primary">
+        Şablonları gör
+        <span class="arrow">↗</span>
+      </a>
+      <a href="#iletisim" class="btn btn-ghost">
+        Teklif iste
+      </a>
+    </div>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="marquee-item">Restoran &amp; Cafe</span>
+      <span class="marquee-item">Estetik Salonları</span>
+      <span class="marquee-item">Diş Klinikleri</span>
+      <span class="marquee-item">Emlakçılar</span>
+      <span class="marquee-item">Avukatlar</span>
+      <span class="marquee-item">Galericiler</span>
+      <span class="marquee-item">Mimarlar</span>
+      <span class="marquee-item">Eğitim Merkezleri</span>
+      <span class="marquee-item">Restoran &amp; Cafe</span>
+      <span class="marquee-item">Estetik Salonları</span>
+      <span class="marquee-item">Diş Klinikleri</span>
+      <span class="marquee-item">Emlakçılar</span>
+      <span class="marquee-item">Avukatlar</span>
+      <span class="marquee-item">Galericiler</span>
+      <span class="marquee-item">Mimarlar</span>
+      <span class="marquee-item">Eğitim Merkezleri</span>
+    </div>
+  </div>
+</header>
+
+<!-- SECTORS -->
+<section id="sektorler">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num">[ 01 / Sektörler ]</div>
+      <div>
+        <h2 class="section-title">Hangi işi <em>yapıyorsunuz</em>?</h2>
+        <p class="section-lead">Her sektörün kendine özgü ihtiyaçları var — menü, randevu, portföy ya da rezervasyon. Biz hangisi gerekiyorsa onu yapıyoruz.</p>
+      </div>
+    </div>
+
+    <div class="sectors-grid">
+      <!-- AKTIF: Restoran/Cafe -->
+      <a href="#sablonlar" class="sector-card live">
+        <div>
+          <div class="sector-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v20M16 2v6c0 1 1 2 2 2h2"/><path d="M6 2v8a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V2"/></svg>
+          </div>
+          <h3 class="sector-name">Restoran &amp; Cafe</h3>
+          <p class="sector-desc">Menü, rezervasyon, atmosfer — masaya gelmeden önce müşteri tatmin olur.</p>
+        </div>
+        <span class="sector-link">Şablonları gör →</span>
+      </a>
+
+      <!-- YAKINDA -->
+      <div class="sector-card soon">
+        <div>
+          <div class="sector-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+          </div>
+          <h3 class="sector-name">Estetik &amp; Güzellik</h3>
+          <p class="sector-desc">Online randevu, hizmet kataloğu, öncesi/sonrası galerisi.</p>
+        </div>
+        <span class="badge-soon">Yakında</span>
+      </div>
+
+      <div class="sector-card soon">
+        <div>
+          <div class="sector-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 6 5 6 9c0 3 1 5 2 7 1 1 2 4 4 4s3-3 4-4c1-2 2-4 2-7 0-4-2-7-6-7z"/></svg>
+          </div>
+          <h3 class="sector-name">Diş Klinikleri</h3>
+          <p class="sector-desc">Tedavi sayfaları, doktor kadrosu, hızlı randevu sistemi.</p>
+        </div>
+        <span class="badge-soon">Yakında</span>
+      </div>
+
+      <div class="sector-card soon">
+        <div>
+          <div class="sector-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8v10a2 2 0 0 1-2 2h-4v-7H10v7H6a2 2 0 0 1-2-2V11z"/></svg>
+          </div>
+          <h3 class="sector-name">Emlakçılar</h3>
+          <p class="sector-desc">İlan listeleri, harita, filtreli arama, danışman profilleri.</p>
+        </div>
+        <span class="badge-soon">Yakında</span>
+      </div>
+
+      <div class="sector-card soon">
+        <div>
+          <div class="sector-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M6 6v15M18 6v15M9 11h6M9 16h6"/></svg>
+          </div>
+          <h3 class="sector-name">Avukatlar</h3>
+          <p class="sector-desc">Uzmanlık alanları, makale yayını, gizli iletişim formu.</p>
+        </div>
+        <span class="badge-soon">Yakında</span>
+      </div>
+
+      <div class="sector-card soon">
+        <div>
+          <div class="sector-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-6h14l2 6v6H3v-6z"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg>
+          </div>
+          <h3 class="sector-name">Galericiler</h3>
+          <p class="sector-desc">Stok kataloğu, fiyat filtreleri, takas/finansman çağrısı.</p>
+        </div>
+        <span class="badge-soon">Yakında</span>
+      </div>
+
+      <div class="sector-card soon">
+        <div>
+          <div class="sector-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l9-5 9 5v13M9 21V12h6v9"/></svg>
+          </div>
+          <h3 class="sector-name">Mimarlar</h3>
+          <p class="sector-desc">Proje portföyü, tam ekran galeri, basında biz.</p>
+        </div>
+        <span class="badge-soon">Yakında</span>
+      </div>
+
+      <div class="sector-card soon">
+        <div>
+          <div class="sector-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>
+          </div>
+          <h3 class="sector-name">Eğitim &amp; Kurslar</h3>
+          <p class="sector-desc">Kurs takvimi, öğretmen kadrosu, online kayıt.</p>
+        </div>
+        <span class="badge-soon">Yakında</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMPLATES -->
+<section id="sablonlar" class="templates-section">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num">[ 02 / Şablonlar ]</div>
+      <div>
+        <h2 class="section-title">Hazır <em>tasarımlar</em>.</h2>
+        <p class="section-lead">Tıklayın, gerçek tasarımı görün. Beğendiğinizi alıp kendi içeriğinize göre özelleştiriyoruz.</p>
+      </div>
+    </div>
+
+    <div class="template-grid">
+
+      <a href="sablonlar/cafe-aroma.html" class="template-card l" target="_blank">
+        <div class="template-preview preview-cafe">
+          <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="cg1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#3a2415"/>
+                <stop offset="100%" stop-color="#1a0e08"/>
+              </linearGradient>
+            </defs>
+            <rect width="700" height="440" fill="url(#cg1)"/>
+            <circle cx="350" cy="200" r="180" fill="#c8863a" opacity="0.08"/>
+            <text x="60" y="80" font-family="Cormorant Garamond, serif" font-style="italic" font-size="22" fill="#e8b86d" opacity="0.7">Aroma Café</text>
+            <text x="60" y="200" font-family="Cormorant Garamond, serif" font-size="76" fill="#f5ede0">Kahvenin</text>
+            <text x="60" y="270" font-family="Cormorant Garamond, serif" font-style="italic" font-size="76" fill="#e8b86d">sanatı.</text>
+            <line x1="60" y1="320" x2="180" y2="320" stroke="#e8b86d" stroke-width="2"/>
+            <text x="60" y="360" font-family="DM Sans, sans-serif" font-size="14" fill="#c8863a" letter-spacing="2">SAMSUN — SINCE 2018</text>
+            <circle cx="540" cy="180" r="80" fill="none" stroke="#e8b86d" stroke-width="1" opacity="0.4"/>
+            <circle cx="540" cy="180" r="120" fill="none" stroke="#e8b86d" stroke-width="1" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Aroma Café</h3>
+            <p>Sıcak tonlar, hikâye anlatımı, hero galeri</p>
+          </div>
+          <span class="template-tag">Cafe</span>
+        </div>
+      </a>
+
+      <a href="sablonlar/restoran-menu-premium.html" class="template-card s" target="_blank">
+        <div class="template-preview preview-menu-prem">
+          <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="700" height="440" fill="#1a1208"/>
+            <rect x="40" y="40" width="620" height="360" fill="none" stroke="#d4af6f" stroke-width="1" opacity="0.4"/>
+            <text x="350" y="120" text-anchor="middle" font-family="serif" font-style="italic" font-size="20" fill="#d4af6f" opacity="0.8">— menu —</text>
+            <text x="350" y="220" text-anchor="middle" font-family="serif" font-size="64" fill="#f5ede0">Dölapi</text>
+            <text x="350" y="270" text-anchor="middle" font-family="serif" font-style="italic" font-size="32" fill="#d4af6f">restaurant</text>
+            <line x1="280" y1="310" x2="420" y2="310" stroke="#d4af6f" stroke-width="1"/>
+            <text x="350" y="360" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#a0826d" letter-spacing="3">PREMIUM</text>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Dölapi Premium</h3>
+            <p>Lüks restoran menü kartı</p>
+          </div>
+          <span class="template-tag">Menü</span>
+        </div>
+      </a>
+
+      <a href="sablonlar/restoran-menu.html" class="template-card s" target="_blank">
+        <div class="template-preview preview-menu">
+          <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="700" height="440" fill="#0a1f1c"/>
+            <circle cx="100" cy="100" r="60" fill="#d4ff3e" opacity="0.1"/>
+            <circle cx="600" cy="340" r="80" fill="#d4ff3e" opacity="0.08"/>
+            <text x="60" y="180" font-family="sans-serif" font-size="14" fill="#d4ff3e" letter-spacing="3">MENÜ</text>
+            <text x="60" y="240" font-family="serif" font-size="56" fill="#f5ede0">Bugünün</text>
+            <text x="60" y="300" font-family="serif" font-style="italic" font-size="56" fill="#d4ff3e">lezzetleri.</text>
+            <rect x="60" y="340" width="120" height="40" rx="20" fill="#d4ff3e"/>
+            <text x="120" y="365" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#0a1f1c" font-weight="600">REZERVE ET</text>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Modern Menü</h3>
+            <p>Tek sayfa restoran menüsü</p>
+          </div>
+          <span class="template-tag">Menü</span>
+        </div>
+      </a>
+
+      <a href="sablonlar/restoran-orta-paket.html" class="template-card l" target="_blank">
+        <div class="template-preview preview-orta">
+          <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="og1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#3d2418"/>
+                <stop offset="100%" stop-color="#1a0d08"/>
+              </linearGradient>
+            </defs>
+            <rect width="700" height="440" fill="url(#og1)"/>
+            <text x="60" y="90" font-family="serif" font-style="italic" font-size="18" fill="#d4a574" opacity="0.8">— Geleneksel Lezzetler —</text>
+            <text x="60" y="200" font-family="serif" font-size="68" fill="#f5e6d3">Anadolu</text>
+            <text x="60" y="270" font-family="serif" font-style="italic" font-size="68" fill="#d4a574">Sofra.</text>
+            <line x1="60" y1="310" x2="240" y2="310" stroke="#d4a574" stroke-width="2"/>
+            <text x="60" y="350" font-family="sans-serif" font-size="14" fill="#a08060" letter-spacing="2">REZERVASYON · MENÜ · GALERİ</text>
+            <circle cx="560" cy="220" r="100" fill="none" stroke="#d4a574" stroke-width="1" opacity="0.3"/>
+            <circle cx="560" cy="220" r="60" fill="#d4a574" opacity="0.1"/>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Anadolu Sofra</h3>
+            <p>Geleneksel restoran, çok bölümlü site</p>
+          </div>
+          <span class="template-tag">Restoran</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num">[ 03 / Neden Biz ]</div>
+      <div>
+        <h2 class="section-title">Hızlı, <em>kalıcı</em>,<br>sıkıntısız.</h2>
+      </div>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-num">01</div>
+        <h3>Hız.</h3>
+        <p>Şablon temelli çalıştığımız için 5-10 gün içinde sitenizi yayına alıyoruz. Sıfırdan tasarımda haftalar süren süreçleri günlere indiriyoruz.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">02</div>
+        <h3>Sektör odağı.</h3>
+        <p>Bir avukatın ihtiyacı bir restoranınkinden farklı. Şablonlarımız sektörünüzün dinamiklerine göre kurgulanmış.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-num">03</div>
+        <h3>Mobilden başlar.</h3>
+        <p>Müşterilerinizin %70'i siteyi telefondan açıyor. Tasarım önce mobil için yapılır, sonra masaüstüne uyarlanır.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num"><em>5-10</em></div>
+        <div class="stat-label">Gün teslim süresi</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><em>100%</em></div>
+        <div class="stat-label">Mobil uyumlu</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><em>8</em></div>
+        <div class="stat-label">Sektör şablonu</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num"><em>1y</em></div>
+        <div class="stat-label">Ücretsiz destek</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="nasil">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num">[ 04 / Süreç ]</div>
+      <div>
+        <h2 class="section-title">Nasıl <em>çalışıyor</em>?</h2>
+      </div>
+    </div>
+
+    <div class="process-list">
+      <div class="process-row">
+        <div class="step-num">[ ADIM 01 ]</div>
+        <div class="step-title">Kısa görüşme</div>
+        <div class="step-desc">15 dakikalık bir aramada işinizi tanırız: ne sattığınızı, müşteri profilinizi, sitenizden ne beklediğinizi.</div>
+      </div>
+      <div class="process-row">
+        <div class="step-num">[ ADIM 02 ]</div>
+        <div class="step-title">Şablon seçimi</div>
+        <div class="step-desc">Sektörünüzdeki şablonlardan birini seçin ya da fikir verin — onun üzerinde özelleştirelim.</div>
+      </div>
+      <div class="process-row">
+        <div class="step-num">[ ADIM 03 ]</div>
+        <div class="step-title">İçerik &amp; tasarım</div>
+        <div class="step-desc">Logo, fotoğraf, metin ne varsa toplarız; logonuz yoksa biz hallederiz. Tasarımı işinize uyarlarız.</div>
+      </div>
+      <div class="process-row">
+        <div class="step-num">[ ADIM 04 ]</div>
+        <div class="step-title">Yayına alma</div>
+        <div class="step-desc">Domain, hosting, mail kurulumu — hepsi bizden. 1 yıl boyunca ufak değişikliklerde ekstra ücret yok.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="sss">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-num">[ 05 / SSS ]</div>
+      <div>
+        <h2 class="section-title">Sık sorulan <em>sorular</em>.</h2>
+      </div>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Logom yok, problem mi? <span class="plus">+</span></div>
+        <div class="faq-a">Hayır, sıkıntı yok. Sade bir logoyu paket içinde tasarlıyoruz; daha kapsamlı kurumsal kimlik isterseniz ek paket olarak sunarız.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Sonradan güncelleme yapabilir miyim? <span class="plus">+</span></div>
+        <div class="faq-a">Evet. İlk 1 yıl ufak değişiklikler (telefon, fiyat, metin, foto güncelleme) ücretsiz. Sonrasında dilerseniz bize yaptırırsınız, dilerseniz size bir kullanıcı paneli kurarız.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Domain ve hosting dahil mi? <span class="plus">+</span></div>
+        <div class="faq-a">İlk yıl domain (.com / .com.tr) ve hosting paketin içinde. İkinci yıldan itibaren yıllık yenileme ücreti var, çok küçük bir tutar.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Kaç dilli olabilir? <span class="plus">+</span></div>
+        <div class="faq-a">Tek dilli paketlerimiz standart. İngilizce + Türkçe çift dilli isterseniz küçük bir ek ücretle ekliyoruz; metin çevirileri sizden ya da bizden olabilir.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Ödeme nasıl yapılıyor? <span class="plus">+</span></div>
+        <div class="faq-a">%50 başlangıçta, %50 site teslim edildiğinde. Havale veya kredi kartı (taksit dahil) seçenekleri mevcut.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="iletisim" style="padding-bottom: 60px;">
+  <div class="wrap">
+    <div class="cta-block">
+      <h2>Bir <em>kahve</em> içerken<br>sitenizi konuşalım.</h2>
+      <p class="lead">15 dakikalık ücretsiz görüşmeyle ihtiyacınızı çıkarır, size özel teklif veririz.</p>
+      <a href="#" class="btn btn-primary">
+        WhatsApp'tan yaz
+        <span class="arrow">↗</span>
+      </a>
+
+      <div class="cta-contacts">
+        <div class="cta-contact">
+          <span class="label">Telefon</span>
+          <span class="val">+90 5XX XXX XX XX</span>
+        </div>
+        <div class="cta-contact">
+          <span class="label">E-posta</span>
+          <span class="val">selam@studio.com</span>
+        </div>
+        <div class="cta-contact">
+          <span class="label">Lokasyon</span>
+          <span class="val">İstanbul, TR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#" class="logo">studio<span>.</span></a>
+        <p class="footer-tagline">Sektörünüze özel, hızlı, modern web siteleri. İşi bilmeyen ajanslara para vermeyin.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Site</h4>
+        <a href="#sektorler">Sektörler</a>
+        <a href="#sablonlar">Şablonlar</a>
+        <a href="#nasil">Süreç</a>
+        <a href="#sss">SSS</a>
+      </div>
+      <div class="footer-col">
+        <h4>Sosyal</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Behance</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">WhatsApp</a>
+      </div>
+      <div class="footer-col">
+        <h4>İletişim</h4>
+        <a href="#">+90 5XX XXX XX XX</a>
+        <a href="#">selam@studio.com</a>
+        <a href="#">İstanbul, TR</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Studio. Tüm hakları saklıdır.</span>
+      <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;">MADE WITH ♥ IN TÜRKİYE</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // FAQ açma
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', () => item.classList.toggle('open'));
+  });
+
+  // Reveal on scroll
+  const reveal = (el) => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    obs.observe(el);
+  };
+
+  document.querySelectorAll('.sector-card, .template-card, .why-item, .stat, .process-row, .faq-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    reveal(el);
+  });
+</script>
+
+</body>
+</html>
