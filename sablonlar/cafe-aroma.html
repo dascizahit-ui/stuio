@@ -572,25 +572,24 @@
     .busy-bar {
       flex: 1; min-width: 0;
       min-height: 3px;
-      background: linear-gradient(to top, var(--caramel), var(--gold));
       border-radius: 2px 2px 0 0;
       position: relative;
       transition: height .5s cubic-bezier(.16,1,.3,1), filter .2s;
       cursor: pointer;
-      opacity: .85;
     }
-    .busy-bar:hover { opacity: 1; filter: brightness(1.1); }
+    .busy-bar:hover { filter: brightness(1.12); }
     .busy-bar.now {
-      background: linear-gradient(to top, var(--espresso), var(--caramel));
-      opacity: 1;
+      outline: 2px solid var(--gold);
+      outline-offset: 1px;
     }
     .busy-bar.now::before {
       content: '';
       position: absolute;
-      top: -8px; left: 50%; transform: translateX(-50%);
-      width: 6px; height: 6px;
-      background: var(--espresso);
+      top: -10px; left: 50%; transform: translateX(-50%);
+      width: 7px; height: 7px;
+      background: var(--gold);
       border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(232,184,109,.35);
     }
     .busy-bar-tip {
       position: absolute;
@@ -621,18 +620,6 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .busy-legend {
-      display: flex; gap: 14px; flex-wrap: wrap;
-      margin-top: 14px;
-      font-size: .7rem; color: var(--muted);
-    }
-    .busy-legend span { display: inline-flex; align-items: center; gap: 5px; }
-    .busy-legend i {
-      width: 10px; height: 10px; border-radius: 2px; display: inline-block;
-    }
-    .lvl-low  { background: var(--gold); opacity: .6; }
-    .lvl-mid  { background: var(--caramel); }
-    .lvl-high { background: var(--espresso); }
 
     .contact-map { border-radius: 4px; overflow: hidden; height: 100%; min-height: 400px; }
     .contact-map iframe { width: 100%; height: 100%; border: none; }
@@ -854,11 +841,6 @@
           <span>13:00</span>
           <span>17:00</span>
           <span>21:00</span>
-        </div>
-        <div class="busy-legend">
-          <span><i class="lvl-low"></i> Sakin</span>
-          <span><i class="lvl-mid"></i> Orta</span>
-          <span><i class="lvl-high"></i> Yoğun</span>
         </div>
       </div>
     </div>
@@ -1141,6 +1123,15 @@ function levelText(v) {
   if (v < 80) return 'Yoğun';
   return 'Çok yoğun';
 }
+// Yoğunluk yüzdesine göre renk: 0% → açık #FFDF84, 100% → siyaha yakın espresso
+function busyColor(v) {
+  const t = Math.max(0, Math.min(1, v / 100));
+  // light: #FFDF84 (255,223,132)  →  dark: #1a0e08 (26,14,8)
+  const r = Math.round(255 + (26  - 255) * t);
+  const g = Math.round(223 + (14  - 223) * t);
+  const b = Math.round(132 + (8   - 132) * t);
+  return `rgb(${r},${g},${b})`;
+}
 
 let activeBusyIdx = todayIdx();
 
@@ -1172,6 +1163,7 @@ function renderBusy() {
     const bar = document.createElement('div');
     bar.className = 'busy-bar' + (isNow ? ' now' : '');
     bar.style.height = val + '%';
+    bar.style.background = busyColor(val);
     bar.innerHTML = `<span class="busy-bar-tip">${busyHours[i]}:00 · ${levelText(val)} (${val}%)</span>`;
     barsEl.appendChild(bar);
   });
