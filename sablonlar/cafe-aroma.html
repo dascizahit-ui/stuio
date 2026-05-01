@@ -275,18 +275,32 @@
     }
     .menu-card:hover .menu-card-img img { transform: scale(1.06); }
 
-    .menu-card-video video {
-      width: 100%; height: 100%; object-fit: cover;
-      display: block;
-      transition: transform .4s;
+    .menu-card-video {
+      background: #1a0e08;
     }
-    .menu-card:hover .menu-card-video video { transform: scale(1.04); }
+    .menu-card-video::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: var(--card-bg);
+      background-size: cover;
+      background-position: center;
+      filter: blur(22px) brightness(.55) saturate(1.1);
+      transform: scale(1.2);
+      z-index: 0;
+    }
+    .menu-card-video video {
+      position: relative;
+      width: 100%; height: 100%;
+      object-fit: contain;
+      display: block;
+      z-index: 1;
+    }
     .menu-card-video::after {
       content: '▶';
       position: absolute;
       top: 12px; right: 12px;
       width: 28px; height: 28px;
-      background: rgba(18,11,5,.55);
+      background: rgba(18,11,5,.65);
       color: var(--gold);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
@@ -294,6 +308,7 @@
       backdrop-filter: blur(4px);
       transition: opacity .25s;
       pointer-events: none;
+      z-index: 2;
     }
     .menu-card-video.playing::after { opacity: 0; }
 
@@ -498,6 +513,140 @@
       color: var(--caramel); font-weight: 500;
       font-variant-numeric: tabular-nums;
     }
+
+    /* ─── BUSY CHART ─── */
+    .busy-chart {
+      position: relative;
+      background: #fff;
+      padding: 28px 30px 24px;
+      border-radius: 4px;
+      margin-top: 24px;
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 4px 28px rgba(58,42,26,.08);
+    }
+    .busy-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 14px; flex-wrap: wrap; gap: 8px;
+    }
+    .busy-header h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600; color: var(--text);
+    }
+    .busy-now {
+      font-size: .78rem; color: var(--muted);
+      letter-spacing: .3px;
+    }
+    .busy-now strong { color: var(--caramel); font-weight: 600; }
+    .busy-now-dot {
+      display: inline-block;
+      width: 7px; height: 7px;
+      background: #2ecc71;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: pulseLive 1.6s infinite;
+      vertical-align: middle;
+    }
+    @keyframes pulseLive {
+      0%,100% { box-shadow: 0 0 0 0 rgba(46,204,113,.55); }
+      50%     { box-shadow: 0 0 0 6px rgba(46,204,113,0); }
+    }
+
+    .busy-days {
+      display: flex; gap: 4px; margin-bottom: 16px;
+    }
+    .busy-day-btn {
+      flex: 1; min-width: 0;
+      padding: 7px 4px;
+      background: transparent;
+      border: 1px solid rgba(58,42,26,.12);
+      cursor: pointer; border-radius: 2px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .72rem; letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: all .2s;
+    }
+    .busy-day-btn:hover { color: var(--text); border-color: var(--caramel); }
+    .busy-day-btn.active {
+      background: var(--caramel); border-color: var(--caramel);
+      color: #fff;
+    }
+    .busy-day-btn.today::after {
+      content: '•';
+      color: var(--gold); margin-left: 3px;
+    }
+    .busy-day-btn.active.today::after { color: #fff; }
+
+    .busy-bars {
+      display: flex; align-items: flex-end; gap: 3px;
+      height: 90px;
+      padding: 16px 2px 0;
+      border-bottom: 1px solid rgba(58,42,26,.1);
+    }
+    .busy-bar {
+      flex: 1; min-width: 0;
+      min-height: 3px;
+      background: linear-gradient(to top, var(--caramel), var(--gold));
+      border-radius: 2px 2px 0 0;
+      position: relative;
+      transition: height .5s cubic-bezier(.16,1,.3,1), filter .2s;
+      cursor: pointer;
+      opacity: .85;
+    }
+    .busy-bar:hover { opacity: 1; filter: brightness(1.1); }
+    .busy-bar.now {
+      background: linear-gradient(to top, var(--espresso), var(--caramel));
+      opacity: 1;
+    }
+    .busy-bar.now::before {
+      content: '';
+      position: absolute;
+      top: -8px; left: 50%; transform: translateX(-50%);
+      width: 6px; height: 6px;
+      background: var(--espresso);
+      border-radius: 50%;
+    }
+    .busy-bar-tip {
+      position: absolute;
+      bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%);
+      background: var(--espresso); color: var(--cream);
+      padding: 5px 10px; border-radius: 3px;
+      font-size: .7rem; white-space: nowrap;
+      pointer-events: none; opacity: 0;
+      transition: opacity .15s;
+      letter-spacing: .3px;
+      z-index: 3;
+    }
+    .busy-bar-tip::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%; transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: var(--espresso);
+    }
+    .busy-bar:hover .busy-bar-tip { opacity: 1; }
+
+    .busy-axis {
+      display: flex; justify-content: space-between;
+      margin-top: 8px;
+      font-size: .68rem; color: var(--muted);
+      letter-spacing: .5px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .busy-legend {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      margin-top: 14px;
+      font-size: .7rem; color: var(--muted);
+    }
+    .busy-legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .busy-legend i {
+      width: 10px; height: 10px; border-radius: 2px; display: inline-block;
+    }
+    .lvl-low  { background: var(--gold); opacity: .6; }
+    .lvl-mid  { background: var(--caramel); }
+    .lvl-high { background: var(--espresso); }
 
     .contact-map { border-radius: 4px; overflow: hidden; height: 100%; min-height: 400px; }
     .contact-map iframe { width: 100%; height: 100%; border: none; }
@@ -706,6 +855,26 @@
         <div class="hours-row"><strong>Cumartesi</strong><span>09:00 – 23:00</span></div>
         <div class="hours-row"><strong>Pazar</strong><span>10:00 – 21:00</span></div>
       </div>
+
+      <div class="busy-chart">
+        <div class="busy-header">
+          <h3>Yoğunluk Saatleri</h3>
+          <span class="busy-now"><span class="busy-now-dot"></span>Şu anda: <strong id="busyNow">—</strong></span>
+        </div>
+        <div class="busy-days" id="busyDays"></div>
+        <div class="busy-bars" id="busyBars"></div>
+        <div class="busy-axis">
+          <span>09:00</span>
+          <span>13:00</span>
+          <span>17:00</span>
+          <span>21:00</span>
+        </div>
+        <div class="busy-legend">
+          <span><i class="lvl-low"></i> Sakin</span>
+          <span><i class="lvl-mid"></i> Orta</span>
+          <span><i class="lvl-high"></i> Yoğun</span>
+        </div>
+      </div>
     </div>
     <div class="contact-map">
       <iframe
@@ -824,6 +993,7 @@ function renderGrid() {
 
     const mediaHtml = item.video
       ? `<div class="menu-card-img menu-card-video"
+              style="--card-bg:url('${item.img}')"
               onmouseenter="playMenuVideo(this)"
               onmouseleave="pauseMenuVideo(this)">
            <video poster="${item.img}" muted loop playsinline preload="none"
@@ -964,10 +1134,81 @@ window.addEventListener('scroll', () => {
   document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
 });
 
+/* ─── BUSY CHART ─── */
+// Saatler 08:00 → 23:00 (16 dilim). Değerler 0-100.
+const busyHours = ['08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'];
+const busyData = {
+  Pazartesi: [12,22,35,48,62,72,58,42,38,45,58,72,80,62,42,22],
+  Salı:      [15,25,38,50,65,75,60,45,40,48,62,75,82,60,40,22],
+  Çarşamba:  [10,20,32,45,60,70,55,40,35,42,55,70,78,58,38,20],
+  Perşembe:  [14,24,38,52,68,78,62,48,42,50,65,78,85,62,42,25],
+  Cuma:      [18,32,48,62,75,90,82,68,58,62,78,92,98,85,65,42],
+  Cumartesi: [25,42,58,72,85,95,92,82,75,80,90,96,92,78,58,38],
+  Pazar:     [22,38,52,68,78,85,80,68,60,65,76,82,78,62,45,28],
+};
+const dayShort = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
+const dayFull  = ['Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi','Pazar'];
+// JS getDay(): 0=Pazar,1=Pzt..6=Cmt — kendi sıramız Pzt başlı, indekse çevir
+function todayIdx() {
+  const d = new Date().getDay();
+  return d === 0 ? 6 : d - 1;
+}
+function levelText(v) {
+  if (v < 30) return 'Sakin';
+  if (v < 60) return 'Orta yoğunluk';
+  if (v < 80) return 'Yoğun';
+  return 'Çok yoğun';
+}
+
+let activeBusyIdx = todayIdx();
+
+function renderBusy() {
+  const tIdx = todayIdx();
+  const nowH = new Date().getHours();
+
+  // Gün butonları
+  const daysEl = document.getElementById('busyDays');
+  daysEl.innerHTML = '';
+  dayShort.forEach((s, i) => {
+    const btn = document.createElement('button');
+    let cls = 'busy-day-btn';
+    if (i === activeBusyIdx) cls += ' active';
+    if (i === tIdx) cls += ' today';
+    btn.className = cls;
+    btn.textContent = s;
+    btn.onclick = () => { activeBusyIdx = i; renderBusy(); };
+    daysEl.appendChild(btn);
+  });
+
+  // Barlar
+  const barsEl = document.getElementById('busyBars');
+  barsEl.innerHTML = '';
+  const data = busyData[dayFull[activeBusyIdx]];
+  data.forEach((val, i) => {
+    const hour = parseInt(busyHours[i], 10);
+    const isNow = activeBusyIdx === tIdx && hour === nowH;
+    const bar = document.createElement('div');
+    bar.className = 'busy-bar' + (isNow ? ' now' : '');
+    bar.style.height = val + '%';
+    bar.innerHTML = `<span class="busy-bar-tip">${busyHours[i]}:00 · ${levelText(val)} (${val}%)</span>`;
+    barsEl.appendChild(bar);
+  });
+
+  // "Şu anda" göstergesi (her zaman bugüne göre)
+  const nowEl = document.getElementById('busyNow');
+  const todayData = busyData[dayFull[tIdx]];
+  if (nowH >= 8 && nowH <= 23) {
+    nowEl.textContent = levelText(todayData[nowH - 8]);
+  } else {
+    nowEl.textContent = 'Kapalı';
+  }
+}
+
 /* ─── INIT ─── */
 renderTabs();
 renderGrid();
 updateCartUI();
+renderBusy();
 </script>
 </body>
 </html>
