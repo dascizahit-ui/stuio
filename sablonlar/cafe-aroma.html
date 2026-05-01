@@ -981,8 +981,8 @@ function renderGrid() {
       ? `<div class="menu-card-img menu-card-video"
               onmouseenter="playMenuVideo(this)"
               onmouseleave="pauseMenuVideo(this)">
-           <video poster="${item.img}" muted loop playsinline preload="none"
-                  data-src="${item.video}" aria-label="${item.name}"></video>
+           <video src="${item.video}#t=0.1" muted loop playsinline preload="metadata"
+                  aria-label="${item.name}"></video>
          </div>`
       : `<div class="menu-card-img">
            <img src="${item.img}" alt="${item.name}" loading="lazy" />
@@ -1006,13 +1006,10 @@ function renderGrid() {
   });
 }
 
-/* ─── HOVER VIDEO (lazy) ─── */
+/* ─── HOVER VIDEO ─── */
 function playMenuVideo(wrapper) {
   const v = wrapper.querySelector('video');
   if (!v) return;
-  if (!v.src && v.dataset.src) {
-    v.src = v.dataset.src;
-  }
   wrapper.classList.add('playing');
   v.play().catch(() => {});
 }
@@ -1021,7 +1018,7 @@ function pauseMenuVideo(wrapper) {
   if (!v) return;
   wrapper.classList.remove('playing');
   v.pause();
-  try { v.currentTime = 0; } catch (e) {}
+  try { v.currentTime = 0.1; } catch (e) {}
 }
 
 /* ─── CHANGE QTY ─── */
