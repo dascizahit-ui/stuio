@@ -275,6 +275,28 @@
     }
     .menu-card:hover .menu-card-img img { transform: scale(1.06); }
 
+    .menu-card-video video {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+      transition: transform .4s;
+    }
+    .menu-card:hover .menu-card-video video { transform: scale(1.04); }
+    .menu-card-video::after {
+      content: '▶';
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 28px; height: 28px;
+      background: rgba(18,11,5,.55);
+      color: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .7rem;
+      backdrop-filter: blur(4px);
+      transition: opacity .25s;
+      pointer-events: none;
+    }
+    .menu-card-video.playing::after { opacity: 0; }
+
     .menu-card-body { padding: 20px 24px 24px; flex: 1; display: flex; flex-direction: column; }
     .menu-card-name {
       font-family: 'Cormorant Garamond', serif;
@@ -387,14 +409,6 @@
     }
     .cart-total span:last-child { color: var(--caramel); }
 
-    .order-note {
-      width: 100%; padding: 10px 14px; border: 1px solid rgba(58,42,26,.2);
-      border-radius: 2px; font-family: 'DM Sans', sans-serif;
-      font-size: .82rem; color: var(--text); background: var(--milk);
-      resize: none; margin-bottom: 16px; outline: none;
-    }
-    .order-note:focus { border-color: var(--caramel); }
-
     .checkout-btn {
       width: 100%; padding: 16px; background: var(--espresso);
       color: var(--gold); border: none; cursor: pointer;
@@ -446,20 +460,44 @@
     .contact-detail p { font-size: .9rem; color: var(--muted); line-height: 1.6; }
 
     .contact-hours {
-      background: var(--espresso); padding: 36px; border-radius: 4px;
-      margin-top: 40px;
+      position: relative;
+      background: #fff;
+      padding: 36px 36px 28px;
+      border-radius: 4px;
+      margin-top: 56px;
+      border-top: 3px solid var(--caramel);
+      box-shadow: 0 4px 28px rgba(58,42,26,.08);
+    }
+    .contact-hours::before {
+      content: '🕐';
+      position: absolute;
+      top: -22px; left: 32px;
+      width: 44px; height: 44px;
+      background: var(--caramel);
+      color: #fff; font-size: 1.1rem;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px rgba(200,134,58,.35);
     }
     .contact-hours h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.3rem; color: var(--gold); margin-bottom: 20px;
+      font-size: 1.5rem; font-weight: 600;
+      color: var(--text); margin-bottom: 18px;
     }
     .hours-row {
-      display: flex; justify-content: space-between;
-      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.06);
-      color: rgba(245,237,224,.7); font-size: .85rem;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px dashed rgba(58,42,26,.12);
+      color: var(--muted); font-size: .9rem;
     }
     .hours-row:last-child { border-bottom: none; }
-    .hours-row strong { color: var(--cream); }
+    .hours-row strong {
+      color: var(--text); font-weight: 500;
+      letter-spacing: .3px;
+    }
+    .hours-row span {
+      color: var(--caramel); font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
 
     .contact-map { border-radius: 4px; overflow: hidden; height: 100%; min-height: 400px; }
     .contact-map iframe { width: 100%; height: 100%; border: none; }
@@ -712,8 +750,7 @@
       <span>Toplam</span>
       <span id="totalVal">₺0</span>
     </div>
-    <textarea class="order-note" rows="2" placeholder="Sipariş notu ekleyin (ör: az şekerli, laktozsuz süt)..."></textarea>
-    <button class="checkout-btn" onclick="placeOrder()">Siparişi Onayla →</button>
+    <button class="checkout-btn" onclick="clearCart()">Sepeti Temizle</button>
   </div>
 </div>
 
@@ -724,7 +761,7 @@
 /* ─── MENU DATA ─── */
 const menuData = {
   "Sıcak Kahveler": [
-    { id:1,  name:"Türk Kahvesi",    price:45,  desc:"Geleneksel cezve ile demlenmiş, damıtılmış su ile servis edilir.",    img:"https://images.unsplash.com/photo-1610889556528-9a770e32642f?w=400&q=80" },
+    { id:1,  name:"Türk Kahvesi",    price:45,  desc:"Geleneksel cezve ile demlenmiş, damıtılmış su ile servis edilir.",    img:"https://images.unsplash.com/photo-1610889556528-9a770e32642f?w=400&q=80", video:"os/kahve.mp4" },
     { id:2,  name:"Espresso",        price:50,  desc:"Yoğun aromalı, crema kaplı tek çekimlik espresso.",                    img:"https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&q=80" },
     { id:3,  name:"Cappuccino",      price:65,  desc:"Espresso, buharlı süt ve yoğun köpük harmonisi.",                     img:"https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&q=80" },
     { id:4,  name:"Latte",           price:70,  desc:"Yumuşak espresso, bol buharlı süt ve nefis latte art.",               img:"https://images.unsplash.com/photo-1561047029-3000c68339ca?w=400&q=80" },
@@ -784,10 +821,20 @@ function renderGrid() {
     const qty = cart[item.id]?.qty || 0;
     const card = document.createElement('div');
     card.className = 'menu-card';
+
+    const mediaHtml = item.video
+      ? `<div class="menu-card-img menu-card-video"
+              onmouseenter="playMenuVideo(this)"
+              onmouseleave="pauseMenuVideo(this)">
+           <video poster="${item.img}" muted loop playsinline preload="none"
+                  data-src="${item.video}" aria-label="${item.name}"></video>
+         </div>`
+      : `<div class="menu-card-img">
+           <img src="${item.img}" alt="${item.name}" loading="lazy" />
+         </div>`;
+
     card.innerHTML = `
-      <div class="menu-card-img">
-        <img src="${item.img}" alt="${item.name}" loading="lazy" />
-      </div>
+      ${mediaHtml}
       <div class="menu-card-body">
         <div class="menu-card-name">${item.name}</div>
         <div class="menu-card-desc">${item.desc}</div>
@@ -802,6 +849,24 @@ function renderGrid() {
       </div>`;
     grid.appendChild(card);
   });
+}
+
+/* ─── HOVER VIDEO (lazy) ─── */
+function playMenuVideo(wrapper) {
+  const v = wrapper.querySelector('video');
+  if (!v) return;
+  if (!v.src && v.dataset.src) {
+    v.src = v.dataset.src;
+  }
+  wrapper.classList.add('playing');
+  v.play().catch(() => {});
+}
+function pauseMenuVideo(wrapper) {
+  const v = wrapper.querySelector('video');
+  if (!v) return;
+  wrapper.classList.remove('playing');
+  v.pause();
+  try { v.currentTime = 0; } catch (e) {}
 }
 
 /* ─── CHANGE QTY ─── */
@@ -877,15 +942,13 @@ function toggleCart() {
   drawer.classList.toggle('open');
 }
 
-/* ─── ORDER ─── */
-function placeOrder() {
-  const items = Object.values(cart);
-  if (items.length === 0) return;
-  showToast('🎉 Siparişiniz alındı! Teşekkürler.');
+/* ─── CLEAR CART ─── */
+function clearCart() {
+  if (Object.keys(cart).length === 0) return;
   cart = {};
   updateCartUI();
-  toggleCart();
   renderGrid();
+  showToast('Sepet temizlendi');
 }
 
 /* ─── TOAST ─── */
