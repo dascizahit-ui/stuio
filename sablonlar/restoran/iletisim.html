@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>İletişim & Rezervasyon — Ember & Gold Fine Dining</title>
+  <meta name="description" content="Ember & Gold ile iletişime geçin, masa rezervasyonu yapın. Beşiktaş, İstanbul'da yer alan restoranımızın adres ve çalışma saatleri." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="logo-main">Ember & Gold</span>
+    <span class="logo-sub">Fine Dining · İstanbul</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Ana Sayfa</a></li>
+    <li><a href="menu.html">Menü</a></li>
+    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+    <li><a href="iletisim.html" class="active">İletişim</a></li>
+    <li><a href="#rezervasyon" class="nav-reserve">Rezervasyon</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Ana Sayfa</a>
+  <a href="menu.html">Menü</a>
+  <a href="hakkimizda.html">Hakkımızda</a>
+  <a href="iletisim.html">İletişim</a>
+  <a href="#rezervasyon">Rezervasyon</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600&q=80');"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-breadcrumb"><a href="index.html">Ana Sayfa</a> / İletişim</div>
+    <h1 class="page-hero-title">Bize <em>Ulaşın</em></h1>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="contact-grid">
+    <!-- INFO -->
+    <div>
+      <p class="section-label">Bilgiler</p>
+      <h2 class="section-title" style="margin-bottom:40px;">Bizi <em>Bulun</em></h2>
+
+      <div class="contact-detail fade-in">
+        <div class="contact-detail-icon">📍</div>
+        <div class="contact-detail-text">
+          <h4>Adres</h4>
+          <p>Kuruçeşme Caddesi No:42<br>Beşiktaş, İstanbul 34022<br><a href="https://maps.google.com" target="_blank" style="color:var(--gold);font-size:0.8rem;">Haritada Göster →</a></p>
+        </div>
+      </div>
+
+      <div class="contact-detail fade-in">
+        <div class="contact-detail-icon">📞</div>
+        <div class="contact-detail-text">
+          <h4>Telefon</h4>
+          <p>
+            <a href="tel:+902121234567" style="color:var(--text-muted);text-decoration:none;">+90 (212) 123 45 67</a><br>
+            <a href="tel:+905321234567" style="color:var(--text-muted);text-decoration:none;">+90 (532) 123 45 67</a> <span style="font-size:0.75rem;">(WhatsApp)</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-detail fade-in">
+        <div class="contact-detail-icon">✉️</div>
+        <div class="contact-detail-text">
+          <h4>E-Posta</h4>
+          <p>
+            <a href="mailto:rezervasyon@embergold.com.tr" style="color:var(--text-muted);text-decoration:none;">rezervasyon@embergold.com.tr</a><br>
+            <a href="mailto:info@embergold.com.tr" style="color:var(--text-muted);text-decoration:none;">info@embergold.com.tr</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-detail fade-in">
+        <div class="contact-detail-icon">🕐</div>
+        <div class="contact-detail-text">
+          <h4>Çalışma Saatleri</h4>
+          <div class="hours-grid">
+            <div class="hour-row"><span class="day">Pazartesi</span><span class="time">12:00 – 23:00</span></div>
+            <div class="hour-row"><span class="day">Salı</span><span class="time">12:00 – 23:00</span></div>
+            <div class="hour-row"><span class="day">Çarşamba</span><span class="time">12:00 – 23:00</span></div>
+            <div class="hour-row"><span class="day">Perşembe</span><span class="time">12:00 – 23:00</span></div>
+            <div class="hour-row"><span class="day">Cuma</span><span class="time">12:00 – 23:30</span></div>
+            <div class="hour-row"><span class="day">Cumartesi</span><span class="time">11:00 – 23:30</span></div>
+            <div class="hour-row"><span class="day">Pazar</span><span class="time">11:00 – 22:00</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOCIAL -->
+      <div style="margin-top:30px;">
+        <h4 style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:15px;">Sosyal Medya</h4>
+        <div style="display:flex;gap:12px;">
+          <a href="#" style="display:flex;align-items:center;gap:8px;color:var(--text-muted);text-decoration:none;font-size:0.82rem;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">📸 Instagram</a>
+          <a href="#" style="display:flex;align-items:center;gap:8px;color:var(--text-muted);text-decoration:none;font-size:0.82rem;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">📘 Facebook</a>
+          <a href="#" style="display:flex;align-items:center;gap:8px;color:var(--text-muted);text-decoration:none;font-size:0.82rem;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text-muted)'">🌟 TripAdvisor</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT FORM -->
+    <div class="contact-form-wrap fade-in">
+      <p class="section-label">Mesaj Gönderin</p>
+      <h2 class="section-title" style="margin-bottom:40px;">Sizden <em>Duymak</em> İsteriz</h2>
+      <form class="contact-form" novalidate>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Adınız *</label>
+            <input type="text" class="form-input" placeholder="Adınız" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Soyadınız *</label>
+            <input type="text" class="form-input" placeholder="Soyadınız" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">E-Posta *</label>
+            <input type="email" class="form-input" placeholder="ornek@email.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Telefon</label>
+            <input type="tel" class="form-input" placeholder="+90 5XX XXX XX XX" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Konu</label>
+          <select class="form-select">
+            <option value="" disabled selected>Konu seçiniz</option>
+            <option>Rezervasyon</option>
+            <option>Özel Etkinlik & Organizasyon</option>
+            <option>Kurumsal Yemek</option>
+            <option>Şikayet & Öneri</option>
+            <option>Diğer</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mesajınız *</label>
+          <textarea class="form-textarea" placeholder="Mesajınızı buraya yazın..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Mesaj Gönder</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<div class="map-section">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.284!2d29.0444!3d41.0459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDAyJzQ1LjMiTiAyOcKwMDInMzkuOSJF!5e0!3m2!1str!2str!4v1234567890"
+    width="100%" height="400" style="border:0;display:block;filter:grayscale(30%);" allowfullscreen="" loading="lazy">
+  </iframe>
+</div>
+
+<!-- RESERVATION SECTION -->
+<section class="reservation-section" id="rezervasyon">
+  <p class="section-label" style="justify-content:center;">Online Rezervasyon</p>
+  <h2 class="section-title" style="color:#fff;text-align:center;margin-bottom:15px;">Masanızı <em>Şimdi</em> Ayırtın</h2>
+  <p class="reservation-sub">Özel anlarınız için yerinizi garantiye alın. Onay için sizi arayacağız.</p>
+  <form class="reservation-form" novalidate>
+    <input type="text" class="res-input" placeholder="Adınız Soyadınız" required />
+    <input type="date" class="res-input" required />
+    <select class="res-input" required>
+      <option value="" disabled selected>Saat Seçin</option>
+      <option>12:00</option><option>12:30</option><option>13:00</option><option>13:30</option>
+      <option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option>
+    </select>
+    <select class="res-input" required>
+      <option value="" disabled selected>Kaç Kişi?</option>
+      <option>1 Kişi</option><option>2 Kişi</option><option>3-4 Kişi</option>
+      <option>5-6 Kişi</option><option>7-8 Kişi</option><option>8+ Kişi (Özel)</option>
+    </select>
+    <button type="submit" class="res-btn">Rezervasyon Yap</button>
+  </form>
+  <p style="margin-top:25px;font-size:0.75rem;color:rgba(255,255,255,0.3);letter-spacing:1px;">
+    Büyük gruplar ve özel etkinlikler için: <a href="tel:+902121234567" style="color:var(--gold);text-decoration:none;">+90 (212) 123 45 67</a>
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-main">Ember & Gold</span>
+      <span class="logo-sub">Fine Dining · İstanbul</span>
+      <p class="footer-tagline">"Lezzet, sevgiyle pişirildiğinde<br>bir sanat eserine dönüşür."</p>
+      <div class="footer-social">
+        <a href="#" class="social-link">IG</a>
+        <a href="#" class="social-link">FB</a>
+        <a href="#" class="social-link">TW</a>
+        <a href="#" class="social-link">TA</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Sayfalar</h5>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="menu.html">Menü</a></li>
+        <li><a href="hakkimizda.html">Hakkımızda</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Çalışma Saatleri</h5>
+      <ul style="color:rgba(255,255,255,0.45);font-size:0.85rem;">
+        <li style="margin-bottom:8px;">Pazartesi – Cuma<br><span style="color:var(--gold);">12:00 – 23:00</span></li>
+        <li style="margin-bottom:8px;">Cumartesi<br><span style="color:var(--gold);">11:00 – 23:30</span></li>
+        <li>Pazar<br><span style="color:var(--gold);">11:00 – 22:00</span></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>İletişim</h5>
+      <ul class="footer-contact">
+        <li><span class="contact-icon">📍</span><span>Kuruçeşme Cad. No:42<br>Beşiktaş, İstanbul</span></li>
+        <li style="margin-top:12px;"><span class="contact-icon">📞</span><a href="tel:+902121234567" style="color:rgba(255,255,255,0.5);text-decoration:none;">+90 (212) 123 45 67</a></li>
+        <li style="margin-top:12px;"><span class="contact-icon">✉️</span><a href="mailto:info@embergold.com.tr" style="color:rgba(255,255,255,0.5);text-decoration:none;">info@embergold.com.tr</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Ember & Gold. Tüm hakları saklıdır.</span>
+    <div class="footer-bottom-links"><a href="#">Gizlilik</a><a href="#">Koşullar</a></div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

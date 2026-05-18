@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ember & Gold — Fine Dining İstanbul</title>
+  <meta name="description" content="İstanbul'un kalbinde unutulmaz bir yemek deneyimi. Ember & Gold, sezonluk malzemeler ve yaratıcı mutfak anlayışıyla misafirlerini ağırlıyor." />
+  <link rel="stylesheet" href="css/style.css?v=3" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="logo-main">Ember & Gold</span>
+    <span class="logo-sub" data-i18n="brand.sub">Fine Dining · İstanbul</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active" data-i18n="nav.home">Ana Sayfa</a></li>
+    <li><a href="#menu-preview" data-i18n="nav.menu">Menü</a></li>
+    <li><a href="hakkimizda.html" data-i18n="nav.about">Hakkımızda</a></li>
+    <li><a href="iletisim.html" data-i18n="nav.contact">İletişim</a></li>
+    <li><a href="#rezervasyon" class="nav-reserve" data-i18n="nav.reserve">Rezervasyon</a></li>
+  </ul>
+  <div class="lang-switch" aria-label="Dil seçimi">
+    <button type="button" class="lang-btn active" data-lang="tr">TR</button>
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+    <button type="button" class="lang-btn" data-lang="ru">RU</button>
+  </div>
+  <div class="hamburger" aria-label="Menüyü aç">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html" data-i18n="nav.home">Ana Sayfa</a>
+  <a href="#menu-preview" data-i18n="nav.menu">Menü</a>
+  <a href="hakkimizda.html" data-i18n="nav.about">Hakkımızda</a>
+  <a href="iletisim.html" data-i18n="nav.contact">İletişim</a>
+  <a href="#rezervasyon" data-i18n="nav.reserve">Rezervasyon</a>
+  <div class="lang-switch mobile-lang" aria-label="Dil seçimi">
+    <button type="button" class="lang-btn active" data-lang="tr">TR</button>
+    <button type="button" class="lang-btn" data-lang="en">EN</button>
+    <button type="button" class="lang-btn" data-lang="ru">RU</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge" data-i18n="hero.badge">1997'den Bu Yana · İstanbul</div>
+    <h1 class="hero-title">
+      <span data-i18n="hero.title1">Lezzetin</span><br><em data-i18n="hero.title2">Sanatı</em>
+    </h1>
+    <p class="hero-tagline" data-i18n="hero.tagline">Türk mutfağının zenginliği, modern yorumuyla buluşuyor</p>
+    <div class="hero-ctas">
+      <a href="#menu-preview" class="btn-primary" data-i18n="hero.menuCta">Menüyü Keşfet</a>
+      <a href="#rezervasyon" class="btn-outline" data-i18n="hero.reserveCta">Masa Rezervasyonu</a>
+    </div>
+  </div>
+  <a href="#features" class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span data-i18n="hero.scroll">Keşfet</span>
+  </a>
+</section>
+
+<!-- FEATURES STRIP -->
+<div class="features-strip" id="features">
+  <div class="feature-item fade-in">
+    <div class="feature-icon">🌿</div>
+    <div class="feature-text">
+      <h4 data-i18n="features.local.title">Taze & Yerel</h4>
+      <p data-i18n="features.local.text">Günlük taze, yerel üreticilerden malzeme</p>
+    </div>
+  </div>
+  <div class="feature-item fade-in">
+    <div class="feature-icon">👨‍🍳</div>
+    <div class="feature-text">
+      <h4 data-i18n="features.chef.title">Usta Şef</h4>
+      <p data-i18n="features.chef.text">20 yıllık deneyimli mutfak ekibi</p>
+    </div>
+  </div>
+  <div class="feature-item fade-in">
+    <div class="feature-icon">🍷</div>
+    <div class="feature-text">
+      <h4 data-i18n="features.wine.title">Seçkin Şaraplar</h4>
+      <p data-i18n="features.wine.text">Geniş Türk ve dünya şarap koleksiyonu</p>
+    </div>
+  </div>
+  <div class="feature-item fade-in">
+    <div class="feature-icon">🏆</div>
+    <div class="feature-text">
+      <h4 data-i18n="features.award.title">Ödüllü Mutfak</h4>
+      <p data-i18n="features.award.text">Gastronomi ödülü sahibi restoran</p>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT HOME -->
+<section class="section">
+  <div class="about-home">
+    <div class="about-img-wrap fade-in">
+      <div class="about-img-main"></div>
+      <div class="about-img-accent"></div>
+      <div class="about-gold-line"></div>
+    </div>
+    <div class="about-text">
+      <p class="section-label" data-i18n="about.label">Hikayemiz</p>
+      <h2 class="section-title"><span data-i18n="about.title1">İstanbul'un</span> <em data-i18n="about.title2">Kalbinden</em><br><span data-i18n="about.title3">Sofraya</span></h2>
+      <p style="margin-top:25px;" data-i18n="about.p1">1997 yılında küçük bir aile restoranı olarak yola çıkan Ember & Gold, bugün İstanbul'un en seçkin fine dining adresleri arasında yer alıyor. Osmanlı mutfağının köklü geleneğini, modern gastronominin yaratıcı teknikleriyle harmanlıyoruz.</p>
+      <p data-i18n="about.p2">Her tabak, bir hikaye; her lokma, bir anı. Sezonluk malzemeleri yerel çiftçilerden, deniz ürünlerini günlük Boğaz'dan temin ederek sofranıza tazeliği ve dürüstlüğü getiriyoruz.</p>
+      <div class="about-stats">
+        <div>
+          <div class="stat-num" data-target="27" data-suffix="+">0+</div>
+          <div class="stat-label" data-i18n="about.stat1">Yıllık Deneyim</div>
+        </div>
+        <div>
+          <div class="stat-num" data-target="85" data-suffix="">0</div>
+          <div class="stat-label" data-i18n="about.stat2">Menüde Çeşit</div>
+        </div>
+        <div>
+          <div class="stat-num" data-target="12000" data-suffix="+">0+</div>
+          <div class="stat-label" data-i18n="about.stat3">Mutlu Misafir</div>
+        </div>
+      </div>
+      <a href="hakkimizda.html" class="btn-primary" data-i18n="about.cta">Daha Fazla Bilgi</a>
+    </div>
+  </div>
+</section>
+
+<!-- MENU PREVIEW -->
+<section class="section menu-section" id="menu-preview">
+  <div class="menu-head">
+    <div>
+      <p class="section-label" data-i18n="menu.label">Lezzetlerimiz</p>
+      <h2 class="section-title" style="color:var(--cream);"><span data-i18n="menu.title1">İmza</span> <em style="color:var(--gold-light);" data-i18n="menu.title2">Seçkiler</em></h2>
+    </div>
+    <p class="menu-intro" data-i18n="menu.intro">Şefimizin menüsü kısa, net ve mevsime göre değişir. Her tabak önce malzemeyi, sonra tekniği konuşturur.</p>
+  </div>
+  <div class="menu-categories" aria-label="Menü kategorileri">
+    <button class="menu-cat-btn active" data-cat="all" data-i18n="menu.filter.all">Tümü</button>
+    <button class="menu-cat-btn" data-cat="baslangic" data-i18n="menu.filter.starters">Başlangıçlar</button>
+    <button class="menu-cat-btn" data-cat="ana" data-i18n="menu.filter.mains">Ana Yemekler</button>
+    <button class="menu-cat-btn" data-cat="tatli" data-i18n="menu.filter.desserts">Tatlılar</button>
+  </div>
+  <div class="menu-showcase">
+    <article class="signature-card fade-in">
+      <div class="signature-image"></div>
+      <div class="signature-content">
+        <span data-i18n="menu.signature.kicker">Şef Tadım Menüsü</span>
+        <h3 data-i18n="menu.signature.title">Boğaz Akşamı</h3>
+        <p data-i18n="menu.signature.text">Meze seçkisi, yavaş pişmiş kuzu, taze deniz ürünü ve fıstıklı finalden oluşan dört aşamalı deneyim.</p>
+        <div class="signature-meta">
+          <strong>₺1.450</strong>
+          <small data-i18n="menu.signature.meta">Kişi başı · 4 servis</small>
+        </div>
+      </div>
+    </article>
+    <div class="menu-list">
+      <article class="menu-dish fade-in" data-cat="baslangic">
+        <img src="https://images.unsplash.com/photo-1604909052743-94e838986d24?w=420&q=80" alt="Mevsim mezeler" loading="lazy" />
+        <div>
+          <span data-i18n="menu.tag.starter">Başlangıç</span>
+          <h3 data-i18n="menu.dish1.title">Mevsim Mezeleri</h3>
+          <p data-i18n="menu.dish1.text">Günlük taze sebze, otlar ve zeytinyağlılarla hazırlanan 8 çeşit seçki.</p>
+        </div>
+        <strong>₺285</strong>
+      </article>
+      <article class="menu-dish fade-in" data-cat="ana">
+        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=420&q=80" alt="Kuzu tandır" loading="lazy" />
+        <div>
+          <span data-i18n="menu.tag.main">Ana Yemek</span>
+          <h3 data-i18n="menu.dish2.title">Kuzu Tandır</h3>
+          <p data-i18n="menu.dish2.text">12 saat düşük ısıda pişmiş kuzu, köz sebzeler ve baharatlı jus.</p>
+        </div>
+        <strong>₺620</strong>
+      </article>
+      <article class="menu-dish fade-in" data-cat="ana">
+        <img src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=420&q=80" alt="Levrek ızgara" loading="lazy" />
+        <div>
+          <span data-i18n="menu.tag.main">Ana Yemek</span>
+          <h3 data-i18n="menu.dish3.title">Levrek Izgara</h3>
+          <p data-i18n="menu.dish3.text">Günlük levrek, kapari-limon sos ve enginar eşliğiyle servis edilir.</p>
+        </div>
+        <strong>₺545</strong>
+      </article>
+      <article class="menu-dish fade-in" data-cat="tatli">
+        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=420&q=80" alt="Fıstıklı baklava" loading="lazy" />
+        <div>
+          <span data-i18n="menu.tag.dessert">Tatlı</span>
+          <h3 data-i18n="menu.dish4.title">Fıstıklı Baklava</h3>
+          <p data-i18n="menu.dish4.text">Antep fıstığı, ince hamur ve kaymakla hazırlanan sıcak final.</p>
+        </div>
+        <strong>₺185</strong>
+      </article>
+    </div>
+  </div>
+  <div class="menu-cta">
+    <a href="menu.html" class="btn-primary" data-i18n="menu.cta">Tüm Menüyü Görüntüle</a>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" style="padding-bottom:50px;">
+  <p class="section-label" data-i18n="gallery.label">Atmosfer</p>
+  <h2 class="section-title"><span data-i18n="gallery.title1">Mekânımızdan</span> <em data-i18n="gallery.title2">Kareler</em></h2>
+  <div class="gallery-grid">
+    <div class="gallery-item fade-in">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80" alt="Restoran iç mekan" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-in">
+      <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=500&q=80" alt="Şarap rafları" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-in">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=500&q=80" alt="Yemek" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-in">
+      <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800&q=80" alt="Restoran ambiyans" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-in">
+      <img src="https://images.unsplash.com/photo-1530554764233-e79e16c91d08?w=500&q=80" alt="Tatlı tabağı" loading="lazy" />
+    </div>
+    <div class="gallery-item fade-in">
+      <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=500&q=80" alt="Mutfak" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonials-section">
+  <p class="section-label" data-i18n="testimonials.label">Misafirlerimiz</p>
+  <h2 class="section-title"><span data-i18n="testimonials.title1">Onların</span> <em data-i18n="testimonials.title2">Gözünden</em></h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">İstanbul'da yediğim en iyi kuzu tandır. Atmosfer muhteşem, servis kusursuz. Özel gecelerimizin vazgeçilmez adresi oldunuz.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">A</div>
+        <div>
+          <div class="author-name">Ayşe Kılıç</div>
+          <div class="author-loc">İstanbul · Google</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">Şefin dokunuşu her tabakta hissediliyor. Mezelerden tatlıya kadar her şey harikaydı. Şarap seçkisi de gerçekten etkileyici.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">M</div>
+        <div>
+          <div class="author-name">Murat Demir</div>
+          <div class="author-loc">Ankara · TripAdvisor</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-in">
+      <div class="stars">★★★★★</div>
+      <p class="testimonial-text">Yurtdışından misafirlerimizi getirdiğimizde hep Ember & Gold'u tercih ediyoruz. Türk mutfağını en iyi yansıtan adres burası.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">Z</div>
+        <div>
+          <div class="author-name">Zeynep Arslan</div>
+          <div class="author-loc">İstanbul · Yelp</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation-section" id="rezervasyon">
+  <p class="section-label" style="justify-content:center;" data-i18n="reservation.label">Rezervasyon</p>
+  <h2 class="section-title"><span data-i18n="reservation.title1">Masanızı</span> <em data-i18n="reservation.title2">Ayırtın</em></h2>
+  <p class="reservation-sub" data-i18n="reservation.sub">Özel anlarınız için yerinizi şimdiden hazırlayalım</p>
+  <form class="reservation-form" novalidate>
+    <input type="text" class="res-input" placeholder="Adınız Soyadınız" data-i18n-placeholder="reservation.name" required />
+    <input type="date" class="res-input" required />
+    <select class="res-input" required>
+      <option value="" disabled selected data-i18n="reservation.time">Saat</option>
+      <option>12:00</option><option>12:30</option><option>13:00</option>
+      <option>13:30</option><option>19:00</option><option>19:30</option>
+      <option>20:00</option><option>20:30</option><option>21:00</option>
+    </select>
+    <select class="res-input" required>
+      <option value="" disabled selected data-i18n="reservation.people">Kişi Sayısı</option>
+      <option data-i18n="reservation.person1">1 Kişi</option><option data-i18n="reservation.person2">2 Kişi</option><option data-i18n="reservation.person34">3-4 Kişi</option>
+      <option data-i18n="reservation.person56">5-6 Kişi</option><option data-i18n="reservation.person78">7-8 Kişi</option><option data-i18n="reservation.person8">8+ Kişi</option>
+    </select>
+    <button type="submit" class="res-btn" data-i18n="reservation.submit">Rezervasyon Yap</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-main">Ember & Gold</span>
+      <span class="logo-sub" data-i18n="brand.sub">Fine Dining · İstanbul</span>
+      <p class="footer-tagline" data-i18n="footer.quote">"Lezzet, sevgiyle pişirildiğinde<br>bir sanat eserine dönüşür."</p>
+      <div class="footer-social">
+        <a href="#" class="social-link" aria-label="Instagram">IG</a>
+        <a href="#" class="social-link" aria-label="Facebook">FB</a>
+        <a href="#" class="social-link" aria-label="Twitter">TW</a>
+        <a href="#" class="social-link" aria-label="TripAdvisor">TA</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5 data-i18n="footer.pages">Sayfalar</h5>
+      <ul>
+        <li><a href="index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+        <li><a href="#menu-preview" data-i18n="nav.menu">Menü</a></li>
+        <li><a href="hakkimizda.html" data-i18n="nav.about">Hakkımızda</a></li>
+        <li><a href="iletisim.html" data-i18n="nav.contact">İletişim</a></li>
+        <li><a href="#rezervasyon" data-i18n="nav.reserve">Rezervasyon</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5 data-i18n="footer.hours">Çalışma Saatleri</h5>
+      <ul style="color:rgba(255,255,255,0.45);font-size:0.85rem;">
+        <li style="margin-bottom:8px;">Pazartesi – Cuma<br><span style="color:var(--gold);">12:00 – 23:00</span></li>
+        <li style="margin-bottom:8px;">Cumartesi<br><span style="color:var(--gold);">11:00 – 23:30</span></li>
+        <li>Pazar<br><span style="color:var(--gold);">11:00 – 22:00</span></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5 data-i18n="footer.contact">İletişim</h5>
+      <ul class="footer-contact">
+        <li>
+          <span class="contact-icon">📍</span>
+          <span>Kuruçeşme Cad. No:42<br>Beşiktaş, İstanbul</span>
+        </li>
+        <li style="margin-top:12px;">
+          <span class="contact-icon">📞</span>
+          <a href="tel:+902121234567" style="color:rgba(255,255,255,0.5);text-decoration:none;">+90 (212) 123 45 67</a>
+        </li>
+        <li style="margin-top:12px;">
+          <span class="contact-icon">✉️</span>
+          <a href="mailto:rezervasyon@embergold.com.tr" style="color:rgba(255,255,255,0.5);text-decoration:none;">rezervasyon@embergold.com.tr</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span data-i18n="footer.rights">© 2024 Ember & Gold. Tüm hakları saklıdır.</span>
+    <div class="footer-bottom-links">
+      <a href="#" data-i18n="footer.privacy">Gizlilik Politikası</a>
+      <a href="#" data-i18n="footer.terms">Kullanım Koşulları</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js?v=3"></script>
+</body>
+</html>

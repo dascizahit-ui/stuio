@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menü — Ember & Gold Fine Dining</title>
+  <meta name="description" content="Ember & Gold'un zengin menüsünü keşfedin. Başlangıçlardan ana yemeklere, tatlılardan içeceklere kadar geniş seçenek yelpazesi." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="logo-main">Ember & Gold</span>
+    <span class="logo-sub">Fine Dining · İstanbul</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Ana Sayfa</a></li>
+    <li><a href="menu.html" class="active">Menü</a></li>
+    <li><a href="hakkimizda.html">Hakkımızda</a></li>
+    <li><a href="iletisim.html">İletişim</a></li>
+    <li><a href="iletisim.html#rezervasyon" class="nav-reserve">Rezervasyon</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Ana Sayfa</a>
+  <a href="menu.html">Menü</a>
+  <a href="hakkimizda.html">Hakkımızda</a>
+  <a href="iletisim.html">İletişim</a>
+  <a href="iletisim.html#rezervasyon">Rezervasyon</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600&q=80');"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-hero-breadcrumb"><a href="index.html">Ana Sayfa</a> / Menü</div>
+    <h1 class="page-hero-title">Lezzetli <em>Menümüz</em></h1>
+  </div>
+</div>
+
+<!-- MENU NOTE -->
+<div style="background:var(--cream);padding:20px 5%;display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+  <div style="font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);">
+    🌿 Vegan &nbsp;|&nbsp; 🌶️ Acılı &nbsp;|&nbsp; ⭐ Şef Önerisi &nbsp;|&nbsp; 🐟 Deniz Ürünü
+  </div>
+  <div style="margin-left:auto;font-size:0.78rem;color:var(--text-muted);">Fiyatlarımıza KDV dahildir. Menü mevsimsel olarak değişebilir.</div>
+</div>
+
+<!-- MENU PAGE -->
+<section class="menu-page-section">
+  <div class="menu-page-tabs">
+    <button class="menu-tab active" data-tab="baslangiclar">Başlangıçlar</button>
+    <button class="menu-tab" data-tab="corbalar">Çorbalar</button>
+    <button class="menu-tab" data-tab="salatalar">Salatalar</button>
+    <button class="menu-tab" data-tab="etler">Et Yemekleri</button>
+    <button class="menu-tab" data-tab="deniz">Deniz Ürünleri</button>
+    <button class="menu-tab" data-tab="vejetaryen">Vejetaryen</button>
+    <button class="menu-tab" data-tab="tatlilar">Tatlılar</button>
+    <button class="menu-tab" data-tab="icecekler">İçecekler</button>
+  </div>
+
+  <!-- BAŞLANGIÇLAR -->
+  <div class="menu-items-list active" id="baslangiclar">
+    <h2 class="menu-category-title fade-in">Başlangıçlar <em style="font-size:1rem;color:var(--text-muted);font-style:normal;">— Meze & Soğuk Tabaklar</em></h2>
+    <div class="menu-items-grid">
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1547592180-85f173990554?w=200&q=80" alt="Mevsim Mezeler" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Mevsim Meze Tabağı</span>
+            <span class="menu-item-price">₺285</span>
+          </div>
+          <p class="menu-item-desc">8 çeşit günlük taze meze: tarama, cacık, haydari, patlıcan ezmesi, acı ezme, közlenmiş biber, zeytinyağlı yeşil fasulye ve hummus.</p>
+          <div class="menu-item-tags"><span class="menu-tag vegan">🌿 Vegan</span><span class="menu-tag chef">⭐ Şef Önerisi</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=200&q=80" alt="Çiğ Köfte" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Ev Yapımı Çiğ Köfte</span>
+            <span class="menu-item-price">₺145</span>
+          </div>
+          <p class="menu-item-desc">İnce bulgur ve nar ekşisiyle yoğrulmuş, marul ve limon eşliğinde servis edilir.</p>
+          <div class="menu-item-tags"><span class="menu-tag vegan">🌿 Vegan</span><span class="menu-tag spicy">🌶️ Acılı</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=200&q=80" alt="Karides Kokteyl" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Karides Kokteyl</span>
+            <span class="menu-item-price">₺285</span>
+          </div>
+          <p class="menu-item-desc">Taze karides, avokado, limon mayonezi ve roka eşliğinde zarif sunum.</p>
+          <div class="menu-item-tags"><span class="menu-tag">🐟 Deniz Ürünü</span><span class="menu-tag chef">⭐ Şef Önerisi</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=200&q=80" alt="Sigara Böreği" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Sigara Böreği</span>
+            <span class="menu-item-price">₺165</span>
+          </div>
+          <p class="menu-item-desc">Lor peyniri ve maydanozlu, ince yufkadan el yapımı çıtır börekler. 6'lı porsiyon.</p>
+          <div class="menu-item-tags"><span class="menu-tag vegan">🧀 Vejetaryen</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=200&q=80" alt="Midye Dolma" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Midye Dolma (6 Adet)</span>
+            <span class="menu-item-price">₺195</span>
+          </div>
+          <p class="menu-item-desc">Günlük taze midye, baharat ve pirinçle doldurulmuş, limonla servis edilir.</p>
+          <div class="menu-item-tags"><span class="menu-tag">🐟 Deniz Ürünü</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1481070414801-51fd732d7184?w=200&q=80" alt="Köz Patlıcan" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Köz Patlıcan Salatası</span>
+            <span class="menu-item-price">₺175</span>
+          </div>
+          <p class="menu-item-desc">Odun ateşinde közlenmiş patlıcan, sarımsak, zeytinyağı ve nar taneleriyle.</p>
+          <div class="menu-item-tags"><span class="menu-tag vegan">🌿 Vegan</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÇORBALAR -->
+  <div class="menu-items-list" id="corbalar">
+    <h2 class="menu-category-title fade-in">Çorbalar</h2>
+    <div class="menu-items-grid">
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=200&q=80" alt="Mercimek Çorbası" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Kırmızı Mercimek Çorbası</span>
+            <span class="menu-item-price">₺145</span>
+          </div>
+          <p class="menu-item-desc">Geleneksel tarif, limon ve kırmızı pul biber yağıyla servis edilir.</p>
+          <div class="menu-item-tags"><span class="menu-tag vegan">🌿 Vegan</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=200&q=80" alt="Şef Çorbası" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Günün Şef Çorbası</span>
+            <span class="menu-item-price">₺165</span>
+          </div>
+          <p class="menu-item-desc">Mevsime göre her gün değişen yaratıcı çorba. Garson'dan güncel bilgi alabilirsiniz.</p>
+          <div class="menu-item-tags"><span class="menu-tag chef">⭐ Şef Önerisi</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1580173769034-5b28f7afbb20?w=200&q=80" alt="İşkembe Çorbası" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">İşkembe Çorbası</span>
+            <span class="menu-item-price">₺175</span>
+          </div>
+          <p class="menu-item-desc">Geleneksel Türk usulü işkembe çorbası, sarımsaklı sirke ve kırmızı biber yağıyla.</p>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=200&q=80" alt="Domates Çorbası" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Kremalı Domates Çorbası</span>
+            <span class="menu-item-price">₺155</span>
+          </div>
+          <p class="menu-item-desc">Taze domates, fesleğen ve krema ile hazırlanan pürüzsüz çorba, ev ekmeği eşliğinde.</p>
+          <div class="menu-item-tags"><span class="menu-tag vegan">🧀 Vejetaryen</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SALATALAR -->
+  <div class="menu-items-list" id="salatalar">
+    <h2 class="menu-category-title fade-in">Salatalar</h2>
+    <div class="menu-items-grid">
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200&q=80" alt="Çoban Salata" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Çoban Salatası</span>
+            <span class="menu-item-price">₺155</span>
+          </div>
+          <p class="menu-item-desc">Taze domates, salatalık, biber ve maydanoz. Zeytinyağı ve limon sosuyla.</p>
+          <div class="menu-item-tags"><span class="menu-tag vegan">🌿 Vegan</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=200&q=80" alt="Roka Salatası" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Roka & Parmesan</span>
+            <span class="menu-item-price">₺185</span>
+          </div>
+          <p class="menu-item-desc">Taze roka, parmesan, kiraz domates, çam fıstığı ve balsamik sos.</p>
+          <div class="menu-item-tags"><span class="menu-tag chef">⭐ Şef Önerisi</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ET YEMEKLERİ -->
+  <div class="menu-items-list" id="etler">
+    <h2 class="menu-category-title fade-in">Et Yemekleri</h2>
+    <div class="menu-items-grid">
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1544025162-d76694265947?w=200&q=80" alt="Kuzu Tandır" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Kuzu Tandır</span>
+            <span class="menu-item-price">₺620</span>
+          </div>
+          <p class="menu-item-desc">12 saat tandırda pişirilmiş kuzu, közlenmiş sebzeler, pilav ve yoğurt ile servis edilir.</p>
+          <div class="menu-item-tags"><span class="menu-tag chef">⭐ Şef Önerisi</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=200&q=80" alt="Dana Güveç" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Dana Güveç</span>
+            <span class="menu-item-price">₺580</span>
+          </div>
+          <p class="menu-item-desc">Toprak güveçte yavaş pişirilmiş dana eti, kuru fasulye, kekik ve domates.</p>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1558030006-450675393462?w=200&q=80" alt="Adana Kebap" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Adana Kebap</span>
+            <span class="menu-item-price">₺445</span>
+          </div>
+          <p class="menu-item-desc">El kıyması ile hazırlanan ince uzun kebap, közlenmiş domates ve biber eşliğinde.</p>
+          <div class="menu-item-tags"><span class="menu-tag spicy">🌶️ Acılı</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1610057099443-fde8c4d50f91?w=200&q=80" alt="Kuzu Kaburga" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Kuzu Kaburga</span>
+            <span class="menu-item-price">₺695</span>
+          </div>
+          <p class="menu-item-desc">Fırında 8 saat pişirilmiş kuzu kaburga, nar ekşili sos ve taze otlar ile.</p>
+          <div class="menu-item-tags"><span class="menu-tag chef">⭐ Şef Önerisi</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=200&q=80" alt="İskender" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">İskender Kebap</span>
+            <span class="menu-item-price">₺425</span>
+          </div>
+          <p class="menu-item-desc">İnce dilimlenmiş döner, pide üzerinde, domates sosu ve tereyağı ile servis edilir.</p>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=200&q=80" alt="Köfte" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Ev Yapımı Köfte</span>
+            <span class="menu-item-price">₺395</span>
+          </div>
+          <p class="menu-item-desc">Dana ve kuzu karışımı, özel baharatlarla yoğrulmuş el yapımı köfteler. Pilav ve salata ile.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DENİZ ÜRÜNLERİ -->
+  <div class="menu-items-list" id="deniz">
+    <h2 class="menu-category-title fade-in">Deniz Ürünleri</h2>
+    <div class="menu-items-grid">
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=200&q=80" alt="Levrek Izgara" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Levrek Izgara</span>
+            <span class="menu-item-price">₺545</span>
+          </div>
+          <p class="menu-item-desc">Günlük Boğaz levreği, kapari sosu, enginar ve limon ile servis edilir.</p>
+          <div class="menu-item-tags"><span class="menu-tag chef">⭐ Şef Önerisi</span><span class="menu-tag">🐟 Taze</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1559847844-5315695dadae?w=200&q=80" alt="Karides Güveç" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Karides Güveç</span>
+            <span class="menu-item-price">₺495</span>
+          </div>
+          <p class="menu-item-desc">Tereyağı, sarımsak ve domates ile güveçte pişirilmiş taze karides. Ev ekmeği ile.</p>
+          <div class="menu-item-tags"><span class="menu-tag spicy">🌶️ Hafif Acı</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&q=80" alt="Çipura" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Çipura Fırın</span>
+            <span class="menu-item-price">₺510</span>
+          </div>
+          <p class="menu-item-desc">Kaya tuzu üzerinde fırında pişirilmiş taze çipura. Siz soyun, biz servis edelim.</p>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=200&q=80" alt="Ahtapot" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Izgara Ahtapot</span>
+            <span class="menu-item-price">₺595</span>
+          </div>
+          <p class="menu-item-desc">Kuzine marine edilmiş, ızgarada pişirilmiş ahtapot. Roka ve limon sosu ile.</p>
+          <div class="menu-item-tags"><span class="menu-tag chef">⭐ Şef Önerisi</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VEJETARYEn -->
+  <div class="menu-items-list" id="vejetaryen">
+    <h2 class="menu-category-title fade-in">Vejetaryen Seçenekler</h2>
+    <div class="menu-items-grid">
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=200&q=80" alt="Sebze Güveç" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Türlü (Sebze Güveç)</span>
+            <span class="menu-item-price">₺295</span>
+          </div>
+          <p class="menu-item-desc">Mevsim sebzeleri, domates sosu ve taze baharatlarla güveçte yavaş pişirilmiş.</p>
+          <div class="menu-item-tags"><span class="menu-tag vegan">🌿 Vegan</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=200&q=80" alt="Zeytinyağlı Dolma" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Zeytinyağlı Yaprak Dolma</span>
+            <span class="menu-item-price">₺265</span>
+          </div>
+          <p class="menu-item-desc">Pirinç, fıstık ve kuş üzümü ile hazırlanan zeytinyağlı sarma. Soğuk servis.</p>
+          <div class="menu-item-tags"><span class="menu-tag vegan">🌿 Vegan</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TATLILAR -->
+  <div class="menu-items-list" id="tatlilar">
+    <h2 class="menu-category-title fade-in">Tatlılar</h2>
+    <div class="menu-items-grid">
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=200&q=80" alt="Baklava" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Fıstıklı Baklava (3 Adet)</span>
+            <span class="menu-item-price">₺185</span>
+          </div>
+          <p class="menu-item-desc">Günlük ev yapımı baklava, Antep fıstığı, kaymak ile servis edilir.</p>
+          <div class="menu-item-tags"><span class="menu-tag chef">⭐ Şef Önerisi</span></div>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&q=80" alt="Sütlaç" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Fırın Sütlaç</span>
+            <span class="menu-item-price">₺165</span>
+          </div>
+          <p class="menu-item-desc">Geleneksel tarife sadık taze fırın sütlaç. Üzüm karamel kaplamalı.</p>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1564355808539-22fda35bed7e?w=200&q=80" alt="Kazandibi" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Kazandibi</span>
+            <span class="menu-item-price">₺155</span>
+          </div>
+          <p class="menu-item-desc">Karamelize süt tatlısı, tavuk göğsü ile hazırlanan geleneksel lezzet.</p>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=200&q=80" alt="Künefe" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Hatay Usulü Künefe</span>
+            <span class="menu-item-price">₺195</span>
+          </div>
+          <p class="menu-item-desc">Antakya'dan getirilen taze tel kadayıf ve peynir. Sıcak servis, dondurma eşliğinde.</p>
+          <div class="menu-item-tags"><span class="menu-tag chef">⭐ Şef Önerisi</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- İÇECEKLER -->
+  <div class="menu-items-list" id="icecekler">
+    <h2 class="menu-category-title fade-in">İçecekler</h2>
+    <div class="menu-items-grid">
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=200&q=80" alt="Türk Çayı" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Türk Çayı (Demlik)</span>
+            <span class="menu-item-price">₺65</span>
+          </div>
+          <p class="menu-item-desc">Rize'nin en kaliteli yapraklarından demlenen geleneksel Türk çayı.</p>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=200&q=80" alt="Türk Kahvesi" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Türk Kahvesi</span>
+            <span class="menu-item-price">₺85</span>
+          </div>
+          <p class="menu-item-desc">Geleneksel cezve ile pişirilmiş Türk kahvesi, lokum eşliğinde.</p>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1571950006418-82c5d9b45bdd?w=200&q=80" alt="Ayran" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Ev Yapımı Ayran</span>
+            <span class="menu-item-price">₺75</span>
+          </div>
+          <p class="menu-item-desc">Günlük taze yoğurttan el çırpması ayran. Köpüklü ve soğuk servis.</p>
+        </div>
+      </div>
+      <div class="menu-item fade-in">
+        <img class="menu-item-img" src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?w=200&q=80" alt="Şarap" loading="lazy" />
+        <div class="menu-item-body">
+          <div class="menu-item-header">
+            <span class="menu-item-name">Şarap Listesi</span>
+            <span class="menu-item-price">₺285+</span>
+          </div>
+          <p class="menu-item-desc">Türk bağlarından seçkin kırmızı ve beyaz şaraplar. Sommelierimizden tavsiye alabilirsiniz.</p>
+          <div class="menu-item-tags"><span class="menu-tag chef">⭐ Sommalier Önerisi</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVATION CTA -->
+<section class="reservation-section" style="padding:80px 5%;">
+  <p class="section-label" style="justify-content:center;">Rezervasyon</p>
+  <h2 class="section-title" style="color:#fff;text-align:center;margin-bottom:15px;">Masanızı <em>Ayırtın</em></h2>
+  <p class="reservation-sub">Bu lezzetleri yerinde deneyimlemek için yerinizi şimdiden hazırlayalım</p>
+  <form class="reservation-form" novalidate>
+    <input type="text" class="res-input" placeholder="Adınız Soyadınız" required />
+    <input type="date" class="res-input" required />
+    <select class="res-input" required>
+      <option value="" disabled selected>Saat</option>
+      <option>12:00</option><option>12:30</option><option>13:00</option>
+      <option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option>
+    </select>
+    <select class="res-input" required>
+      <option value="" disabled selected>Kişi Sayısı</option>
+      <option>1 Kişi</option><option>2 Kişi</option><option>3-4 Kişi</option>
+      <option>5-6 Kişi</option><option>7-8 Kişi</option><option>8+ Kişi</option>
+    </select>
+    <button type="submit" class="res-btn">Rezervasyon Yap</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-main">Ember & Gold</span>
+      <span class="logo-sub">Fine Dining · İstanbul</span>
+      <p class="footer-tagline">"Lezzet, sevgiyle pişirildiğinde<br>bir sanat eserine dönüşür."</p>
+      <div class="footer-social">
+        <a href="#" class="social-link">IG</a>
+        <a href="#" class="social-link">FB</a>
+        <a href="#" class="social-link">TW</a>
+        <a href="#" class="social-link">TA</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Sayfalar</h5>
+      <ul>
+        <li><a href="index.html">Ana Sayfa</a></li>
+        <li><a href="menu.html">Menü</a></li>
+        <li><a href="hakkimizda.html">Hakkımızda</a></li>
+        <li><a href="iletisim.html">İletişim</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Çalışma Saatleri</h5>
+      <ul style="color:rgba(255,255,255,0.45);font-size:0.85rem;">
+        <li style="margin-bottom:8px;">Pazartesi – Cuma<br><span style="color:var(--gold);">12:00 – 23:00</span></li>
+        <li style="margin-bottom:8px;">Cumartesi<br><span style="color:var(--gold);">11:00 – 23:30</span></li>
+        <li>Pazar<br><span style="color:var(--gold);">11:00 – 22:00</span></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>İletişim</h5>
+      <ul class="footer-contact">
+        <li><span class="contact-icon">📍</span><span>Kuruçeşme Cad. No:42<br>Beşiktaş, İstanbul</span></li>
+        <li style="margin-top:12px;"><span class="contact-icon">📞</span><a href="tel:+902121234567" style="color:rgba(255,255,255,0.5);text-decoration:none;">+90 (212) 123 45 67</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Ember & Gold. Tüm hakları saklıdır.</span>
+    <div class="footer-bottom-links">
+      <a href="#">Gizlilik Politikası</a>
+      <a href="#">Kullanım Koşulları</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
