@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Studio — Sektörünüze Özel Web Siteleri</title>
+<title>Canova Studio — Sektörünüze Özel Web Siteleri</title>
 <meta name="description" content="Estetikten avukatlığa, restorandan emlağa — işletmenize birebir uyan, hızlı ve modern web siteleri.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,6 +68,7 @@
     font-family: var(--serif);
     font-size: 26px; font-style: italic;
     letter-spacing: -0.02em;
+    white-space: nowrap;
   }
   .logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 36px; font-size: 14px; font-weight: 500; }
@@ -235,6 +236,12 @@
     overflow: hidden;
   }
   .sector-card.live:hover { background: var(--bg-elev); }
+  .sector-card.featured {
+    background:
+      radial-gradient(circle at 78% 18%, rgba(212,255,62,0.16), transparent 32%),
+      linear-gradient(145deg, rgba(212,255,62,0.08), rgba(255,107,53,0.04) 42%, var(--bg) 72%);
+    border: 1px solid rgba(212,255,62,0.18);
+  }
   .sector-card.live::before {
     content: ""; position: absolute;
     top: 0; left: 0; width: 100%; height: 2px;
@@ -277,6 +284,23 @@
     margin-top: auto;
   }
   .sector-card.live:hover .sector-link { color: var(--accent); }
+  .sector-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0 24px;
+  }
+  .sector-pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    padding: 6px 9px;
+    border: 1px solid rgba(212,255,62,0.22);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.035);
+  }
   .badge-soon {
     display: inline-block;
     font-family: var(--mono);
@@ -315,7 +339,12 @@
   }
   .template-card.l { grid-column: span 7; }
   .template-card.s { grid-column: span 5; }
-  @media (max-width: 900px) { .template-card.l, .template-card.s { grid-column: span 12; } }
+  .template-card.wide {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  }
+  @media (max-width: 900px) { .template-card.l, .template-card.s, .template-card.wide { grid-column: span 12; } .template-card.wide { display: flex; } }
 
   .template-preview {
     aspect-ratio: 16/10;
@@ -339,8 +368,31 @@
   .template-card:hover .template-preview::after { opacity: 1; transform: translateY(0); }
 
   .template-info { padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .template-card.wide .template-info {
+    padding: 34px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
   .template-info h3 { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -0.01em; }
+  .template-card.wide .template-info h3 { font-size: clamp(30px, 4vw, 44px); }
   .template-info p { font-size: 13px; color: var(--text-mute); margin-top: 4px; }
+  .template-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .template-features span {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 10px;
+  }
   .template-tag {
     font-family: var(--mono);
     font-size: 11px; color: var(--accent);
@@ -564,6 +616,7 @@
   .preview-menu { background: linear-gradient(135deg, #0a1f1c 0%, #050d0c 100%); }
   .preview-menu-prem { background: linear-gradient(135deg, #1a1208 0%, #0d0905 100%); }
   .preview-orta { background: linear-gradient(135deg, #2c1810 0%, #1a0d08 100%); }
+  .preview-ember { background: linear-gradient(135deg, #24140a 0%, #090604 100%); }
 </style>
 </head>
 <body>
@@ -571,7 +624,7 @@
 <!-- NAV -->
 <nav class="top">
   <div class="inner">
-    <a href="#" class="logo">studio<span>.</span></a>
+    <a href="#" class="logo">canova studio<span>.</span></a>
     <div class="nav-links">
       <a href="#sektorler">Sektörler</a>
       <a href="#sablonlar">Şablonlar</a>
@@ -641,13 +694,19 @@
 
     <div class="sectors-grid">
       <!-- AKTIF: Restoran/Cafe -->
-      <a href="#sablonlar" class="sector-card live">
+      <a href="#sablonlar" class="sector-card live featured">
         <div>
           <div class="sector-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v20M16 2v6c0 1 1 2 2 2h2"/><path d="M6 2v8a2 2 0 0 0 2 2h0a2 2 0 0 0 2-2V2"/></svg>
           </div>
           <h3 class="sector-name">Restoran &amp; Cafe</h3>
-          <p class="sector-desc">Menü, rezervasyon, atmosfer — masaya gelmeden önce müşteri tatmin olur.</p>
+          <p class="sector-desc">Menü, rezervasyon, galeri ve iletişim akışı tek yerde. Müşteri daha mekana gelmeden atmosferi görür, menüyü inceler, masayı ayırtır.</p>
+          <div class="sector-stats">
+            <span class="sector-pill">5 şablon</span>
+            <span class="sector-pill">Menü</span>
+            <span class="sector-pill">Rezervasyon</span>
+            <span class="sector-pill">Galeri</span>
+          </div>
         </div>
         <span class="sector-link">Şablonları gör →</span>
       </a>
@@ -846,6 +905,47 @@
         </div>
       </a>
 
+      <a href="sablonlar/restoran/index.html" class="template-card wide" target="_blank">
+        <div class="template-preview preview-ember">
+          <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="eg1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#2b170b"/>
+                <stop offset="46%" stop-color="#15100c"/>
+                <stop offset="100%" stop-color="#080604"/>
+              </linearGradient>
+              <radialGradient id="egGlow" cx="72%" cy="32%" r="45%">
+                <stop offset="0%" stop-color="#e8b96a" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#e8b96a" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="900" height="520" fill="url(#eg1)"/>
+            <rect width="900" height="520" fill="url(#egGlow)"/>
+            <rect x="58" y="58" width="784" height="404" fill="none" stroke="#c8963e" stroke-width="1" opacity="0.35"/>
+            <text x="86" y="126" font-family="serif" font-style="italic" font-size="25" fill="#e8b96a" opacity="0.9">Ember &amp; Gold</text>
+            <text x="86" y="252" font-family="serif" font-size="78" fill="#f5efe0">Fine Dining</text>
+            <text x="86" y="327" font-family="serif" font-style="italic" font-size="72" fill="#c8963e">experience.</text>
+            <line x1="86" y1="370" x2="260" y2="370" stroke="#c8963e" stroke-width="2"/>
+            <text x="86" y="415" font-family="sans-serif" font-size="14" fill="#b9975a" letter-spacing="3">ANA SAYFA · MENÜ · HAKKIMIZDA · REZERVASYON</text>
+            <circle cx="690" cy="238" r="120" fill="none" stroke="#c8963e" stroke-width="1" opacity="0.28"/>
+            <circle cx="690" cy="238" r="76" fill="#c8963e" opacity="0.08"/>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Ember &amp; Gold</h3>
+            <p>Fine dining restoranlar için çok sayfalı, rezervasyon ve detaylı menü akışına sahip premium paket.</p>
+            <div class="template-features">
+              <span>Çok sayfalı</span>
+              <span>Rezervasyon</span>
+              <span>Detaylı menü</span>
+              <span>Galeri</span>
+            </div>
+          </div>
+          <span class="template-tag">Premium</span>
+        </div>
+      </a>
+
     </div>
   </div>
 </section>
@@ -933,7 +1033,7 @@
       <div class="process-row">
         <div class="step-num">[ ADIM 04 ]</div>
         <div class="step-title">Yayına alma</div>
-        <div class="step-desc">Domain, hosting, mail kurulumu — hepsi bizden. 1 yıl boyunca ufak değişikliklerde ekstra ücret yok.</div>
+        <div class="step-desc">Domain, hosting ve mail kurulumu sürecinde size yardımcı oluyoruz. Bu hizmetlerin yıllık ücretleri teklifin dışında, ihtiyaca göre ayrıca planlanır.</div>
       </div>
     </div>
   </div>
@@ -951,24 +1051,24 @@
 
     <div class="faq-list">
       <div class="faq-item">
-        <div class="faq-q">Logom yok, problem mi? <span class="plus">+</span></div>
-        <div class="faq-a">Hayır, sıkıntı yok. Sade bir logoyu paket içinde tasarlıyoruz; daha kapsamlı kurumsal kimlik isterseniz ek paket olarak sunarız.</div>
+        <div class="faq-q">Logom yoksa destek alabilir miyim? <span class="plus">+</span></div>
+        <div class="faq-a">Evet. Mevcut bir logonuz yoksa, web sitenizde kullanılabilecek sade ve temiz bir logo çalışması hazırlayabiliriz. Daha kapsamlı kurumsal kimlik ihtiyaçları ayrıca değerlendirilir.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Sonradan güncelleme yapabilir miyim? <span class="plus">+</span></div>
-        <div class="faq-a">Evet. İlk 1 yıl ufak değişiklikler (telefon, fiyat, metin, foto güncelleme) ücretsiz. Sonrasında dilerseniz bize yaptırırsınız, dilerseniz size bir kullanıcı paneli kurarız.</div>
+        <div class="faq-q">Yayından sonra güncelleme yapılabilir mi? <span class="plus">+</span></div>
+        <div class="faq-a">Evet. Telefon, adres, fiyat, metin ve görsel gibi küçük güncellemelerde ilk yıl destek sağlıyoruz. Daha kapsamlı değişiklikler ayrıca planlanır.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Domain ve hosting dahil mi? <span class="plus">+</span></div>
-        <div class="faq-a">İlk yıl domain (.com / .com.tr) ve hosting paketin içinde. İkinci yıldan itibaren yıllık yenileme ücreti var, çok küçük bir tutar.</div>
+        <div class="faq-q">Domain ve hosting fiyata dahil mi? <span class="plus">+</span></div>
+        <div class="faq-a">Hayır. Domain, hosting ve varsa kurumsal e-posta ücretleri web sitesi tasarım fiyatına dahil değildir. İhtiyacınıza uygun seçenekleri belirlemenize ve kurulum sürecine yardımcı oluruz.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-q">Kaç dilli olabilir? <span class="plus">+</span></div>
-        <div class="faq-a">Tek dilli paketlerimiz standart. İngilizce + Türkçe çift dilli isterseniz küçük bir ek ücretle ekliyoruz; metin çevirileri sizden ya da bizden olabilir.</div>
+        <div class="faq-q">Site kaç dilde hazırlanabilir? <span class="plus">+</span></div>
+        <div class="faq-a">Web sitenizi 3 dile kadar ücretsiz şekilde hazırlayabiliriz. 3 dilden sonraki ek diller, içerik yoğunluğuna göre küçük bir ek ücretle eklenir.</div>
       </div>
       <div class="faq-item">
         <div class="faq-q">Ödeme nasıl yapılıyor? <span class="plus">+</span></div>
-        <div class="faq-a">%50 başlangıçta, %50 site teslim edildiğinde. Havale veya kredi kartı (taksit dahil) seçenekleri mevcut.</div>
+        <div class="faq-a">Ödeme genellikle %50 başlangıçta, %50 site tesliminde alınır. Şu anda ödeme seçenekleri havale/EFT veya elden ödeme ile sınırlıdır.</div>
       </div>
     </div>
   </div>
@@ -1008,7 +1108,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col">
-        <a href="#" class="logo">studio<span>.</span></a>
+        <a href="#" class="logo">canova studio<span>.</span></a>
         <p class="footer-tagline">Sektörünüze özel, hızlı, modern web siteleri. İşi bilmeyen ajanslara para vermeyin.</p>
       </div>
       <div class="footer-col">
@@ -1033,7 +1133,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Studio. Tüm hakları saklıdır.</span>
+      <span>© 2025 Canova Studio. Tüm hakları saklıdır.</span>
       <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;">MADE WITH ♥ IN TÜRKİYE</span>
     </div>
   </div>
