@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canova Studio — Sektörünüze Özel Web Siteleri</title>
+<title>Zetta Studio — Sektörünüze Özel Web Siteleri</title>
 <meta name="description" content="Estetikten avukatlığa, restorandan emlağa — işletmenize birebir uyan, hızlı ve modern web siteleri.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,16 +12,18 @@
 
 <style>
   :root {
-    --bg: #0d0d0f;
-    --bg-elev: #16161a;
-    --bg-elev-2: #1d1d22;
-    --border: #28282e;
-    --border-soft: #1f1f24;
-    --text: #f5f5ef;
-    --text-mute: #8a8a85;
-    --text-dim: #5a5a55;
-    --accent: #d4ff3e;
-    --accent-warm: #ff6b35;
+    --bg: #f7f4ec;
+    --bg-elev: #ffffff;
+    --bg-elev-2: #efe8d6;
+    --border: #ddd4be;
+    --border-soft: #ece5d2;
+    --text: #1d1a14;
+    --text-mute: #6c6656;
+    --text-dim: #a39c88;
+    --accent: #c25e2e;
+    --accent-hover: #d36a37;
+    --accent-warm: #6b8d4f;
+    --on-accent: #fdf9f0;
     --serif: "Instrument Serif", "Times New Roman", serif;
     --sans: "Manrope", -apple-system, sans-serif;
     --mono: "JetBrains Mono", monospace;
@@ -43,7 +45,7 @@
     content: "";
     position: fixed; inset: 0;
     pointer-events: none; z-index: 1;
-    opacity: 0.035;
+    opacity: 0.022;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
@@ -57,7 +59,7 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 18px 32px;
     backdrop-filter: blur(20px);
-    background: rgba(13,13,15,0.7);
+    background: rgba(247,244,236,0.82);
     border-bottom: 1px solid var(--border-soft);
   }
   nav.top .inner {
@@ -76,12 +78,12 @@
   .nav-links a:hover { color: var(--text); }
   .nav-cta {
     padding: 10px 18px;
-    background: var(--accent); color: #0d0d0f;
+    background: var(--accent); color: var(--on-accent);
     border-radius: 100px;
     font-size: 13px; font-weight: 600;
-    transition: transform 0.2s;
+    transition: transform 0.2s, background 0.2s;
   }
-  .nav-cta:hover { transform: translateY(-1px); }
+  .nav-cta:hover { transform: translateY(-1px); background: var(--accent-hover); }
   @media (max-width: 768px) { .nav-links { display: none; } }
 
   /* HERO */
@@ -90,8 +92,15 @@
     content: ""; position: absolute;
     top: 20%; right: -10%;
     width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(212,255,62,0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(194,94,46,0.14) 0%, transparent 70%);
     filter: blur(60px); pointer-events: none;
+  }
+  .hero::before {
+    content: ""; position: absolute;
+    bottom: -10%; left: -10%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(107,141,79,0.10) 0%, transparent 70%);
+    filter: blur(70px); pointer-events: none;
   }
 
   .eyebrow {
@@ -142,14 +151,14 @@
     border: 1px solid transparent;
     cursor: pointer;
   }
-  .btn-primary { background: var(--accent); color: #0d0d0f; }
+  .btn-primary { background: var(--accent); color: var(--on-accent); }
   .btn-primary:hover {
-    background: #e2ff5e;
+    background: var(--accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 12px 40px -10px rgba(212,255,62,0.4);
+    box-shadow: 0 14px 36px -10px rgba(194,94,46,0.42);
   }
-  .btn-ghost { border-color: var(--border); color: var(--text); }
-  .btn-ghost:hover { border-color: var(--text); background: rgba(255,255,255,0.03); }
+  .btn-ghost { border-color: var(--border); color: var(--text); background: var(--bg-elev); }
+  .btn-ghost:hover { border-color: var(--text); background: var(--bg-elev-2); }
   .btn .arrow { transition: transform 0.2s; }
   .btn:hover .arrow { transform: translate(3px, -3px); }
 
@@ -226,7 +235,7 @@
   @media (max-width: 600px) { .sectors-grid { grid-template-columns: 1fr; } }
 
   .sector-card {
-    background: var(--bg);
+    background: var(--bg-elev);
     padding: 36px 28px;
     min-height: 280px;
     display: flex; flex-direction: column; justify-content: space-between;
@@ -235,12 +244,12 @@
     position: relative;
     overflow: hidden;
   }
-  .sector-card.live:hover { background: var(--bg-elev); }
+  .sector-card.live:hover { background: var(--bg-elev-2); }
   .sector-card.featured {
     background:
-      radial-gradient(circle at 78% 18%, rgba(212,255,62,0.16), transparent 32%),
-      linear-gradient(145deg, rgba(212,255,62,0.08), rgba(255,107,53,0.04) 42%, var(--bg) 72%);
-    border: 1px solid rgba(212,255,62,0.18);
+      radial-gradient(circle at 78% 18%, rgba(194,94,46,0.18), transparent 35%),
+      linear-gradient(145deg, rgba(194,94,46,0.10), rgba(107,141,79,0.08) 42%, var(--bg-elev) 72%);
+    border: 1px solid rgba(194,94,46,0.22);
   }
   .sector-card.live::before {
     content: ""; position: absolute;
@@ -251,8 +260,8 @@
   }
   .sector-card.live:hover::before { transform: scaleX(1); }
 
-  .sector-card.soon { opacity: 0.6; cursor: default; }
-  .sector-card.soon:hover { background: var(--bg); }
+  .sector-card.soon { opacity: 0.65; cursor: default; }
+  .sector-card.soon:hover { background: var(--bg-elev); }
 
   .sector-icon {
     width: 48px; height: 48px;
@@ -263,7 +272,7 @@
     color: var(--accent);
     transition: all 0.3s;
   }
-  .sector-card.live:hover .sector-icon { background: var(--accent); color: var(--bg); }
+  .sector-card.live:hover .sector-icon { background: var(--accent); color: var(--on-accent); }
   .sector-icon svg { width: 22px; height: 22px; }
 
   .sector-name {
@@ -297,9 +306,9 @@
     text-transform: uppercase;
     color: var(--text);
     padding: 6px 9px;
-    border: 1px solid rgba(212,255,62,0.22);
+    border: 1px solid rgba(194,94,46,0.30);
     border-radius: 999px;
-    background: rgba(255,255,255,0.035);
+    background: rgba(194,94,46,0.06);
   }
   .badge-soon {
     display: inline-block;
@@ -314,7 +323,7 @@
 
   /* TEMPLATES SHOWCASE */
   .templates-section {
-    background: var(--bg-elev);
+    background: var(--bg-elev-2);
   }
   .template-grid {
     display: grid;
@@ -322,7 +331,7 @@
     gap: 24px;
   }
   .template-card {
-    background: var(--bg);
+    background: var(--bg-elev);
     border: 1px solid var(--border-soft);
     border-radius: 16px;
     overflow: hidden;
@@ -331,11 +340,12 @@
     text-decoration: none;
     color: inherit;
     display: flex; flex-direction: column;
+    box-shadow: 0 1px 0 rgba(28,24,20,0.04);
   }
   .template-card:hover {
     transform: translateY(-8px);
     border-color: var(--accent);
-    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+    box-shadow: 0 30px 60px -22px rgba(110,82,46,0.28);
   }
   .template-card.l { grid-column: span 7; }
   .template-card.s { grid-column: span 5; }
@@ -357,13 +367,14 @@
     content: "Şablonu aç →";
     position: absolute;
     bottom: 16px; right: 16px;
-    background: var(--accent); color: var(--bg);
+    background: var(--accent); color: var(--on-accent);
     padding: 10px 16px;
     border-radius: 100px;
     font-size: 12px; font-weight: 600;
     opacity: 0;
     transform: translateY(10px);
     transition: all 0.3s;
+    box-shadow: 0 8px 22px -8px rgba(194,94,46,0.55);
   }
   .template-card:hover .template-preview::after { opacity: 1; transform: translateY(0); }
 
@@ -440,7 +451,7 @@
   }
   @media (max-width: 768px) { .stats { grid-template-columns: repeat(2, 1fr); } }
 
-  .stat { background: var(--bg); padding: 40px 28px; }
+  .stat { background: var(--bg-elev); padding: 40px 28px; }
   .stat-num {
     font-family: var(--serif);
     font-size: 56px; line-height: 1;
@@ -458,7 +469,7 @@
     overflow: hidden;
   }
   .process-row {
-    background: var(--bg);
+    background: var(--bg-elev);
     padding: 36px 32px;
     display: grid;
     grid-template-columns: 80px 1fr 2fr;
@@ -466,7 +477,7 @@
     align-items: center;
     transition: background 0.3s;
   }
-  .process-row:hover { background: var(--bg-elev); }
+  .process-row:hover { background: var(--bg-elev-2); }
   @media (max-width: 768px) {
     .process-row { grid-template-columns: 1fr; gap: 12px; }
   }
@@ -508,7 +519,7 @@
   }
   .faq-item.open .faq-q .plus {
     background: var(--accent);
-    color: var(--bg);
+    color: var(--on-accent);
     border-color: var(--accent);
     transform: rotate(45deg);
   }
@@ -526,14 +537,18 @@
     text-align: center;
     padding: 120px 32px;
     position: relative;
-    background: var(--bg-elev);
+    background:
+      radial-gradient(ellipse at 22% 30%, rgba(194,94,46,0.08), transparent 55%),
+      radial-gradient(ellipse at 78% 70%, rgba(107,141,79,0.10), transparent 55%),
+      var(--bg-elev);
     border-radius: 24px;
     overflow: hidden;
     border: 1px solid var(--border-soft);
+    box-shadow: 0 24px 60px -28px rgba(110,82,46,0.20);
   }
   .cta-block::before {
     content: ""; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, rgba(212,255,62,0.1) 0%, transparent 60%);
+    background: radial-gradient(ellipse at center, rgba(194,94,46,0.10) 0%, transparent 60%);
     pointer-events: none;
   }
   .cta-block h2 {
@@ -624,7 +639,7 @@
 <!-- NAV -->
 <nav class="top">
   <div class="inner">
-    <a href="#" class="logo">canova studio<span>.</span></a>
+    <a href="#" class="logo">zetta studio<span>.</span></a>
     <div class="nav-links">
       <a href="#sektorler">Sektörler</a>
       <a href="#sablonlar">Şablonlar</a>
@@ -1108,7 +1123,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div class="footer-col">
-        <a href="#" class="logo">canova studio<span>.</span></a>
+        <a href="#" class="logo">zetta studio<span>.</span></a>
         <p class="footer-tagline">Sektörünüze özel, hızlı, modern web siteleri. İşi bilmeyen ajanslara para vermeyin.</p>
       </div>
       <div class="footer-col">
@@ -1133,7 +1148,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Canova Studio. Tüm hakları saklıdır.</span>
+      <span>© 2025 Zetta Studio. Tüm hakları saklıdır.</span>
       <span style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;">MADE WITH ♥ IN TÜRKİYE</span>
     </div>
   </div>

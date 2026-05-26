@@ -1,0 +1,283 @@
+- generic [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Ember & Gold Fine Dining · Стамбул" [ref=e277] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=e4]: Ember & Gold
+      - generic [ref=e5]: Fine Dining · Стамбул
+    - list [ref=e6]:
+      - listitem [ref=e7]:
+        - link "Главная" [ref=e278] [cursor=pointer]:
+          - /url: index.html
+      - listitem [ref=e9]:
+        - link "Меню" [ref=e279] [cursor=pointer]:
+          - /url: "#menu-preview"
+      - listitem [ref=e11]:
+        - link "О нас" [ref=e280] [cursor=pointer]:
+          - /url: hakkimizda.html
+      - listitem [ref=e13]:
+        - link "Контакты" [ref=e281] [cursor=pointer]:
+          - /url: iletisim.html
+      - listitem [ref=e15]:
+        - link "Бронь" [ref=e282] [cursor=pointer]:
+          - /url: "#rezervasyon"
+    - generic "Dil seçimi" [ref=e17]:
+      - button "TR" [ref=e18] [cursor=pointer]
+      - button "EN" [ref=e19] [cursor=pointer]
+      - button "RU" [active] [ref=e20] [cursor=pointer]
+  - generic [ref=e21]:
+    - generic [ref=e24]:
+      - generic [ref=e25]: С 1997 года · Стамбул
+      - heading "Искусство вкуса" [level=1] [ref=e283]:
+        - text: Искусство
+        - emphasis [ref=e27]: вкуса
+      - paragraph [ref=e28]: Богатство турецкой кухни в современном прочтении
+      - generic [ref=e29]:
+        - link "Смотреть меню" [ref=e284] [cursor=pointer]:
+          - /url: "#menu-preview"
+        - link "Забронировать стол" [ref=e285] [cursor=pointer]:
+          - /url: "#rezervasyon"
+    - link "Смотреть" [ref=e286] [cursor=pointer]:
+      - /url: "#features"
+      - generic [ref=e34]: Смотреть
+  - generic [ref=e35]:
+    - generic [ref=e36]:
+      - generic [ref=e37]: 🌿
+      - generic [ref=e38]:
+        - heading "Свежее и местное" [level=4] [ref=e287]
+        - paragraph [ref=e40]: Ежедневные продукты от местных производителей
+    - generic [ref=e41]:
+      - generic [ref=e42]: 👨‍🍳
+      - generic [ref=e43]:
+        - heading "Шеф-повар" [level=4] [ref=e288]
+        - paragraph [ref=e45]: Кухня с опытом более 20 лет
+    - generic [ref=e46]:
+      - generic [ref=e47]: 🍷
+      - generic [ref=e48]:
+        - heading "Избранные вина" [level=4] [ref=e289]
+        - paragraph [ref=e50]: Широкая коллекция турецких и мировых вин
+    - generic [ref=e51]:
+      - generic [ref=e52]: 🏆
+      - generic [ref=e53]:
+        - heading "Отмеченная кухня" [level=4] [ref=e290]
+        - paragraph [ref=e55]: Ресторан с гастрономическим признанием
+  - generic [ref=e62]:
+    - paragraph [ref=e63]: Наша история
+    - heading "Из сердца Стамбула к столу" [level=2] [ref=e291]:
+      - text: Из сердца
+      - emphasis [ref=e65]: Стамбула
+      - text: к столу
+    - paragraph [ref=e66]: Ember & Gold начался в 1997 году как небольшой семейный ресторан, а сегодня стал одним из изысканных адресов Стамбула. Мы соединяем традиции османской кухни с современной гастрономией.
+    - paragraph [ref=e67]: Каждое блюдо рассказывает историю. Сезонные продукты мы берем у местных фермеров, а морепродукты ежедневно поступают с Босфора.
+    - generic [ref=e68]:
+      - generic [ref=e69]:
+        - generic [ref=e70]: 0+
+        - generic [ref=e71]: Лет опыта
+      - generic [ref=e72]:
+        - generic [ref=e73]: "0"
+        - generic [ref=e74]: Позиций в меню
+      - generic [ref=e75]:
+        - generic [ref=e76]: 0+
+        - generic [ref=e77]: Довольных гостей
+    - link "Подробнее" [ref=e292] [cursor=pointer]:
+      - /url: hakkimizda.html
+  - generic [ref=e79]:
+    - generic [ref=e80]:
+      - generic [ref=e81]:
+        - paragraph [ref=e82]: Наши вкусы
+        - heading "Фирменные блюда" [level=2] [ref=e293]:
+          - text: Фирменные
+          - emphasis [ref=e84]: блюда
+      - paragraph [ref=e85]: Меню шефа лаконичное, сезонное и продуманное. Сначала говорит продукт, затем техника.
+    - generic "Menü kategorileri" [ref=e86]:
+      - button "Все" [ref=e294] [cursor=pointer]
+      - button "Закуски" [ref=e295] [cursor=pointer]
+      - button "Основные" [ref=e296] [cursor=pointer]
+      - button "Десерты" [ref=e297] [cursor=pointer]
+    - generic [ref=e91]:
+      - article [ref=e92]:
+        - generic [ref=e94]:
+          - generic [ref=e95]: Дегустационное меню
+          - heading "Вечер на Босфоре" [level=3] [ref=e298]
+          - paragraph [ref=e97]: "Четыре подачи: мезе, томленая баранина, свежая рыба и фисташковый финал."
+          - generic [ref=e98]:
+            - strong [ref=e99]: ₺1.450
+            - generic [ref=e100]: На человека · 4 подачи
+      - generic [ref=e101]:
+        - article [ref=e102]:
+          - img "Mevsim mezeler" [ref=e103]
+          - generic [ref=e104]:
+            - generic [ref=e105]: Закуска
+            - heading "Сезонные мезе" [level=3] [ref=e299]
+            - paragraph [ref=e107]: Восемь свежих закусок с овощами, травами и оливковым маслом.
+          - strong [ref=e108]: ₺285
+        - article [ref=e109]:
+          - img "Kuzu tandır" [ref=e110]
+          - generic [ref=e111]:
+            - generic [ref=e112]: Основное
+            - heading "Баранина тандыр" [level=3] [ref=e300]
+            - paragraph [ref=e114]: Баранина, томленная 12 часов, с печеными овощами и пряным соусом.
+          - strong [ref=e115]: ₺620
+        - article [ref=e116]:
+          - img "Levrek ızgara" [ref=e117]
+          - generic [ref=e118]:
+            - generic [ref=e119]: Основное
+            - heading "Сибас на гриле" [level=3] [ref=e301]
+            - paragraph [ref=e121]: Свежий сибас с лимонно-каперсовым соусом и артишоком.
+          - strong [ref=e122]: ₺545
+        - article [ref=e123]:
+          - img "Fıstıklı baklava" [ref=e124]
+          - generic [ref=e125]:
+            - generic [ref=e126]: Десерт
+            - heading "Фисташковая пахлава" [level=3] [ref=e302]
+            - paragraph [ref=e128]: Теплый десерт с фисташкой, тонким тестом и каймаком.
+          - strong [ref=e129]: ₺185
+    - link "Полное меню" [ref=e303] [cursor=pointer]:
+      - /url: menu.html
+  - generic [ref=e132]:
+    - paragraph [ref=e133]: Атмосфера
+    - heading "Кадры ресторана" [level=2] [ref=e304]:
+      - text: Кадры
+      - emphasis [ref=e135]: ресторана
+    - generic [ref=e136]:
+      - img "Restoran iç mekan" [ref=e138] [cursor=pointer]
+      - img "Şarap rafları" [ref=e140] [cursor=pointer]
+      - img "Yemek" [ref=e142] [cursor=pointer]
+      - img "Restoran ambiyans" [ref=e144] [cursor=pointer]
+      - img "Tatlı tabağı" [ref=e146] [cursor=pointer]
+      - img "Mutfak" [ref=e148] [cursor=pointer]
+  - generic [ref=e149]:
+    - paragraph [ref=e150]: Гости
+    - heading "Их отзывы" [level=2] [ref=e305]:
+      - text: Их
+      - emphasis [ref=e152]: отзывы
+    - generic [ref=e153]:
+      - generic [ref=e154]:
+        - text: "\""
+        - generic [ref=e155]: ★★★★★
+        - paragraph [ref=e156]: İstanbul'da yediğim en iyi kuzu tandır. Atmosfer muhteşem, servis kusursuz. Özel gecelerimizin vazgeçilmez adresi oldunuz.
+        - generic [ref=e157]:
+          - generic [ref=e158]: A
+          - generic [ref=e159]:
+            - generic [ref=e160]: Ayşe Kılıç
+            - generic [ref=e161]: İstanbul · Google
+      - generic [ref=e162]:
+        - text: "\""
+        - generic [ref=e163]: ★★★★★
+        - paragraph [ref=e164]: Şefin dokunuşu her tabakta hissediliyor. Mezelerden tatlıya kadar her şey harikaydı. Şarap seçkisi de gerçekten etkileyici.
+        - generic [ref=e165]:
+          - generic [ref=e166]: M
+          - generic [ref=e167]:
+            - generic [ref=e168]: Murat Demir
+            - generic [ref=e169]: Ankara · TripAdvisor
+      - generic [ref=e170]:
+        - text: "\""
+        - generic [ref=e171]: ★★★★★
+        - paragraph [ref=e172]: Yurtdışından misafirlerimizi getirdiğimizde hep Ember & Gold'u tercih ediyoruz. Türk mutfağını en iyi yansıtan adres burası.
+        - generic [ref=e173]:
+          - generic [ref=e174]: Z
+          - generic [ref=e175]:
+            - generic [ref=e176]: Zeynep Arslan
+            - generic [ref=e177]: İstanbul · Yelp
+  - generic [ref=e178]:
+    - paragraph [ref=e179]: Бронирование
+    - heading "Забронируйте стол" [level=2] [ref=e306]:
+      - text: Забронируйте
+      - emphasis [ref=e181]: стол
+    - paragraph [ref=e182]: Мы подготовим ваш стол для особенного вечера
+    - generic [ref=e183]:
+      - textbox "Имя и фамилия" [ref=e307]
+      - textbox [ref=e185]
+      - combobox [ref=e186]:
+        - option "Время" [disabled] [selected]
+        - option "12:00"
+        - option "12:30"
+        - option "13:00"
+        - option "13:30"
+        - option "19:00"
+        - option "19:30"
+        - option "20:00"
+        - option "20:30"
+        - option "21:00"
+      - combobox [ref=e187]:
+        - option "Гости" [disabled] [selected]
+        - option "1 гость"
+        - option "2 гостя"
+        - option "3-4 гостя"
+        - option "5-6 гостей"
+        - option "7-8 гостей"
+        - option "8+ гостей"
+      - button "Забронировать" [ref=e308] [cursor=pointer]
+  - contentinfo [ref=e189]:
+    - generic [ref=e190]:
+      - generic [ref=e191]:
+        - generic [ref=e192]: Ember & Gold
+        - text: Fine Dining · Стамбул
+        - paragraph [ref=e193]:
+          - text: "\"Когда вкус готовят с заботой,"
+          - text: он становится искусством."
+        - generic [ref=e194]:
+          - link "Instagram" [ref=e195] [cursor=pointer]:
+            - /url: "#"
+            - text: IG
+          - link "Facebook" [ref=e196] [cursor=pointer]:
+            - /url: "#"
+            - text: FB
+          - link "Twitter" [ref=e197] [cursor=pointer]:
+            - /url: "#"
+            - text: TW
+          - link "TripAdvisor" [ref=e198] [cursor=pointer]:
+            - /url: "#"
+            - text: TA
+      - generic [ref=e199]:
+        - heading "Страницы" [level=5] [ref=e309]
+        - list [ref=e201]:
+          - listitem [ref=e202]:
+            - link "Главная" [ref=e310] [cursor=pointer]:
+              - /url: index.html
+          - listitem [ref=e204]:
+            - link "Меню" [ref=e311] [cursor=pointer]:
+              - /url: "#menu-preview"
+          - listitem [ref=e206]:
+            - link "О нас" [ref=e312] [cursor=pointer]:
+              - /url: hakkimizda.html
+          - listitem [ref=e208]:
+            - link "Контакты" [ref=e313] [cursor=pointer]:
+              - /url: iletisim.html
+          - listitem [ref=e210]:
+            - link "Бронь" [ref=e314] [cursor=pointer]:
+              - /url: "#rezervasyon"
+      - generic [ref=e212]:
+        - heading "Часы работы" [level=5] [ref=e315]
+        - list [ref=e214]:
+          - listitem [ref=e215]:
+            - text: Pazartesi – Cuma
+            - text: 12:00 – 23:00
+          - listitem [ref=e216]:
+            - text: Cumartesi
+            - text: 11:00 – 23:30
+          - listitem [ref=e217]:
+            - text: Pazar
+            - text: 11:00 – 22:00
+      - generic [ref=e218]:
+        - heading "Контакты" [level=5] [ref=e316]
+        - list [ref=e220]:
+          - listitem [ref=e221]:
+            - generic [ref=e222]: 📍
+            - generic [ref=e223]:
+              - text: Kuruçeşme Cad. No:42
+              - text: Beşiktaş, İstanbul
+          - listitem [ref=e224]:
+            - generic [ref=e225]: 📞
+            - link "+90 (212) 123 45 67" [ref=e226] [cursor=pointer]:
+              - /url: tel:+902121234567
+          - listitem [ref=e227]:
+            - generic [ref=e228]: ✉️
+            - link "rezervasyon@embergold.com.tr" [ref=e229] [cursor=pointer]:
+              - /url: mailto:rezervasyon@embergold.com.tr
+    - generic [ref=e230]:
+      - generic [ref=e231]: © 2024 Ember & Gold. Все права защищены.
+      - generic [ref=e232]:
+        - link "Политика конфиденциальности" [ref=e317] [cursor=pointer]:
+          - /url: "#"
+        - link "Условия использования" [ref=e318] [cursor=pointer]:
+          - /url: "#"

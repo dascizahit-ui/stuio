@@ -1,0 +1,282 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "Ember & Gold Fine Dining · İstanbul" [ref=e3] [cursor=pointer]:
+      - /url: index.html
+      - generic [ref=e4]: Ember & Gold
+      - generic [ref=e5]: Fine Dining · İstanbul
+    - list [ref=e6]:
+      - listitem [ref=e7]:
+        - link "Ana Sayfa" [ref=e8] [cursor=pointer]:
+          - /url: index.html
+      - listitem [ref=e9]:
+        - link "Menü" [ref=e10] [cursor=pointer]:
+          - /url: menu.html
+      - listitem [ref=e11]:
+        - link "Hakkımızda" [ref=e12] [cursor=pointer]:
+          - /url: hakkimizda.html
+      - listitem [ref=e13]:
+        - link "İletişim" [ref=e14] [cursor=pointer]:
+          - /url: iletisim.html
+      - listitem [ref=e15]:
+        - link "Rezervasyon" [ref=e16] [cursor=pointer]:
+          - /url: iletisim.html#rezervasyon
+  - generic [ref=e17]:
+    - generic [ref=e20]:
+      - generic [ref=e21]: 1997'den Bu Yana · İstanbul
+      - heading "Lezzetin Sanatı" [level=1] [ref=e22]:
+        - text: Lezzetin
+        - emphasis [ref=e23]: Sanatı
+      - paragraph [ref=e24]: Türk mutfağının zenginliği, modern yorumuyla buluşuyor
+      - generic [ref=e25]:
+        - link "Menüyü Keşfet" [ref=e26] [cursor=pointer]:
+          - /url: menu.html
+        - link "Masa Rezervasyonu" [ref=e27] [cursor=pointer]:
+          - /url: iletisim.html#rezervasyon
+    - link "Keşfet" [ref=e28] [cursor=pointer]:
+      - /url: "#features"
+      - generic [ref=e30]: Keşfet
+  - generic [ref=e31]:
+    - generic [ref=e32]:
+      - generic [ref=e33]: 🌿
+      - generic [ref=e34]:
+        - heading "Taze & Yerel" [level=4] [ref=e35]
+        - paragraph [ref=e36]: Günlük taze, yerel üreticilerden malzeme
+    - generic [ref=e37]:
+      - generic [ref=e38]: 👨‍🍳
+      - generic [ref=e39]:
+        - heading "Usta Şef" [level=4] [ref=e40]
+        - paragraph [ref=e41]: 20 yıllık deneyimli mutfak ekibi
+    - generic [ref=e42]:
+      - generic [ref=e43]: 🍷
+      - generic [ref=e44]:
+        - heading "Seçkin Şaraplar" [level=4] [ref=e45]
+        - paragraph [ref=e46]: Geniş Türk ve dünya şarap koleksiyonu
+    - generic [ref=e47]:
+      - generic [ref=e48]: 🏆
+      - generic [ref=e49]:
+        - heading "Ödüllü Mutfak" [level=4] [ref=e50]
+        - paragraph [ref=e51]: Gastronomi ödülü sahibi restoran
+  - generic [ref=e58]:
+    - paragraph [ref=e59]: Hikayemiz
+    - heading "İstanbul'un Kalbinden Sofraya" [level=2] [ref=e60]:
+      - text: İstanbul'un
+      - emphasis [ref=e61]: Kalbinden
+      - text: Sofraya
+    - paragraph [ref=e62]: 1997 yılında küçük bir aile restoranı olarak yola çıkan Ember & Gold, bugün İstanbul'un en seçkin fine dining adresleri arasında yer alıyor. Osmanlı mutfağının köklü geleneğini, modern gastronominin yaratıcı teknikleriyle harmanlıyoruz.
+    - paragraph [ref=e63]: Her tabak, bir hikaye; her lokma, bir anı. Sezonluk malzemeleri yerel çiftçilerden, deniz ürünlerini günlük Boğaz'dan temin ederek sofranıza tazeliği ve dürüstlüğü getiriyoruz.
+    - generic [ref=e64]:
+      - generic [ref=e65]:
+        - generic [ref=e66]: 0+
+        - generic [ref=e67]: Yıllık Deneyim
+      - generic [ref=e68]:
+        - generic [ref=e69]: "0"
+        - generic [ref=e70]: Menüde Çeşit
+      - generic [ref=e71]:
+        - generic [ref=e72]: 0+
+        - generic [ref=e73]: Mutlu Misafir
+    - link "Daha Fazla Bilgi" [ref=e74] [cursor=pointer]:
+      - /url: hakkimizda.html
+  - generic [ref=e75]:
+    - paragraph [ref=e76]: Lezzetlerimiz
+    - heading "Seçkin Tatlar" [level=2] [ref=e77]:
+      - text: Seçkin
+      - emphasis [ref=e78]: Tatlar
+    - paragraph [ref=e79]: Şefimizin özenle hazırladığı, mevsimsel malzemelerle hayat bulan imza lezzetlerimiz.
+    - generic [ref=e80]:
+      - button "Tümü" [ref=e81] [cursor=pointer]
+      - button "Başlangıçlar" [ref=e82] [cursor=pointer]
+      - button "Ana Yemekler" [ref=e83] [cursor=pointer]
+      - button "Tatlılar" [ref=e84] [cursor=pointer]
+    - generic [ref=e85]:
+      - generic [ref=e86] [cursor=pointer]:
+        - img "Mevsim Mezeler" [ref=e87]
+        - generic [ref=e88]:
+          - generic [ref=e89]: Başlangıç
+          - heading "Mevsim Mezeler" [level=3] [ref=e90]
+          - paragraph: Günlük taze sebze ve otlarla hazırlanan geleneksel Türk mezeleri. 8 çeşit seçki.
+          - generic [ref=e91]: ₺285
+      - generic [ref=e92] [cursor=pointer]:
+        - img "Kuzu Tandır" [ref=e93]
+        - generic [ref=e94]:
+          - generic [ref=e95]: Ana Yemek
+          - heading "Kuzu Tandır" [level=3] [ref=e96]
+          - paragraph: 12 saat kuzine pişirilmiş kuzu eti, közlenmiş sebzeler ve baharat soslariyle.
+          - generic [ref=e97]: ₺620
+      - generic [ref=e98] [cursor=pointer]:
+        - img "Fıstıklı Baklava" [ref=e99]
+        - generic [ref=e100]:
+          - generic [ref=e101]: Tatlı
+          - heading "Fıstıklı Baklava" [level=3] [ref=e102]
+          - paragraph: Antep fıstığı ile hazırlanan ev yapımı baklava, kaymak ile servis edilir.
+          - generic [ref=e103]: ₺185
+      - generic [ref=e104] [cursor=pointer]:
+        - img "Levrek Izgara" [ref=e105]
+        - generic [ref=e106]:
+          - generic [ref=e107]: Ana Yemek
+          - heading "Levrek Izgara" [level=3] [ref=e108]
+          - paragraph: Günlük Boğaz levreği, kapari ve limon soslariyle, enginar eşliğinde.
+          - generic [ref=e109]: ₺545
+      - generic [ref=e110] [cursor=pointer]:
+        - img "Çorba" [ref=e111]
+        - generic [ref=e112]:
+          - generic [ref=e113]: Başlangıç
+          - heading "Şef Çorbası" [level=3] [ref=e114]
+          - paragraph: Günlük değişen sezonsal sebzeler ile hazırlanan kremalı çorba.
+          - generic [ref=e115]: ₺165
+      - generic [ref=e116] [cursor=pointer]:
+        - img "Kuşbaşı Güveç" [ref=e117]
+        - generic [ref=e118]:
+          - generic [ref=e119]: Ana Yemek
+          - heading "Dana Güveç" [level=3] [ref=e120]
+          - paragraph: Toprak güveçte pişirilmiş dana eti, kuru fasulye ve kekik.
+          - generic [ref=e121]: ₺580
+    - link "Tüm Menüyü Görüntüle" [ref=e123] [cursor=pointer]:
+      - /url: menu.html
+  - generic [ref=e124]:
+    - paragraph [ref=e125]: Atmosfer
+    - heading "Mekânımızdan Kareler" [level=2] [ref=e126]:
+      - text: Mekânımızdan
+      - emphasis [ref=e127]: Kareler
+    - generic [ref=e128]:
+      - img "Restoran iç mekan" [ref=e130] [cursor=pointer]
+      - img "Şarap rafları" [ref=e132] [cursor=pointer]
+      - img "Yemek" [ref=e134] [cursor=pointer]
+      - img "Restoran ambiyans" [ref=e136] [cursor=pointer]
+      - img "Tatlı tabağı" [ref=e138] [cursor=pointer]
+      - img "Mutfak" [ref=e140] [cursor=pointer]
+  - generic [ref=e141]:
+    - paragraph [ref=e142]: Misafirlerimiz
+    - heading "Onların Gözünden" [level=2] [ref=e143]:
+      - text: Onların
+      - emphasis [ref=e144]: Gözünden
+    - generic [ref=e145]:
+      - generic [ref=e146]:
+        - text: "\""
+        - generic [ref=e147]: ★★★★★
+        - paragraph [ref=e148]: İstanbul'da yediğim en iyi kuzu tandır. Atmosfer muhteşem, servis kusursuz. Özel gecelerimizin vazgeçilmez adresi oldunuz.
+        - generic [ref=e149]:
+          - generic [ref=e150]: A
+          - generic [ref=e151]:
+            - generic [ref=e152]: Ayşe Kılıç
+            - generic [ref=e153]: İstanbul · Google
+      - generic [ref=e154]:
+        - text: "\""
+        - generic [ref=e155]: ★★★★★
+        - paragraph [ref=e156]: Şefin dokunuşu her tabakta hissediliyor. Mezelerden tatlıya kadar her şey harikaydı. Şarap seçkisi de gerçekten etkileyici.
+        - generic [ref=e157]:
+          - generic [ref=e158]: M
+          - generic [ref=e159]:
+            - generic [ref=e160]: Murat Demir
+            - generic [ref=e161]: Ankara · TripAdvisor
+      - generic [ref=e162]:
+        - text: "\""
+        - generic [ref=e163]: ★★★★★
+        - paragraph [ref=e164]: Yurtdışından misafirlerimizi getirdiğimizde hep Ember & Gold'u tercih ediyoruz. Türk mutfağını en iyi yansıtan adres burası.
+        - generic [ref=e165]:
+          - generic [ref=e166]: Z
+          - generic [ref=e167]:
+            - generic [ref=e168]: Zeynep Arslan
+            - generic [ref=e169]: İstanbul · Yelp
+  - generic [ref=e170]:
+    - paragraph [ref=e171]: Rezervasyon
+    - heading "Masanızı Ayırtın" [level=2] [ref=e172]:
+      - text: Masanızı
+      - emphasis [ref=e173]: Ayırtın
+    - paragraph [ref=e174]: Özel anlarınız için yerinizi şimdiden hazırlayalım
+    - generic [ref=e175]:
+      - textbox "Adınız Soyadınız" [ref=e176]
+      - textbox [ref=e177]
+      - combobox [ref=e178]:
+        - option "Saat" [disabled] [selected]
+        - option "12:00"
+        - option "12:30"
+        - option "13:00"
+        - option "13:30"
+        - option "19:00"
+        - option "19:30"
+        - option "20:00"
+        - option "20:30"
+        - option "21:00"
+      - combobox [ref=e179]:
+        - option "Kişi Sayısı" [disabled] [selected]
+        - option "1 Kişi"
+        - option "2 Kişi"
+        - option "3-4 Kişi"
+        - option "5-6 Kişi"
+        - option "7-8 Kişi"
+        - option "8+ Kişi"
+      - button "Rezervasyon Yap" [ref=e180] [cursor=pointer]
+  - contentinfo [ref=e181]:
+    - generic [ref=e182]:
+      - generic [ref=e183]:
+        - generic [ref=e184]: Ember & Gold
+        - text: Fine Dining · İstanbul
+        - paragraph [ref=e185]:
+          - text: "\"Lezzet, sevgiyle pişirildiğinde"
+          - text: bir sanat eserine dönüşür."
+        - generic [ref=e186]:
+          - link "Instagram" [ref=e187] [cursor=pointer]:
+            - /url: "#"
+            - text: IG
+          - link "Facebook" [ref=e188] [cursor=pointer]:
+            - /url: "#"
+            - text: FB
+          - link "Twitter" [ref=e189] [cursor=pointer]:
+            - /url: "#"
+            - text: TW
+          - link "TripAdvisor" [ref=e190] [cursor=pointer]:
+            - /url: "#"
+            - text: TA
+      - generic [ref=e191]:
+        - heading "Sayfalar" [level=5] [ref=e192]
+        - list [ref=e193]:
+          - listitem [ref=e194]:
+            - link "Ana Sayfa" [ref=e195] [cursor=pointer]:
+              - /url: index.html
+          - listitem [ref=e196]:
+            - link "Menü" [ref=e197] [cursor=pointer]:
+              - /url: menu.html
+          - listitem [ref=e198]:
+            - link "Hakkımızda" [ref=e199] [cursor=pointer]:
+              - /url: hakkimizda.html
+          - listitem [ref=e200]:
+            - link "İletişim" [ref=e201] [cursor=pointer]:
+              - /url: iletisim.html
+          - listitem [ref=e202]:
+            - link "Rezervasyon" [ref=e203] [cursor=pointer]:
+              - /url: iletisim.html#rezervasyon
+      - generic [ref=e204]:
+        - heading "Çalışma Saatleri" [level=5] [ref=e205]
+        - list [ref=e206]:
+          - listitem [ref=e207]:
+            - text: Pazartesi – Cuma
+            - text: 12:00 – 23:00
+          - listitem [ref=e208]:
+            - text: Cumartesi
+            - text: 11:00 – 23:30
+          - listitem [ref=e209]:
+            - text: Pazar
+            - text: 11:00 – 22:00
+      - generic [ref=e210]:
+        - heading "İletişim" [level=5] [ref=e211]
+        - list [ref=e212]:
+          - listitem [ref=e213]:
+            - generic [ref=e214]: 📍
+            - generic [ref=e215]:
+              - text: Kuruçeşme Cad. No:42
+              - text: Beşiktaş, İstanbul
+          - listitem [ref=e216]:
+            - generic [ref=e217]: 📞
+            - link "+90 (212) 123 45 67" [ref=e218] [cursor=pointer]:
+              - /url: tel:+902121234567
+          - listitem [ref=e219]:
+            - generic [ref=e220]: ✉️
+            - link "rezervasyon@embergold.com.tr" [ref=e221] [cursor=pointer]:
+              - /url: mailto:rezervasyon@embergold.com.tr
+    - generic [ref=e222]:
+      - generic [ref=e223]: © 2024 Ember & Gold. Tüm hakları saklıdır.
+      - generic [ref=e224]:
+        - link "Gizlilik Politikası" [ref=e225] [cursor=pointer]:
+          - /url: "#"
+        - link "Kullanım Koşulları" [ref=e226] [cursor=pointer]:
+          - /url: "#"

@@ -1,0 +1,324 @@
+- generic [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "studio." [ref=e4] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=e5]:
+        - link "Sektörler" [ref=e6] [cursor=pointer]:
+          - /url: "#sektorler"
+        - link "Şablonlar" [ref=e7] [cursor=pointer]:
+          - /url: "#sablonlar"
+        - link "Nasıl Çalışır" [ref=e8] [cursor=pointer]:
+          - /url: "#nasil"
+        - link "SSS" [ref=e9] [cursor=pointer]:
+          - /url: "#sss"
+      - link "Teklif Al" [ref=e10] [cursor=pointer]:
+        - /url: "#iletisim"
+  - banner [ref=e11]:
+    - generic [ref=e12]:
+      - generic [ref=e13]: "Teslim süresi: 5-10 gün"
+      - heading "İşine özel bir web sitesi." [level=1] [ref=e15]:
+        - text: İşine
+        - emphasis [ref=e16]: özel
+        - text: bir
+        - text: web sitesi.
+      - paragraph [ref=e17]: Klişe şablonlardan değil, sektörünüze birebir uyan tasarımlardan başlıyoruz. Restoran, klinik, emlak ya da hukuk bürosu — siteniz işiniz gibi davranır.
+      - generic [ref=e18]:
+        - link "Şablonları gör ↗" [ref=e19] [cursor=pointer]:
+          - /url: "#sablonlar"
+          - text: Şablonları gör
+          - generic [ref=e20]: ↗
+        - link "Teklif iste" [ref=e21] [cursor=pointer]:
+          - /url: "#iletisim"
+    - generic [ref=e23]:
+      - generic [ref=e24]: Restoran & Cafe ✦
+      - generic [ref=e25]: Estetik Salonları ✦
+      - generic [ref=e26]: Diş Klinikleri ✦
+      - generic [ref=e27]: Emlakçılar ✦
+      - generic [ref=e28]: Avukatlar ✦
+      - generic [ref=e29]: Galericiler ✦
+      - generic [ref=e30]: Mimarlar ✦
+      - generic [ref=e31]: Eğitim Merkezleri ✦
+      - generic [ref=e32]: Restoran & Cafe ✦
+      - generic [ref=e33]: Estetik Salonları ✦
+      - generic [ref=e34]: Diş Klinikleri ✦
+      - generic [ref=e35]: Emlakçılar ✦
+      - generic [ref=e36]: Avukatlar ✦
+      - generic [ref=e37]: Galericiler ✦
+      - generic [ref=e38]: Mimarlar ✦
+      - generic [ref=e39]: Eğitim Merkezleri ✦
+  - generic [ref=e41]:
+    - generic [ref=e42]:
+      - generic [ref=e43]: "[ 01 / Sektörler ]"
+      - generic [ref=e44]:
+        - heading "Hangi işi yapıyorsunuz?" [level=2] [ref=e45]:
+          - text: Hangi işi
+          - emphasis [ref=e46]: yapıyorsunuz
+          - text: "?"
+        - paragraph [ref=e47]: Her sektörün kendine özgü ihtiyaçları var — menü, randevu, portföy ya da rezervasyon. Biz hangisi gerekiyorsa onu yapıyoruz.
+    - generic [ref=e48]:
+      - link "Restoran & Cafe Menü, rezervasyon, atmosfer — masaya gelmeden önce müşteri tatmin olur. Şablonları gör →" [ref=e49] [cursor=pointer]:
+        - /url: "#sablonlar"
+        - generic [ref=e50]:
+          - img [ref=e52]
+          - heading "Restoran & Cafe" [level=3] [ref=e55]
+          - paragraph [ref=e56]: Menü, rezervasyon, atmosfer — masaya gelmeden önce müşteri tatmin olur.
+        - generic [ref=e57]: Şablonları gör →
+      - generic [ref=e58]:
+        - generic [ref=e59]:
+          - img [ref=e61]
+          - heading "Estetik & Güzellik" [level=3] [ref=e64]
+          - paragraph [ref=e65]: Online randevu, hizmet kataloğu, öncesi/sonrası galerisi.
+        - generic [ref=e66]: Yakında
+      - generic [ref=e67]:
+        - generic [ref=e68]:
+          - img [ref=e70]
+          - heading "Diş Klinikleri" [level=3] [ref=e72]
+          - paragraph [ref=e73]: Tedavi sayfaları, doktor kadrosu, hızlı randevu sistemi.
+        - generic [ref=e74]: Yakında
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - img [ref=e78]
+          - heading "Emlakçılar" [level=3] [ref=e80]
+          - paragraph [ref=e81]: İlan listeleri, harita, filtreli arama, danışman profilleri.
+        - generic [ref=e82]: Yakında
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - img [ref=e86]
+          - heading "Avukatlar" [level=3] [ref=e88]
+          - paragraph [ref=e89]: Uzmanlık alanları, makale yayını, gizli iletişim formu.
+        - generic [ref=e90]: Yakında
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - img [ref=e94]
+          - heading "Galericiler" [level=3] [ref=e98]
+          - paragraph [ref=e99]: Stok kataloğu, fiyat filtreleri, takas/finansman çağrısı.
+        - generic [ref=e100]: Yakında
+      - generic [ref=e101]:
+        - generic [ref=e102]:
+          - img [ref=e104]
+          - heading "Mimarlar" [level=3] [ref=e106]
+          - paragraph [ref=e107]: Proje portföyü, tam ekran galeri, basında biz.
+        - generic [ref=e108]: Yakında
+      - generic [ref=e109]:
+        - generic [ref=e110]:
+          - img [ref=e112]
+          - heading "Eğitim & Kurslar" [level=3] [ref=e115]
+          - paragraph [ref=e116]: Kurs takvimi, öğretmen kadrosu, online kayıt.
+        - generic [ref=e117]: Yakında
+  - generic [ref=e119]:
+    - generic [ref=e120]:
+      - generic [ref=e121]: "[ 02 / Şablonlar ]"
+      - generic [ref=e122]:
+        - heading "Hazır tasarımlar." [level=2] [ref=e123]:
+          - text: Hazır
+          - emphasis [ref=e124]: tasarımlar
+          - text: .
+        - paragraph [ref=e125]: Tıklayın, gerçek tasarımı görün. Beğendiğinizi alıp kendi içeriğinize göre özelleştiriyoruz.
+    - generic [ref=e126]:
+      - link "Şablonu aç → Aroma Café Sıcak tonlar, hikâye anlatımı, hero galeri Cafe" [active] [ref=e127] [cursor=pointer]:
+        - /url: sablonlar/cafe-aroma.html
+        - generic [ref=e128]:
+          - img [ref=e129]:
+            - generic [ref=e132]: Aroma Café
+            - generic [ref=e133]: Kahvenin
+            - generic [ref=e134]: sanatı.
+            - generic [ref=e135]: SAMSUN — SINCE 2018
+          - text: Şablonu aç →
+        - generic [ref=e138]:
+          - generic [ref=e139]:
+            - heading "Aroma Café" [level=3] [ref=e140]
+            - paragraph [ref=e141]: Sıcak tonlar, hikâye anlatımı, hero galeri
+          - generic [ref=e142]: Cafe
+      - link "Şablonu aç → Dölapi Premium Lüks restoran menü kartı Menü" [ref=e143] [cursor=pointer]:
+        - /url: sablonlar/restoran-menu-premium.html
+        - generic [ref=e144]:
+          - img [ref=e145]:
+            - generic [ref=e148]: — menu —
+            - generic [ref=e149]: Dölapi
+            - generic [ref=e150]: restaurant
+            - generic [ref=e151]: PREMIUM
+          - text: Şablonu aç →
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - heading "Dölapi Premium" [level=3] [ref=e154]
+            - paragraph [ref=e155]: Lüks restoran menü kartı
+          - generic [ref=e156]: Menü
+      - link "Şablonu aç → Modern Menü Tek sayfa restoran menüsü Menü" [ref=e157] [cursor=pointer]:
+        - /url: sablonlar/restoran-menu.html
+        - generic [ref=e158]:
+          - img [ref=e159]:
+            - generic [ref=e163]: MENÜ
+            - generic [ref=e164]: Bugünün
+            - generic [ref=e165]: lezzetleri.
+            - generic [ref=e167]: REZERVE ET
+          - text: Şablonu aç →
+        - generic [ref=e168]:
+          - generic [ref=e169]:
+            - heading "Modern Menü" [level=3] [ref=e170]
+            - paragraph [ref=e171]: Tek sayfa restoran menüsü
+          - generic [ref=e172]: Menü
+      - link "Şablonu aç → Anadolu Sofra Geleneksel restoran, çok bölümlü site Restoran" [ref=e173] [cursor=pointer]:
+        - /url: sablonlar/restoran-orta-paket.html
+        - generic [ref=e174]:
+          - img [ref=e175]:
+            - generic [ref=e177]: — Geleneksel Lezzetler —
+            - generic [ref=e178]: Anadolu
+            - generic [ref=e179]: Sofra.
+            - generic [ref=e180]: REZERVASYON · MENÜ · GALERİ
+          - text: Şablonu aç →
+        - generic [ref=e183]:
+          - generic [ref=e184]:
+            - heading "Anadolu Sofra" [level=3] [ref=e185]
+            - paragraph [ref=e186]: Geleneksel restoran, çok bölümlü site
+          - generic [ref=e187]: Restoran
+  - generic [ref=e189]:
+    - generic [ref=e190]:
+      - generic [ref=e191]: "[ 03 / Neden Biz ]"
+      - heading "Hızlı, kalıcı, sıkıntısız." [level=2] [ref=e193]:
+        - text: Hızlı,
+        - emphasis [ref=e194]: kalıcı
+        - text: ","
+        - text: sıkıntısız.
+    - generic [ref=e195]:
+      - generic [ref=e196]:
+        - generic [ref=e197]: "01"
+        - heading "Hız." [level=3] [ref=e198]
+        - paragraph [ref=e199]: Şablon temelli çalıştığımız için 5-10 gün içinde sitenizi yayına alıyoruz. Sıfırdan tasarımda haftalar süren süreçleri günlere indiriyoruz.
+      - generic [ref=e200]:
+        - generic [ref=e201]: "02"
+        - heading "Sektör odağı." [level=3] [ref=e202]
+        - paragraph [ref=e203]: Bir avukatın ihtiyacı bir restoranınkinden farklı. Şablonlarımız sektörünüzün dinamiklerine göre kurgulanmış.
+      - generic [ref=e204]:
+        - generic [ref=e205]: "03"
+        - heading "Mobilden başlar." [level=3] [ref=e206]
+        - paragraph [ref=e207]: Müşterilerinizin %70'i siteyi telefondan açıyor. Tasarım önce mobil için yapılır, sonra masaüstüne uyarlanır.
+  - generic [ref=e210]:
+    - generic [ref=e211]:
+      - emphasis [ref=e213]: 5-10
+      - generic [ref=e214]: Gün teslim süresi
+    - generic [ref=e215]:
+      - emphasis [ref=e217]: 100%
+      - generic [ref=e218]: Mobil uyumlu
+    - generic [ref=e219]:
+      - emphasis [ref=e221]: "8"
+      - generic [ref=e222]: Sektör şablonu
+    - generic [ref=e223]:
+      - emphasis [ref=e225]: 1y
+      - generic [ref=e226]: Ücretsiz destek
+  - generic [ref=e228]:
+    - generic [ref=e229]:
+      - generic [ref=e230]: "[ 04 / Süreç ]"
+      - heading "Nasıl çalışıyor?" [level=2] [ref=e232]:
+        - text: Nasıl
+        - emphasis [ref=e233]: çalışıyor
+        - text: "?"
+    - generic [ref=e234]:
+      - generic [ref=e235]:
+        - generic [ref=e236]: "[ ADIM 01 ]"
+        - generic [ref=e237]: Kısa görüşme
+        - generic [ref=e238]: "15 dakikalık bir aramada işinizi tanırız: ne sattığınızı, müşteri profilinizi, sitenizden ne beklediğinizi."
+      - generic [ref=e239]:
+        - generic [ref=e240]: "[ ADIM 02 ]"
+        - generic [ref=e241]: Şablon seçimi
+        - generic [ref=e242]: Sektörünüzdeki şablonlardan birini seçin ya da fikir verin — onun üzerinde özelleştirelim.
+      - generic [ref=e243]:
+        - generic [ref=e244]: "[ ADIM 03 ]"
+        - generic [ref=e245]: İçerik & tasarım
+        - generic [ref=e246]: Logo, fotoğraf, metin ne varsa toplarız; logonuz yoksa biz hallederiz. Tasarımı işinize uyarlarız.
+      - generic [ref=e247]:
+        - generic [ref=e248]: "[ ADIM 04 ]"
+        - generic [ref=e249]: Yayına alma
+        - generic [ref=e250]: Domain, hosting, mail kurulumu — hepsi bizden. 1 yıl boyunca ufak değişikliklerde ekstra ücret yok.
+  - generic [ref=e252]:
+    - generic [ref=e253]:
+      - generic [ref=e254]: "[ 05 / SSS ]"
+      - heading "Sık sorulan sorular." [level=2] [ref=e256]:
+        - text: Sık sorulan
+        - emphasis [ref=e257]: sorular
+        - text: .
+    - generic [ref=e258]:
+      - generic [ref=e259] [cursor=pointer]:
+        - generic [ref=e260]:
+          - text: Logom yok, problem mi?
+          - generic [ref=e261]: +
+        - generic: Hayır, sıkıntı yok. Sade bir logoyu paket içinde tasarlıyoruz; daha kapsamlı kurumsal kimlik isterseniz ek paket olarak sunarız.
+      - generic [ref=e262] [cursor=pointer]:
+        - generic [ref=e263]:
+          - text: Sonradan güncelleme yapabilir miyim?
+          - generic [ref=e264]: +
+        - generic: Evet. İlk 1 yıl ufak değişiklikler (telefon, fiyat, metin, foto güncelleme) ücretsiz. Sonrasında dilerseniz bize yaptırırsınız, dilerseniz size bir kullanıcı paneli kurarız.
+      - generic [ref=e265] [cursor=pointer]:
+        - generic [ref=e266]:
+          - text: Domain ve hosting dahil mi?
+          - generic [ref=e267]: +
+        - generic: İlk yıl domain (.com / .com.tr) ve hosting paketin içinde. İkinci yıldan itibaren yıllık yenileme ücreti var, çok küçük bir tutar.
+      - generic [ref=e268] [cursor=pointer]:
+        - generic [ref=e269]:
+          - text: Kaç dilli olabilir?
+          - generic [ref=e270]: +
+        - generic: Tek dilli paketlerimiz standart. İngilizce + Türkçe çift dilli isterseniz küçük bir ek ücretle ekliyoruz; metin çevirileri sizden ya da bizden olabilir.
+      - generic [ref=e271] [cursor=pointer]:
+        - generic [ref=e272]:
+          - text: Ödeme nasıl yapılıyor?
+          - generic [ref=e273]: +
+        - generic: "%50 başlangıçta, %50 site teslim edildiğinde. Havale veya kredi kartı (taksit dahil) seçenekleri mevcut."
+  - generic [ref=e276]:
+    - heading "Bir kahve içerken sitenizi konuşalım." [level=2] [ref=e277]:
+      - text: Bir
+      - emphasis [ref=e278]: kahve
+      - text: içerken
+      - text: sitenizi konuşalım.
+    - paragraph [ref=e279]: 15 dakikalık ücretsiz görüşmeyle ihtiyacınızı çıkarır, size özel teklif veririz.
+    - link "WhatsApp'tan yaz ↗" [ref=e280] [cursor=pointer]:
+      - /url: "#"
+      - text: WhatsApp'tan yaz
+      - generic [ref=e281]: ↗
+    - generic [ref=e282]:
+      - generic [ref=e283]:
+        - generic [ref=e284]: Telefon
+        - generic [ref=e285]: +90 5XX XXX XX XX
+      - generic [ref=e286]:
+        - generic [ref=e287]: E-posta
+        - generic [ref=e288]: selam@studio.com
+      - generic [ref=e289]:
+        - generic [ref=e290]: Lokasyon
+        - generic [ref=e291]: İstanbul, TR
+  - contentinfo [ref=e292]:
+    - generic [ref=e293]:
+      - generic [ref=e294]:
+        - generic [ref=e295]:
+          - link "studio." [ref=e296] [cursor=pointer]:
+            - /url: "#"
+          - paragraph [ref=e297]: Sektörünüze özel, hızlı, modern web siteleri. İşi bilmeyen ajanslara para vermeyin.
+        - generic [ref=e298]:
+          - heading "Site" [level=4] [ref=e299]
+          - link "Sektörler" [ref=e300] [cursor=pointer]:
+            - /url: "#sektorler"
+          - link "Şablonlar" [ref=e301] [cursor=pointer]:
+            - /url: "#sablonlar"
+          - link "Süreç" [ref=e302] [cursor=pointer]:
+            - /url: "#nasil"
+          - link "SSS" [ref=e303] [cursor=pointer]:
+            - /url: "#sss"
+        - generic [ref=e304]:
+          - heading "Sosyal" [level=4] [ref=e305]
+          - link "Instagram" [ref=e306] [cursor=pointer]:
+            - /url: "#"
+          - link "Behance" [ref=e307] [cursor=pointer]:
+            - /url: "#"
+          - link "LinkedIn" [ref=e308] [cursor=pointer]:
+            - /url: "#"
+          - link "WhatsApp" [ref=e309] [cursor=pointer]:
+            - /url: "#"
+        - generic [ref=e310]:
+          - heading "İletişim" [level=4] [ref=e311]
+          - link "+90 5XX XXX XX XX" [ref=e312] [cursor=pointer]:
+            - /url: "#"
+          - link "selam@studio.com" [ref=e313] [cursor=pointer]:
+            - /url: "#"
+          - link "İstanbul, TR" [ref=e314] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=e315]:
+        - generic [ref=e316]: © 2025 Studio. Tüm hakları saklıdır.
+        - generic [ref=e317]: MADE WITH ♥ IN TÜRKİYE
