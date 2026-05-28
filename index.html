@@ -632,6 +632,7 @@
   .preview-menu-prem { background: linear-gradient(135deg, #1a1208 0%, #0d0905 100%); }
   .preview-orta { background: linear-gradient(135deg, #2c1810 0%, #1a0d08 100%); }
   .preview-ember { background: linear-gradient(135deg, #24140a 0%, #090604 100%); }
+  .preview-lumina { background: linear-gradient(135deg, #14110a 0%, #070707 100%); }
 </style>
 </head>
 <body>
@@ -749,16 +750,21 @@
         <span class="badge-soon">Yakında</span>
       </div>
 
-      <div class="sector-card soon">
+      <a href="sablonlar/emlak/emlak.html" class="sector-card live" target="_blank">
         <div>
           <div class="sector-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8v10a2 2 0 0 1-2 2h-4v-7H10v7H6a2 2 0 0 1-2-2V11z"/></svg>
           </div>
           <h3 class="sector-name">Emlakçılar</h3>
           <p class="sector-desc">İlan listeleri, harita, filtreli arama, danışman profilleri.</p>
+          <div class="sector-stats">
+            <span class="sector-pill">1 şablon</span>
+            <span class="sector-pill">Harita</span>
+            <span class="sector-pill">Filtre</span>
+          </div>
         </div>
-        <span class="badge-soon">Yakında</span>
-      </div>
+        <span class="sector-link">Şablonu gör →</span>
+      </a>
 
       <div class="sector-card soon">
         <div>
@@ -920,6 +926,50 @@
         </div>
       </a>
 
+      <a href="sablonlar/emlak/emlak.html" class="template-card wide" target="_blank">
+        <div class="template-preview preview-lumina">
+          <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="lg1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#1c1810"/>
+                <stop offset="55%" stop-color="#0d0c08"/>
+                <stop offset="100%" stop-color="#070707"/>
+              </linearGradient>
+              <radialGradient id="lgGlow" cx="74%" cy="34%" r="48%">
+                <stop offset="0%" stop-color="#c9a46e" stop-opacity="0.32"/>
+                <stop offset="100%" stop-color="#c9a46e" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="900" height="520" fill="url(#lg1)"/>
+            <rect width="900" height="520" fill="url(#lgGlow)"/>
+            <rect x="58" y="58" width="784" height="404" fill="none" stroke="#c9a46e" stroke-width="1" opacity="0.35"/>
+            <text x="86" y="124" font-family="serif" font-size="14" fill="#c9a46e" letter-spacing="6" opacity="0.85">LUMINA</text>
+            <text x="86" y="252" font-family="serif" font-size="80" fill="#f3ede4">Premium</text>
+            <text x="86" y="328" font-family="serif" font-style="italic" font-size="72" fill="#c9a46e">Estate.</text>
+            <line x1="86" y1="370" x2="240" y2="370" stroke="#c9a46e" stroke-width="2"/>
+            <text x="86" y="415" font-family="sans-serif" font-size="13" fill="#a89270" letter-spacing="3">VITRIN · İLANLAR · HARITA · DANIŞMAN</text>
+            <rect x="650" y="160" width="160" height="200" fill="none" stroke="#c9a46e" stroke-width="1" opacity="0.45"/>
+            <rect x="660" y="170" width="140" height="100" fill="#c9a46e" opacity="0.10"/>
+            <line x1="660" y1="290" x2="800" y2="290" stroke="#c9a46e" stroke-width="1" opacity="0.5"/>
+            <text x="670" y="320" font-family="serif" font-size="14" fill="#e8d5b0" opacity="0.85">₺ 12.500.000</text>
+            <text x="670" y="345" font-family="sans-serif" font-size="10" fill="#a89270" letter-spacing="2">BEBEK · ISTANBUL</text>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Lumina Estate</h3>
+            <p>Premium emlak ofisleri için çok bölümlü vitrin: lüks ilan kartları, harita, danışman profilleri ve filtreli arama.</p>
+            <div class="template-features">
+              <span>İlan vitrini</span>
+              <span>Harita</span>
+              <span>Filtreleme</span>
+              <span>Danışman</span>
+            </div>
+          </div>
+          <span class="template-tag">Emlak</span>
+        </div>
+      </a>
+
       <a href="sablonlar/restoran/index.html" class="template-card wide" target="_blank">
         <div class="template-preview preview-ember">
           <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
@@ -1008,8 +1058,8 @@
         <div class="stat-label">Mobil uyumlu</div>
       </div>
       <div class="stat">
-        <div class="stat-num"><em>8</em></div>
-        <div class="stat-label">Sektör şablonu</div>
+        <div class="stat-num"><em>6</em></div>
+        <div class="stat-label">Hazır şablon</div>
       </div>
       <div class="stat">
         <div class="stat-num"><em>1y</em></div>
