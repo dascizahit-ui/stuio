@@ -1210,8 +1210,11 @@
     item.addEventListener('click', () => item.classList.toggle('open'));
   });
 
-  // Reveal on scroll
-  const reveal = (el) => {
+  // Reveal on scroll — sadece masaüstünde ve "reduced motion" tercih etmeyen kullanıcılarda
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+  if (!prefersReduced && !isMobile) {
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -1220,16 +1223,18 @@
           obs.unobserve(e.target);
         }
       });
-    }, { threshold: 0.1 });
-    obs.observe(el);
-  };
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.sector-card, .template-card, .why-item, .stat, .process-row, .faq-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-    reveal(el);
-  });
+    document.querySelectorAll('.sector-card, .template-card, .why-item, .stat, .process-row, .faq-item').forEach(el => {
+      // Zaten ekranda olanları hiç gizleme — kayma hissini engeller
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) return;
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+      obs.observe(el);
+    });
+  }
 </script>
 
 </body>
