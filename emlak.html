@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emlak Şablonları — Zetta Studio</title>
+<meta name="description" content="Emlak ofisleri için hazır web sitesi şablonları. İlan vitrini, harita, filtreli arama ve danışman profilleri.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f4ec;
+    --bg-elev: #ffffff;
+    --bg-elev-2: #efe8d6;
+    --border: #ddd4be;
+    --border-soft: #ece5d2;
+    --text: #1d1a14;
+    --text-mute: #6c6656;
+    --text-dim: #a39c88;
+    --accent: #c25e2e;
+    --accent-hover: #d36a37;
+    --on-accent: #fdf9f0;
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "Manrope", -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    opacity: 0.022;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+
+  /* NAV */
+  nav.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 32px;
+    backdrop-filter: blur(20px);
+    background: rgba(247,244,236,0.82);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  nav.top .inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 26px; font-style: italic;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .logo span { color: var(--accent); }
+  .nav-cta {
+    padding: 10px 18px;
+    background: var(--accent); color: var(--on-accent);
+    border-radius: 100px;
+    font-size: 13px; font-weight: 600;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); background: var(--accent-hover); }
+
+  /* HERO */
+  .hero { padding: 140px 0 80px; position: relative; overflow: hidden; text-align: center; }
+  .hero::after {
+    content: ""; position: absolute;
+    top: 10%; right: -8%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(194,94,46,0.12) 0%, transparent 70%);
+    filter: blur(60px); pointer-events: none;
+  }
+  .hero::before {
+    content: ""; position: absolute;
+    bottom: -8%; left: -8%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(107,141,79,0.08) 0%, transparent 70%);
+    filter: blur(70px); pointer-events: none;
+  }
+
+  h1.hero-title {
+    font-family: var(--serif);
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+  h1.hero-title em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-mute);
+    max-width: 560px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 32px;
+    background: var(--accent); color: var(--on-accent);
+    border-radius: 100px;
+    font-size: 15px; font-weight: 600;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px -10px rgba(194,94,46,0.42);
+  }
+
+  /* TEMPLATES */
+  .templates { padding: 80px 0 120px; }
+  .template-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  .template-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.4s, border-color 0.3s, box-shadow 0.4s;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column;
+    box-shadow: 0 1px 0 rgba(28,24,20,0.04);
+  }
+  .template-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 30px 60px -22px rgba(110,82,46,0.28);
+  }
+  .template-card.wide {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  }
+  @media (max-width: 900px) {
+    .template-card.wide { display: flex; flex-direction: column; }
+  }
+
+  .template-preview {
+    aspect-ratio: 16/10;
+    background: var(--bg-elev-2);
+    position: relative;
+    overflow: hidden;
+  }
+  .template-preview svg { width: 100%; height: 100%; display: block; }
+  .template-preview::after {
+    content: "Şablonu aç →";
+    position: absolute;
+    bottom: 16px; right: 16px;
+    background: var(--accent); color: var(--on-accent);
+    padding: 10px 16px;
+    border-radius: 100px;
+    font-size: 12px; font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    box-shadow: 0 8px 22px -8px rgba(194,94,46,0.55);
+  }
+  .template-card:hover .template-preview::after { opacity: 1; transform: translateY(0); }
+
+  .template-info { padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .template-card.wide .template-info {
+    padding: 34px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .template-info h3 { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -0.01em; }
+  .template-card.wide .template-info h3 { font-size: clamp(30px, 4vw, 44px); }
+  .template-info p { font-size: 13px; color: var(--text-mute); margin-top: 4px; }
+  .template-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .template-features span {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 10px;
+  }
+  .template-tag {
+    font-size: 11px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+  }
+
+  /* PREVIEW BACKGROUNDS */
+  .preview-lumina { background: linear-gradient(135deg, #14110a 0%, #070707 100%); }
+
+  /* FOOTER */
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--border-soft);
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="inner">
+    <a href="index.html" class="logo">zetta studio<span>.</span></a>
+    <a href="index.html#iletisim" class="nav-cta">Teklif Al</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <h1 class="hero-title">
+      Emlak<br><em>Şablonları</em>
+    </h1>
+    <p class="hero-sub">
+      İlan vitrini, harita, filtreli arama ve danışman profilleri — emlak ofisleriniz için hazır çözümler.
+    </p>
+    <a href="index.html#iletisim" class="btn-primary">
+      Teklif İste
+      <span>→</span>
+    </a>
+  </div>
+</header>
+
+<!-- TEMPLATES -->
+<section class="templates">
+  <div class="wrap">
+    <div class="template-grid">
+
+      <a href="sablonlar/emlak/emlak.html" class="template-card wide" target="_blank">
+        <div class="template-preview preview-lumina">
+          <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="lg1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#1c1810"/>
+                <stop offset="55%" stop-color="#0d0c08"/>
+                <stop offset="100%" stop-color="#070707"/>
+              </linearGradient>
+              <radialGradient id="lgGlow" cx="74%" cy="34%" r="48%">
+                <stop offset="0%" stop-color="#c9a46e" stop-opacity="0.32"/>
+                <stop offset="100%" stop-color="#c9a46e" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="900" height="520" fill="url(#lg1)"/>
+            <rect width="900" height="520" fill="url(#lgGlow)"/>
+            <rect x="58" y="58" width="784" height="404" fill="none" stroke="#c9a46e" stroke-width="1" opacity="0.35"/>
+            <text x="86" y="124" font-family="serif" font-size="14" fill="#c9a46e" letter-spacing="6" opacity="0.85">LUMINA</text>
+            <text x="86" y="252" font-family="serif" font-size="80" fill="#f3ede4">Premium</text>
+            <text x="86" y="328" font-family="serif" font-style="italic" font-size="72" fill="#c9a46e">Estate.</text>
+            <line x1="86" y1="370" x2="240" y2="370" stroke="#c9a46e" stroke-width="2"/>
+            <text x="86" y="415" font-family="sans-serif" font-size="13" fill="#a89270" letter-spacing="3">VITRIN · İLANLAR · HARITA · DANIŞMAN</text>
+            <rect x="650" y="160" width="160" height="200" fill="none" stroke="#c9a46e" stroke-width="1" opacity="0.45"/>
+            <rect x="660" y="170" width="140" height="100" fill="#c9a46e" opacity="0.10"/>
+            <line x1="660" y1="290" x2="800" y2="290" stroke="#c9a46e" stroke-width="1" opacity="0.5"/>
+            <text x="670" y="320" font-family="serif" font-size="14" fill="#e8d5b0" opacity="0.85">₺ 12.500.000</text>
+            <text x="670" y="345" font-family="sans-serif" font-size="10" fill="#a89270" letter-spacing="2">BEBEK · ISTANBUL</text>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Lumina Estate</h3>
+            <p>Premium emlak ofisleri için çok bölümlü vitrin: lüks ilan kartları, harita, danışman profilleri ve filtreli arama.</p>
+            <div class="template-features">
+              <span>İlan vitrini</span>
+              <span>Harita</span>
+              <span>Filtreleme</span>
+              <span>Danışman</span>
+            </div>
+          </div>
+          <span class="template-tag">Emlak</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <p>© 2025 Zetta Studio. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+</body>
+</html>

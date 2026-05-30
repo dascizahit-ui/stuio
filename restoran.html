@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restoran & Cafe Şablonları — Zetta Studio</title>
+<meta name="description" content="Restoran, cafe ve yemek işletmeleri için hazır web sitesi şablonları. Menü, rezervasyon, galeri ve daha fazlası.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #f7f4ec;
+    --bg-elev: #ffffff;
+    --bg-elev-2: #efe8d6;
+    --border: #ddd4be;
+    --border-soft: #ece5d2;
+    --text: #1d1a14;
+    --text-mute: #6c6656;
+    --text-dim: #a39c88;
+    --accent: #c25e2e;
+    --accent-hover: #d36a37;
+    --on-accent: #fdf9f0;
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "Manrope", -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    opacity: 0.022;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+
+  /* NAV */
+  nav.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 32px;
+    backdrop-filter: blur(20px);
+    background: rgba(247,244,236,0.82);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  nav.top .inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 26px; font-style: italic;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .logo span { color: var(--accent); }
+  .nav-cta {
+    padding: 10px 18px;
+    background: var(--accent); color: var(--on-accent);
+    border-radius: 100px;
+    font-size: 13px; font-weight: 600;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); background: var(--accent-hover); }
+
+  /* HERO */
+  .hero { padding: 140px 0 80px; position: relative; overflow: hidden; text-align: center; }
+  .hero::after {
+    content: ""; position: absolute;
+    top: 10%; right: -8%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(194,94,46,0.12) 0%, transparent 70%);
+    filter: blur(60px); pointer-events: none;
+  }
+  .hero::before {
+    content: ""; position: absolute;
+    bottom: -8%; left: -8%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(107,141,79,0.08) 0%, transparent 70%);
+    filter: blur(70px); pointer-events: none;
+  }
+
+  h1.hero-title {
+    font-family: var(--serif);
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+  h1.hero-title em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-mute);
+    max-width: 560px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 32px;
+    background: var(--accent); color: var(--on-accent);
+    border-radius: 100px;
+    font-size: 15px; font-weight: 600;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px -10px rgba(194,94,46,0.42);
+  }
+
+  /* TEMPLATES */
+  .templates { padding: 80px 0 120px; }
+  .template-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+  }
+  .template-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.4s, border-color 0.3s, box-shadow 0.4s;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column;
+    box-shadow: 0 1px 0 rgba(28,24,20,0.04);
+  }
+  .template-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 30px 60px -22px rgba(110,82,46,0.28);
+  }
+  .template-card.l { grid-column: span 7; }
+  .template-card.s { grid-column: span 5; }
+  .template-card.wide {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  }
+  @media (max-width: 900px) {
+    .template-card.l, .template-card.s, .template-card.wide { grid-column: span 12; }
+    .template-card.wide { display: flex; flex-direction: column; }
+  }
+
+  .template-preview {
+    aspect-ratio: 16/10;
+    background: var(--bg-elev-2);
+    position: relative;
+    overflow: hidden;
+  }
+  .template-preview svg { width: 100%; height: 100%; display: block; }
+  .template-preview::after {
+    content: "Şablonu aç →";
+    position: absolute;
+    bottom: 16px; right: 16px;
+    background: var(--accent); color: var(--on-accent);
+    padding: 10px 16px;
+    border-radius: 100px;
+    font-size: 12px; font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    box-shadow: 0 8px 22px -8px rgba(194,94,46,0.55);
+  }
+  .template-card:hover .template-preview::after { opacity: 1; transform: translateY(0); }
+
+  .template-info { padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .template-card.wide .template-info {
+    padding: 34px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .template-info h3 { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -0.01em; }
+  .template-card.wide .template-info h3 { font-size: clamp(30px, 4vw, 44px); }
+  .template-info p { font-size: 13px; color: var(--text-mute); margin-top: 4px; }
+  .template-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .template-features span {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 10px;
+  }
+  .template-tag {
+    font-size: 11px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+  }
+
+  /* PREVIEW BACKGROUNDS */
+  .preview-cafe { background: linear-gradient(135deg, #2e1a0e 0%, #1a0e08 100%); }
+  .preview-menu { background: linear-gradient(135deg, #0a1f1c 0%, #050d0c 100%); }
+  .preview-menu-prem { background: linear-gradient(135deg, #1a1208 0%, #0d0905 100%); }
+  .preview-orta { background: linear-gradient(135deg, #2c1810 0%, #1a0d08 100%); }
+  .preview-ember { background: linear-gradient(135deg, #24140a 0%, #090604 100%); }
+
+  /* FOOTER */
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--border-soft);
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="inner">
+    <a href="index.html" class="logo">zetta studio<span>.</span></a>
+    <a href="index.html#iletisim" class="nav-cta">Teklif Al</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <h1 class="hero-title">
+      Restoran &amp; Cafe<br><em>Şablonları</em>
+    </h1>
+    <p class="hero-sub">
+      Menü, rezervasyon, galeri ve iletişim — işletmenize özel, hızlı ve modern web siteleri.
+    </p>
+    <a href="index.html#iletisim" class="btn-primary">
+      Teklif İste
+      <span>→</span>
+    </a>
+  </div>
+</header>
+
+<!-- TEMPLATES -->
+<section class="templates">
+  <div class="wrap">
+    <div class="template-grid">
+
+      <a href="sablonlar/cafe-aroma.html" class="template-card l" target="_blank">
+        <div class="template-preview preview-cafe">
+          <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="cg1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#3a2415"/>
+                <stop offset="100%" stop-color="#1a0e08"/>
+              </linearGradient>
+            </defs>
+            <rect width="700" height="440" fill="url(#cg1)"/>
+            <circle cx="350" cy="200" r="180" fill="#c8863a" opacity="0.08"/>
+            <text x="60" y="80" font-family="Cormorant Garamond, serif" font-style="italic" font-size="22" fill="#e8b86d" opacity="0.7">Aroma Café</text>
+            <text x="60" y="200" font-family="Cormorant Garamond, serif" font-size="76" fill="#f5ede0">Kahvenin</text>
+            <text x="60" y="270" font-family="Cormorant Garamond, serif" font-style="italic" font-size="76" fill="#e8b86d">sanatı.</text>
+            <line x1="60" y1="320" x2="180" y2="320" stroke="#e8b86d" stroke-width="2"/>
+            <text x="60" y="360" font-family="DM Sans, sans-serif" font-size="14" fill="#c8863a" letter-spacing="2">SAMSUN — SINCE 2018</text>
+            <circle cx="540" cy="180" r="80" fill="none" stroke="#e8b86d" stroke-width="1" opacity="0.4"/>
+            <circle cx="540" cy="180" r="120" fill="none" stroke="#e8b86d" stroke-width="1" opacity="0.2"/>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Aroma Café</h3>
+            <p>Sıcak tonlar, hikâye anlatımı, hero galeri</p>
+          </div>
+          <span class="template-tag">Cafe</span>
+        </div>
+      </a>
+
+      <a href="sablonlar/restoran-menu-premium.html" class="template-card s" target="_blank">
+        <div class="template-preview preview-menu-prem">
+          <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="700" height="440" fill="#1a1208"/>
+            <rect x="40" y="40" width="620" height="360" fill="none" stroke="#d4af6f" stroke-width="1" opacity="0.4"/>
+            <text x="350" y="120" text-anchor="middle" font-family="serif" font-style="italic" font-size="20" fill="#d4af6f" opacity="0.8">— menu —</text>
+            <text x="350" y="220" text-anchor="middle" font-family="serif" font-size="64" fill="#f5ede0">Dölapi</text>
+            <text x="350" y="270" text-anchor="middle" font-family="serif" font-style="italic" font-size="32" fill="#d4af6f">restaurant</text>
+            <line x1="280" y1="310" x2="420" y2="310" stroke="#d4af6f" stroke-width="1"/>
+            <text x="350" y="360" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#a0826d" letter-spacing="3">PREMIUM</text>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Dölapi Premium</h3>
+            <p>Lüks restoran menü kartı</p>
+          </div>
+          <span class="template-tag">Menü</span>
+        </div>
+      </a>
+
+      <a href="sablonlar/restoran-menu.html" class="template-card s" target="_blank">
+        <div class="template-preview preview-menu">
+          <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="700" height="440" fill="#0a1f1c"/>
+            <circle cx="100" cy="100" r="60" fill="#d4ff3e" opacity="0.1"/>
+            <circle cx="600" cy="340" r="80" fill="#d4ff3e" opacity="0.08"/>
+            <text x="60" y="180" font-family="sans-serif" font-size="14" fill="#d4ff3e" letter-spacing="3">MENÜ</text>
+            <text x="60" y="240" font-family="serif" font-size="56" fill="#f5ede0">Bugünün</text>
+            <text x="60" y="300" font-family="serif" font-style="italic" font-size="56" fill="#d4ff3e">lezzetleri.</text>
+            <rect x="60" y="340" width="120" height="40" rx="20" fill="#d4ff3e"/>
+            <text x="120" y="365" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#0a1f1c" font-weight="600">REZERVE ET</text>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Modern Menü</h3>
+            <p>Tek sayfa restoran menüsü</p>
+          </div>
+          <span class="template-tag">Menü</span>
+        </div>
+      </a>
+
+      <a href="sablonlar/restoran-orta-paket.html" class="template-card l" target="_blank">
+        <div class="template-preview preview-orta">
+          <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="og1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#3d2418"/>
+                <stop offset="100%" stop-color="#1a0d08"/>
+              </linearGradient>
+            </defs>
+            <rect width="700" height="440" fill="url(#og1)"/>
+            <text x="60" y="90" font-family="serif" font-style="italic" font-size="18" fill="#d4a574" opacity="0.8">— Geleneksel Lezzetler —</text>
+            <text x="60" y="200" font-family="serif" font-size="68" fill="#f5e6d3">Anadolu</text>
+            <text x="60" y="270" font-family="serif" font-style="italic" font-size="68" fill="#d4a574">Sofra.</text>
+            <line x1="60" y1="310" x2="240" y2="310" stroke="#d4a574" stroke-width="2"/>
+            <text x="60" y="350" font-family="sans-serif" font-size="14" fill="#a08060" letter-spacing="2">REZERVASYON · MENÜ · GALERİ</text>
+            <circle cx="560" cy="220" r="100" fill="none" stroke="#d4a574" stroke-width="1" opacity="0.3"/>
+            <circle cx="560" cy="220" r="60" fill="#d4a574" opacity="0.1"/>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Anadolu Sofra</h3>
+            <p>Geleneksel restoran, çok bölümlü site</p>
+          </div>
+          <span class="template-tag">Restoran</span>
+        </div>
+      </a>
+
+      <a href="sablonlar/restoran/index.html" class="template-card wide" target="_blank">
+        <div class="template-preview preview-ember">
+          <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="eg1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#2b170b"/>
+                <stop offset="46%" stop-color="#15100c"/>
+                <stop offset="100%" stop-color="#080604"/>
+              </linearGradient>
+              <radialGradient id="egGlow" cx="72%" cy="32%" r="45%">
+                <stop offset="0%" stop-color="#e8b96a" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#e8b96a" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="900" height="520" fill="url(#eg1)"/>
+            <rect width="900" height="520" fill="url(#egGlow)"/>
+            <rect x="58" y="58" width="784" height="404" fill="none" stroke="#c8963e" stroke-width="1" opacity="0.35"/>
+            <text x="86" y="126" font-family="serif" font-style="italic" font-size="25" fill="#e8b96a" opacity="0.9">Ember &amp; Gold</text>
+            <text x="86" y="252" font-family="serif" font-size="78" fill="#f5efe0">Fine Dining</text>
+            <text x="86" y="327" font-family="serif" font-style="italic" font-size="72" fill="#c8963e">experience.</text>
+            <line x1="86" y1="370" x2="260" y2="370" stroke="#c8963e" stroke-width="2"/>
+            <text x="86" y="415" font-family="sans-serif" font-size="14" fill="#b9975a" letter-spacing="3">ANA SAYFA · MENÜ · HAKKIMIZDA · REZERVASYON</text>
+            <circle cx="690" cy="238" r="120" fill="none" stroke="#c8963e" stroke-width="1" opacity="0.28"/>
+            <circle cx="690" cy="238" r="76" fill="#c8963e" opacity="0.08"/>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Ember &amp; Gold</h3>
+            <p>Fine dining restoranlar için çok sayfalı, rezervasyon ve detaylı menü akışına sahip premium paket.</p>
+            <div class="template-features">
+              <span>Çok sayfalı</span>
+              <span>Rezervasyon</span>
+              <span>Detaylı menü</span>
+              <span>Galeri</span>
+            </div>
+          </div>
+          <span class="template-tag">Premium</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <p>© 2025 Zetta Studio. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+</body>
+</html>
