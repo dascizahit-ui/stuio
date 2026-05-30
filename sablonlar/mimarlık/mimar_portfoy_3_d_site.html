@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maison Arka - React Mimarlik Portfoyu</title>
-<meta name="description" content="React JSX olarak hazirlanan mimarlik portfoy sablonunun GitHub Pages uzerinde calisan HTML surumu.">
+<title>Maison Arka - React Mimarlık Portföyü</title>
+<meta name="description" content="React JSX olarak hazırlanan mimarlık portföy şablonunun GitHub Pages üzerinde çalışan HTML sürümü.">
 <script src="https://cdn.tailwindcss.com"></script>
 <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -28,10 +28,10 @@
 <div id="root"></div>
 <div id="boot-error">
   <div style="max-width: 680px;">
-    <h1 style="font-size: 32px; margin-bottom: 12px;">Sablon yuklenemedi</h1>
+    <h1 style="font-size: 32px; margin-bottom: 12px;">Şablon yüklenemedi</h1>
     <p style="color: rgba(255,255,255,.68); line-height: 1.7;">
-      Bu sayfa React JSX dosyasini tarayicida calistirir. Internet baglantisini ve
-      <code>mimar_portfoy_3_d_site.jsx</code> dosyasinin ayni klasorde oldugunu kontrol edin.
+      Bu sayfa React JSX dosyasını tarayıcıda çalıştırır. İnternet bağlantısını ve
+      <code>mimar_portfoy_3_d_site.jsx</code> dosyasının aynı klasörde olduğunu kontrol edin.
     </p>
   </div>
 </div>
@@ -90,7 +90,7 @@
 
   try {
     const response = await fetch("./mimar_portfoy_3_d_site.jsx", { cache: "no-store" });
-    if (!response.ok) throw new Error("JSX dosyasi okunamadi.");
+    if (!response.ok) throw new Error("JSX dosyası okunamadı.");
 
     let source = await response.text();
     source = source.replace(/import React[\s\S]*?from "lucide-react";\s*/m, "");
