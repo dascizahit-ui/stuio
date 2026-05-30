@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARSEN KAYA — Mimarlık & Tasarım</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--bg:#09090A;--surface:#121213;--surface2:#1C1C1E;
+--text:#EDE8DE;--muted:#787060;--gold:#C4953A;--gold-l:#D4AE5A;
+--border:#252420;
+--ff-d:'Cormorant Garamond',Georgia,serif;
+--ff-u:'Syne',sans-serif;--ff-m:'DM Mono',monospace
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--ff-u);overflow-x:hidden;cursor:none}
+
+/* GRAIN */
+body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+opacity:.025;pointer-events:none;z-index:9000;animation:grain 6s steps(8) infinite}
+@keyframes grain{
+0%{transform:translate(0,0)}12.5%{transform:translate(-5%,-5%)}25%{transform:translate(-10%,5%)}
+37.5%{transform:translate(5%,-10%)}50%{transform:translate(-5%,15%)}62.5%{transform:translate(-10%,5%)}
+75%{transform:translate(15%,0)}87.5%{transform:translate(0,10%)}100%{transform:translate(-15%,0)}
+}
+
+/* CURSOR */
+#cur-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+#cur-ring{width:38px;height:38px;border:1px solid rgba(196,149,58,.6);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .3s,background .3s}
+#cur-ring.hovered{width:64px;height:64px;border-color:var(--gold-l);background:rgba(196,149,58,.06)}
+#cur-dot.hovered{width:4px;height:4px}
+
+/* PRELOADER */
+#preloader{position:fixed;inset:0;background:#030303;z-index:99000;display:flex;align-items:center;justify-content:center;flex-direction:column;transition:opacity .8s ease}
+#preloader.hidden{opacity:0;pointer-events:none}
+.pl-logo{font-family:var(--ff-d);font-size:clamp(2.5rem,6vw,5rem);font-weight:300;letter-spacing:.35em;color:var(--text);clip-path:inset(0 100% 0 0);animation:clipReveal 1.2s cubic-bezier(.77,0,.175,1) .4s forwards}
+.pl-line{width:0;height:1px;background:var(--gold);margin-top:1.5rem;animation:lineGrow 1s ease .9s forwards}
+.pl-sub{font-family:var(--ff-m);font-size:.65rem;letter-spacing:.4em;color:var(--muted);margin-top:1rem;opacity:0;animation:fadeUp .6s ease 1.6s forwards}
+.pl-count{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.3em;color:var(--gold);margin-top:2rem;opacity:0;animation:fadeUp .4s ease 1.8s forwards}
+@keyframes clipReveal{to{clip-path:inset(0 0% 0 0)}}
+@keyframes lineGrow{to{width:220px}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:2rem 5vw;display:flex;align-items:center;justify-content:space-between;transition:all .4s ease}
+nav.scrolled{background:rgba(9,9,10,.88);backdrop-filter:blur(20px);padding:1.2rem 5vw;border-bottom:1px solid var(--border)}
+.nav-logo{font-family:var(--ff-d);font-size:1.25rem;font-weight:400;letter-spacing:.2em;color:var(--text);text-decoration:none}
+.nav-logo em{font-style:normal;color:var(--gold)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:var(--ff-m);font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--bg);background:var(--gold);padding:.65rem 1.6rem;text-decoration:none;transition:background .3s}
+.nav-cta:hover{background:var(--gold-l)}
+
+/* HERO */
+#hero{position:relative;width:100%;height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+#three-canvas{position:absolute;inset:0;z-index:0}
+.hero-content{position:relative;z-index:10;padding:0 5vw 9vh;width:100%;display:grid;grid-template-columns:1fr 1fr;align-items:flex-end}
+.hero-hl{font-family:var(--ff-d);font-size:clamp(3.5rem,8.5vw,10rem);font-weight:300;line-height:.9;letter-spacing:-.02em;color:var(--text)}
+.hero-hl em{font-style:italic;color:var(--gold-l)}
+.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:2.5rem}
+.hero-desc{font-family:var(--ff-m);font-size:.65rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);line-height:2.2;text-align:right;border-right:1px solid var(--gold);padding-right:1.5rem}
+.hero-scroll{display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.hero-scroll span{font-family:var(--ff-m);font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl}
+.scroll-line{width:1px;height:55px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.4;transform:scaleY(.6)}}
+.hero-year{position:absolute;bottom:9vh;left:5vw;font-family:var(--ff-d);font-size:12vw;font-weight:300;color:rgba(255,255,255,.018);line-height:1;user-select:none;pointer-events:none;z-index:1}
+.hero-badge{position:absolute;top:50%;right:5vw;transform:translateY(-50%);font-family:var(--ff-m);font-size:.55rem;letter-spacing:.35em;color:rgba(196,149,58,.4);text-transform:uppercase;writing-mode:vertical-rl}
+
+/* MARQUEE */
+.marquee-wrap{overflow:hidden;white-space:nowrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.2rem 0;background:var(--surface)}
+.marquee-inner{display:inline-flex;animation:marqueScroll 22s linear infinite;gap:3rem}
+.marquee-inner:hover{animation-play-state:paused}
+.m-item{font-family:var(--ff-d);font-size:1.1rem;font-weight:300;font-style:italic;color:var(--muted);display:flex;align-items:center;gap:2rem}
+.m-item::after{content:'◆';color:var(--gold);font-style:normal;font-size:.45rem}
+@keyframes marqueScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section{padding:10vh 5vw}
+.s-tag{font-family:var(--ff-m);font-size:.58rem;letter-spacing:.45em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+.s-tag::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+.s-title{font-family:var(--ff-d);font-size:clamp(2.5rem,5vw,5.5rem);font-weight:300;line-height:1.05;letter-spacing:-.01em}
+.s-title em{font-style:italic;color:var(--gold-l)}
+
+/* ABOUT */
+#about{border-top:1px solid var(--border)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:start;margin-top:5rem}
+.about-text{font-family:var(--ff-d);font-size:clamp(1.1rem,1.6vw,1.5rem);line-height:1.75;font-weight:300;color:var(--text)}
+.about-text p+p{margin-top:1.6rem}
+.about-text em{font-style:italic;color:var(--gold-l)}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-bottom:1px}
+.stat{padding:1.8rem;background:var(--surface);position:relative;overflow:hidden;transition:background .3s}
+.stat:hover{background:var(--surface2)}
+.stat::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .5s ease}
+.stat:hover::after{width:100%}
+.stat-n{font-family:var(--ff-d);font-size:3.2rem;font-weight:300;color:var(--gold);line-height:1}
+.stat-l{font-family:var(--ff-m);font-size:.57rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-top:.5rem}
+.awards{margin-top:1px}
+.award{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.8rem;border-bottom:1px solid var(--border);background:var(--surface);transition:background .3s}
+.award:hover{background:var(--surface2)}
+.award-n{font-family:var(--ff-d);font-size:.95rem;font-weight:300}
+.award-y{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.2em;color:var(--gold)}
+
+/* WORKS */
+#works{border-top:1px solid var(--border)}
+.works-hd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem}
+.works-yr{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.22em;color:var(--muted);text-transform:uppercase}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.pc{position:relative;cursor:none;overflow:hidden;aspect-ratio:4/3}
+.pc.tall{aspect-ratio:3/4}
+.pc.wide{grid-column:1/-1;aspect-ratio:21/9}
+.pi{width:100%;height:100%;transition:transform .7s cubic-bezier(.25,.46,.45,.94);position:relative}
+.pc:hover .pi{transform:scale(1.06)}
+.a1 .pi{background:radial-gradient(ellipse at 65% 25%,#1a3a55 0%,transparent 55%),radial-gradient(ellipse at 25% 80%,#0d2035 0%,transparent 45%),linear-gradient(160deg,#07090e 0%,#0c1520 45%,#182535 100%)}
+.a2 .pi{background:radial-gradient(ellipse at 35% 35%,#3d2010 0%,transparent 55%),radial-gradient(ellipse at 75% 75%,#5a3015 0%,transparent 45%),linear-gradient(140deg,#0c0704 0%,#1e1108 45%,#3a2010 100%)}
+.a3 .pi{background:radial-gradient(ellipse at 50% 30%,#1a3a28 0%,transparent 55%),linear-gradient(190deg,#060c08 0%,#0d1c10 45%,#1a2e1a 100%)}
+.a4 .pi{background:radial-gradient(ellipse at 30% 60%,#28201a 0%,transparent 55%),radial-gradient(ellipse at 70% 20%,#3f2d15 0%,transparent 45%),linear-gradient(140deg,#0a0806 0%,#1a1410 45%,#2d2018 100%)}
+.a5 .pi{background:radial-gradient(ellipse at 75% 30%,#2a0d12 0%,transparent 55%),radial-gradient(ellipse at 25% 75%,#1a0a0d 0%,transparent 45%),linear-gradient(165deg,#080304 0%,#140608 45%,#200c10 100%)}
+.a6 .pi{background:radial-gradient(ellipse at 40% 40%,#1a2a1a 0%,transparent 55%),linear-gradient(140deg,#060906 0%,#101910 45%,#1a2a1a 100%)}
+.arch-svg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.06;pointer-events:none;transition:opacity .5s ease;z-index:2}
+.pc:hover .arch-svg{opacity:.14}
+.pi-hover{position:absolute;inset:0;background:linear-gradient(to top,rgba(9,9,10,.92) 0%,rgba(9,9,10,.35) 50%,transparent 100%);opacity:0;transition:opacity .5s ease;z-index:3}
+.pc:hover .pi-hover{opacity:1}
+.pi-info{position:absolute;bottom:0;left:0;right:0;padding:2rem 2.2rem;z-index:5;background:linear-gradient(to top,rgba(9,9,10,.85) 0%,transparent 100%)}
+.pi-type{font-family:var(--ff-m);font-size:.57rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.pi-name{font-family:var(--ff-d);font-size:clamp(1.4rem,2.2vw,2.2rem);font-weight:300;line-height:1.05;color:var(--text)}
+.pi-meta{font-family:var(--ff-m);font-size:.58rem;letter-spacing:.2em;color:var(--muted);margin-top:.4rem}
+.pi-extra{max-height:0;overflow:hidden;opacity:0;transition:max-height .5s ease,opacity .4s ease}
+.pc:hover .pi-extra{max-height:200px;opacity:1}
+.pi-desc{font-family:var(--ff-d);font-size:.9rem;line-height:1.65;color:rgba(237,232,222,.6);margin-top:.8rem;font-weight:300}
+.pi-btn{display:inline-flex;align-items:center;gap:.65rem;margin-top:1.1rem;font-family:var(--ff-m);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);background:none;border:1px solid rgba(196,149,58,.35);padding:.6rem 1.3rem;cursor:none;transition:all .3s}
+.pi-btn:hover{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+.pi-btn-arrow{transition:transform .3s}
+.pi-btn:hover .pi-btn-arrow{transform:translateX(4px)}
+
+/* PHILOSOPHY */
+#philosophy{border-top:1px solid var(--border);text-align:center;padding:16vh 5vw;position:relative;overflow:hidden}
+.phil-bg{position:absolute;inset:0;font-family:var(--ff-d);font-size:18rem;font-weight:300;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.012);user-select:none;pointer-events:none;letter-spacing:-.05em}
+.phil-q{font-family:var(--ff-d);font-size:clamp(1.8rem,3.5vw,4rem);font-weight:300;font-style:italic;line-height:1.4;max-width:950px;margin:0 auto;position:relative;z-index:5}
+.phil-q em{font-style:normal;color:var(--gold-l)}
+.phil-a{font-family:var(--ff-m);font-size:.6rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);margin-top:2.5rem}
+
+/* SERVICES */
+#services{border-top:1px solid var(--border)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:4rem}
+.svc{padding:3rem 2.5rem;background:var(--surface);position:relative;overflow:hidden;transition:background .4s}
+.svc::after{content:'';position:absolute;top:0;left:0;width:1.5px;height:0;background:var(--gold);transition:height .5s ease}
+.svc:hover::after{height:100%}
+.svc:hover{background:var(--surface2)}
+.svc-n{font-family:var(--ff-m);font-size:.57rem;letter-spacing:.3em;color:var(--gold);margin-bottom:2rem}
+.svc-title{font-family:var(--ff-d);font-size:1.9rem;font-weight:300;line-height:1.1;margin-bottom:1.5rem}
+.svc-desc{font-family:var(--ff-d);font-size:.93rem;line-height:1.75;color:var(--muted);font-weight:300}
+.svc-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
+.svc-tag{font-family:var(--ff-m);font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid var(--border);padding:.3rem .75rem}
+
+/* CONTACT */
+#contact{border-top:1px solid var(--border)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6vw;margin-top:5rem}
+.contact-email{font-family:var(--ff-d);font-size:clamp(1.4rem,2.2vw,2rem);font-weight:300;color:var(--gold-l);text-decoration:none;display:block;margin:1.5rem 0 2.5rem;transition:color .3s}
+.contact-email:hover{color:var(--text)}
+.ci-list{list-style:none;display:flex;flex-direction:column}
+.ci{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 0;border-bottom:1px solid var(--border)}
+.ci-l{font-family:var(--ff-m);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.ci-v{font-family:var(--ff-d);font-size:.95rem;font-weight:300}
+.cf{display:flex;flex-direction:column;gap:1.6rem}
+.ff{position:relative}
+.ff input,.ff textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--border);padding:1rem 0;color:var(--text);font-family:var(--ff-d);font-size:1rem;font-weight:300;outline:none;transition:border-color .3s;cursor:none}
+.ff textarea{height:110px;resize:none}
+.ff input:focus,.ff textarea:focus{border-color:var(--gold)}
+.ff label{position:absolute;top:1rem;left:0;font-family:var(--ff-m);font-size:.57rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);transition:all .3s;pointer-events:none}
+.ff input:focus~label,.ff input:not(:placeholder-shown)~label,.ff textarea:focus~label,.ff textarea:not(:placeholder-shown)~label{top:-.4rem;font-size:.5rem;color:var(--gold)}
+.sbtn{align-self:flex-start;background:none;border:1px solid var(--border);color:var(--text);font-family:var(--ff-m);font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;padding:1rem 2.5rem;cursor:none;transition:all .4s;position:relative;overflow:hidden}
+.sbtn::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-101%);transition:transform .4s cubic-bezier(.77,0,.175,1)}
+.sbtn:hover::before{transform:translateX(0)}
+.sbtn span{position:relative;z-index:1;transition:color .4s}
+.sbtn:hover span{color:var(--bg)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:3.5rem 5vw;display:flex;justify-content:space-between;align-items:center}
+.ft-logo{font-family:var(--ff-d);font-size:1.1rem;font-weight:300;letter-spacing:.2em}
+.ft-logo em{font-style:normal;color:var(--gold)}
+.ft-copy{font-family:var(--ff-m);font-size:.57rem;letter-spacing:.2em;color:var(--muted)}
+.ft-soc{display:flex;gap:2rem}
+.ft-soc a{font-family:var(--ff-m);font-size:.57rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s}
+.ft-soc a:hover{color:var(--gold)}
+
+
+
+/* FILTERS */
+.filterbar{display:flex;flex-wrap:wrap;gap:.75rem;margin:-1.5rem 0 2.5rem;align-items:center}
+.filter{background:transparent;border:1px solid var(--border);color:var(--muted);font-family:var(--ff-m);font-size:.55rem;letter-spacing:.26em;text-transform:uppercase;padding:.65rem 1rem;cursor:none;transition:all .3s}
+.filter:hover,.filter.active{color:var(--bg);background:var(--gold);border-color:var(--gold)}
+.pc.hide{display:none}
+
+/* PROCESS */
+#process{border-top:1px solid var(--border);background:linear-gradient(180deg,var(--bg),#0d0d0e)}
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:4rem;border:1px solid var(--border);background:var(--border)}
+.process-card{min-height:280px;background:var(--surface);padding:2.2rem;position:relative;overflow:hidden;transition:transform .35s ease,background .35s ease}
+.process-card::before{content:'';position:absolute;inset:auto -20% -35% -20%;height:60%;background:radial-gradient(ellipse at center,rgba(196,149,58,.16),transparent 65%);opacity:0;transition:opacity .35s}
+.process-card:hover{background:var(--surface2);transform:translateY(-6px)}
+.process-card:hover::before{opacity:1}
+.process-card span{font-family:var(--ff-m);font-size:.58rem;letter-spacing:.35em;color:var(--gold)}
+.process-card h3{font-family:var(--ff-d);font-weight:300;font-size:1.75rem;line-height:1.1;margin:2rem 0 1rem}
+.process-card p{font-family:var(--ff-d);font-weight:300;line-height:1.75;color:var(--muted);font-size:.95rem}
+.form-note{min-height:1.2rem;font-family:var(--ff-m);font-size:.58rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}
+.nav-toggle{display:none;background:transparent;border:1px solid var(--border);width:42px;height:42px;align-items:center;justify-content:center;flex-direction:column;gap:6px;cursor:none}
+.nav-toggle span{display:block;width:18px;height:1px;background:var(--text);transition:transform .3s,opacity .3s}
+.nav-toggle.open span:first-child{transform:translateY(3.5px) rotate(45deg)}
+.nav-toggle.open span:last-child{transform:translateY(-3.5px) rotate(-45deg)}
+
+@media (max-width: 980px){
+  body{cursor:auto}
+  #cur-dot,#cur-ring{display:none}
+  nav{padding:1rem 5vw;background:rgba(9,9,10,.9);backdrop-filter:blur(16px)}
+  .nav-toggle{display:flex;order:3}
+  .nav-cta{display:none}
+  .nav-links{position:fixed;top:72px;left:5vw;right:5vw;display:grid;gap:0;background:rgba(18,18,19,.96);border:1px solid var(--border);padding:.5rem;transform:translateY(-16px);opacity:0;pointer-events:none;transition:all .3s;backdrop-filter:blur(18px)}
+  .nav-links.open{transform:translateY(0);opacity:1;pointer-events:all}
+  .nav-links li a{display:block;padding:1rem;border-bottom:1px solid var(--border)}
+  .nav-links li:last-child a{border-bottom:none}
+  .hero-content{grid-template-columns:1fr;gap:2rem;padding-bottom:7vh}
+  .hero-right{align-items:flex-start}
+  .hero-desc{text-align:left;border-left:1px solid var(--gold);border-right:0;padding-left:1.2rem;padding-right:0}
+  .hero-badge{display:none}
+  .hero-year{font-size:28vw;bottom:16vh}
+  section{padding:8vh 5vw}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:3rem}
+  .projects-grid{grid-template-columns:1fr}
+  .pc.wide{grid-column:auto;aspect-ratio:4/3}
+  .svc-grid{grid-template-columns:1fr}
+  .process-grid{grid-template-columns:1fr 1fr}
+  .lb{flex-direction:column}
+  #lb{display:block;overflow-y:auto}
+  .lb-side,.lb-gallery{width:100%}
+  .lb-side{min-height:auto;padding:5rem 5vw 2rem;border-right:0;border-bottom:1px solid var(--border)}
+  .lb-gallery{height:62vh}
+  footer{flex-direction:column;gap:1.2rem;text-align:center}
+}
+@media (max-width: 620px){
+  .s-title{font-size:2.4rem}
+  .hero-hl{font-size:3.2rem}
+  .stats-grid,.process-grid{grid-template-columns:1fr}
+  .works-hd{display:block}
+  .works-yr{margin-top:1rem}
+  .filterbar{gap:.5rem}
+  .filter{width:calc(50% - .25rem);padding:.7rem .4rem}
+  .pc,.pc.tall,.pc.wide{aspect-ratio:3/4}
+  .pi-info{padding:1.5rem}
+  .lb-close{right:1.2rem;top:1.2rem}
+}
+
+
+
+/* PROJECT PHOTOS */
+.project-photo,.lb-photo{position:absolute;inset:0;overflow:hidden;background:linear-gradient(135deg,#121212,#262018)}
+.project-photo img,.lb-photo img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;transform:scale(1.01);filter:brightness(.78) saturate(1.04) contrast(1.06);transition:transform .85s cubic-bezier(.25,.46,.45,.94),filter .45s ease}
+.project-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(9,9,10,.90) 0%,rgba(9,9,10,.42) 48%,rgba(9,9,10,.15) 100%);pointer-events:none}
+.pc:hover .project-photo img{transform:scale(1.075);filter:brightness(.88) saturate(1.08) contrast(1.08)}
+.pi .arch-svg{display:none!important}
+.lb-photo img{filter:brightness(.92) saturate(1.04) contrast(1.04)}
+.lb-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.08),transparent 34%,rgba(0,0,0,.12));pointer-events:none}
+.photo-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;background:linear-gradient(135deg,#121212,#342817);color:rgba(237,232,222,.72);font-family:var(--ff-m);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;line-height:1.8}
+.photo-fallback::before{content:'';position:absolute;inset:12%;border:1px solid rgba(196,149,58,.28)}
+.lb-img{background:#0b1118!important}
+/* LIGHTBOX */
+#lb{position:fixed;inset:0;background:rgba(6,6,6,.97);z-index:10000;display:flex;opacity:0;pointer-events:none;transition:opacity .5s ease}
+#lb.open{opacity:1;pointer-events:all}
+.lb-close{position:absolute;top:2rem;right:3rem;background:none;border:none;color:var(--text);cursor:none;font-family:var(--ff-m);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;display:flex;align-items:center;gap:.75rem;z-index:20;transition:color .3s}
+.lb-close:hover{color:var(--gold)}
+.lb-x{width:18px;height:18px;position:relative}
+.lb-x::before,.lb-x::after{content:'';position:absolute;top:50%;left:0;width:100%;height:1px;background:currentColor}
+.lb-x::before{transform:rotate(45deg)}.lb-x::after{transform:rotate(-45deg)}
+.lb-side{width:36%;padding:6rem 3vw 4rem 5vw;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border);overflow-y:auto}
+.lb-num{font-family:var(--ff-m);font-size:.57rem;letter-spacing:.4em;color:var(--muted);margin-bottom:3rem}
+.lb-type{font-family:var(--ff-m);font-size:.62rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.lb-name{font-family:var(--ff-d);font-size:clamp(2.5rem,4vw,4.5rem);font-weight:300;line-height:1;margin-bottom:3rem}
+.lb-name em{font-style:italic;color:var(--gold-l)}
+.lb-deets{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding-top:2rem;border-top:1px solid var(--border);margin-bottom:2.5rem}
+.lb-dl{font-family:var(--ff-m);font-size:.52rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:.35rem}
+.lb-dv{font-family:var(--ff-d);font-size:1rem;font-weight:300}
+.lb-desc{font-family:var(--ff-d);font-size:1.02rem;line-height:1.75;font-weight:300;color:var(--muted);padding-top:2rem;border-top:1px solid var(--border)}
+.lb-gallery{width:64%;position:relative;overflow:hidden}
+.lb-imgs{width:100%;height:100%;position:relative}
+.lb-img{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
+.lb-img.show{opacity:1}
+.lb-img svg{position:absolute;inset:0;width:100%;height:100%;opacity:.04}
+.lb-dots{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;z-index:10}
+.lb-dot{width:4px;height:4px;background:var(--muted);border-radius:50%;cursor:none;transition:all .3s}
+.lb-dot.on{background:var(--gold);width:18px;border-radius:2px}
+.lb-nav{position:absolute;bottom:2.5rem;right:2.5rem;display:flex;gap:.75rem;z-index:10}
+.lb-nbtn{width:42px;height:42px;border:1px solid rgba(196,149,58,.35);background:rgba(9,9,10,.5);cursor:none;display:flex;align-items:center;justify-content:center;transition:all .3s;backdrop-filter:blur(8px)}
+.lb-nbtn:hover{background:var(--gold);border-color:var(--gold)}
+.lb-nbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.5}
+.lb-pnav{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 1rem;pointer-events:none;z-index:10}
+.lb-pnbtn{width:48px;height:48px;border:1px solid rgba(255,255,255,.08);background:rgba(9,9,10,.7);cursor:none;display:flex;align-items:center;justify-content:center;transition:all .3s;pointer-events:all;backdrop-filter:blur(8px)}
+.lb-pnbtn:hover{border-color:var(--gold)}
+.lb-pnbtn svg{width:18px;height:18px;stroke:white;fill:none;stroke-width:1.5}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(35px);transition:opacity .8s ease,transform .8s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
+
+/* SELECTION LINE */
+.line-dec{display:flex;align-items:center;gap:1.5rem;margin-top:3rem}
+.line-dec::before,.line-dec::after{content:'';flex:1;height:1px;background:var(--border)}
+.line-dec span{font-family:var(--ff-m);font-size:.55rem;letter-spacing:.3em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pl-logo">ARSEN KAYA</div>
+  <div class="pl-line"></div>
+  <div class="pl-sub">Mimarlık &amp; Tasarım Atölyesi</div>
+  <div class="pl-count" id="plcount">İstanbul · Est. 2012</div>
+</div>
+
+<!-- NAV -->
+<nav id="mainnav">
+  <a href="#" class="nav-logo">A<em>.</em>KAYA</a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menüyü aç" aria-expanded="false"><span></span><span></span></button>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">Hakkında</a></li>
+    <li><a href="#works">Projeler</a></li>
+    <li><a href="#services">Hizmetler</a></li>
+    <li><a href="#process">Süreç</a></li>
+    <li><a href="#contact">İletişim</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Proje Başlat</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="three-canvas"></canvas>
+  <div class="hero-year">2024</div>
+  <div class="hero-badge">Architecture · Design · Space</div>
+  <div class="hero-content">
+    <div class="hero-hl" id="hero-hl">
+      Mekânı<br>
+      <em>Sanat</em><br>
+      Olarak<br>
+      Tasarlamak
+    </div>
+    <div class="hero-right">
+      <div class="hero-desc">
+        İstanbul'dan Dünyaya<br>
+        Mimarlık · İç Tasarım · Peyzaj<br>
+        80+ Proje · 9 Ülke
+      </div>
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        <span>Keşfet</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner" id="mq">
+    <span class="m-item">Mimarlık</span><span class="m-item">İç Tasarım</span><span class="m-item">Peyzaj</span>
+    <span class="m-item">Kentsel Tasarım</span><span class="m-item">Restorasyon</span><span class="m-item">Master Plan</span>
+    <span class="m-item">Sürdürülebilirlik</span><span class="m-item">Proje Yönetimi</span>
+    <span class="m-item">Mimarlık</span><span class="m-item">İç Tasarım</span><span class="m-item">Peyzaj</span>
+    <span class="m-item">Kentsel Tasarım</span><span class="m-item">Restorasyon</span><span class="m-item">Master Plan</span>
+    <span class="m-item">Sürdürülebilirlik</span><span class="m-item">Proje Yönetimi</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="s-tag">Hakkımda</div>
+  <div class="s-title">Sınırları <em>Aşan</em> Formlar</div>
+  <div class="about-grid">
+    <div class="about-text rv">
+      <p>Mimarlık benim için yalnızca binalar inşa etmek değil; insanların hayatlarına dokunan, zamana meydan okuyan ve çevreyle derin bir diyalog kuran mekânlar yaratmak demektir.</p>
+      <p>İTÜ Mimarlık Fakültesi'nden mezun olduktan sonra Zaha Hadid Architects ve Herzog &amp; de Meuron'da deneyim kazandım. 2012 yılında kendi atölyemi kurarak Türkiye ve Avrupa'da 80'i aşkın projeye imza attım.</p>
+      <p>Her proje, kendine özgü bir hikâye anlatır. Ben bu hikâyelerin <em>mimari tercümanlığını</em> yaparım.</p>
+    </div>
+    <div>
+      <div class="stats-grid">
+        <div class="stat rv d1"><div class="stat-n" data-c="84">0</div><div class="stat-l">Tamamlanan Proje</div></div>
+        <div class="stat rv d2"><div class="stat-n" data-c="12">0</div><div class="stat-l">Yıllık Deneyim</div></div>
+        <div class="stat rv d3"><div class="stat-n" data-c="18">0</div><div class="stat-l">Uluslararası Ödül</div></div>
+        <div class="stat rv d4"><div class="stat-n" data-c="9">0</div><div class="stat-l">Ülke</div></div>
+      </div>
+      <div class="awards rv">
+        <div class="award"><span class="award-n">WAN Architecture Award</span><span class="award-y">2024</span></div>
+        <div class="award"><span class="award-n">Aga Khan Award for Architecture</span><span class="award-y">2022</span></div>
+        <div class="award"><span class="award-n">AIA International Design Excellence</span><span class="award-y">2021</span></div>
+        <div class="award"><span class="award-n">Archmarathon Award — Best Villa</span><span class="award-y">2020</span></div>
+        <div class="award"><span class="award-n">Dezeen Architecture Award</span><span class="award-y">2019</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKS -->
+<section id="works">
+  <div class="works-hd">
+    <div>
+      <div class="s-tag">Seçilmiş Projeler</div>
+      <div class="s-title">Son <em>İşler</em></div>
+    </div>
+    <div class="works-yr">2021 — 2024</div>
+  </div>
+
+  <div class="filterbar rv d1" aria-label="Proje filtreleri">
+    <button class="filter active" data-filter="all">Tümü</button>
+    <button class="filter" data-filter="konut">Konut</button>
+    <button class="filter" data-filter="icmekan">İç Mekân</button>
+    <button class="filter" data-filter="kulturel">Kültürel</button>
+    <button class="filter" data-filter="peyzaj">Peyzaj</button>
+  </div>
+
+  <div class="projects-grid">
+    <!-- 1 -->
+    <div class="pc wide a1" data-cat="konut" onclick="openLB(0)">
+      <div class="pi">
+        <svg class="arch-svg" width="600" height="300" viewBox="0 0 600 300">
+          <rect x="100" y="40" width="400" height="220" fill="none" stroke="white" stroke-width=".8"/>
+          <rect x="140" y="70" width="100" height="80" fill="none" stroke="white" stroke-width=".5"/>
+          <rect x="260" y="70" width="100" height="80" fill="none" stroke="white" stroke-width=".5"/>
+          <rect x="380" y="70" width="80" height="80" fill="none" stroke="white" stroke-width=".5"/>
+          <rect x="140" y="170" width="100" height="70" fill="none" stroke="white" stroke-width=".5"/>
+          <rect x="260" y="170" width="100" height="70" fill="none" stroke="white" stroke-width=".5"/>
+          <rect x="380" y="170" width="80" height="70" fill="none" stroke="white" stroke-width=".5"/>
+          <line x1="100" y1="155" x2="500" y2="155" stroke="white" stroke-width=".4"/>
+          <line x1="300" y1="40" x2="300" y2="260" stroke="white" stroke-width=".4"/>
+          <polygon points="300,10 270,40 330,40" fill="none" stroke="white" stroke-width=".6"/>
+        </svg>
+      </div>
+      <div class="pi-hover"></div>
+      <div class="pi-info">
+        <div class="pi-type">Konut · İstanbul, 2024</div>
+        <div class="pi-name">Lumen Kulesi</div>
+        <div class="pi-meta">42 Kat · 180m Yükseklik · 45.000 m²</div>
+        <div class="pi-extra">
+          <div class="pi-desc">Boğaz manzarasına hâkim bu rezidans kulesi, cam ve çelik örgüsüyle günün her saatinde farklı bir ışık oyunu sunar.</div>
+          <button class="pi-btn" onclick="openLB(0)"><span>Projeyi İncele</span><span class="pi-btn-arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="pc tall a2" data-cat="konut icmekan" onclick="openLB(1)">
+      <div class="pi">
+        <svg class="arch-svg" width="200" height="350" viewBox="0 0 200 350">
+          <polygon points="100,20 20,200 180,200" fill="none" stroke="white" stroke-width=".8"/>
+          <rect x="20" y="200" width="160" height="110" fill="none" stroke="white" stroke-width=".5"/>
+          <line x1="100" y1="20" x2="100" y2="310" stroke="white" stroke-width=".4"/>
+          <line x1="20" y1="200" x2="180" y2="200" stroke="white" stroke-width=".6"/>
+          <line x1="55" y1="140" x2="145" y2="140" stroke="white" stroke-width=".3"/>
+          <rect x="70" y="230" width="60" height="80" fill="none" stroke="white" stroke-width=".5"/>
+        </svg>
+      </div>
+      <div class="pi-hover"></div>
+      <div class="pi-info">
+        <div class="pi-type">Villa · Bodrum, 2023</div>
+        <div class="pi-name">Kıyalı</div>
+        <div class="pi-meta">Özel Konut · 620 m²</div>
+        <div class="pi-extra">
+          <div class="pi-desc">Ege'nin berrak sularına uzanan bu yalı evi, doğal taş ve ahşapla çevreyle uyum içindedir.</div>
+          <button class="pi-btn" onclick="openLB(1)"><span>Projeyi İncele</span><span class="pi-btn-arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="pc a3" data-cat="kulturel" onclick="openLB(2)">
+      <div class="pi">
+        <svg class="arch-svg" width="220" height="220" viewBox="0 0 220 220">
+          <ellipse cx="110" cy="110" rx="85" ry="85" fill="none" stroke="white" stroke-width=".8"/>
+          <ellipse cx="110" cy="110" rx="55" ry="55" fill="none" stroke="white" stroke-width=".5"/>
+          <ellipse cx="110" cy="110" rx="25" ry="25" fill="none" stroke="white" stroke-width=".4"/>
+          <line x1="25" y1="110" x2="195" y2="110" stroke="white" stroke-width=".3"/>
+          <line x1="110" y1="25" x2="110" y2="195" stroke="white" stroke-width=".3"/>
+          <line x1="49" y1="49" x2="171" y2="171" stroke="white" stroke-width=".2"/>
+          <line x1="171" y1="49" x2="49" y2="171" stroke="white" stroke-width=".2"/>
+        </svg>
+      </div>
+      <div class="pi-hover"></div>
+      <div class="pi-info">
+        <div class="pi-type">Kültürel · Ankara, 2023</div>
+        <div class="pi-name">Sahne Merkezi</div>
+        <div class="pi-meta">8.500 m² · Kamu Yapısı</div>
+        <div class="pi-extra">
+          <div class="pi-desc">Organik formlu bu kültür merkezi şehrin kalbinde sanat adası gibi yükseliyor.</div>
+          <button class="pi-btn" onclick="openLB(2)"><span>Projeyi İncele</span><span class="pi-btn-arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="pc a4" data-cat="konut icmekan" onclick="openLB(3)">
+      <div class="pi">
+        <svg class="arch-svg" width="220" height="200" viewBox="0 0 220 200">
+          <rect x="10" y="140" width="200" height="30" fill="none" stroke="white" stroke-width=".6"/>
+          <rect x="30" y="90" width="160" height="50" fill="none" stroke="white" stroke-width=".5"/>
+          <rect x="60" y="50" width="100" height="40" fill="none" stroke="white" stroke-width=".5"/>
+          <rect x="85" y="20" width="50" height="30" fill="none" stroke="white" stroke-width=".4"/>
+          <line x1="110" y1="20" x2="110" y2="170" stroke="white" stroke-width=".3"/>
+        </svg>
+      </div>
+      <div class="pi-hover"></div>
+      <div class="pi-info">
+        <div class="pi-type">Minimal Villa · Çeşme, 2022</div>
+        <div class="pi-name">Çerçeve Ev</div>
+        <div class="pi-meta">450 m² · Özel</div>
+        <div class="pi-extra">
+          <div class="pi-desc">Manzarayı tabloya dönüştüren çerçeveli açıklıklar, minimal Ege estetiğiyle buluşuyor.</div>
+          <button class="pi-btn" onclick="openLB(3)"><span>Projeyi İncele</span><span class="pi-btn-arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="pc a5" data-cat="kulturel" onclick="openLB(4)">
+      <div class="pi">
+        <svg class="arch-svg" width="200" height="280" viewBox="0 0 200 280">
+          <path d="M30 250 L30 80 L100 30 L170 80 L170 250 Z" fill="none" stroke="white" stroke-width=".8"/>
+          <path d="M30 80 L100 130 L170 80" fill="none" stroke="white" stroke-width=".4"/>
+          <rect x="70" y="185" width="60" height="65" fill="none" stroke="white" stroke-width=".5"/>
+          <line x1="100" y1="30" x2="100" y2="250" stroke="white" stroke-width=".3"/>
+          <rect x="38" y="130" width="45" height="40" fill="none" stroke="white" stroke-width=".3"/>
+          <rect x="117" y="130" width="45" height="40" fill="none" stroke="white" stroke-width=".3"/>
+        </svg>
+      </div>
+      <div class="pi-hover"></div>
+      <div class="pi-info">
+        <div class="pi-type">Müze · İstanbul, 2022</div>
+        <div class="pi-name">Eserlik Müzesi</div>
+        <div class="pi-meta">12.000 m² · İBB</div>
+        <div class="pi-extra">
+          <div class="pi-desc">Tophane'nin tarihi dokusuna saygılı, çağdaş bir müze yapısı.</div>
+          <button class="pi-btn" onclick="openLB(4)"><span>Projeyi İncele</span><span class="pi-btn-arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="pc a6" data-cat="peyzaj" onclick="openLB(5)">
+      <div class="pi">
+        <svg class="arch-svg" width="200" height="200" viewBox="0 0 200 200">
+          <path d="M100 10 L180 60 L180 140 L100 190 L20 140 L20 60 Z" fill="none" stroke="white" stroke-width=".8"/>
+          <path d="M100 45 L155 75 L155 125 L100 155 L45 125 L45 75 Z" fill="none" stroke="white" stroke-width=".5"/>
+          <circle cx="100" cy="100" r="25" fill="none" stroke="white" stroke-width=".4"/>
+          <line x1="20" y1="100" x2="180" y2="100" stroke="white" stroke-width=".3"/>
+          <line x1="100" y1="10" x2="100" y2="190" stroke="white" stroke-width=".3"/>
+        </svg>
+      </div>
+      <div class="pi-hover"></div>
+      <div class="pi-info">
+        <div class="pi-type">Peyzaj · İstanbul, 2021</div>
+        <div class="pi-name">Yeşil Ada</div>
+        <div class="pi-meta">3.2 Hektar · Sarıyer</div>
+        <div class="pi-extra">
+          <div class="pi-desc">Kent içinde solunum alanı. Çok katmanlı peyzaj tasarımı.</div>
+          <button class="pi-btn" onclick="openLB(5)"><span>Projeyi İncele</span><span class="pi-btn-arrow">→</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="phil-bg">AK</div>
+  <div class="s-tag" style="justify-content:center">Felsefe</div>
+  <div class="phil-q rv">
+    "Mimarlık <em>dondurulmuş müzik</em> değildir; aksine,
+    zamanla birlikte nefes alan, insan deneyimini
+    <em>şekillendiren</em> canlı bir sanattır."
+  </div>
+  <div class="phil-a">— Arsen Kaya · Tasarım Manifestosu, 2018</div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="s-tag">Hizmetler</div>
+  <div class="s-title">Ne <em>Yapıyorum</em></div>
+  <div class="svc-grid">
+    <div class="svc rv">
+      <div class="svc-n">01 / Mimarlık</div>
+      <div class="svc-title">Mimarlık &amp;<br>Yapı Tasarımı</div>
+      <div class="svc-desc">Konuttan kültürel yapılara, ticari binalardan karma kullanımlı yapılara kadar her ölçekte özgün mimari çözümler üretiyorum. Tasarım fikrinden anahtar teslimine kadar tam kapsamlı hizmet.</div>
+      <div class="svc-tags"><span class="svc-tag">Konut</span><span class="svc-tag">Kültürel</span><span class="svc-tag">Ticari</span><span class="svc-tag">Karma</span></div>
+    </div>
+    <div class="svc rv d1">
+      <div class="svc-n">02 / İç Tasarım</div>
+      <div class="svc-title">İç Mekân<br>Tasarımı</div>
+      <div class="svc-desc">Yaşam alanlarını kimliklendirir, malzeme seçiminden mobilyaya kadar her detayı titizlikle kurgularım. Mimari bütünlük içinde, insanı merkeze alan iç mekânlar.</div>
+      <div class="svc-tags"><span class="svc-tag">Residential</span><span class="svc-tag">Hospitality</span><span class="svc-tag">Retail</span></div>
+    </div>
+    <div class="svc rv d2">
+      <div class="svc-n">03 / Peyzaj</div>
+      <div class="svc-title">Kentsel Tasarım<br>&amp; Peyzaj</div>
+      <div class="svc-desc">Kamusal alanları, parkları ve kent dokusunu insan ölçeğinde yeniden tasarlayarak yaşanabilir çevreler yaratıyorum. Biyoçeşitlilik ve ekolojik denge ön planda.</div>
+      <div class="svc-tags"><span class="svc-tag">Master Plan</span><span class="svc-tag">Peyzaj</span><span class="svc-tag">Kamusal</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="s-tag">Tasarım Süreci</div>
+  <div class="s-title">Fikirden <em>Mekâna</em></div>
+  <div class="process-grid">
+    <div class="process-card rv"><span>01</span><h3>Keşif &amp; Brif</h3><p>Arsa, kullanıcı beklentisi, bütçe ve yaşam senaryosu birlikte okunur. Projenin mimari omurgası bu aşamada netleşir.</p></div>
+    <div class="process-card rv d1"><span>02</span><h3>Konsept &amp; 3D Kütle</h3><p>Eskiz, diyagram, moodboard ve 3D hacim çalışmalarıyla mekânın karakteri görünür hâle getirilir.</p></div>
+    <div class="process-card rv d2"><span>03</span><h3>Uygulama Projesi</h3><p>Plan, kesit, cephe, malzeme, aydınlatma ve detay çözümleri üretime hazır teknik dile çevrilir.</p></div>
+    <div class="process-card rv d3"><span>04</span><h3>Şantiye &amp; Teslim</h3><p>Uygulama süreci tasarıma sadık kalacak şekilde takip edilir; son dokunuşlarla mekân kullanıma hazırlanır.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="rv">
+      <div class="s-tag">İletişim</div>
+      <div class="s-title">Bir Proje<br><em>Başlatalım</em></div>
+      <a href="mailto:merhaba@arsenkaya.com" class="contact-email">merhaba@arsenkaya.com</a>
+      <ul class="ci-list">
+        <li class="ci"><span class="ci-l">Telefon</span><span class="ci-v">+90 212 555 0101</span></li>
+        <li class="ci"><span class="ci-l">Adres</span><span class="ci-v">Karaköy, İstanbul</span></li>
+        <li class="ci"><span class="ci-l">Çalışma Saatleri</span><span class="ci-v">Pzt–Cum, 09:00–18:00</span></li>
+        <li class="ci"><span class="ci-l">Instagram</span><span class="ci-v">@arsenkaya_arch</span></li>
+      </ul>
+    </div>
+    <div class="cf rv d1">
+      <div class="ff"><input type="text" placeholder=" " id="f-name"><label for="f-name">Adınız Soyadınız</label></div>
+      <div class="ff"><input type="email" placeholder=" " id="f-email"><label for="f-email">E-posta Adresiniz</label></div>
+      <div class="ff"><input type="text" placeholder=" " id="f-proj"><label for="f-proj">Proje Türü</label></div>
+      <div class="ff"><textarea placeholder=" " id="f-msg"></textarea><label for="f-msg">Projenizi Kısaca Anlatın</label></div>
+      <div class="form-note" id="form-note" role="status" aria-live="polite"></div>
+      <button class="sbtn" type="button" id="send-btn"><span>Mesaj Gönder →</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-logo">ARSEN<em>.</em>KAYA</div>
+  <div class="ft-copy">© 2024 Arsen Kaya Mimarlık. Tüm hakları saklıdır.</div>
+  <div class="ft-soc">
+    <a href="#">Instagram</a>
+    <a href="#">Behance</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">Archello</a>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button class="lb-close" onclick="closeLB()"><span>Kapat</span><div class="lb-x"></div></button>
+  <div class="lb-side">
+    <div class="lb-num" id="lb-num">01 / 06</div>
+    <div class="lb-type" id="lb-type"></div>
+    <div class="lb-name" id="lb-name"></div>
+    <div class="lb-deets" id="lb-deets"></div>
+    <div class="lb-desc" id="lb-desc"></div>
+  </div>
+  <div class="lb-gallery">
+    <div class="lb-imgs" id="lb-imgs"></div>
+    <div class="lb-dots" id="lb-dots"></div>
+    <div class="lb-nav">
+      <button class="lb-nbtn" onclick="prevView()"><svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg></button>
+      <button class="lb-nbtn" onclick="nextView()"><svg viewBox="0 0 24 24"><polyline points="9,6 15,12 9,18"/></svg></button>
+    </div>
+    <div class="lb-pnav">
+      <button class="lb-pnbtn" onclick="prevProj()"><svg viewBox="0 0 24 24"><polyline points="15,18 9,12 15,6"/></svg></button>
+      <button class="lb-pnbtn" onclick="nextProj()"><svg viewBox="0 0 24 24"><polyline points="9,6 15,12 9,18"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ─── DATA ─────────────────────────────────────────────────
+const P=[
+{type:'Konut · İstanbul',name:'Lumen <em>Kulesi</em>',yr:'2024',loc:'Levent, İstanbul',area:'45.000 m²',status:'Tamamlandı',client:'Özel',
+desc:'Boğaz manzarasına hâkim bu rezidans kulesi, cam ve çelik örgüsüyle günün her saatinde farklı bir ışık oyunu sunar. 42 katlı yapı, bölgenin en ikonik siluetlerinden biri haline gelmiştir. Her daire kişiselleştirilmiş iç mekân tasarımıyla donatılmıştır.',
+photos:[
+'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1800&q=85'
+]},
+{type:'Villa · Bodrum',name:'Kıyalı',yr:'2023',loc:'Yalıkavak, Bodrum',area:'620 m²',status:'Tamamlandı',client:'Özel',
+desc:'Ege\'nin berrak sularına uzanan bu yalı evi, doğal taş ve ahşap kullanımıyla çevreyle uyum içindedir. Denize sıfır konumuyla özel iskelesi ve havuzuyla lüks yaşamı doğayla harmanlayan bir tasarıma sahiptir.',
+photos:[
+'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=85'
+]},
+{type:'Kültürel · Ankara',name:'Sahne <em>Merkezi</em>',yr:'2023',loc:'Beştepe, Ankara',area:'8.500 m²',status:'Tamamlandı',client:'Kültür Bakanlığı',
+desc:'Organik formlu bu kültür merkezi, şehrin kalbinde bir sanat adası gibi yükseliyor. Çok işlevli sahnesi, sergi alanları ve kütüphanesiyle yaratıcı endüstrilerin buluşma noktasına dönüştürülmüştür.',
+photos:[
+'https://images.unsplash.com/photo-1496307653780-42ee777d4833?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1800&q=85'
+]},
+{type:'Minimal Villa · Çeşme',name:'<em>Çerçeve</em> Ev',yr:'2022',loc:'Alaçatı, Çeşme',area:'450 m²',status:'Tamamlandı',client:'Özel',
+desc:'Manzarayı bir tabloya dönüştüren geniş çerçeveli açıklıklar, minimal bir Ege estetiğiyle buluşuyor. Doğal taş yüzeyler ve beton ile ahşabın dengeli kullanımı güçlü bir mimari dil oluşturuyor.',
+photos:[
+'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=85'
+]},
+{type:'Müze · İstanbul',name:'Eserlik <em>Müzesi</em>',yr:'2022',loc:'Tophane, İstanbul',area:'12.000 m²',status:'Tamamlandı',client:'İBB',
+desc:'Tophane\'nin tarihi dokusuna saygılı, çağdaş bir müze yapısı. Tarihin katmanlarıyla diyalog içinde tasarlanan yapı, Osmanlı döneminden günümüze uzanan mimari mirası modern bir yorumla okur.',
+photos:[
+'https://images.unsplash.com/photo-1533158326339-7f3cf2404354?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1800&q=85'
+]},
+{type:'Peyzaj · İstanbul',name:'Yeşil <em>Ada</em>',yr:'2021',loc:'Sarıyer, İstanbul',area:'3.2 Hektar',status:'Tamamlandı',client:'Sarıyer Belediyesi',
+desc:'Kent içinde solunum alanı. Sarıyer\'de doğayla bütünleşen çok katmanlı bir peyzaj tasarımı. Biyoçeşitlilik koridorları, su ögeleri ve amfi tiyatrosuyla kamusal yaşamı canlandıran bir yeşil ada.',
+photos:[
+'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1800&q=85',
+'https://images.unsplash.com/photo-1473773508845-188df298d2d1?auto=format&fit=crop&w=1800&q=85'
+]}
+];
+
+// ─── CURSOR ───────────────────────────────────────────────
+const dot=document.getElementById('cur-dot'),ring=document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.pc,.lb-nbtn,.lb-pnbtn,.lb-close').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.classList.add('hovered');dot.classList.add('hovered')});
+  el.addEventListener('mouseleave',()=>{ring.classList.remove('hovered');dot.classList.remove('hovered')})
+});
+
+// ─── PRELOADER ────────────────────────────────────────────
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    const pl=document.getElementById('preloader');
+    pl.classList.add('hidden');
+    setTimeout(()=>{pl.style.display='none';heroAnim()},800);
+  },2600);
+});
+
+// ─── HERO ANIM ────────────────────────────────────────────
+function heroAnim(){
+  if(typeof gsap==='undefined')return;
+  gsap.from('#hero-hl',{y:70,opacity:0,duration:1.3,ease:'power4.out'});
+  gsap.from('.hero-desc',{x:40,opacity:0,duration:1,delay:.3,ease:'power3.out'});
+  gsap.from('.hero-scroll',{opacity:0,duration:1,delay:.6,ease:'power2.out'});
+  gsap.from('.hero-badge',{opacity:0,duration:1,delay:.8,ease:'power2.out'});
+}
+
+// ─── NAV SCROLL ───────────────────────────────────────────
+const nav=document.getElementById('mainnav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>80));
+
+// ─── REVEAL ───────────────────────────────────────────────
+const io=new IntersectionObserver(entries=>entries.forEach(e=>e.isIntersecting&&e.target.classList.add('vis')),{threshold:.13});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// ─── COUNTER ──────────────────────────────────────────────
+function runCount(el,tgt){
+  const dur=1800,start=performance.now();
+  const tick=now=>{
+    const p=Math.min((now-start)/dur,1);
+    el.textContent=Math.floor(p*tgt);
+    if(p<1)requestAnimationFrame(tick);
+    else el.textContent=tgt+(tgt<20?'':'+');
+  };
+  requestAnimationFrame(tick);
+}
+const cio=new IntersectionObserver(entries=>entries.forEach(e=>{
+  if(e.isIntersecting){runCount(e.target,+e.target.dataset.c);cio.unobserve(e.target)}
+}),{threshold:.5});
+document.querySelectorAll('[data-c]').forEach(el=>cio.observe(el));
+
+// ─── THREE.JS ─────────────────────────────────────────────
+(function initThree(){
+  if(typeof THREE==='undefined')return;
+  const canvas=document.getElementById('three-canvas');
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(55,innerWidth/innerHeight,.1,1000);
+  camera.position.z=36;
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});
+  renderer.setSize(innerWidth,innerHeight);
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  renderer.setClearColor(0,0);
+
+  // Particles
+  const N=3000,pos=new Float32Array(N*3);
+  for(let i=0;i<N*3;i++)pos[i]=(Math.random()-.5)*130;
+  const pg=new THREE.BufferGeometry();
+  pg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const pm=new THREE.PointsMaterial({color:0xC4953A,size:.055,transparent:true,opacity:.45});
+  scene.add(new THREE.Points(pg,pm));
+
+  // Wireframe meshes
+  function wf(geo,col,op){
+    const m=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:col,wireframe:true,transparent:true,opacity:op}));
+    scene.add(m);return m;
+  }
+  const ico=wf(new THREE.IcosahedronGeometry(7,1),0xC4953A,.1);
+  const ico2=wf(new THREE.IcosahedronGeometry(4.5,0),0xD4AE5A,.18);
+  const oct=wf(new THREE.OctahedronGeometry(3.2,0),0xC4953A,.09);oct.position.set(16,9,-8);
+  const tet=wf(new THREE.TetrahedronGeometry(2.8,0),0xD4AE5A,.11);tet.position.set(-14,-7,-4);
+  const cub=wf(new THREE.BoxGeometry(4,4,4),0xC4953A,.07);cub.position.set(-18,10,-12);
+
+  let tmx=0,tmy=0;
+  document.addEventListener('mousemove',e=>{tmx=(e.clientX/innerWidth-.5)*2;tmy=(e.clientY/innerHeight-.5)*2});
+
+  const clk=new THREE.Clock();
+  (function loop(){
+    requestAnimationFrame(loop);
+    const t=clk.getElapsedTime();
+    ico.rotation.x=t*.07;ico.rotation.y=t*.11;
+    ico2.rotation.x=-t*.09;ico2.rotation.y=-t*.06;
+    oct.rotation.x=t*.13;oct.rotation.z=t*.09;
+    tet.rotation.y=t*.11;tet.rotation.x=t*.07;
+    cub.rotation.x=t*.05;cub.rotation.y=t*.08;cub.rotation.z=t*.06;
+    camera.position.x+=(tmx*3.5-camera.position.x)*.04;
+    camera.position.y+=(-tmy*3.5-camera.position.y)*.04;
+    camera.lookAt(scene.position);
+    renderer.render(scene,camera);
+  })();
+
+  window.addEventListener('resize',()=>{
+    camera.aspect=innerWidth/innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth,innerHeight);
+  });
+})();
+
+
+// ─── PROJECT VISUALS ─────────────────────────────────────
+function projectVisual(i,view=0,mode='card'){
+  const p=P[i]||{};
+  const photos=p.photos||[];
+  const src=photos[view]||photos[0]||'';
+  const klass=mode==='card'?'project-photo':'lb-photo';
+  const label=(p.name||'Proje').replace(/<[^>]*>/g,'');
+  return `<div class="${klass}">
+    <img src="${src}" alt="${label} mimari proje görseli" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+    <div class="photo-fallback" style="display:none">${label}<br>Proje görseli yüklenemedi</div>
+  </div>`;
+}
+
+function hydrateProjectCards(){
+  document.querySelectorAll('.pc .pi').forEach((pi,i)=>{
+    pi.querySelectorAll('.project-photo,.project-visual').forEach(el=>el.remove());
+    pi.insertAdjacentHTML('afterbegin',projectVisual(i,0,'card'));
+  });
+}
+hydrateProjectCards();
+
+// ─── LIGHTBOX ─────────────────────────────────────────────
+let curP=0,curV=0;
+function openLB(i){curP=i;curV=0;renderLB();document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden'}
+function closeLB(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+function nextProj(){curP=(curP+1)%P.length;curV=0;renderLB()}
+function prevProj(){curP=(curP-1+P.length)%P.length;curV=0;renderLB()}
+function nextView(){curV=(curV+1)%(P[curP].photos||[]).length;updateViews()}
+function prevView(){curV=(curV-1+(P[curP].photos||[]).length)%(P[curP].photos||[]).length;updateViews()}
+
+function renderLB(){
+  const p=P[curP];
+  document.getElementById('lb-num').textContent=String(curP+1).padStart(2,'0')+' / '+String(P.length).padStart(2,'0');
+  document.getElementById('lb-type').textContent=p.type;
+  document.getElementById('lb-name').innerHTML=p.name;
+  document.getElementById('lb-desc').textContent=p.desc;
+  document.getElementById('lb-deets').innerHTML=`
+    <div><div class="lb-dl">Yıl</div><div class="lb-dv">${p.yr}</div></div>
+    <div><div class="lb-dl">Konum</div><div class="lb-dv">${p.loc}</div></div>
+    <div><div class="lb-dl">Alan</div><div class="lb-dv">${p.area}</div></div>
+    <div><div class="lb-dl">Durum</div><div class="lb-dv">${p.status}</div></div>
+  `;
+  const imgs=document.getElementById('lb-imgs');
+  imgs.innerHTML='';
+  (p.photos||[]).forEach((src,i)=>{
+    const d=document.createElement('div');
+    d.className='lb-img'+(i===curV?' show':'');
+    d.style.position='absolute';
+    d.style.inset='0';
+    d.innerHTML=projectVisual(curP,i,'lightbox');
+    imgs.appendChild(d);
+  });
+  const dots=document.getElementById('lb-dots');
+  dots.innerHTML='';
+  (p.photos||[]).forEach((_,i)=>{
+    const d=document.createElement('div');
+    d.className='lb-dot'+(i===curV?' on':'');
+    d.onclick=()=>{curV=i;updateViews()};
+    dots.appendChild(d);
+  });
+}
+
+function updateViews(){
+  document.querySelectorAll('.lb-img').forEach((el,i)=>el.classList.toggle('show',i===curV));
+  document.querySelectorAll('.lb-dot').forEach((el,i)=>el.classList.toggle('on',i===curV));
+}
+
+
+
+// ─── FILTERS, MOBILE NAV & FORM UX ───────────────────────
+const navToggle=document.getElementById('nav-toggle');
+const navLinks=document.getElementById('nav-links');
+if(navToggle&&navLinks){
+  navToggle.addEventListener('click',()=>{
+    const open=navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open',open);
+    navToggle.setAttribute('aria-expanded',String(open));
+  });
+  navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    navLinks.classList.remove('open');navToggle.classList.remove('open');navToggle.setAttribute('aria-expanded','false');
+  }));
+}
+
+document.querySelectorAll('.filter').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('.pc').forEach(card=>{
+      const cats=(card.dataset.cat||'').split(' ');
+      const show=f==='all'||cats.includes(f);
+      card.classList.toggle('hide',!show);
+    });
+  });
+});
+
+const sendBtn=document.getElementById('send-btn');
+if(sendBtn){
+  sendBtn.addEventListener('click',()=>{
+    const name=document.getElementById('f-name').value.trim();
+    const email=document.getElementById('f-email').value.trim();
+    const proj=document.getElementById('f-proj').value.trim();
+    const msg=document.getElementById('f-msg').value.trim();
+    const note=document.getElementById('form-note');
+    if(!name||!email||!msg){note.textContent='Lütfen ad, e-posta ve mesaj alanlarını doldurun.';return}
+    const subject=encodeURIComponent('Yeni proje talebi'+(proj?' · '+proj:''));
+    const body=encodeURIComponent(`Ad Soyad: ${name}\nE-posta: ${email}\nProje Türü: ${proj||'-'}\n\nMesaj:\n${msg}`);
+    note.textContent='E-posta uygulamanız açılıyor.';
+    window.location.href=`mailto:merhaba@arsenkaya.com?subject=${subject}&body=${body}`;
+  });
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeLB();
+  if(e.key==='ArrowRight')nextView();
+  if(e.key==='ArrowLeft')prevView();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mimarlik Sablonlari - Zetta Studio</title>
+<meta name="description" content="Mimarlar, ic mimarlar ve tasarim studyolari icin hazir web sitesi sablonlari. Portfoy, galeri, proje detaylari ve iletisim akisi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#f7f4ec; --bg-elev:#fff; --bg-elev-2:#efe8d6; --border:#ddd4be; --border-soft:#ece5d2; --text:#1d1a14; --text-mute:#6c6656; --accent:#c25e2e; --on-accent:#fdf9f0; --serif:"Instrument Serif","Times New Roman",serif; --sans:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); line-height: 1.5; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  nav.top { position: fixed; inset: 0 0 auto; z-index: 10; padding: 18px 32px; background: rgba(247,244,236,.84); border-bottom: 1px solid var(--border-soft); backdrop-filter: blur(20px); }
+  nav.top .inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .logo { font-family: var(--serif); font-size: 26px; font-style: italic; letter-spacing: -.02em; white-space: nowrap; }
+  .logo span { color: var(--accent); }
+  .nav-cta { display: inline-flex; align-items: center; padding: 10px 18px; border-radius: 999px; background: var(--accent); color: var(--on-accent); font-size: 13px; font-weight: 700; }
+  .hero { position: relative; padding: 140px 0 76px; text-align: center; overflow: hidden; }
+  .hero::before,.hero::after { content:""; position:absolute; width:420px; height:420px; border-radius:50%; filter:blur(70px); pointer-events:none; }
+  .hero::before { left:-130px; bottom:-160px; background:rgba(107,141,79,.12); }
+  .hero::after { right:-120px; top:60px; background:rgba(194,94,46,.15); }
+  .hero-title { position: relative; font-family: var(--serif); font-size: clamp(48px,8vw,96px); font-weight:400; line-height:1; letter-spacing:-.03em; margin-bottom:24px; }
+  .hero-title em { color: var(--accent); }
+  .hero-sub { position: relative; max-width: 650px; margin: 0 auto; color: var(--text-mute); font-size: 18px; line-height: 1.7; }
+  .templates { padding: 30px 0 120px; }
+  .template-grid { display:grid; grid-template-columns:repeat(12,1fr); gap:24px; }
+  .template-card { grid-column:span 6; display:flex; flex-direction:column; overflow:hidden; border:1px solid var(--border-soft); border-radius:16px; background:var(--bg-elev); transition:transform .35s ease,border-color .25s ease,box-shadow .35s ease; box-shadow:0 1px 0 rgba(28,24,20,.04); }
+  .template-card:hover { transform:translateY(-8px); border-color:var(--accent); box-shadow:0 30px 60px -22px rgba(110,82,46,.28); }
+  .template-preview { position:relative; aspect-ratio:16/10; overflow:hidden; background:#15120e; }
+  .template-preview::after { content:"Sablonu ac"; position:absolute; right:16px; bottom:16px; padding:10px 16px; border-radius:999px; background:var(--accent); color:var(--on-accent); font-size:12px; font-weight:700; opacity:0; transform:translateY(10px); transition:all .25s ease; }
+  .template-card:hover .template-preview::after { opacity:1; transform:translateY(0); }
+  .template-preview svg { display:block; width:100%; height:100%; }
+  .template-info { display:flex; align-items:center; justify-content:space-between; gap:18px; padding:24px 28px; }
+  .template-info h3 { font-family:var(--serif); font-size:28px; font-weight:400; letter-spacing:-.01em; }
+  .template-info p { margin-top:4px; color:var(--text-mute); font-size:13px; }
+  .template-tag { color:var(--accent); font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; white-space:nowrap; }
+  @media (max-width:900px){ .template-card{grid-column:span 12;} }
+  @media (max-width:640px){ nav.top{padding:16px 22px;} .wrap{padding:0 22px;} .nav-cta{display:none;} .hero{padding-top:112px;} .template-info{align-items:flex-start; flex-direction:column;} }
+</style>
+</head>
+<body>
+<nav class="top"><div class="inner"><a href="index.html" class="logo">zetta studio<span>.</span></a><a href="index.html#iletisim" class="nav-cta">Teklif Al</a></div></nav>
+<header class="hero"><div class="wrap"><h1 class="hero-title">Mimarlik<br><em>Sablonlari</em></h1><p class="hero-sub">Proje portfoyu, tam ekran galeri, hizmet akisi ve guven veren iletisim bolumleriyle mimarlik studyolari icin iki farkli premium tasarim.</p></div></header>
+<main class="templates"><div class="wrap"><div class="template-grid">
+  <a href="sablonlar/mimarlık/architect-portfolio-duzeltilmis-gorseller.html" class="template-card" target="_blank">
+    <div class="template-preview"><svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="archA" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#09090a"/><stop offset="55%" stop-color="#171717"/><stop offset="100%" stop-color="#2b2113"/></linearGradient></defs><rect width="700" height="440" fill="url(#archA)"/><rect x="80" y="88" width="220" height="248" fill="none" stroke="#c4953a" stroke-width="2" opacity=".55"/><rect x="300" y="132" width="260" height="204" fill="none" stroke="#ede8de" stroke-width="1.5" opacity=".28"/><line x1="115" y1="336" x2="610" y2="336" stroke="#c4953a" opacity=".5"/><text x="82" y="74" fill="#ede8de" font-family="serif" font-size="34" letter-spacing="5">ARSEN KAYA</text><text x="84" y="370" fill="#c4953a" font-family="monospace" font-size="13" letter-spacing="4">3D / PORTFOLIO / GALLERY</text></svg></div>
+    <div class="template-info"><div><h3>Arsen Kaya Portfolio</h3><p>Three.js destekli, galeri ve portfoy odakli mimarlik sitesi</p></div><span class="template-tag">HTML</span></div>
+  </a>
+  <a href="sablonlar/mimarlık/mimar_portfoy_3_d_site.html" class="template-card" target="_blank">
+    <div class="template-preview"><svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="archB" x1="0" x2="1" y1="0" y2="1"><stop offset="0%" stop-color="#11100d"/><stop offset="58%" stop-color="#2d261e"/><stop offset="100%" stop-color="#f2ece2"/></linearGradient></defs><rect width="700" height="440" fill="url(#archB)"/><rect x="44" y="44" width="612" height="352" rx="28" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)"/><circle cx="124" cy="110" r="28" fill="#f2ece2" opacity=".9"/><rect x="82" y="180" width="250" height="26" rx="13" fill="#f2ece2" opacity=".72"/><rect x="82" y="222" width="360" height="16" rx="8" fill="#f2ece2" opacity=".34"/><rect x="82" y="254" width="310" height="16" rx="8" fill="#f2ece2" opacity=".28"/><rect x="470" y="112" width="126" height="204" rx="24" fill="#f2ece2" opacity=".3"/><text x="82" y="348" fill="#f2ece2" font-family="monospace" font-size="13" letter-spacing="4">REACT / TAILWIND</text></svg></div>
+    <div class="template-info"><div><h3>Maison Arka React</h3><p>JSX dosyasindan calisan modern React mimarlik portfoyu</p></div><span class="template-tag">React</span></div>
+  </a>
+</div></div></main>
+</body>
+</html>
