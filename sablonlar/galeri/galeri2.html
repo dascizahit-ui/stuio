@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DriveLux Motors | Premium Galeri V2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f1ea;
+      --paper: #fffaf1;
+      --dark: #111318;
+      --dark-2: #1a1f2b;
+      --muted: #6e7482;
+      --line: rgba(17, 19, 24, 0.12);
+      --brand: #b88746;
+      --brand-dark: #7a552b;
+      --cream: #fff7e8;
+      --success: #16875d;
+      --danger: #d94e4e;
+      --shadow: 0 24px 70px rgba(28, 24, 18, 0.16);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--dark);
+      background:
+        radial-gradient(circle at 10% -10%, rgba(184, 135, 70, 0.22), transparent 32rem),
+        radial-gradient(circle at 95% 4%, rgba(17, 19, 24, 0.08), transparent 30rem),
+        var(--bg);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button, input, select, textarea { font: inherit; }
+    .container { width: min(1200px, calc(100% - 36px)); margin-inline: auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(244, 241, 234, 0.78);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 950;
+      letter-spacing: -0.045em;
+      font-size: 1.22rem;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      background: var(--dark);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 14px 30px rgba(17, 19, 24, 0.2);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: #505865;
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a:hover { color: var(--dark); }
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 13px 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 850;
+      font-size: 0.92rem;
+      background: #fff;
+      color: var(--dark);
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 26px rgba(17, 19, 24, 0.06);
+      transition: 0.22s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 36px rgba(17, 19, 24, 0.12); }
+    .btn-dark { background: var(--dark); color: #fff; border-color: var(--dark); }
+    .btn-gold { background: linear-gradient(135deg, #d1a45e, #8a5c2e); color: #fff; border-color: transparent; }
+    .btn-ghost { background: rgba(255, 255, 255, 0.55); }
+    .menu-btn { display: none; width: 46px; height: 46px; border-radius: 15px; border: 1px solid var(--line); background: #fff; cursor: pointer; font-size: 1.3rem; }
+    .mobile-menu { display: none; padding: 0 18px 18px; }
+    .mobile-menu.open { display: block; }
+    .mobile-menu a { display: block; padding: 15px 0; border-bottom: 1px solid var(--line); color: var(--muted); font-weight: 850; }
+
+    .hero { padding: 64px 0 36px; }
+    .hero-shell {
+      position: relative;
+      border-radius: 44px;
+      overflow: hidden;
+      min-height: 660px;
+      background:
+        linear-gradient(90deg, rgba(17, 19, 24, 0.92), rgba(17, 19, 24, 0.52), rgba(17, 19, 24, 0.12)),
+        url("https://i.ytimg.com/vi/y_fYitUNb7s/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBRIyfMuO_jmKQLancP4pxaV9uNBA") center/cover;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(17, 19, 24, 0.08);
+      display: grid;
+      align-items: end;
+    }
+
+    .hero-content { padding: clamp(26px, 5vw, 58px); max-width: 760px; color: #fff; position: relative; z-index: 2; }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(14px);
+      color: #fff2d8;
+      font-size: 0.84rem;
+      font-weight: 850;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 7vw, 6.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.085em;
+      margin-bottom: 24px;
+    }
+
+    .hero-content p { color: rgba(255, 255, 255, 0.78); line-height: 1.75; font-size: clamp(1rem, 1.5vw, 1.15rem); max-width: 670px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+    .hero-info {
+      position: absolute;
+      right: 28px;
+      bottom: 28px;
+      width: min(420px, calc(100% - 56px));
+      z-index: 3;
+      padding: 20px;
+      border-radius: 28px;
+      background: rgba(255, 250, 241, 0.9);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+      color: var(--dark);
+    }
+
+    .hero-info-top { display: flex; justify-content: space-between; gap: 14px; align-items: start; margin-bottom: 16px; }
+    .hero-info h3 { font-size: 1.35rem; letter-spacing: -0.04em; line-height: 1.15; }
+    .hero-price { font-size: 1.3rem; font-weight: 950; color: var(--brand-dark); white-space: nowrap; }
+    .hero-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+    .mini-pill { padding: 8px 10px; border-radius: 999px; background: rgba(17, 19, 24, 0.07); font-size: 0.78rem; font-weight: 850; color: #313844; }
+
+    .quick-search {
+      margin-top: -42px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .search-card {
+      padding: 18px;
+      border-radius: 30px;
+      background: rgba(255, 250, 241, 0.88);
+      border: 1px solid rgba(17, 19, 24, 0.1);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 1.45fr repeat(4, 1fr) auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .field label {
+      display: block;
+      margin: 0 0 8px 4px;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .input, .select, .textarea {
+      width: 100%;
+      height: 52px;
+      border-radius: 18px;
+      border: 1px solid rgba(17, 19, 24, 0.12);
+      background: #fff;
+      color: var(--dark);
+      padding: 0 15px;
+      outline: none;
+      font-weight: 750;
+    }
+
+    .textarea { height: 118px; resize: vertical; padding-top: 14px; }
+    .input:focus, .select:focus, .textarea:focus { border-color: rgba(184, 135, 70, 0.7); box-shadow: 0 0 0 4px rgba(184, 135, 70, 0.13); }
+
+    .section { padding: 68px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 26px; }
+    .section-title h2 { font-size: clamp(2.05rem, 4vw, 4rem); line-height: 0.96; letter-spacing: -0.075em; margin-bottom: 12px; }
+    .section-title p { color: var(--muted); line-height: 1.7; max-width: 720px; }
+
+    .inventory-layout {
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 98px;
+      padding: 20px;
+      border-radius: 30px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 48px rgba(17, 19, 24, 0.08);
+    }
+
+    .side-panel h3 { font-size: 1.2rem; letter-spacing: -0.04em; margin-bottom: 12px; }
+    .side-panel p { color: var(--muted); line-height: 1.6; font-size: 0.92rem; margin-bottom: 18px; }
+    .range-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .check-row { display: grid; gap: 10px; margin-top: 18px; }
+    .check-row label { display: flex; align-items: center; gap: 10px; font-weight: 800; color: #353b46; }
+    .check-row input { accent-color: var(--brand); }
+
+    .inventory-top { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 16px; color: var(--muted); font-weight: 850; }
+    .view-tabs { display: flex; gap: 8px; }
+    .tab-btn { padding: 10px 13px; border-radius: 999px; border: 1px solid var(--line); background: #fff; font-weight: 850; cursor: pointer; color: #4d5562; }
+    .tab-btn.active { background: var(--dark); color: #fff; }
+
+    .cars-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .car-card {
+      border-radius: 30px;
+      overflow: hidden;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 50px rgba(17, 19, 24, 0.09);
+      transition: 0.25s ease;
+    }
+    .car-card:hover { transform: translateY(-6px); box-shadow: 0 26px 70px rgba(17, 19, 24, 0.16); }
+    .car-media { height: 260px; position: relative; overflow: hidden; background: linear-gradient(135deg, #d8d0c2, #f7efe2); }
+    .car-media img { width: 100%; height: 100%; object-fit: cover; transition: 0.35s ease; }
+    .car-card:hover .car-media img { transform: scale(1.06); }
+    .car-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.48)); pointer-events: none; }
+    .image-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      color: #5d4122;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, #efe1ca, #fff8ea);
+      z-index: 1;
+    }
+    .label { position: absolute; top: 14px; left: 14px; z-index: 2; padding: 8px 11px; border-radius: 999px; background: rgba(255, 250, 241, 0.9); color: var(--dark); font-weight: 900; font-size: 0.78rem; backdrop-filter: blur(12px); }
+    .heart { position: absolute; top: 14px; right: 14px; z-index: 2; width: 42px; height: 42px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.28); background: rgba(17, 19, 24, 0.52); color: #fff; cursor: pointer; font-size: 1.1rem; backdrop-filter: blur(12px); }
+    .heart.active { color: #ffca67; }
+    .car-body { padding: 20px; }
+    .car-head { display: flex; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
+    .car-head h3 { font-size: 1.22rem; line-height: 1.2; letter-spacing: -0.04em; }
+    .car-head small { display: block; color: var(--muted); font-weight: 800; margin-top: 6px; }
+    .price { color: var(--brand-dark); font-size: 1.32rem; font-weight: 950; letter-spacing: -0.04em; text-align: right; white-space: nowrap; }
+    .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; margin: 16px 0; }
+    .spec { padding: 10px; border-radius: 16px; background: rgba(17, 19, 24, 0.055); color: #353b46; font-size: 0.82rem; font-weight: 850; }
+    .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    .empty { display: none; padding: 40px 22px; border-radius: 30px; border: 1px dashed rgba(17, 19, 24, 0.2); color: var(--muted); text-align: center; font-weight: 850; background: rgba(255,255,255,0.45); }
+
+    .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .service-card { padding: 22px; border-radius: 28px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 14px 42px rgba(17, 19, 24, 0.08); }
+    .service-icon { width: 50px; height: 50px; border-radius: 18px; display: grid; place-items: center; background: var(--dark); color: #fff; font-size: 1.35rem; margin-bottom: 20px; }
+    .service-card h3 { letter-spacing: -0.04em; margin-bottom: 10px; }
+    .service-card p { color: var(--muted); line-height: 1.65; font-size: 0.92rem; }
+
+    .detail-page {
+      display: none;
+      padding: 34px 0 74px;
+    }
+    .detail-page.active { display: block; }
+    .back-line { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .detail-shell {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .detail-gallery { display: grid; gap: 14px; }
+    .main-photo { height: 520px; border-radius: 34px; overflow: hidden; box-shadow: var(--shadow); background: linear-gradient(135deg, #d8d0c2, #f7efe2); position: relative; }
+    .main-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .thumb { height: 112px; border-radius: 20px; overflow: hidden; border: 3px solid transparent; cursor: pointer; background: #ddd; }
+    .thumb.active { border-color: var(--brand); }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    .detail-card {
+      position: sticky;
+      top: 98px;
+      padding: 26px;
+      border-radius: 34px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .detail-card h2 { font-size: clamp(2rem, 4vw, 3.4rem); line-height: 0.96; letter-spacing: -0.075em; margin-bottom: 10px; }
+    .detail-desc { color: var(--muted); line-height: 1.75; margin: 16px 0 22px; }
+    .detail-price { font-size: 2rem; font-weight: 950; color: var(--brand-dark); letter-spacing: -0.055em; margin: 12px 0; }
+    .detail-specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 18px 0 22px; }
+    .detail-spec { padding: 14px; border-radius: 18px; background: rgba(17, 19, 24, 0.055); }
+    .detail-spec small { display: block; color: var(--muted); font-weight: 850; margin-bottom: 5px; }
+    .detail-spec strong { display: block; color: var(--dark); font-size: 1rem; }
+    .detail-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .note-box { margin-top: 18px; padding: 16px; border-radius: 20px; background: rgba(184, 135, 70, 0.12); color: #5d4122; line-height: 1.55; font-weight: 750; }
+
+    .finance-shell {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+    .finance-card {
+      padding: 30px;
+      border-radius: 36px;
+      background: var(--dark);
+      color: #fff;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+    .finance-card::after { content: ""; position: absolute; width: 340px; height: 340px; border-radius: 50%; right: -110px; top: -110px; background: rgba(184, 135, 70, 0.28); }
+    .finance-card h2 { position: relative; z-index: 2; font-size: clamp(2rem, 4vw, 4rem); line-height: 0.98; letter-spacing: -0.075em; margin-bottom: 18px; }
+    .finance-card p { position: relative; z-index: 2; color: rgba(255,255,255,0.72); line-height: 1.75; }
+    .lead-form { padding: 26px; border-radius: 36px; background: var(--paper); border: 1px solid var(--line); box-shadow: 0 18px 50px rgba(17, 19, 24, 0.08); }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-grid .full { grid-column: 1 / -1; }
+
+    footer { padding: 42px 0; border-top: 1px solid var(--line); color: var(--muted); }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 100;
+      max-width: 340px;
+      padding: 15px 18px;
+      border-radius: 18px;
+      background: var(--dark);
+      color: #fff;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(14px);
+      transition: 0.25s ease;
+      font-weight: 850;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 1120px) {
+      .filters { grid-template-columns: repeat(3, 1fr); }
+      .filters .btn { grid-column: span 3; }
+      .inventory-layout { grid-template-columns: 1fr; }
+      .side-panel { position: static; }
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .detail-shell, .finance-shell { grid-template-columns: 1fr; }
+      .detail-card { position: static; }
+    }
+
+    @media (max-width: 820px) {
+      .container { width: min(100% - 24px, 1200px); }
+      .nav { height: 68px; }
+      .nav-links, .nav-actions { display: none; }
+      .menu-btn { display: grid; place-items: center; }
+      .hero { padding: 30px 0 22px; }
+      .hero-shell { min-height: 560px; border-radius: 30px; background-position: center; }
+      .hero-info { position: relative; right: auto; bottom: auto; width: auto; margin: 0 18px 18px; }
+      .quick-search { margin-top: 20px; }
+      .filters, .cars-grid, .service-grid, .form-grid { grid-template-columns: 1fr; }
+      .filters .btn, .form-grid .full { grid-column: auto; }
+      .section { padding: 48px 0; }
+      .section-head, .inventory-top { flex-direction: column; align-items: flex-start; }
+      .car-media { height: clamp(220px, 58vw, 280px); }
+      .car-head, .back-line { flex-direction: column; align-items: flex-start; }
+      .price { text-align: left; }
+      .main-photo { height: clamp(300px, 72vw, 390px); border-radius: 26px; }
+      .thumbs { grid-template-columns: repeat(2, 1fr); }
+      .detail-specs, .detail-actions, .card-actions { grid-template-columns: 1fr; }
+      .finance-card { min-height: auto; }
+      .hero-actions .btn, .detail-actions .btn, .card-actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#" data-page="home">
+        <span class="brand-mark">DL</span>
+        <span>DriveLux</span>
+      </a>
+      <nav class="nav-links" aria-label="Ana menü">
+        <a href="#stok" data-page="home">Stok</a>
+        <a href="#hizmetler" data-page="home">Hizmetler</a>
+        <a href="#finansman" data-page="home">Finansman</a>
+        <a href="#iletisim" data-page="home">İletişim</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-ghost" href="tel:+905551112233">☎ Hemen Ara</a>
+        <a class="btn btn-dark" href="#iletisim" data-page="home">Randevu Al</a>
+      </div>
+      <button class="menu-btn" id="menuBtn" aria-label="Menüyü aç">☰</button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#stok" data-page="home">Stok Kataloğu</a>
+      <a href="#hizmetler" data-page="home">Hizmetler</a>
+      <a href="#finansman" data-page="home">Finansman / Takas</a>
+      <a href="#iletisim" data-page="home">İletişim</a>
+    </div>
+  </header>
+
+  <main id="homePage">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-shell">
+          <div class="hero-content">
+            <div class="kicker">● Premium showroom deneyimi</div>
+            <h1>Aradığın aracı daha hızlı bul.</h1>
+            <p>DriveLux Motors, galericiler için modern stok yönetimi, araç detay sayfası, takas talebi ve finansman başvurusu olan yeni nesil araç satış arayüzüdür.</p>
+            <div class="hero-actions">
+              <a class="btn btn-gold" href="#stok">Stoktaki Araçlar</a>
+              <a class="btn" href="#finansman">Takas / Finansman</a>
+            </div>
+          </div>
+          <div class="hero-info">
+            <div class="hero-info-top">
+              <div>
+                <h3>Porsche Macan 2.0</h3>
+                <div style="color: var(--muted); font-weight: 800; margin-top: 6px;">2022 • SUV • Benzin</div>
+              </div>
+              <div class="hero-price">₺5.650.000</div>
+            </div>
+            <div class="hero-pills">
+              <span class="mini-pill">26.000 km</span>
+              <span class="mini-pill">Otomatik</span>
+              <span class="mini-pill">Sport Chrono</span>
+              <span class="mini-pill">Takas uygun</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-search">
+      <div class="container">
+        <div class="search-card">
+          <div class="filters">
+            <div class="field">
+              <label for="searchInput">Araç ara</label>
+              <input class="input" id="searchInput" type="search" placeholder="BMW, Mercedes, SUV, Hibrit...">
+            </div>
+            <div class="field">
+              <label for="brandFilter">Marka</label>
+              <select class="select" id="brandFilter"><option value="all">Tümü</option></select>
+            </div>
+            <div class="field">
+              <label for="bodyFilter">Kasa</label>
+              <select class="select" id="bodyFilter"><option value="all">Tümü</option><option>Sedan</option><option>SUV</option><option>Pick-up</option></select>
+            </div>
+            <div class="field">
+              <label for="fuelFilter">Yakıt</label>
+              <select class="select" id="fuelFilter"><option value="all">Tümü</option><option>Benzin</option><option>Dizel</option><option>Hibrit</option><option>Elektrik</option></select>
+            </div>
+            <div class="field">
+              <label for="sortFilter">Sırala</label>
+              <select class="select" id="sortFilter"><option value="newest">En yeni</option><option value="priceAsc">Fiyat düşük</option><option value="priceDesc">Fiyat yüksek</option><option value="kmAsc">KM düşük</option></select>
+            </div>
+            <button class="btn btn-dark" id="resetBtn">Sıfırla</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stok">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-title">
+            <h2>Seçilmiş stok</h2>
+            <p>Liste, detay sayfası ve teklif akışı birlikte çalışır. Müşteri karttan aracı inceler, detay sayfasına geçer, sonra takas veya finansman talebi bırakır.</p>
+          </div>
+          <a class="btn btn-dark" href="#iletisim">Satış danışmanı ara</a>
+        </div>
+
+        <div class="inventory-layout">
+          <aside class="side-panel">
+            <h3>Akıllı filtre</h3>
+            <p>Bütçe, yıl ve stok durumuna göre kataloğu daralt. Gerçek projede bu alan API veya panelden yönetilebilir.</p>
+            <div class="field">
+              <label for="maxPriceFilter">Maksimum fiyat</label>
+              <select class="select" id="maxPriceFilter">
+                <option value="999999999">Tümü</option>
+                <option value="1500000">₺1.500.000</option>
+                <option value="2500000">₺2.500.000</option>
+                <option value="4000000">₺4.000.000</option>
+                <option value="6000000">₺6.000.000</option>
+              </select>
+            </div>
+            <div class="range-row">
+              <div class="field">
+                <label for="minYear">Min yıl</label>
+                <select class="select" id="minYear"><option value="2018">2018+</option><option value="2020">2020+</option><option value="2022">2022+</option><option value="2024">2024</option></select>
+              </div>
+              <div class="field">
+                <label for="maxKm">Max KM</label>
+                <select class="select" id="maxKm"><option value="999999">Tümü</option><option value="10000">10.000</option><option value="30000">30.000</option><option value="50000">50.000</option></select>
+              </div>
+            </div>
+            <div class="check-row">
+              <label><input type="checkbox" id="tradeOnly"> Sadece takasa uygun</label>
+              <label><input type="checkbox" id="financeOnly"> Sadece finansmana uygun</label>
+            </div>
+          </aside>
+
+          <div>
+            <div class="inventory-top">
+              <span id="resultCount">0 araç listeleniyor</span>
+              <div class="view-tabs">
+                <button class="tab-btn active" type="button">Kart görünümü</button>
+                <button class="tab-btn" type="button">Detaylı stok</button>
+              </div>
+            </div>
+            <div class="cars-grid" id="carsGrid"></div>
+            <div class="empty" id="emptyState">Bu filtrelere uygun araç bulunamadı. Filtreleri biraz genişletmeyi deneyin.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="hizmetler">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-title">
+            <h2>Bu pakette neler var?</h2>
+            <p>Önceki tasarımdan farklı olarak bu versiyon daha kurumsal, açık renkli ve detay sayfası odaklı hazırlandı.</p>
+          </div>
+        </div>
+        <div class="service-grid">
+          <article class="service-card"><div class="service-icon">🔎</div><h3>Gelişmiş stok</h3><p>Marka, kasa, yakıt, yıl, kilometre ve fiyata göre hızlı filtreleme.</p></article>
+          <article class="service-card"><div class="service-icon">🖼️</div><h3>Detay sayfası</h3><p>Her araç için büyük fotoğraf, küçük galeri, teknik bilgiler ve açıklama.</p></article>
+          <article class="service-card"><div class="service-icon">💳</div><h3>Finansman akışı</h3><p>Kredi, peşinat ve vade talebi için form alanı ve çağrı butonları.</p></article>
+          <article class="service-card"><div class="service-icon">🔁</div><h3>Takas teklifi</h3><p>Müşteri mevcut aracını takasa vermek için kolayca form bırakabilir.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="finansman">
+      <div class="container">
+        <div class="finance-shell">
+          <div class="finance-card">
+            <div>
+              <div class="kicker">● Takas ve kredi desteği</div>
+              <h2>Satışa giden yolu kısalt.</h2>
+              <p>Galerinizde müşterinin en çok sorduğu iki konu: “Aracımı takasa alır mısınız?” ve “Kredi çıkar mı?”. Bu bölüm doğrudan bu iki talebi toplar.</p>
+            </div>
+            <div class="hero-actions">
+              <a class="btn btn-gold" href="tel:+905551112233">Hemen ara</a>
+              <a class="btn" href="https://wa.me/905551112233" target="_blank" rel="noreferrer">WhatsApp</a>
+            </div>
+          </div>
+          <form class="lead-form" id="leadForm">
+            <div class="form-grid">
+              <input class="input" type="text" name="name" placeholder="Ad Soyad" required>
+              <input class="input" type="tel" name="phone" placeholder="Telefon" required>
+              <select class="select" name="type" required>
+                <option value="">Talep türü</option>
+                <option>Satın alma</option>
+                <option>Finansman</option>
+                <option>Takas</option>
+                <option>Test sürüşü</option>
+              </select>
+              <input class="input" type="text" name="vehicle" placeholder="İlgilendiğiniz araç">
+              <textarea class="textarea full" name="message" placeholder="Mesajınız / mevcut aracınızın bilgileri"></textarea>
+              <button class="btn btn-dark full" type="submit">Talep Gönder</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="detail-page" id="detailPage">
+    <div class="container">
+      <div class="back-line">
+        <button class="btn" id="backHome">← Stok kataloğuna dön</button>
+        <a class="btn btn-dark" href="tel:+905551112233">Satış danışmanı ara</a>
+      </div>
+
+      <div class="detail-shell">
+        <div class="detail-gallery">
+          <div class="main-photo">
+            <img id="detailMainImage" src="" alt="Araç detay görseli">
+            <div class="image-fallback" id="detailFallback">Araç görseli yüklenemedi</div>
+          </div>
+          <div class="thumbs" id="detailThumbs"></div>
+        </div>
+
+        <aside class="detail-card">
+          <div class="kicker" style="background: rgba(184,135,70,.13); border-color: rgba(184,135,70,.22); color: var(--brand-dark); margin-bottom: 16px;">● Araç detay sayfası</div>
+          <h2 id="detailTitle">Araç adı</h2>
+          <div id="detailSubtitle" style="color: var(--muted); font-weight: 850;"></div>
+          <div class="detail-price" id="detailPrice"></div>
+          <p class="detail-desc" id="detailDesc"></p>
+          <div class="detail-specs" id="detailSpecs"></div>
+          <div class="detail-actions">
+            <a class="btn btn-gold" href="#finansman" data-page="home">Finansman Al</a>
+            <a class="btn btn-dark" href="https://wa.me/905551112233" target="_blank" rel="noreferrer">WhatsApp</a>
+          </div>
+          <div class="note-box">Not: Bu demo sürümünde araç fotoğrafları dış bağlantılarla eşleştirildi. Kendi çekimlerin olduğunda aynı alanlara yerel images dosyalarını bağlayabilirsin.</div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-row">
+      <a class="brand" href="#" data-page="home"><span class="brand-mark">DL</span><span>DriveLux</span></a>
+      <p>© 2026 DriveLux Motors. Premium galeri web sitesi V2.</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">Talebiniz alındı. Satış danışmanı sizi arayacak.</div>
+
+  <script>
+    const imageSets = {
+      bmw: [
+        "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=85"
+      ],
+      mercedes: [
+        "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=85"
+      ],
+      audi: [
+        "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=85"
+      ],
+      tesla: [
+        "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85"
+      ],
+      volkswagen: [
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Volkswagen_Tiguan_R_1X7A5802.jpg",
+        "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=85"
+      ],
+      toyota: [
+        "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85"
+      ],
+      porsche: [
+        "https://images.unsplash.com/photo-1611859266238-4b98091d9d9b?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=1200&q=85"
+      ],
+      renault: [
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Renault%20Austral%20facelift%20Wit%20Bochane.jpg",
+        "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=85"
+      ],
+      ford: [
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ford%20Ranger%20%28T6%2C%20P703%29%20Wildtrak%20IMG%207320.jpg",
+        "https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1606220838315-056192d5e927?auto=format&fit=crop&w=1200&q=85"
+      ]
+    };
+
+    const cars = [
+      {
+        id: 1,
+        brand: "BMW",
+        model: "BMW 520i M Sport",
+        year: 2024,
+        price: 3890000,
+        km: 18000,
+        fuel: "Benzin",
+        gear: "Otomatik",
+        body: "Sedan",
+        tag: "Premium Sedan",
+        trade: true,
+        finance: true,
+        image: imageSets.bmw[0],
+        gallery: imageSets.bmw,
+        desc: "M Sport paket, vakum kapı, hayalet ekran, adaptif hız sabitleyici ve yetkili servis bakımlı premium sedan. Kurumsal kullanım ve aile kullanımı için güçlü bir seçenek."
+      },
+      {
+        id: 2,
+        brand: "Mercedes",
+        model: "Mercedes-Benz E 220d AMG",
+        year: 2024,
+        price: 4250000,
+        km: 12000,
+        fuel: "Dizel",
+        gear: "Otomatik",
+        body: "Sedan",
+        tag: "Yeni Geldi",
+        trade: true,
+        finance: true,
+        image: imageSets.mercedes[0],
+        gallery: imageSets.mercedes,
+        desc: "AMG paket, cam tavan, premium iç mekan, masaj koltuk ve yüksek konfor beklentisi olan müşteriler için öne çıkan model."
+      },
+      {
+        id: 3,
+        brand: "Audi",
+        model: "Audi Q5 45 TFSI Quattro",
+        year: 2023,
+        price: 3325000,
+        km: 29000,
+        fuel: "Benzin",
+        gear: "Otomatik",
+        body: "SUV",
+        tag: "Quattro SUV",
+        trade: true,
+        finance: true,
+        image: imageSets.audi[0],
+        gallery: imageSets.audi,
+        desc: "Quattro çekiş sistemi, yüksek oturma pozisyonu, geniş bagaj ve premium SUV konforu arayanlar için dengeli bir seçenek."
+      },
+      {
+        id: 4,
+        brand: "Tesla",
+        model: "Tesla Model Y Long Range",
+        year: 2024,
+        price: 2790000,
+        km: 9000,
+        fuel: "Elektrik",
+        gear: "Otomatik",
+        body: "SUV",
+        tag: "Elektrik",
+        trade: true,
+        finance: true,
+        image: imageSets.tesla[0],
+        gallery: imageSets.tesla,
+        desc: "Elektrikli sürüş, yüksek menzil, sade iç mekan ve düşük kullanım maliyeti isteyen müşteriler için modern crossover."
+      },
+      {
+        id: 5,
+        brand: "Volkswagen",
+        model: "Volkswagen Tiguan 1.5 eTSI",
+        year: 2023,
+        price: 1985000,
+        km: 34000,
+        fuel: "Hibrit",
+        gear: "Otomatik",
+        body: "SUV",
+        tag: "Aile SUV",
+        trade: true,
+        finance: true,
+        image: imageSets.volkswagen[0],
+        gallery: imageSets.volkswagen,
+        desc: "Geniş iç hacim, ekonomik eTSI motor, konforlu sürüş ve aile kullanımına uygun bagaj hacmiyle güçlü bir seçenek."
+      },
+      {
+        id: 6,
+        brand: "Toyota",
+        model: "Toyota Corolla Hybrid Flame X-Pack",
+        year: 2022,
+        price: 1395000,
+        km: 42000,
+        fuel: "Hibrit",
+        gear: "Otomatik",
+        body: "Sedan",
+        tag: "Ekonomik",
+        trade: true,
+        finance: true,
+        image: imageSets.toyota[0],
+        gallery: imageSets.toyota,
+        desc: "Yakıt ekonomisi, sorunsuz kullanım ve düşük bakım maliyeti arayan müşteriler için güven veren hibrit sedan."
+      },
+      {
+        id: 7,
+        brand: "Porsche",
+        model: "Porsche Macan 2.0",
+        year: 2022,
+        price: 5650000,
+        km: 26000,
+        fuel: "Benzin",
+        gear: "Otomatik",
+        body: "SUV",
+        tag: "Performans",
+        trade: true,
+        finance: false,
+        image: imageSets.porsche[0],
+        gallery: imageSets.porsche,
+        desc: "Sport Chrono, deri iç mekan, prestijli marka algısı ve sportif SUV karakteriyle özel bir araç arayanlara hitap eder."
+      },
+      {
+        id: 8,
+        brand: "Renault",
+        model: "Renault Austral Techno Esprit Alpine",
+        year: 2024,
+        price: 1760000,
+        km: 7000,
+        fuel: "Hibrit",
+        gear: "Otomatik",
+        body: "SUV",
+        tag: "Düşük KM",
+        trade: true,
+        finance: true,
+        image: imageSets.renault[0],
+        gallery: imageSets.renault,
+        desc: "Yeni nesil hibrit motor, büyük ekranlı iç mekan, sportif Esprit Alpine çizgisi ve düşük kilometre avantajı."
+      },
+      {
+        id: 9,
+        brand: "Ford",
+        model: "Ford Ranger Wildtrak 4x4",
+        year: 2023,
+        price: 2475000,
+        km: 31000,
+        fuel: "Dizel",
+        gear: "Otomatik",
+        body: "Pick-up",
+        tag: "4x4 Pick-up",
+        trade: true,
+        finance: true,
+        image: imageSets.ford[0],
+        gallery: imageSets.ford,
+        desc: "4x4 çekiş, güçlü dizel motor, arazi kabiliyeti ve iş kullanımı için dayanıklı pick-up alternatifi."
+      }
+    ];
+
+    const formatter = new Intl.NumberFormat("tr-TR", { style: "currency", currency: "TRY", maximumFractionDigits: 0 });
+    const numberFormatter = new Intl.NumberFormat("tr-TR");
+
+    const homePage = document.getElementById("homePage");
+    const detailPage = document.getElementById("detailPage");
+    const carsGrid = document.getElementById("carsGrid");
+    const resultCount = document.getElementById("resultCount");
+    const emptyState = document.getElementById("emptyState");
+    const searchInput = document.getElementById("searchInput");
+    const brandFilter = document.getElementById("brandFilter");
+    const bodyFilter = document.getElementById("bodyFilter");
+    const fuelFilter = document.getElementById("fuelFilter");
+    const sortFilter = document.getElementById("sortFilter");
+    const maxPriceFilter = document.getElementById("maxPriceFilter");
+    const minYear = document.getElementById("minYear");
+    const maxKm = document.getElementById("maxKm");
+    const tradeOnly = document.getElementById("tradeOnly");
+    const financeOnly = document.getElementById("financeOnly");
+    const resetBtn = document.getElementById("resetBtn");
+    const backHome = document.getElementById("backHome");
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const leadForm = document.getElementById("leadForm");
+    const toast = document.getElementById("toast");
+
+    function populateBrands() {
+      [...new Set(cars.map(car => car.brand))].sort((a, b) => a.localeCompare(b, "tr")).forEach(brand => {
+        const option = document.createElement("option");
+        option.value = brand;
+        option.textContent = brand;
+        brandFilter.appendChild(option);
+      });
+    }
+
+    function getFilteredCars() {
+      const query = searchInput.value.trim().toLowerCase();
+      const brand = brandFilter.value;
+      const body = bodyFilter.value;
+      const fuel = fuelFilter.value;
+      const sort = sortFilter.value;
+      const price = Number(maxPriceFilter.value);
+      const year = Number(minYear.value);
+      const km = Number(maxKm.value);
+
+      let filtered = cars.filter(car => {
+        const searchMatch = [car.brand, car.model, car.body, car.fuel, car.gear, car.tag].join(" ").toLowerCase().includes(query);
+        const brandMatch = brand === "all" || car.brand === brand;
+        const bodyMatch = body === "all" || car.body === body;
+        const fuelMatch = fuel === "all" || car.fuel === fuel;
+        const priceMatch = car.price <= price;
+        const yearMatch = car.year >= year;
+        const kmMatch = car.km <= km;
+        const tradeMatch = !tradeOnly.checked || car.trade;
+        const financeMatch = !financeOnly.checked || car.finance;
+        return searchMatch && brandMatch && bodyMatch && fuelMatch && priceMatch && yearMatch && kmMatch && tradeMatch && financeMatch;
+      });
+
+      filtered.sort((a, b) => {
+        if (sort === "priceAsc") return a.price - b.price;
+        if (sort === "priceDesc") return b.price - a.price;
+        if (sort === "kmAsc") return a.km - b.km;
+        return b.year - a.year || a.km - b.km;
+      });
+
+      return filtered;
+    }
+
+    function renderCars() {
+      const filtered = getFilteredCars();
+      carsGrid.innerHTML = "";
+      resultCount.textContent = `${filtered.length} araç listeleniyor`;
+      emptyState.style.display = filtered.length ? "none" : "block";
+
+      filtered.forEach(car => {
+        const card = document.createElement("article");
+        card.className = "car-card";
+        card.innerHTML = `
+          <div class="car-media">
+            <img src="${car.image}" alt="${car.model}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="image-fallback">${car.model}</div>
+            <span class="label">${car.tag}</span>
+            <button class="heart" aria-label="Favorilere ekle">♡</button>
+          </div>
+          <div class="car-body">
+            <div class="car-head">
+              <div>
+                <h3>${car.model}</h3>
+                <small>${car.year} • ${car.body} • ${car.fuel}</small>
+              </div>
+              <div class="price">${formatter.format(car.price)}</div>
+            </div>
+            <div class="specs">
+              <span class="spec">${numberFormatter.format(car.km)} km</span>
+              <span class="spec">${car.gear}</span>
+              <span class="spec">${car.trade ? "Takas uygun" : "Takas yok"}</span>
+              <span class="spec">${car.finance ? "Finansman uygun" : "Nakit satış"}</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-dark" data-detail="${car.id}">Detay Sayfası</button>
+              <a class="btn" href="#finansman">Teklif Al</a>
+            </div>
+          </div>
+        `;
+
+        card.querySelector(".heart").addEventListener("click", event => {
+          event.currentTarget.classList.toggle("active");
+          event.currentTarget.textContent = event.currentTarget.classList.contains("active") ? "★" : "♡";
+        });
+
+        card.querySelector("[data-detail]").addEventListener("click", () => openDetail(car.id));
+        carsGrid.appendChild(card);
+      });
+    }
+
+    function openDetail(id) {
+      const car = cars.find(item => item.id === id);
+      if (!car) return;
+
+      document.getElementById("detailTitle").textContent = car.model;
+      document.getElementById("detailSubtitle").textContent = `${car.year} • ${car.body} • ${car.fuel} • ${car.gear}`;
+      document.getElementById("detailPrice").textContent = formatter.format(car.price);
+      document.getElementById("detailDesc").textContent = car.desc;
+      const detailMainImage = document.getElementById("detailMainImage");
+      const detailFallback = document.getElementById("detailFallback");
+      const setDetailImage = src => {
+        detailFallback.style.display = "none";
+        detailMainImage.style.display = "block";
+        detailMainImage.onerror = () => {
+          detailMainImage.style.display = "none";
+          detailFallback.textContent = `${car.model} görseli yüklenemedi`;
+          detailFallback.style.display = "flex";
+        };
+        detailMainImage.src = src;
+        detailMainImage.alt = car.model;
+      };
+      setDetailImage(car.image);
+      document.getElementById("detailSpecs").innerHTML = `
+        <div class="detail-spec"><small>Model yılı</small><strong>${car.year}</strong></div>
+        <div class="detail-spec"><small>Kilometre</small><strong>${numberFormatter.format(car.km)} km</strong></div>
+        <div class="detail-spec"><small>Yakıt</small><strong>${car.fuel}</strong></div>
+        <div class="detail-spec"><small>Vites</small><strong>${car.gear}</strong></div>
+        <div class="detail-spec"><small>Kasa tipi</small><strong>${car.body}</strong></div>
+        <div class="detail-spec"><small>Stok durumu</small><strong>Hazır teslim</strong></div>
+      `;
+
+      const thumbs = document.getElementById("detailThumbs");
+      thumbs.innerHTML = "";
+      car.gallery.forEach((src, index) => {
+        const thumb = document.createElement("button");
+        thumb.className = `thumb ${index === 0 ? "active" : ""}`;
+        thumb.type = "button";
+        thumb.innerHTML = `<img src="${src}" alt="${car.model} galeri ${index + 1}" onerror="this.style.opacity='.25';">`;
+        thumb.addEventListener("click", () => {
+          setDetailImage(src);
+          thumbs.querySelectorAll(".thumb").forEach(item => item.classList.remove("active"));
+          thumb.classList.add("active");
+        });
+        thumbs.appendChild(thumb);
+      });
+
+      homePage.style.display = "none";
+      detailPage.classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function showHome() {
+      detailPage.classList.remove("active");
+      homePage.style.display = "block";
+      setTimeout(() => document.getElementById("stok").scrollIntoView({ behavior: "smooth" }), 0);
+    }
+
+    function resetFilters() {
+      searchInput.value = "";
+      brandFilter.value = "all";
+      bodyFilter.value = "all";
+      fuelFilter.value = "all";
+      sortFilter.value = "newest";
+      maxPriceFilter.value = "999999999";
+      minYear.value = "2018";
+      maxKm.value = "999999";
+      tradeOnly.checked = false;
+      financeOnly.checked = false;
+      renderCars();
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
+    [searchInput, brandFilter, bodyFilter, fuelFilter, sortFilter, maxPriceFilter, minYear, maxKm, tradeOnly, financeOnly].forEach(element => {
+      element.addEventListener("input", renderCars);
+      element.addEventListener("change", renderCars);
+    });
+
+    resetBtn.addEventListener("click", resetFilters);
+    backHome.addEventListener("click", showHome);
+
+    document.querySelectorAll("[data-page='home']").forEach(link => {
+      link.addEventListener("click", () => {
+        if (detailPage.classList.contains("active")) {
+          detailPage.classList.remove("active");
+          homePage.style.display = "block";
+        }
+      });
+    });
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+      menuBtn.textContent = mobileMenu.classList.contains("open") ? "✕" : "☰";
+    });
+
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("open");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+    leadForm.addEventListener("submit", event => {
+      event.preventDefault();
+      leadForm.reset();
+      showToast("Talebiniz alındı. Satış danışmanı sizi arayacak.");
+    });
+
+    populateBrands();
+    renderCars();
+  </script>
+</body>
+</html>
