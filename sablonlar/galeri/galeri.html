@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoVista Galeri | Premium Araç Stok Kataloğu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #070a12;
+      --bg-soft: #0d1323;
+      --panel: rgba(255, 255, 255, 0.075);
+      --panel-strong: rgba(255, 255, 255, 0.12);
+      --text: #f7f9ff;
+      --muted: #9aa6bd;
+      --line: rgba(255, 255, 255, 0.13);
+      --brand: #ffb000;
+      --brand-2: #ffdf75;
+      --green: #36d399;
+      --red: #ff6b6b;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      --radius: 26px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255, 176, 0, 0.18), transparent 34rem),
+        radial-gradient(circle at top right, rgba(43, 108, 255, 0.16), transparent 38rem),
+        linear-gradient(180deg, #05070d 0%, #0a0f1d 48%, #070a12 100%);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent 75%);
+      z-index: -2;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 36px));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(22px);
+      background: rgba(7, 10, 18, 0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      font-size: 1.22rem;
+    }
+
+    .logo-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      color: #1c1200;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: 0 12px 34px rgba(255, 176, 0, 0.25);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 13px 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      transition: 0.22s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: var(--panel-strong);
+      border-color: rgba(255, 255, 255, 0.24);
+    }
+
+    .btn-primary {
+      color: #1e1300;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      border-color: transparent;
+      box-shadow: 0 16px 36px rgba(255, 176, 0, 0.24);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ffc247, #fff0ad);
+    }
+
+    .menu-btn {
+      display: none;
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 1.3rem;
+    }
+
+    .hero {
+      padding: 74px 0 52px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 13px;
+      border: 1px solid rgba(255, 176, 0, 0.28);
+      border-radius: 999px;
+      color: var(--brand-2);
+      background: rgba(255, 176, 0, 0.08);
+      font-weight: 800;
+      font-size: 0.84rem;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(2.55rem, 6vw, 5.85rem);
+      line-height: 0.94;
+      letter-spacing: -0.075em;
+      margin-bottom: 24px;
+    }
+
+    h1 span {
+      color: transparent;
+      background: linear-gradient(135deg, #fff, var(--brand-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: clamp(1rem, 1.5vw, 1.13rem);
+      max-width: 640px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .stat {
+      padding: 19px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.065);
+      border: 1px solid var(--line);
+    }
+
+    .stat strong {
+      font-size: 1.55rem;
+      display: block;
+      letter-spacing: -0.04em;
+    }
+
+    .stat small {
+      color: var(--muted);
+      font-weight: 700;
+      margin-top: 6px;
+      display: block;
+    }
+
+    .hero-card {
+      min-height: 520px;
+      border-radius: 38px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.045)),
+        url("https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=85") center/cover;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(255,255,255,0.16);
+      transform: perspective(1000px) rotateY(-5deg) rotateX(3deg);
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 15%, rgba(0,0,0,0.18) 44%, rgba(0,0,0,0.8) 100%);
+    }
+
+    .floating-card {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 2;
+      padding: 22px;
+      border-radius: 28px;
+      background: rgba(7, 10, 18, 0.78);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(18px);
+    }
+
+    .floating-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      background: rgba(54, 211, 153, 0.13);
+      color: #9effd6;
+      border: 1px solid rgba(54, 211, 153, 0.22);
+    }
+
+    .price-large {
+      font-size: 1.6rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .floating-card h3 {
+      font-size: 1.55rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
+    }
+
+    .specs-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .pill {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #d7deee;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .section {
+      padding: 54px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-title h2 {
+      font-size: clamp(2rem, 3.7vw, 3.2rem);
+      letter-spacing: -0.065em;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 670px;
+    }
+
+    .filter-panel {
+      padding: 18px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.068);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 64px rgba(0,0,0,0.22);
+      margin-bottom: 24px;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 900;
+      display: block;
+      margin: 0 0 7px 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .input,
+    .select {
+      width: 100%;
+      height: 50px;
+      border-radius: 17px;
+      border: 1px solid rgba(255,255,255,0.13);
+      background: rgba(6, 10, 18, 0.68);
+      color: var(--text);
+      padding: 0 15px;
+      outline: none;
+      font: inherit;
+      font-weight: 700;
+    }
+
+    .input:focus,
+    .select:focus {
+      border-color: rgba(255, 176, 0, 0.65);
+      box-shadow: 0 0 0 4px rgba(255, 176, 0, 0.1);
+    }
+
+    .select option {
+      color: #111827;
+    }
+
+    .catalog-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font-weight: 800;
+      margin: 0 3px 18px;
+    }
+
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .car-card {
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.074);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 52px rgba(0,0,0,0.23);
+      transition: 0.25s ease;
+      position: relative;
+    }
+
+    .car-card:hover {
+      transform: translateY(-7px);
+      border-color: rgba(255, 176, 0, 0.32);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.36);
+    }
+
+    .car-media {
+      height: 225px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 26% 18%, rgba(255,176,0,0.18), transparent 34%),
+        linear-gradient(135deg, #121827, #05070d);
+    }
+
+    .car-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.35s ease;
+    }
+
+    .image-fallback {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      color: rgba(247,249,255,0.78);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      background:
+        radial-gradient(circle at 34% 24%, rgba(255,176,0,0.2), transparent 35%),
+        linear-gradient(135deg, #151b2c, #060912);
+    }
+
+    .car-card:hover .car-media img {
+      transform: scale(1.07);
+    }
+
+    .car-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.55));
+    }
+
+    .tag {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 2;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(7,10,18,0.74);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(12px);
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .favorite {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 2;
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(7,10,18,0.68);
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+    }
+
+    .favorite.active {
+      color: var(--brand);
+    }
+
+    .car-body {
+      padding: 20px;
+    }
+
+    .car-title {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .car-title h3 {
+      font-size: 1.14rem;
+      letter-spacing: -0.035em;
+      line-height: 1.25;
+    }
+
+    .car-title small {
+      color: var(--muted);
+      font-weight: 800;
+      display: block;
+      margin-top: 5px;
+    }
+
+    .price {
+      color: var(--brand-2);
+      font-size: 1.28rem;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .spec-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin: 17px 0;
+    }
+
+    .spec {
+      padding: 10px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.055);
+      color: #d7deee;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .car-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .btn-sm {
+      padding: 12px 13px;
+      font-size: 0.84rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      min-height: 250px;
+      padding: 26px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.068);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature::before {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: rgba(255,176,0,0.15);
+      right: -70px;
+      top: -70px;
+      filter: blur(2px);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      color: #1e1300;
+      font-size: 1.45rem;
+      box-shadow: 0 18px 36px rgba(255,176,0,0.2);
+      margin-bottom: 26px;
+    }
+
+    .feature h3 {
+      font-size: 1.36rem;
+      letter-spacing: -0.04em;
+      margin-bottom: 12px;
+    }
+
+    .feature p {
+      color: var(--muted);
+      line-height: 1.68;
+      position: relative;
+    }
+
+    .cta {
+      padding: 34px;
+      border-radius: 38px;
+      background:
+        linear-gradient(135deg, rgba(255,176,0,0.18), rgba(255,255,255,0.05)),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1300&q=85") center/cover;
+      border: 1px solid rgba(255,255,255,0.16);
+      overflow: hidden;
+      position: relative;
+      min-height: 360px;
+      display: flex;
+      align-items: end;
+      box-shadow: var(--shadow);
+    }
+
+    .cta::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,0.78), rgba(0,0,0,0.42), rgba(0,0,0,0.14));
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+    }
+
+    .cta h2 {
+      font-size: clamp(2rem, 4vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.065em;
+      margin-bottom: 16px;
+    }
+
+    .cta p {
+      color: #d3d9e7;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .lead-form {
+      padding: 26px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid var(--line);
+    }
+
+    textarea.input {
+      min-height: 118px;
+      resize: vertical;
+      padding-top: 14px;
+      grid-column: 1 / -1;
+    }
+
+    footer {
+      padding: 44px 0 34px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 40px;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .mobile-panel {
+      display: none;
+      padding: 0 18px 18px;
+    }
+
+    .mobile-panel.open {
+      display: block;
+    }
+
+    .mobile-panel a {
+      display: block;
+      padding: 15px 0;
+      color: var(--muted);
+      border-bottom: 1px solid var(--line);
+      font-weight: 800;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.62);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .modal-card {
+      width: min(920px, 100%);
+      max-height: 90vh;
+      overflow: auto;
+      border-radius: 32px;
+      background: #0b1020;
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: var(--shadow);
+      scrollbar-width: none;
+    }
+
+    .modal-card::-webkit-scrollbar {
+      display: none;
+    }
+
+    .modal-media {
+      height: 360px;
+      position: relative;
+    }
+
+    .modal-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-content {
+      padding: 26px;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .modal-head h3 {
+      font-size: 2rem;
+      letter-spacing: -0.055em;
+    }
+
+    .close {
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--text);
+      font-size: 1.2rem;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .empty {
+      display: none;
+      padding: 42px 20px;
+      text-align: center;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.06);
+      border: 1px dashed rgba(255,255,255,0.2);
+      color: var(--muted);
+      font-weight: 800;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 80;
+      padding: 15px 18px;
+      border-radius: 18px;
+      background: rgba(7,10,18,0.9);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(15px);
+      transition: 0.25s ease;
+      font-weight: 800;
+      max-width: 330px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: 460px;
+        transform: none;
+      }
+
+      .filters {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .filters .btn {
+        grid-column: span 3;
+      }
+
+      .cars-grid,
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .nav {
+        height: 66px;
+      }
+
+      .nav-links,
+      .nav-actions {
+        display: none;
+      }
+
+      .menu-btn {
+        display: grid;
+        place-items: center;
+      }
+
+      .hero {
+        padding: 38px 0 34px;
+      }
+
+      h1 {
+        letter-spacing: -0.06em;
+      }
+
+      .hero-actions .btn,
+      .cta .btn {
+        width: 100%;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        min-height: 380px;
+        border-radius: 30px;
+      }
+
+      .floating-card {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+        padding: 17px;
+      }
+
+      .section {
+        padding: 42px 0;
+      }
+
+      .section-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .filters,
+      .cars-grid,
+      .feature-grid,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filters .btn,
+      textarea.input {
+        grid-column: auto;
+      }
+
+      .filters {
+        gap: 10px;
+      }
+
+      .input,
+      .select {
+        min-height: 50px;
+        font-size: 0.95rem;
+      }
+
+      .catalog-meta {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .car-media {
+        height: clamp(210px, 58vw, 255px);
+      }
+
+      .car-body {
+        padding: 18px;
+      }
+
+      .car-title {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .price {
+        text-align: left;
+      }
+
+      .cta {
+        min-height: 440px;
+        padding: 22px;
+        border-radius: 30px;
+      }
+
+      .cta::after {
+        background: rgba(0,0,0,0.68);
+      }
+
+      .modal-media {
+        height: clamp(230px, 58vw, 300px);
+      }
+
+      .modal-card {
+        width: min(100%, 560px);
+      }
+
+      .modal-content {
+        padding: 20px;
+      }
+
+      .modal-head {
+        flex-direction: column-reverse;
+      }
+
+      .close {
+        align-self: flex-end;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .spec-list,
+      .car-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .btn {
+        padding-inline: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="logo" href="#">
+        <span class="logo-mark">AV</span>
+        <span>AutoVista</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Ana menü">
+        <a href="#stok">Stok</a>
+        <a href="#hizmetler">Hizmetler</a>
+        <a href="#takas">Takas</a>
+        <a href="#iletisim">İletişim</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="btn" href="tel:+905551112233">☎ Ara</a>
+        <a class="btn btn-primary" href="#iletisim">Finansman Al</a>
+      </div>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Menüyü aç">☰</button>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <a href="#stok">Stok Kataloğu</a>
+      <a href="#hizmetler">Hizmetler</a>
+      <a href="#takas">Takas / Finansman</a>
+      <a href="#iletisim">İletişim</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">● Ekspertizli, garantili, hazır teslim araçlar</div>
+          <h1>Yeni aracını <span>güvenle</span> seç.</h1>
+          <p>
+            AutoVista; premium stok kataloğu, anlık fiyat filtreleri, takas değerleme ve finansman çağrısı ile galeriniz için modern, hızlı ve mobil uyumlu bir satış deneyimi sunar.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#stok">Stoktaki Araçları Gör</a>
+            <a class="btn" href="#takas">Aracımı Takasa Ver</a>
+          </div>
+
+          <div class="stats" aria-label="Galeri istatistikleri">
+            <div class="stat">
+              <strong>64+</strong>
+              <small>Aktif araç stoku</small>
+            </div>
+            <div class="stat">
+              <strong>24 sa</strong>
+              <small>Hızlı finansman dönüşü</small>
+            </div>
+            <div class="stat">
+              <strong>%98</strong>
+              <small>Müşteri memnuniyeti</small>
+            </div>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Öne çıkan araç">
+          <div class="floating-card">
+            <div class="floating-top">
+              <span class="badge">● Yeni geldi</span>
+              <span class="price-large">₺4.250.000</span>
+            </div>
+            <h3>
+                
+            </h3>
+            <p>2024 model, hatasız, bayi çıkışlı, cam tavan ve premium paket.</p>
+            <div class="specs-row">
+              <span class="pill">12.000 km</span>
+              <span class="pill">Dizel</span>
+              <span class="pill">Otomatik</span>
+              <span class="pill">AMG Paket</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="stok">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-title">
+            <h2>Stok kataloğu</h2>
+            <p>Fiyat, marka, yakıt, vites ve yıl bilgisine göre araçları anında filtreleyin. Her karttan detay alabilir, takas ya da finansman talebi oluşturabilirsiniz.</p>
+          </div>
+          <a class="btn" href="#iletisim">Stok Bildirimi Al</a>
+        </div>
+
+        <div class="filter-panel">
+          <div class="filters">
+            <div class="field">
+              <label for="searchInput">Araç ara</label>
+              <input class="input" id="searchInput" type="search" placeholder="BMW, Audi, SUV..." />
+            </div>
+            <div class="field">
+              <label for="brandFilter">Marka</label>
+              <select class="select" id="brandFilter">
+                <option value="all">Tümü</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fuelFilter">Yakıt</label>
+              <select class="select" id="fuelFilter">
+                <option value="all">Tümü</option>
+                <option value="Benzin">Benzin</option>
+                <option value="Dizel">Dizel</option>
+                <option value="Hibrit">Hibrit</option>
+                <option value="Elektrik">Elektrik</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="maxPriceFilter">Maks. fiyat</label>
+              <select class="select" id="maxPriceFilter">
+                <option value="999999999">Tümü</option>
+                <option value="1500000">₺1.500.000</option>
+                <option value="2500000">₺2.500.000</option>
+                <option value="4000000">₺4.000.000</option>
+                <option value="6000000">₺6.000.000</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="sortFilter">Sıralama</label>
+              <select class="select" id="sortFilter">
+                <option value="newest">En yeni</option>
+                <option value="priceAsc">Fiyat düşük</option>
+                <option value="priceDesc">Fiyat yüksek</option>
+                <option value="kmAsc">KM düşük</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="resetFilters">Sıfırla</button>
+          </div>
+        </div>
+
+        <div class="catalog-meta">
+          <span id="resultCount">0 araç listeleniyor</span>
+          <span>Ekspertiz raporu ve kredi uygunluğu için bizimle iletişime geçin.</span>
+        </div>
+
+        <div class="cars-grid" id="carsGrid"></div>
+        <div class="empty" id="emptyState">Bu filtrelere uygun araç bulunamadı. Fiyat veya marka filtresini genişletmeyi deneyin.</div>
+      </div>
+    </section>
+
+    <section class="section" id="hizmetler">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-title">
+            <h2>Galeriye özel satış araçları</h2>
+            <p>Web sitesi sadece vitrin değil; müşterinin sizi aramasını, form bırakmasını ve stoktaki araca hızlı karar vermesini sağlar.</p>
+          </div>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature">
+            <div class="icon">🚗</div>
+            <h3>Canlı stok kataloğu</h3>
+            <p>Stoktaki araçları marka, fiyat, kilometre, yakıt ve vites bilgisine göre listeleyen hızlı katalog yapısı.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">💰</div>
+            <h3>Fiyat filtreleri</h3>
+            <p>Müşteri bütçesine göre aracı hemen bulur. Bu yapı ilan karmaşasını azaltır ve dönüşümü artırır.</p>
+          </article>
+          <article class="feature">
+            <div class="icon">🤝</div>
+            <h3>Takas / finansman çağrısı</h3>
+            <p>Aracını takasa vermek veya kredi seçeneği almak isteyen müşteriler için doğrudan form ve çağrı alanları.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="takas">
+      <div class="container">
+        <div class="cta">
+          <div class="cta-content">
+            <div class="eyebrow">● Takas ve finansman desteği</div>
+            <h2>Aracını getir, yeni aracına aynı gün geç.</h2>
+            <p>Mevcut aracınız için ön değerleme yapalım. Uygun kredi seçenekleri, vade planı ve peşinat alternatifleri için satış danışmanımız sizi arasın.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#iletisim">Takas Teklifi Al</a>
+              <a class="btn" href="tel:+905551112233">Hemen Ara</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="iletisim">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-title">
+            <h2>Talep bırakın</h2>
+            <p>Satın almak istediğiniz araç, takas etmek istediğiniz aracınız veya finansman ihtiyacınız için bilgilerinizi bırakın.</p>
+          </div>
+        </div>
+
+        <form class="lead-form" id="leadForm">
+          <div class="form-grid">
+            <input class="input" type="text" name="name" placeholder="Ad Soyad" required>
+            <input class="input" type="tel" name="phone" placeholder="Telefon" required>
+            <select class="select" name="requestType" required>
+              <option value="">Talep türü seçin</option>
+              <option>Satın alma</option>
+              <option>Takas</option>
+              <option>Finansman</option>
+              <option>Test sürüşü</option>
+            </select>
+            <input class="input" type="text" name="car" placeholder="İlgilendiğiniz araç / model">
+            <textarea class="input" name="message" placeholder="Mesajınız"></textarea>
+          </div>
+          <div class="hero-actions">
+            <button class="btn btn-primary" type="submit">Talep Gönder</button>
+            <a class="btn" href="https://wa.me/905551112233" target="_blank" rel="noreferrer">WhatsApp ile Yaz</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <a class="logo" href="#">
+        <span class="logo-mark">AV</span>
+        <span>AutoVista</span>
+      </a>
+      <p>© 2026 AutoVista Galeri. Modern stok, takas ve finansman deneyimi.</p>
+    </div>
+  </footer>
+
+  <div class="modal" id="carModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-media">
+        <img id="modalImage" src="" alt="Araç görseli">
+      </div>
+      <div class="modal-content">
+        <div class="modal-head">
+          <div>
+            <h3 id="modalTitle"></h3>
+            <p id="modalSubtitle" style="color: var(--muted); margin-top: 8px; line-height: 1.6;"></p>
+          </div>
+          <button class="close" id="closeModal" aria-label="Detayı kapat">✕</button>
+        </div>
+        <div class="spec-list" id="modalSpecs"></div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#iletisim" id="modalFinance">Finansman Teklifi Al</a>
+          <a class="btn" href="#takas" id="modalTrade">Takasa Uygun mu?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Talebiniz alındı. Satış danışmanı sizi arayacak.</div>
+
+  <script>
+    const cars = [
+      {
+        id: 1,
+        brand: "BMW",
+        model: "BMW 520i M Sport",
+        year: 2024,
+        price: 3890000,
+        km: 18000,
+        fuel: "Benzin",
+        gear: "Otomatik",
+        body: "Sedan",
+        tag: "Premium",
+        image: "https://images.unsplash.com/photo-1556189250-72ba954cfc2b?auto=format&fit=crop&w=1000&q=85",
+        desc: "M Sport paket, vakum kapı, hayalet ekran, yetkili servis bakımlı, takasa uygun."
+      },
+      {
+        id: 2,
+        brand: "Mercedes",
+        model: "Mercedes-Benz E 220d AMG",
+        year: 2024,
+        price: 4250000,
+        km: 12000,
+        fuel: "Dizel",
+        gear: "Otomatik",
+        body: "Sedan",
+        tag: "Yeni geldi",
+        image: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=85",
+        desc: "AMG paket, cam tavan, masaj koltuk, hatasız boya kayıtsız, krediye uygun."
+      },
+      {
+        id: 3,
+        brand: "Audi",
+        model: "Audi Q5 45 TFSI Quattro",
+        year: 2023,
+        price: 3325000,
+        km: 29000,
+        fuel: "Benzin",
+        gear: "Otomatik",
+        body: "SUV",
+        tag: "4x4",
+        image: "https://images.unsplash.com/photo-1609521263047-f8f205293f24?auto=format&fit=crop&w=1000&q=85",
+        desc: "Quattro çekiş, S-Line görünüm, geniş aile kullanımı için ideal premium SUV."
+      },
+      {
+        id: 4,
+        brand: "Tesla",
+        model: "Tesla Model Y Long Range",
+        year: 2024,
+        price: 2790000,
+        km: 9000,
+        fuel: "Elektrik",
+        gear: "Otomatik",
+        body: "SUV",
+        tag: "Elektrik",
+        image: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1000&q=85",
+        desc: "Long Range, yüksek menzil, düşük kullanım maliyeti, teknolojik iç mekan."
+      },
+      {
+        id: 5,
+        brand: "Volkswagen",
+        model: "Volkswagen Tiguan 1.5 eTSI",
+        year: 2023,
+        price: 1985000,
+        km: 34000,
+        fuel: "Hibrit",
+        gear: "Otomatik",
+        body: "SUV",
+        tag: "Aile SUV",
+        image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Volkswagen_Tiguan_R_1X7A5802.jpg",
+        desc: "Düşük tüketim, geniş bagaj, adaptif hız sabitleyici, temiz aile aracı."
+      },
+      {
+        id: 6,
+        brand: "Toyota",
+        model: "Toyota Corolla Hybrid Flame X-Pack",
+        year: 2022,
+        price: 1395000,
+        km: 42000,
+        fuel: "Hibrit",
+        gear: "Otomatik",
+        body: "Sedan",
+        tag: "Ekonomik",
+        image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Toyota%20Corolla%20Limousine%20Hybrid%20Genf%202019%201Y7A5576.jpg",
+        desc: "Yakıt ekonomisi yüksek, şehir içi kullanımda çok avantajlı, sorunsuz Japon teknolojisi."
+      },
+      {
+        id: 7,
+        brand: "Porsche",
+        model: "Porsche Macan 2.0",
+        year: 2022,
+        price: 5650000,
+        km: 26000,
+        fuel: "Benzin",
+        gear: "Otomatik",
+        body: "SUV",
+        tag: "Performans",
+        image: "https://images.unsplash.com/photo-1611859266238-4b98091d9d9b?auto=format&fit=crop&w=1000&q=85",
+        desc: "Sport Chrono, deri iç mekan, güçlü sürüş karakteri ve prestijli SUV deneyimi."
+      },
+      {
+        id: 8,
+        brand: "Renault",
+        model: "Renault Austral Techno Esprit Alpine",
+        year: 2024,
+        price: 1760000,
+        km: 7000,
+        fuel: "Hibrit",
+        gear: "Otomatik",
+        body: "SUV",
+        tag: "Düşük KM",
+        image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Renault%20Austral%20facelift%20Wit%20Bochane.jpg",
+        desc: "Yeni nesil hibrit motor, geniş ekranlı iç mekan, takasa ve finansmana uygun."
+      },
+      {
+        id: 9,
+        brand: "Ford",
+        model: "Ford Ranger Wildtrak 4x4",
+        year: 2023,
+        price: 2475000,
+        km: 31000,
+        fuel: "Dizel",
+        gear: "Otomatik",
+        body: "Pick-up",
+        tag: "Ticari",
+        image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Ford%20Ranger%20%28T6%2C%20P703%29%20Wildtrak%20IMG%207320.jpg",
+        desc: "4x4, güçlü dizel motor, iş ve arazi kullanımı için dayanıklı pick-up."
+      }
+    ];
+
+    const currencyFormatter = new Intl.NumberFormat("tr-TR", {
+      style: "currency",
+      currency: "TRY",
+      maximumFractionDigits: 0
+    });
+
+    const numberFormatter = new Intl.NumberFormat("tr-TR");
+
+    const carsGrid = document.getElementById("carsGrid");
+    const resultCount = document.getElementById("resultCount");
+    const emptyState = document.getElementById("emptyState");
+    const searchInput = document.getElementById("searchInput");
+    const brandFilter = document.getElementById("brandFilter");
+    const fuelFilter = document.getElementById("fuelFilter");
+    const maxPriceFilter = document.getElementById("maxPriceFilter");
+    const sortFilter = document.getElementById("sortFilter");
+    const resetFilters = document.getElementById("resetFilters");
+    const modal = document.getElementById("carModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalSubtitle = document.getElementById("modalSubtitle");
+    const modalSpecs = document.getElementById("modalSpecs");
+    const closeModal = document.getElementById("closeModal");
+    const menuBtn = document.getElementById("menuBtn");
+    const mobilePanel = document.getElementById("mobilePanel");
+    const leadForm = document.getElementById("leadForm");
+    const toast = document.getElementById("toast");
+
+    function populateBrands() {
+      const brands = [...new Set(cars.map(car => car.brand))].sort((a, b) => a.localeCompare(b, "tr"));
+      brands.forEach(brand => {
+        const option = document.createElement("option");
+        option.value = brand;
+        option.textContent = brand;
+        brandFilter.appendChild(option);
+      });
+    }
+
+    function getFilteredCars() {
+      const query = searchInput.value.trim().toLowerCase();
+      const brand = brandFilter.value;
+      const fuel = fuelFilter.value;
+      const maxPrice = Number(maxPriceFilter.value);
+      const sort = sortFilter.value;
+
+      let filtered = cars.filter(car => {
+        const searchMatch = [car.brand, car.model, car.body, car.fuel, car.gear, car.tag]
+          .join(" ")
+          .toLowerCase()
+          .includes(query);
+        const brandMatch = brand === "all" || car.brand === brand;
+        const fuelMatch = fuel === "all" || car.fuel === fuel;
+        const priceMatch = car.price <= maxPrice;
+        return searchMatch && brandMatch && fuelMatch && priceMatch;
+      });
+
+      filtered.sort((a, b) => {
+        if (sort === "priceAsc") return a.price - b.price;
+        if (sort === "priceDesc") return b.price - a.price;
+        if (sort === "kmAsc") return a.km - b.km;
+        return b.year - a.year || a.km - b.km;
+      });
+
+      return filtered;
+    }
+
+    function renderCars() {
+      const filtered = getFilteredCars();
+      carsGrid.innerHTML = "";
+      emptyState.style.display = filtered.length ? "none" : "block";
+      resultCount.textContent = `${filtered.length} araç listeleniyor`;
+
+      filtered.forEach(car => {
+        const card = document.createElement("article");
+        card.className = "car-card";
+        card.innerHTML = `
+          <div class="car-media">
+            <img src="${car.image}" alt="${car.model}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="image-fallback">${car.model}</div>
+            <span class="tag">${car.tag}</span>
+            <button class="favorite" aria-label="Favorilere ekle">♡</button>
+          </div>
+          <div class="car-body">
+            <div class="car-title">
+              <div>
+                <h3>${car.model}</h3>
+                <small>${car.year} • ${car.body}</small>
+              </div>
+              <div class="price">${currencyFormatter.format(car.price)}</div>
+            </div>
+            <div class="spec-list">
+              <span class="spec">${numberFormatter.format(car.km)} km</span>
+              <span class="spec">${car.fuel}</span>
+              <span class="spec">${car.gear}</span>
+              <span class="spec">Takas uygun</span>
+            </div>
+            <div class="car-actions">
+              <button class="btn btn-sm" data-detail="${car.id}">Detay Gör</button>
+              <a class="btn btn-sm btn-primary" href="#iletisim">Teklif Al</a>
+            </div>
+          </div>
+        `;
+
+        card.querySelector(".favorite").addEventListener("click", event => {
+          event.currentTarget.classList.toggle("active");
+          event.currentTarget.textContent = event.currentTarget.classList.contains("active") ? "★" : "♡";
+        });
+
+        card.querySelector("[data-detail]").addEventListener("click", () => openCarModal(car.id));
+        carsGrid.appendChild(card);
+      });
+    }
+
+    function openCarModal(id) {
+      const car = cars.find(item => item.id === id);
+      if (!car) return;
+      modalImage.src = car.image;
+      modalImage.onerror = () => {
+        modalImage.removeAttribute("src");
+        modalImage.alt = `${car.model} görseli yüklenemedi`;
+      };
+      modalImage.alt = car.model;
+      modalTitle.textContent = car.model;
+      modalSubtitle.textContent = `${car.desc} Satış temsilcisi ile görüşerek ekspertiz raporu, ödeme planı ve takas detaylarını öğrenebilirsiniz.`;
+      modalSpecs.innerHTML = `
+        <span class="spec">Fiyat: ${currencyFormatter.format(car.price)}</span>
+        <span class="spec">Model yılı: ${car.year}</span>
+        <span class="spec">Kilometre: ${numberFormatter.format(car.km)} km</span>
+        <span class="spec">Yakıt: ${car.fuel}</span>
+        <span class="spec">Vites: ${car.gear}</span>
+        <span class="spec">Kasa: ${car.body}</span>
+      `;
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeCarModal() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 2800);
+    }
+
+    [searchInput, brandFilter, fuelFilter, maxPriceFilter, sortFilter].forEach(element => {
+      element.addEventListener("input", renderCars);
+      element.addEventListener("change", renderCars);
+    });
+
+    resetFilters.addEventListener("click", () => {
+      searchInput.value = "";
+      brandFilter.value = "all";
+      fuelFilter.value = "all";
+      maxPriceFilter.value = "999999999";
+      sortFilter.value = "newest";
+      renderCars();
+    });
+
+    closeModal.addEventListener("click", closeCarModal);
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeCarModal();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeCarModal();
+    });
+
+    menuBtn.addEventListener("click", () => {
+      mobilePanel.classList.toggle("open");
+      menuBtn.textContent = mobilePanel.classList.contains("open") ? "✕" : "☰";
+    });
+
+    mobilePanel.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        mobilePanel.classList.remove("open");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+    leadForm.addEventListener("submit", event => {
+      event.preventDefault();
+      leadForm.reset();
+      showToast("Talebiniz alındı. Satış danışmanı sizi arayacak.");
+    });
+
+    populateBrands();
+    renderCars();
+  </script>
+</body>
+</html>
