@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridyen Hukuk Bürosu | İstanbul Avukatlık ve Danışmanlık</title>
+<meta name="description" content="Meridyen Hukuk Bürosu - Ticaret, aile, gayrimenkul, ceza, iş ve miras hukuku alanlarında uzman avukat kadrosu. Ön görüşme talebi oluşturun.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%2311161A'/%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23BD9760' stroke-width='1.5'/%3E%3Cpath d='M16 7 L19 16 L16 25 L13 16 Z' fill='%23BD9760'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     TOKENS
+     ============================================ */
+  :root{
+    --ink:#11161A;
+    --ink-2:#1B2329;
+    --ink-3:#252F36;
+    --paper:#F3EFE4;
+    --paper-2:#E8E1D2;
+    --paper-3:#DDD3BE;
+    --brass:#BD9760;
+    --brass-light:#E2C99A;
+    --teal:#3C5A53;
+    --rust:#9C5037;
+    --text-light:#EEE8DA;
+    --text-dark:#1B201F;
+    --muted-light:#9CA6A4;
+    --muted-dark:#73685B;
+    --line-light:rgba(226,201,154,0.18);
+    --line-dark:rgba(27,32,32,0.12);
+
+    --font-display:'Fraunces', serif;
+    --font-body:'Inter', sans-serif;
+    --font-mono:'Space Mono', monospace;
+
+    --container:1200px;
+    --radius:3px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+
+  /* ============================================
+     RESET
+     ============================================ */
+  *,*::before,*::after{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; }
+  img,svg{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; cursor:pointer; }
+  ul{ margin:0; padding:0; }
+  h1,h2,h3,h4,p{ margin:0; }
+
+  body{
+    font-family:var(--font-body);
+    color:var(--text-dark);
+    background:var(--paper);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ============================================
+     TYPOGRAPHY HELPERS
+     ============================================ */
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    font-weight:700;
+  }
+  .eyebrow::before{
+    content:"";
+    display:inline-block;
+    width:22px;
+    height:1px;
+    background:currentColor;
+    vertical-align:middle;
+    margin-right:.8em;
+    opacity:.6;
+  }
+  h1,h2,h3{ font-family:var(--font-display); font-weight:600; letter-spacing:-.01em; }
+  em{ font-style:italic; font-weight:300; color:var(--brass); }
+
+  .container{
+    max-width:var(--container);
+    margin:0 auto;
+    padding:0 1.5rem;
+  }
+
+  /* ============================================
+     BUTTONS
+     ============================================ */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:.6em;
+    font-family:var(--font-mono);
+    font-size:.78rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-weight:700;
+    padding:.95em 1.7em;
+    border-radius:1px;
+    border:1px solid transparent;
+    transition:background .35s var(--ease), color .35s var(--ease), border-color .35s var(--ease), transform .35s var(--ease);
+    white-space:nowrap;
+  }
+  .btn:active{ transform:scale(.97); }
+  .btn-primary{
+    background:var(--brass);
+    color:var(--ink);
+    border-color:var(--brass);
+  }
+  .btn-primary:hover{ background:var(--brass-light); border-color:var(--brass-light); }
+  .btn-line{
+    border-color:var(--line-light);
+    color:var(--text-light);
+  }
+  .btn-line:hover{ border-color:var(--brass); color:var(--brass-light); }
+  .btn-dark{
+    border-color:var(--line-dark);
+    color:var(--ink);
+  }
+  .btn-dark:hover{ border-color:var(--rust); color:var(--rust); }
+  .btn-arrow{ transition:transform .35s var(--ease); }
+  .btn:hover .btn-arrow{ transform:translateX(4px); }
+
+  /* ============================================
+     HEADER
+     ============================================ */
+  .site-header{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:100;
+    padding:1.4rem 0;
+    transition:padding .4s var(--ease), background .4s var(--ease), box-shadow .4s var(--ease), border-color .4s var(--ease);
+    border-bottom:1px solid transparent;
+  }
+  .site-header.scrolled{
+    padding:.85rem 0;
+    background:rgba(17,22,26,.86);
+    backdrop-filter:blur(14px);
+    border-bottom-color:var(--line-light);
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:2rem;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:.7rem;
+    color:var(--text-light);
+  }
+  .logo .compass-mark{ width:34px; height:34px; flex-shrink:0; }
+  .logo-text{ display:flex; flex-direction:column; line-height:1.1; }
+  .logo-text strong{
+    font-family:var(--font-display);
+    font-size:1.18rem;
+    font-weight:600;
+    letter-spacing:.04em;
+  }
+  .logo-text span{
+    font-family:var(--font-mono);
+    font-size:.6rem;
+    letter-spacing:.28em;
+    color:var(--brass-light);
+    margin-top:.2rem;
+  }
+  .main-nav{
+    display:flex;
+    gap:2.2rem;
+  }
+  .main-nav a{
+    font-size:.85rem;
+    letter-spacing:.04em;
+    color:var(--text-light);
+    position:relative;
+    padding:.3rem 0;
+    transition:color .3s var(--ease);
+  }
+  .main-nav a::after{
+    content:"";
+    position:absolute;
+    left:0; right:100%;
+    bottom:0;
+    height:1px;
+    background:var(--brass);
+    transition:right .35s var(--ease);
+  }
+  .main-nav a:hover{ color:var(--brass-light); }
+  .main-nav a:hover::after{ right:0; }
+
+  .header-actions{ display:flex; align-items:center; gap:1.2rem; }
+  .nav-toggle{
+    display:none;
+    width:42px; height:42px;
+    border:1px solid var(--line-light);
+    background:transparent;
+    border-radius:50%;
+    position:relative;
+  }
+  .nav-toggle span{
+    position:absolute; left:11px; right:11px; height:1px;
+    background:var(--text-light);
+    transition:transform .3s var(--ease), opacity .3s var(--ease);
+  }
+  .nav-toggle span:nth-child(1){ top:16px; }
+  .nav-toggle span:nth-child(2){ top:21px; }
+  .nav-toggle span:nth-child(3){ top:26px; }
+  .nav-toggle.open span:nth-child(1){ transform:translateY(5px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2){ opacity:0; }
+  .nav-toggle.open span:nth-child(3){ transform:translateY(-5px) rotate(-45deg); }
+
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    background:var(--ink);
+    color:var(--text-light);
+    overflow:hidden;
+    padding:8rem 0 4rem;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(226,201,154,0.05) 0px, rgba(226,201,154,0.05) 1px, transparent 1px, transparent 120px),
+      repeating-linear-gradient(25deg, rgba(226,201,154,0.04) 0px, rgba(226,201,154,0.04) 1px, transparent 1px, transparent 120px);
+    pointer-events:none;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    top:-30%; right:-15%;
+    width:65vw; height:65vw;
+    max-width:900px; max-height:900px;
+    background:radial-gradient(circle, rgba(189,151,96,.18) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-grid{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:3rem;
+    align-items:center;
+  }
+  .hero-content .eyebrow{ color:var(--brass-light); margin-bottom:1.7rem; display:block; }
+  .hero-content h1{
+    font-size:clamp(2.8rem, 6vw, 5rem);
+    line-height:1.06;
+    font-weight:600;
+  }
+  .hero-content .lead{
+    margin-top:1.8rem;
+    max-width:34rem;
+    font-size:1.05rem;
+    color:var(--muted-light);
+  }
+  .hero-actions{
+    display:flex;
+    gap:1rem;
+    margin-top:2.6rem;
+    flex-wrap:wrap;
+  }
+  .hero-compass{
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .compass-rose{
+    width:100%;
+    max-width:480px;
+    animation:spin 200s linear infinite;
+    filter:drop-shadow(0 0 60px rgba(189,151,96,.12));
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .hero-stats{
+    position:relative;
+    z-index:2;
+    margin-top:5rem;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line-light);
+    padding-top:2rem;
+  }
+  .hero-stats .stat{
+    padding-right:1.5rem;
+    border-right:1px solid var(--line-light);
+  }
+  .hero-stats .stat:last-child{ border-right:none; }
+  .hero-stats .num{
+    font-family:var(--font-display);
+    font-size:clamp(1.8rem,3vw,2.6rem);
+    font-weight:600;
+    color:var(--brass-light);
+    display:block;
+  }
+  .hero-stats .label{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted-light);
+    margin-top:.5rem;
+    display:block;
+  }
+
+  /* ============================================
+     SECTION HEAD (shared)
+     ============================================ */
+  .section-head{
+    max-width:42rem;
+    margin-bottom:3.5rem;
+  }
+  .section-head .eyebrow{ color:var(--rust); margin-bottom:1.2rem; display:block; }
+  .section-head h2{
+    font-size:clamp(2.1rem,4vw,3rem);
+    line-height:1.15;
+  }
+  .section-head p{
+    margin-top:1.1rem;
+    color:var(--muted-dark);
+    font-size:1.02rem;
+    max-width:38rem;
+  }
+  .section-head.on-dark .eyebrow{ color:var(--brass-light); }
+  .section-head.on-dark p{ color:var(--muted-light); }
+
+  /* ============================================
+     PRACTICE AREAS
+     ============================================ */
+  .practice{
+    padding:7rem 0;
+    background:var(--paper);
+  }
+  .practice-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:2.4rem 2rem;
+  }
+  .practice-card{
+    position:relative;
+    background:#fff;
+    border:1px solid var(--line-dark);
+    padding:2.6rem 1.9rem 2.1rem;
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s var(--ease);
+  }
+  .practice-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px -22px rgba(27,32,32,.35);
+    border-color:var(--brass);
+  }
+  .practice-card .bearing{
+    position:absolute;
+    top:0; left:1.9rem;
+    transform:translateY(-50%);
+    background:var(--ink);
+    color:var(--brass-light);
+    font-family:var(--font-mono);
+    font-size:.75rem;
+    letter-spacing:.18em;
+    padding:.45rem 1.1rem .4rem;
+    clip-path:polygon(0 0, 100% 0, 88% 100%, 12% 100%);
+  }
+  .practice-card .icon{
+    width:50px; height:50px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--brass-light);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:1.6rem;
+  }
+  .practice-card .icon svg{ width:24px; height:24px; }
+  .practice-card h3{
+    font-size:1.28rem;
+    font-weight:600;
+    margin-bottom:.75rem;
+  }
+  .practice-card p{
+    color:var(--muted-dark);
+    font-size:.94rem;
+  }
+  .practice-extra{
+    display:grid;
+    gap:.72rem;
+    margin-top:1.25rem;
+    padding-top:1.1rem;
+    border-top:1px solid var(--line-dark);
+  }
+  .practice-extra span{
+    display:block;
+    font-family:var(--font-mono);
+    font-size:.64rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:.22rem;
+  }
+  .practice-extra p{
+    margin:0;
+    font-size:.82rem;
+    line-height:1.6;
+  }
+  .practice-card .more{
+    display:inline-flex;
+    align-items:center;
+    gap:.5em;
+    margin-top:1.4rem;
+    font-family:var(--font-mono);
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--rust);
+    border-bottom:1px solid transparent;
+    transition:border-color .3s var(--ease), gap .3s var(--ease);
+  }
+  .practice-card:hover .more{ border-color:var(--rust); gap:.8em; }
+
+  /* ============================================
+     ABOUT BAND
+     ============================================ */
+  .about{
+    background:var(--ink);
+    color:var(--text-light);
+    padding:7rem 0;
+    position:relative;
+    overflow:hidden;
+  }
+  .about-ticks{
+    position:absolute;
+    top:0; left:0; right:0;
+    height:1px;
+    background:var(--line-light);
+  }
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:4rem;
+    align-items:start;
+  }
+  .about-text h2{
+    font-size:clamp(2rem,4vw,2.9rem);
+    line-height:1.2;
+    color:var(--text-light);
+  }
+  .about-text h2 em{ color:var(--brass-light); }
+  .about-text p{
+    margin-top:1.5rem;
+    color:var(--muted-light);
+    max-width:34rem;
+  }
+  .about-stats{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:2rem;
+  }
+  .about-stats .stat-block{
+    border-left:2px solid var(--brass);
+    padding-left:1.2rem;
+  }
+  .about-stats .num{
+    font-family:var(--font-display);
+    font-size:2.3rem;
+    font-weight:600;
+    color:var(--brass-light);
+  }
+  .about-stats .label{
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted-light);
+    margin-top:.4rem;
+    display:block;
+  }
+
+  /* ============================================
+     ARTICLES
+     ============================================ */
+  .articles{
+    padding:7rem 0;
+    background:var(--paper);
+  }
+  .articles-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.8rem;
+  }
+  .article-card{
+    background:#fff;
+    border:1px solid var(--line-dark);
+    display:flex;
+    flex-direction:column;
+    transition:transform .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .article-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px -22px rgba(27,32,32,.35);
+  }
+  .article-visual{
+    position:relative;
+    height:150px;
+    background:linear-gradient(135deg, var(--ink) 0%, var(--ink-3) 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    color:var(--brass-light);
+  }
+  .article-visual::before{
+    content:attr(data-bearing);
+    position:absolute;
+    right:-.3rem; bottom:-1.2rem;
+    font-family:var(--font-display);
+    font-size:5.5rem;
+    font-weight:900;
+    color:rgba(226,201,154,.08);
+    letter-spacing:-.02em;
+  }
+  .article-visual svg{ width:36px; height:36px; position:relative; z-index:1; }
+  .article-body{
+    padding:1.6rem 1.5rem 1.8rem;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+  }
+  .article-tag{
+    font-family:var(--font-mono);
+    font-size:.65rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--rust);
+  }
+  .article-body h3{
+    font-size:1.08rem;
+    font-weight:600;
+    line-height:1.35;
+    margin-top:.7rem;
+  }
+  .article-body p{
+    margin-top:.7rem;
+    font-size:.88rem;
+    color:var(--muted-dark);
+    flex:1;
+  }
+  .article-meta{
+    margin-top:1.2rem;
+    padding-top:1rem;
+    border-top:1px solid var(--line-dark);
+    display:flex;
+    justify-content:space-between;
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    letter-spacing:.06em;
+    color:var(--muted-dark);
+  }
+
+  /* ============================================
+     CONTACT
+     ============================================ */
+  .contact{
+    background:var(--ink);
+    color:var(--text-light);
+    padding:7rem 0;
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:.9fr 1.1fr;
+    gap:4rem;
+  }
+  .contact-info h2{
+    font-size:clamp(2.1rem,4vw,3rem);
+    line-height:1.18;
+    margin-top:1.2rem;
+    color:var(--text-light);
+  }
+  .contact-info > .eyebrow{ color:var(--brass-light); }
+  .contact-info > p{
+    margin-top:1.4rem;
+    color:var(--muted-light);
+    max-width:30rem;
+  }
+  .contact-points{
+    margin-top:2.4rem;
+    display:flex;
+    flex-direction:column;
+    gap:1.3rem;
+  }
+  .contact-points li{
+    display:flex;
+    gap:1rem;
+    align-items:flex-start;
+    font-size:.92rem;
+  }
+  .contact-points .ic{
+    width:34px; height:34px;
+    border:1px solid var(--line-light);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    color:var(--brass-light);
+  }
+  .contact-points .ic svg{ width:16px; height:16px; }
+  .contact-points strong{ display:block; color:var(--text-light); margin-bottom:.15rem; font-size:.78rem; letter-spacing:.06em; text-transform:uppercase; font-family:var(--font-mono); font-weight:400; color:var(--muted-light);}
+  .contact-points span.value{ color:var(--text-light); }
+
+  .seal-wrap{
+    margin-top:3rem;
+    display:flex;
+    align-items:center;
+    gap:1.5rem;
+  }
+  .seal{ width:108px; height:108px; flex-shrink:0; animation:spin 90s linear infinite; }
+  .seal-note{
+    font-family:var(--font-mono);
+    font-size:.74rem;
+    line-height:1.8;
+    color:var(--muted-light);
+    letter-spacing:.04em;
+  }
+
+  /* form */
+  .contact-form-wrap{
+    background:var(--paper);
+    color:var(--text-dark);
+    padding:2.6rem;
+    position:relative;
+  }
+  .contact-form-wrap h3{
+    font-size:1.3rem;
+    margin-bottom:.4rem;
+  }
+  .contact-form-wrap > p.hint{
+    color:var(--muted-dark);
+    font-size:.88rem;
+    margin-bottom:2rem;
+  }
+  .form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.4rem;
+  }
+  .field{ margin-bottom:1.4rem; }
+  .field label{
+    display:block;
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted-dark);
+    margin-bottom:.6rem;
+  }
+  .field input,
+  .field select,
+  .field textarea{
+    width:100%;
+    font-family:var(--font-body);
+    font-size:.95rem;
+    color:var(--text-dark);
+    background:transparent;
+    border:none;
+    border-bottom:1px solid var(--line-dark);
+    padding:.55rem 0;
+    transition:border-color .3s var(--ease);
+  }
+  .field textarea{ resize:vertical; min-height:90px; }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus{
+    outline:none;
+    border-bottom-color:var(--rust);
+  }
+  .field input:invalid:not(:placeholder-shown),
+  .field textarea:invalid:not(:placeholder-shown){
+    border-bottom-color:#B33A3A;
+  }
+  .checkbox-field{
+    display:flex;
+    gap:.8rem;
+    align-items:flex-start;
+    margin:1.8rem 0 1.8rem;
+  }
+  .checkbox-field input{
+    margin-top:.2rem;
+    accent-color:var(--rust);
+    width:16px; height:16px;
+    flex-shrink:0;
+  }
+  .checkbox-field label{
+    font-size:.85rem;
+    color:var(--muted-dark);
+    line-height:1.6;
+  }
+  .form-foot{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+  .form-foot .privacy-note{
+    font-family:var(--font-mono);
+    font-size:.68rem;
+    letter-spacing:.06em;
+    color:var(--muted-dark);
+  }
+
+  /* success state */
+  .form-success{
+    display:none;
+    text-align:center;
+    padding:2.5rem .5rem;
+  }
+  .form-success.active{ display:block; }
+  .form-success .stamp-graphic{
+    width:130px; height:130px;
+    margin:0 auto 1.5rem;
+    color:var(--rust);
+    transform:scale(1.6) rotate(-14deg);
+    opacity:0;
+  }
+  .form-success.active .stamp-graphic{
+    animation:stampIn .55s var(--ease) forwards;
+  }
+  @keyframes stampIn{
+    0%{ transform:scale(1.8) rotate(-14deg); opacity:0; }
+    60%{ transform:scale(.92) rotate(-14deg); opacity:1; }
+    100%{ transform:scale(1) rotate(-14deg); opacity:1; }
+  }
+  .form-success h3{ font-size:1.4rem; margin-bottom:.6rem; }
+  .form-success p{ color:var(--muted-dark); font-size:.92rem; }
+  .form-success .ref{
+    font-family:var(--font-mono);
+    font-size:.85rem;
+    letter-spacing:.1em;
+    color:var(--rust);
+    margin-top:1rem;
+    display:inline-block;
+    border:1px solid var(--line-dark);
+    padding:.6rem 1.2rem;
+  }
+  .form-success .btn{ margin-top:1.8rem; }
+
+  /* ============================================
+     FOOTER
+     ============================================ */
+  .site-footer{
+    background:#0C1013;
+    color:var(--muted-light);
+    padding:5rem 0 2rem;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns:1.4fr 1fr 1fr 1.2fr;
+    gap:3rem;
+    padding-bottom:3.5rem;
+    border-bottom:1px solid var(--line-light);
+  }
+  .footer-brand .logo{ margin-bottom:1.2rem; }
+  .footer-brand p{ font-size:.9rem; max-width:24rem; }
+  .footer-social{
+    display:flex;
+    gap:.8rem;
+    margin-top:1.6rem;
+  }
+  .footer-social a{
+    width:38px; height:38px;
+    border:1px solid var(--line-light);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transition:border-color .3s var(--ease), color .3s var(--ease);
+  }
+  .footer-social a svg{ width:16px; height:16px; }
+  .footer-social a:hover{ border-color:var(--brass); color:var(--brass-light); }
+  .footer-col h4{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--text-light);
+    margin-bottom:1.4rem;
+  }
+  .footer-col ul{ display:flex; flex-direction:column; gap:.8rem; }
+  .footer-col a, .footer-col li{ font-size:.88rem; transition:color .3s var(--ease); }
+  .footer-col a:hover{ color:var(--brass-light); }
+  .footer-bottom{
+    padding-top:2rem;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:1rem;
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    letter-spacing:.06em;
+  }
+  .footer-bottom a{ margin-left:1.5rem; }
+  .footer-bottom a:hover{ color:var(--brass-light); }
+
+  /* ============================================
+     REVEAL ANIMATION
+     ============================================ */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .8s var(--ease), transform .8s var(--ease);
+  }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+  .reveal-stagger > *{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .7s var(--ease), transform .7s var(--ease);
+  }
+  .reveal-stagger.is-visible > *{ opacity:1; transform:translateY(0); }
+  .reveal-stagger.is-visible > *:nth-child(1){ transition-delay:.02s; }
+  .reveal-stagger.is-visible > *:nth-child(2){ transition-delay:.09s; }
+  .reveal-stagger.is-visible > *:nth-child(3){ transition-delay:.16s; }
+  .reveal-stagger.is-visible > *:nth-child(4){ transition-delay:.23s; }
+  .reveal-stagger.is-visible > *:nth-child(5){ transition-delay:.30s; }
+  .reveal-stagger.is-visible > *:nth-child(6){ transition-delay:.37s; }
+
+  /* ============================================
+     RESPONSIVE
+     ============================================ */
+  @media (max-width:1024px){
+    .hero-grid{ grid-template-columns:1fr; text-align:left; }
+    .hero-compass{ display:none; }
+    .practice-grid{ grid-template-columns:repeat(2,1fr); }
+    .articles-grid{ grid-template-columns:repeat(2,1fr); }
+    .about-grid{ grid-template-columns:1fr; gap:2.5rem; }
+    .contact-grid{ grid-template-columns:1fr; gap:3rem; }
+    .footer-grid{ grid-template-columns:1fr 1fr; gap:2.5rem; }
+  }
+  @media (max-width:760px){
+    .main-nav{
+      position:fixed;
+      top:0; left:0; right:0; bottom:0;
+      background:rgba(17,22,26,.98);
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:2.2rem;
+      transform:translateY(-100%);
+      transition:transform .45s var(--ease);
+      z-index:90;
+    }
+    .main-nav.open{ transform:translateY(0); }
+    .main-nav a{ font-size:1.3rem; font-family:var(--font-display); }
+    .nav-toggle{ display:block; z-index:101; }
+    .header-actions .btn-line{ display:none; }
+    .hero-stats{ grid-template-columns:repeat(2,1fr); row-gap:1.8rem; }
+    .hero-stats .stat:nth-child(2){ border-right:none; }
+    .practice-grid{ grid-template-columns:1fr; }
+    .articles-grid{ grid-template-columns:1fr; }
+    .form-row{ grid-template-columns:1fr; gap:0; }
+    .footer-grid{ grid-template-columns:1fr; gap:2.5rem; }
+    .contact-form-wrap{ padding:1.8rem; }
+    .practice, .articles, .about, .contact{ padding:4.5rem 0; }
+    .seal-wrap{ flex-direction:column; align-items:flex-start; }
+  }
+
+  /* ============================================
+     REDUCED MOTION
+     ============================================ */
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .compass-rose, .seal{ animation:none; }
+    .reveal, .reveal-stagger > *{ transition:none; opacity:1; transform:none; }
+    *{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
+  }
+
+  /* Focus visibility */
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{
+    outline:2px solid var(--rust);
+    outline-offset:3px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     HEADER
+     ============================================ -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#top" class="logo">
+      <svg class="compass-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" stroke="#BD9760" stroke-width="1.2"/>
+        <path d="M20 6 L24 20 L20 34 L16 20 Z" fill="#BD9760"/>
+        <circle cx="20" cy="20" r="2" fill="#11161A"/>
+      </svg>
+      <span class="logo-text">
+        <strong>Meridyen</strong>
+        <span>HUKUK BÜROSU</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#uzmanlik">Uzmanlık Alanları</a>
+      <a href="#makaleler">Makaleler</a>
+      <a href="#hakkimizda">Hakkımızda</a>
+      <a href="#iletisim">İletişim</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#iletisim" class="btn btn-line">Randevu Al</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç/kapat" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow">İSTANBUL · HUKUK VE DANIŞMANLIK · 2009'DAN BERİ</span>
+        <h1>Her davada<br>doğru <em>yönü</em><br>buluyoruz.</h1>
+        <p class="lead">Meridyen Hukuk Bürosu; ticaret, aile, gayrimenkul, ceza, iş ve miras hukuku alanlarında, karmaşık süreçlerde size açık, stratejik ve güvenilir bir yol haritası sunan deneyimli bir avukat kadrosudur.</p>
+        <div class="hero-actions">
+          <a href="#iletisim" class="btn btn-primary">
+            Ön Görüşme Talebi
+            <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#uzmanlik" class="btn btn-line">Uzmanlık Alanlarımız</a>
+        </div>
+      </div>
+
+      <div class="hero-compass" aria-hidden="true">
+        <svg class="compass-rose" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="240" cy="240" r="200" stroke="#3C5A53" stroke-width="1"/>
+          <circle cx="240" cy="240" r="160" stroke="#E2C99A" stroke-width="1" opacity="0.35"/>
+          <!-- ticks -->
+          <g stroke="#E2C99A" stroke-width="1.5" opacity="0.55">
+            <line x1="240" y1="40" x2="240" y2="65" transform="rotate(0 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="55" transform="rotate(30 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="65" transform="rotate(60 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="55" transform="rotate(90 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="65" transform="rotate(120 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="55" transform="rotate(150 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="65" transform="rotate(180 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="55" transform="rotate(210 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="65" transform="rotate(240 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="55" transform="rotate(270 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="65" transform="rotate(300 240 240)"/>
+            <line x1="240" y1="40" x2="240" y2="55" transform="rotate(330 240 240)"/>
+          </g>
+          <!-- cardinal labels -->
+          <g fill="#E2C99A" font-family="Space Mono, monospace" font-size="13" letter-spacing="2" text-anchor="middle" opacity="0.8">
+            <text x="240" y="34">000°</text>
+            <text x="446" y="245">090°</text>
+            <text x="240" y="458">180°</text>
+            <text x="34" y="245">270°</text>
+          </g>
+          <!-- needle -->
+          <path d="M240 80 L262 240 L240 400 L218 240 Z" fill="#BD9760" opacity="0.85"/>
+          <path d="M240 80 L262 240 L240 240 Z" fill="#E2C99A"/>
+          <path d="M240 400 L218 240 L240 240 Z" fill="#E2C99A"/>
+          <circle cx="240" cy="240" r="10" fill="#11161A" stroke="#E2C99A" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="container hero-stats reveal-stagger">
+      <div class="stat">
+        <span class="num" data-count="15" data-suffix="+">0</span>
+        <span class="label">Yıllık Deneyim</span>
+      </div>
+      <div class="stat">
+        <span class="num" data-count="1200" data-suffix="+">0</span>
+        <span class="label">Sonuçlanan Dosya</span>
+      </div>
+      <div class="stat">
+        <span class="num" data-count="98" data-suffix="%">0</span>
+        <span class="label">Müşteri Memnuniyeti</span>
+      </div>
+      <div class="stat">
+        <span class="num" data-count="6" data-suffix="">0</span>
+        <span class="label">Uzmanlık Alanı</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PRACTICE AREAS
+       ============================================ -->
+  <section class="practice" id="uzmanlik">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">PUSULA · ALTI ANA YÖN</span>
+        <h2>Uzmanlık Alanlarımız</h2>
+        <p>Her dosya farklı bir rota gerektirir. Ekibimiz, kendi alanında derinlemesine bilgi birikimine sahip avukatlardan oluşur ve her dosyayı kendi yönünde, titizlikle takip eder.</p>
+      </div>
+
+      <div class="practice-grid reveal-stagger">
+
+        <article class="practice-card">
+          <span class="bearing">000°</span>
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="8" width="18" height="11" rx="1"/>
+              <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              <path d="M3 13h18"/>
+            </svg>
+          </div>
+          <h3>Ticaret ve Şirketler Hukuku</h3>
+          <p>Şirket kuruluşu, birleşme ve devralmalardan ticari sözleşme uyuşmazlıklarına kadar işletmenizin her aşamasında yanınızdayız.</p>
+          <div class="practice-extra">
+            <div><span>Kapsam</span><p>Şirket sözleşmeleri, ortaklık yapısı, alacak takibi, birleşme ve pay devri süreçleri.</p></div>
+            <div><span>Yaklaşım</span><p>Önce ticari riski çıkarır, sonra uygulanabilir müzakere veya dava planı hazırlarız.</p></div>
+          </div>
+          <a href="#iletisim" class="more" data-practice="Ticaret ve Şirketler Hukuku">Ön görüşme al <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="practice-card">
+          <span class="bearing">045°</span>
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 11l9-7 9 7"/>
+              <path d="M5 10v9a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-9"/>
+              <path d="M12 13.2c-.9-1-2.6-1.1-2.6.4 0 1.2 2.6 2.8 2.6 2.8s2.6-1.6 2.6-2.8c0-1.5-1.7-1.4-2.6-.4z" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <h3>Aile ve Boşanma Hukuku</h3>
+          <p>Boşanma, velayet, nafaka ve mal paylaşımı süreçlerini hassasiyetle yürütüyor, haklarınızı en doğru şekilde koruyoruz.</p>
+          <div class="practice-extra">
+            <div><span>Kapsam</span><p>Anlaşmalı veya çekişmeli boşanma, velayet, nafaka, mal rejimi ve protokol hazırlığı.</p></div>
+            <div><span>Yaklaşım</span><p>Önceliği çocuk, malvarlığı ve kişisel güvenlik risklerine vererek yol haritası kurarız.</p></div>
+          </div>
+          <a href="#iletisim" class="more" data-practice="Aile ve Boşanma Hukuku">Ön görüşme al <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="practice-card">
+          <span class="bearing">090°</span>
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="3" width="16" height="18" rx="0.5"/>
+              <path d="M9 21v-4h6v4"/>
+              <path d="M8 7h2M14 7h2M8 11h2M14 11h2M8 15h2M14 15h2"/>
+            </svg>
+          </div>
+          <h3>Gayrimenkul ve İnşaat Hukuku</h3>
+          <p>Tapu işlemleri, kira sözleşmeleri ve kat karşılığı inşaat anlaşmazlıklarında uçtan uca hukuki destek sağlıyoruz.</p>
+          <div class="practice-extra">
+            <div><span>Kapsam</span><p>Tapu iptali, kira uyuşmazlıkları, inşaat sözleşmeleri, ayıplı imalat ve teslim gecikmesi.</p></div>
+            <div><span>Yaklaşım</span><p>Belge zincirini ve taşınmaz kaydını birlikte değerlendirerek delil stratejisi oluştururuz.</p></div>
+          </div>
+          <a href="#iletisim" class="more" data-practice="Gayrimenkul ve İnşaat Hukuku">Ön görüşme al <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="practice-card">
+          <span class="bearing">135°</span>
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <h3>Ceza Hukuku</h3>
+          <p>Soruşturma ve kovuşturma süreçlerinde savunma hakkınızı güçlü şekilde temsil ediyor, her aşamada yanınızda oluyoruz.</p>
+          <div class="practice-extra">
+            <div><span>Kapsam</span><p>İfade hazırlığı, savunma stratejisi, şikayet süreçleri, duruşma ve kanun yolu takibi.</p></div>
+            <div><span>Yaklaşım</span><p>İlk beyanın dosyaya etkisini dikkate alarak hızlı ve kontrollü bir savunma planı kurarız.</p></div>
+          </div>
+          <a href="#iletisim" class="more" data-practice="Ceza Hukuku">Ön görüşme al <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="practice-card">
+          <span class="bearing">180°</span>
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/>
+              <path d="M14 2v4h4"/>
+              <path d="M8 12h6M8 15h6M8 18h3"/>
+            </svg>
+          </div>
+          <h3>İş ve Sosyal Güvenlik Hukuku</h3>
+          <p>İşe iade, kıdem-ihbar tazminatı ve toplu iş sözleşmesi uyuşmazlıklarında işçi ve işveren taraflarına danışmanlık veriyoruz.</p>
+          <div class="practice-extra">
+            <div><span>Kapsam</span><p>İşe iade, fazla mesai, tazminat, arabuluculuk, iş sözleşmesi ve disiplin süreçleri.</p></div>
+            <div><span>Yaklaşım</span><p>Süreleri kaçırmadan bordro, fesih bildirimi ve tanık düzenini birlikte analiz ederiz.</p></div>
+          </div>
+          <a href="#iletisim" class="more" data-practice="İş ve Sosyal Güvenlik Hukuku">Ön görüşme al <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+        <article class="practice-card">
+          <span class="bearing">225°</span>
+          <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 3a2 2 0 0 0-2 2v14a2 2 0 1 0 4 0V5"/>
+              <path d="M7 3h11v4"/>
+              <path d="M9 5h7v12a2 2 0 0 1-2 2H9"/>
+            </svg>
+          </div>
+          <h3>Miras Hukuku</h3>
+          <p>Veraset işlemleri, vasiyetname düzenleme ve mirasın paylaşımına ilişkin uyuşmazlıklarda kapsamlı çözümler sunuyoruz.</p>
+          <div class="practice-extra">
+            <div><span>Kapsam</span><p>Veraset ilamı, miras paylaşımı, saklı pay, tenkis, vasiyetname ve muris muvazaası.</p></div>
+            <div><span>Yaklaşım</span><p>Mirasçı tablosunu, tapu kayıtlarını ve hak düşürücü süreleri birlikte ele alırız.</p></div>
+          </div>
+          <a href="#iletisim" class="more" data-practice="Miras Hukuku">Ön görüşme al <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       ABOUT
+       ============================================ -->
+  <section class="about" id="hakkimizda">
+    <div class="about-ticks"></div>
+    <div class="container about-grid">
+      <div class="about-text reveal">
+        <span class="eyebrow">HAKKIMIZDA</span>
+        <h2 style="margin-top:1.2rem;">Yirmi yıllık deneyim, <em>tek bir pusulada</em> birleşiyor.</h2>
+        <p>2009 yılında İstanbul'da kurulan Meridyen Hukuk Bürosu, bugün dokuz avukat ve geniş bir danışman ağıyla bireysel ve kurumsal müşterilerine hizmet veriyor. Çalışma prensibimiz basit: her dosyayı kendi yönünde, titizlikle ve şeffaf bir iletişimle ilerletmek.</p>
+        <p style="margin-top:1rem;">Müşterilerimize her zaman net bir tablo sunarız — sürecin nereden başladığını, hangi adımların izleneceğini ve olası sonuçların ne olabileceğini açıkça anlatırız.</p>
+      </div>
+      <div class="about-stats reveal-stagger">
+        <div class="stat-block">
+          <span class="num">9</span>
+          <span class="label">Avukat</span>
+        </div>
+        <div class="stat-block">
+          <span class="num">1.200+</span>
+          <span class="label">Sonuçlanan Dosya</span>
+        </div>
+        <div class="stat-block">
+          <span class="num">30+</span>
+          <span class="label">Sektör Deneyimi</span>
+        </div>
+        <div class="stat-block">
+          <span class="num">4</span>
+          <span class="label">Çalışma Dili</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       ARTICLES
+       ============================================ -->
+  <section class="articles" id="makaleler">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">HUKUKİ REHBER</span>
+        <h2>Makaleler ve Güncel Gelişmeler</h2>
+        <p>Ekibimizin kaleme aldığı, güncel mevzuat ve içtihatlar ışığında hazırlanan rehber niteliğindeki makaleler.</p>
+      </div>
+
+      <div class="articles-grid reveal-stagger">
+
+        <article class="article-card">
+          <div class="article-visual" data-bearing="000°">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="8" width="18" height="11" rx="1"/>
+              <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+              <path d="M3 13h18"/>
+            </svg>
+          </div>
+          <div class="article-body">
+            <span class="article-tag">Ticaret Hukuku</span>
+            <h3>Şirket Birleşme ve Devralmalarında Hukuki Süreç Haritası</h3>
+            <p>Due diligence aşamasından devir sözleşmesine, rekabet izninden kapanış şartlarına kadar M&amp;A sürecinin kritik adımlarını özetleyen pratik bir kontrol listesi.</p>
+            <div class="article-meta">
+              <span>10 Haz 2026</span>
+              <span>8 dk okuma</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-visual" data-bearing="045°">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 11l9-7 9 7"/>
+              <path d="M5 10v9a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-9"/>
+            </svg>
+          </div>
+          <div class="article-body">
+            <span class="article-tag">Aile Hukuku</span>
+            <h3>Boşanmada Mal Paylaşımı: Edinilmiş Mallara Katılma Rejimi</h3>
+            <p>Evlilik birliği içinde edinilen malların paylaşımı nasıl yapılır? Katkı payı, değer artış payı, banka kayıtları ve taşınmaz belgeleri açısından ispat yükünü ele aldık.</p>
+            <div class="article-meta">
+              <span>02 Haz 2026</span>
+              <span>6 dk okuma</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-visual" data-bearing="090°">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="3" width="16" height="18" rx="0.5"/>
+              <path d="M9 21v-4h6v4"/>
+              <path d="M8 7h2M14 7h2M8 11h2M14 11h2"/>
+            </svg>
+          </div>
+          <div class="article-body">
+            <span class="article-tag">Gayrimenkul Hukuku</span>
+            <h3>Kat Karşılığı İnşaat Sözleşmelerinde Sık Yapılan Hatalar</h3>
+            <p>Arsa sahibi ile müteahhit arasındaki sözleşmelerde teslim tarihi, gecikme cezası, ayıplı imalat, tapu devri ve teminat hükümlerinin nasıl kurgulanması gerektiğini anlattık.</p>
+            <div class="article-meta">
+              <span>27 May 2026</span>
+              <span>7 dk okuma</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-visual" data-bearing="180°">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1z"/>
+              <path d="M14 2v4h4"/>
+              <path d="M8 12h6M8 15h6M8 18h3"/>
+            </svg>
+          </div>
+          <div class="article-body">
+            <span class="article-tag">İş Hukuku</span>
+            <h3>İşe İade Davası: Şartlar, Süreç ve Sonuçları</h3>
+            <p>İş güvencesi kapsamındaki çalışanlar için arabuluculuk başvurusu, dava açma süresi, geçersiz fesih iddiası ve karar sonrası işe başlatmama tazminatını inceledik.</p>
+            <div class="article-meta">
+              <span>18 May 2026</span>
+              <span>5 dk okuma</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-visual" data-bearing="225°">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 3a2 2 0 0 0-2 2v14a2 2 0 1 0 4 0V5"/>
+              <path d="M7 3h11v4"/>
+              <path d="M9 5h7v12a2 2 0 0 1-2 2H9"/>
+            </svg>
+          </div>
+          <div class="article-body">
+            <span class="article-tag">Miras Hukuku</span>
+            <h3>Saklı Pay, Tenkis Davası ve Mirasçıların Korunması</h3>
+            <p>Muris muvazaası, bağış işlemleri, vasiyetname hükümleri ve saklı pay ihlali iddialarında hangi belgelerin toplanması gerektiğini ve dava sürecinin nasıl ilerlediğini derledik.</p>
+            <div class="article-meta">
+              <span>09 May 2026</span>
+              <span>7 dk okuma</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="article-card">
+          <div class="article-visual" data-bearing="270°">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z"/>
+              <path d="M8 12h8"/>
+              <path d="M12 8v8"/>
+            </svg>
+          </div>
+          <div class="article-body">
+            <span class="article-tag">Ceza Hukuku</span>
+            <h3>İfade Öncesi Hazırlık: İlk Beyanın Dosyaya Etkisi</h3>
+            <p>Soruşturma aşamasında verilen ilk beyanın dosyanın yönünü nasıl etkileyebileceğini, delil sunma zamanlamasını ve müdafi desteğinin neden kritik olduğunu açıklıyoruz.</p>
+            <div class="article-meta">
+              <span>30 Nis 2026</span>
+              <span>6 dk okuma</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTACT / REQUEST FORM
+       ============================================ -->
+  <section class="contact" id="iletisim">
+    <div class="container contact-grid">
+
+      <div class="contact-info reveal">
+        <span class="eyebrow">ÖN GÖRÜŞME VE İLETİŞİM</span>
+        <h2>Davanızı <em>net bir planla</em> ele alalım.</h2>
+        <p>Formu doldurduğunuzda talebiniz ilgili uzmanlık alanındaki ekibimiz tarafından incelenir. İlk değerlendirmede konu başlığı, belge durumu ve acil süreler birlikte ele alınır.</p>
+
+        <ul class="contact-points">
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+            <span><strong>Adres</strong><span class="value">Levent, Büyükdere Cad. No:123, Şişli / İstanbul</span></span>
+          </li>
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.32 1.9.57 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.25 1.85.44 2.81.57A2 2 0 0 1 22 16.92z"/></svg></span>
+            <span><strong>Telefon</strong><span class="value">+90 212 555 01 23</span></span>
+          </li>
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z" opacity="0"/><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span>
+            <span><strong>E-posta</strong><span class="value">iletisim@meridyenhukuk.com</span></span>
+          </li>
+          <li>
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></span>
+            <span><strong>Çalışma Saatleri</strong><span class="value">Pzt – Cum, 09:00 – 18:30</span></span>
+          </li>
+        </ul>
+
+        <div class="seal-wrap">
+          <svg class="seal" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="sealCircle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/>
+            </defs>
+            <circle cx="100" cy="100" r="94" fill="none" stroke="#9C5037" stroke-width="1.5" opacity="0.6"/>
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#9C5037" stroke-width="1.5" opacity="0.6"/>
+            <text font-family="Space Mono, monospace" font-size="11.5" fill="#9C5037" letter-spacing="3" opacity="0.85">
+              <textPath href="#sealCircle">MERİDYEN HUKUK · ÖN DEĞERLENDİRME · MERİDYEN HUKUK · ÖN DEĞERLENDİRME ·</textPath>
+            </text>
+            <path d="M100 55 L112 100 L100 145 L88 100 Z" fill="#9C5037" opacity="0.7"/>
+          </svg>
+          <p class="seal-note">Paylaştığınız bilgiler yalnızca talebinizin değerlendirilmesi ve sizinle iletişime geçilmesi amacıyla kullanılır.</p>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap reveal">
+        <h3 id="formTitle">Danışmanlık Talep Formu</h3>
+        <p class="hint">* ile işaretli alanlar zorunludur. Talebiniz en kısa sürede ilgili uzmanlık alanındaki ekibimize yönlendirilecektir.</p>
+
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="adsoyad">Ad Soyad *</label>
+              <input type="text" id="adsoyad" name="adsoyad" placeholder="Adınız ve soyadınız" required>
+            </div>
+            <div class="field">
+              <label for="eposta">E-posta *</label>
+              <input type="email" id="eposta" name="eposta" placeholder="ornek@eposta.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="telefon">Telefon</label>
+              <input type="tel" id="telefon" name="telefon" placeholder="+90 5__ ___ __ __">
+            </div>
+            <div class="field">
+              <label for="uzmanlik">Uzmanlık Alanı *</label>
+              <select id="uzmanlik" name="uzmanlik" required>
+                <option value="" disabled selected>Bir alan seçin</option>
+                <option>Ticaret ve Şirketler Hukuku</option>
+                <option>Aile ve Boşanma Hukuku</option>
+                <option>Gayrimenkul ve İnşaat Hukuku</option>
+                <option>Ceza Hukuku</option>
+                <option>İş ve Sosyal Güvenlik Hukuku</option>
+                <option>Miras Hukuku</option>
+                <option>Diğer</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="mesaj">Mesajınız *</label>
+            <textarea id="mesaj" name="mesaj" placeholder="Talebinizi kısaca özetleyin. Detaylar görüşme sırasında ele alınacaktır." required></textarea>
+          </div>
+
+          <div class="checkbox-field">
+            <input type="checkbox" id="onay" name="onay" required>
+            <label for="onay">Paylaştığım bilgilerin talebimin değerlendirilmesi ve tarafımla iletişime geçilmesi amacıyla kullanılmasını kabul ediyorum. *</label>
+          </div>
+
+          <div class="form-foot">
+            <button type="submit" class="btn btn-primary">
+              Talebi Gönder
+              <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <span class="privacy-note">KVKK AYDINLATMA METNİNE UYGUN</span>
+          </div>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+          <svg class="stamp-graphic" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="successCircle" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/>
+            </defs>
+            <circle cx="100" cy="100" r="94" fill="none" stroke="currentColor" stroke-width="2"/>
+            <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="1"/>
+            <text font-family="Space Mono, monospace" font-size="12" fill="currentColor" letter-spacing="3">
+              <textPath href="#successCircle">ONAYLANDI · MERİDYEN HUKUK BÜROSU · ONAYLANDI ·</textPath>
+            </text>
+            <path d="M70 102 L92 124 L132 80" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>Talebiniz alındı.</h3>
+          <p>Ekibimiz talebinizi inceleyecek ve 24 saat içinde belirttiğiniz iletişim bilgileri üzerinden sizinle iletişime geçecektir.</p>
+          <span class="ref" id="refNumber">Referans No: MR-2026-000000</span>
+          <br>
+          <button type="button" class="btn btn-dark" id="newRequestBtn">Yeni Talep Oluştur</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo">
+          <svg class="compass-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" stroke="#BD9760" stroke-width="1.2"/>
+            <path d="M20 6 L24 20 L20 34 L16 20 Z" fill="#BD9760"/>
+            <circle cx="20" cy="20" r="2" fill="#11161A"/>
+          </svg>
+          <span class="logo-text">
+            <strong style="color:var(--text-light)">Meridyen</strong>
+            <span>HUKUK BÜROSU</span>
+          </span>
+        </a>
+        <p>2009'dan bu yana İstanbul merkezli, ticaret, aile, gayrimenkul, ceza, iş ve miras hukuku alanlarında danışmanlık ve dava takibi hizmeti veren bağımsız bir hukuk bürosu.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v6M7 7v.5M12 16v-3.5a2 2 0 0 1 4 0V16M12 12.5V16"/></svg></a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://x.com/" target="_blank" rel="noreferrer" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M20 4L4 20"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Hızlı Bağlantılar</h4>
+        <ul>
+          <li><a href="#uzmanlik">Uzmanlık Alanları</a></li>
+          <li><a href="#makaleler">Makaleler</a></li>
+          <li><a href="#hakkimizda">Hakkımızda</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Uzmanlık Alanları</h4>
+        <ul>
+          <li><a href="#uzmanlik">Ticaret ve Şirketler Hukuku</a></li>
+          <li><a href="#uzmanlik">Aile ve Boşanma Hukuku</a></li>
+          <li><a href="#uzmanlik">Gayrimenkul Hukuku</a></li>
+          <li><a href="#uzmanlik">Ceza Hukuku</a></li>
+          <li><a href="#uzmanlik">İş Hukuku</a></li>
+          <li><a href="#uzmanlik">Miras Hukuku</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>İletişim</h4>
+        <ul>
+          <li>Levent, Büyükdere Cad. No:123<br>Şişli / İstanbul</li>
+          <li>+90 212 555 01 23</li>
+          <li>iletisim@meridyenhukuk.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Meridyen Hukuk Bürosu. Tüm hakları saklıdır.</span>
+      <div>
+        <a href="#iletisim">KVKK Aydınlatma Metni</a>
+        <a href="#iletisim">Kullanım Şartları</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ============================================
+  // HEADER SCROLL EFFECT
+  // ============================================
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => {
+    if (window.scrollY > 40) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ============================================
+  // MOBILE NAV TOGGLE
+  // ============================================
+  const navToggle = document.getElementById('navToggle');
+  const mainNav = document.getElementById('mainNav');
+  navToggle.addEventListener('click', () => {
+    const isOpen = mainNav.classList.toggle('open');
+    navToggle.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mainNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mainNav.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ============================================
+  // SCROLL REVEAL
+  // ============================================
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => revealObserver.observe(el));
+
+  // ============================================
+  // STAT COUNTERS
+  // ============================================
+  const counters = document.querySelectorAll('.num[data-count]');
+  const animateCounter = (el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1400;
+    const start = performance.now();
+    const step = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = Math.round(target * eased);
+      el.textContent = value.toLocaleString('tr-TR') + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(el => counterObserver.observe(el));
+
+  // ============================================
+  // CONTACT FORM
+  // ============================================
+  const form = document.getElementById('contactForm');
+  const formSuccess = document.getElementById('formSuccess');
+  const refNumber = document.getElementById('refNumber');
+  const newRequestBtn = document.getElementById('newRequestBtn');
+  const practiceSelect = document.getElementById('uzmanlik');
+
+  document.querySelectorAll('[data-practice]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (!practiceSelect) return;
+      practiceSelect.value = link.dataset.practice;
+    });
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const ref = 'MR-2026-' + Math.floor(100000 + Math.random() * 900000);
+    refNumber.textContent = 'Referans No: ' + ref;
+    form.style.display = 'none';
+    formSuccess.classList.add('active');
+  });
+
+  newRequestBtn.addEventListener('click', () => {
+    formSuccess.classList.remove('active');
+    form.reset();
+    form.style.display = '';
+  });
+</script>
+
+</body>
+</html>

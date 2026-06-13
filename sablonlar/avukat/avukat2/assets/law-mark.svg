@@ -1,0 +1,12 @@
+<svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Lexora Hukuk Logosu</title>
+  <desc id="desc">Altın tonlarında adalet terazisi simgesi.</desc>
+  <rect width="96" height="96" rx="28" fill="#11192B"/>
+  <rect x="10" y="10" width="76" height="76" rx="22" stroke="#D9AA5B" stroke-width="2" opacity="0.65"/>
+  <path d="M48 22V68" stroke="#F4D796" stroke-width="4" stroke-linecap="round"/>
+  <path d="M32 32H64" stroke="#F4D796" stroke-width="4" stroke-linecap="round"/>
+  <path d="M29 35L18 57H40L29 35Z" stroke="#D9AA5B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M67 35L56 57H78L67 35Z" stroke="#D9AA5B" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M34 70H62" stroke="#F4D796" stroke-width="4" stroke-linecap="round"/>
+  <path d="M40 78H56" stroke="#D9AA5B" stroke-width="4" stroke-linecap="round"/>
+</svg>
