@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="150 170 510 510" role="img" aria-label="Z logo vector">
+  <defs>
+    <linearGradient id="blueFace" x1="190" y1="620" x2="560" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07233b"/>
+      <stop offset="0.45" stop-color="#0d416b"/>
+      <stop offset="0.72" stop-color="#2389c5"/>
+      <stop offset="1" stop-color="#09233b"/>
+    </linearGradient>
+    <linearGradient id="blueTop" x1="220" y1="335" x2="421" y2="335" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#09263f"/>
+      <stop offset="0.48" stop-color="#155d8d"/>
+      <stop offset="0.78" stop-color="#2a9fdf"/>
+      <stop offset="1" stop-color="#0b3353"/>
+    </linearGradient>
+    <linearGradient id="silverFace" x1="230" y1="210" x2="615" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b3b5bb"/>
+      <stop offset="0.34" stop-color="#eef0f3"/>
+      <stop offset="0.57" stop-color="#cfd2d8"/>
+      <stop offset="0.78" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#8e939b"/>
+    </linearGradient>
+    <linearGradient id="silverLower" x1="383" y1="520" x2="615" y2="568" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#a7acb4"/>
+      <stop offset="0.42" stop-color="#f2f3f5"/>
+      <stop offset="0.72" stop-color="#d8dbe0"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="edgeDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="0.52" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.42"/>
+    </linearGradient>
+    <pattern id="brushLines" patternUnits="userSpaceOnUse" width="4" height="4">
+      <path d="M0 1 H4" stroke="#fff" stroke-opacity="0.13" stroke-width="0.45"/>
+      <path d="M0 3 H4" stroke="#000" stroke-opacity="0.06" stroke-width="0.45"/>
+    </pattern>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="-18" dy="18" stdDeviation="10" flood-color="#000000" flood-opacity="0.38"/>
+      <feDropShadow dx="3" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+    <filter id="innerDepth" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
+      <feOffset dx="0" dy="3" result="off"/>
+      <feComposite in="off" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="innerShadow"/>
+      <feColorMatrix in="innerShadow" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .32 0" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="SourceGraphic"/>
+        <feMergeNode in="shadow"/>
+      </feMerge>
+    </filter>
+    <clipPath id="clipSilverTop">
+      <path d="M230 194 L615 194 L438 444 L381 444 L516 244 L273 244 C251 244 236 236 230 219 Z"/>
+    </clipPath>
+    <clipPath id="clipSilverLower">
+      <path d="M383 486 L609 486 C612 486 614 488 614 491 L614 621 L558 568 L428 568 C406 568 394 559 385 540 L368 503 C364 494 371 486 383 486 Z"/>
+    </clipPath>
+    <clipPath id="clipBlueLarge">
+      <path d="M191 621 L338 397 C343 390 351 386 360 386 L401 386 L298 544 C288 559 299 570 314 570 L507 570 C526 570 536 579 546 595 L562 621 Z"/>
+    </clipPath>
+    <clipPath id="clipBlueTop">
+      <path d="M249 312 L421 312 L397 360 L255 360 C239 360 227 352 222 339 C218 327 230 312 249 312 Z"/>
+    </clipPath>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <g filter="url(#innerDepth)">
+      <!-- Üst gümüş parça -->
+      <path d="M230 194 L615 194 L438 444 L381 444 L516 244 L273 244 C251 244 236 236 230 219 Z" fill="url(#silverFace)"/>
+      <path d="M230 194 L615 194 L438 444 L381 444 L516 244 L273 244 C251 244 236 236 230 219 Z" fill="url(#brushLines)" clip-path="url(#clipSilverTop)" opacity="0.65"/>
+      <path d="M230 194 L615 194 L438 444 L381 444 L516 244 L273 244 C251 244 236 236 230 219 Z" fill="url(#edgeDark)" opacity="0.28"/>
+
+      <!-- Üst mavi kısa parça -->
+      <path d="M249 312 L421 312 L397 360 L255 360 C239 360 227 352 222 339 C218 327 230 312 249 312 Z" fill="url(#blueTop)"/>
+      <path d="M249 312 L421 312 L397 360 L255 360 C239 360 227 352 222 339 C218 327 230 312 249 312 Z" fill="url(#brushLines)" clip-path="url(#clipBlueTop)" opacity="0.48"/>
+      <path d="M249 312 L421 312 L397 360 L255 360 C239 360 227 352 222 339 C218 327 230 312 249 312 Z" fill="url(#edgeDark)" opacity="0.22"/>
+
+      <!-- Alt büyük mavi parça -->
+      <path d="M191 621 L338 397 C343 390 351 386 360 386 L401 386 L298 544 C288 559 299 570 314 570 L507 570 C526 570 536 579 546 595 L562 621 Z" fill="url(#blueFace)"/>
+      <path d="M191 621 L338 397 C343 390 351 386 360 386 L401 386 L298 544 C288 559 299 570 314 570 L507 570 C526 570 536 579 546 595 L562 621 Z" fill="url(#brushLines)" clip-path="url(#clipBlueLarge)" opacity="0.50"/>
+      <path d="M191 621 L338 397 C343 390 351 386 360 386 L401 386 L298 544 C288 559 299 570 314 570 L507 570 C526 570 536 579 546 595 L562 621 Z" fill="url(#edgeDark)" opacity="0.24"/>
+
+      <!-- Alt sağ gümüş parça -->
+      <path d="M383 486 L609 486 C612 486 614 488 614 491 L614 621 L558 568 L428 568 C406 568 394 559 385 540 L368 503 C364 494 371 486 383 486 Z" fill="url(#silverLower)"/>
+      <path d="M383 486 L609 486 C612 486 614 488 614 491 L614 621 L558 568 L428 568 C406 568 394 559 385 540 L368 503 C364 494 371 486 383 486 Z" fill="url(#brushLines)" clip-path="url(#clipSilverLower)" opacity="0.62"/>
+      <path d="M383 486 L609 486 C612 486 614 488 614 491 L614 621 L558 568 L428 568 C406 568 394 559 385 540 L368 503 C364 494 371 486 383 486 Z" fill="url(#edgeDark)" opacity="0.25"/>
+    </g>
+
+    <!-- Parlak kenar vurguları -->
+    <path d="M233 196 L610 196" stroke="#ffffff" stroke-opacity="0.75" stroke-width="2" stroke-linecap="round"/>
+    <path d="M249 313 L418 313" stroke="#6cc7ff" stroke-opacity="0.65" stroke-width="1.7" stroke-linecap="round"/>
+    <path d="M303 568 L505 568" stroke="#75cfff" stroke-opacity="0.62" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M385 487 L608 487" stroke="#ffffff" stroke-opacity="0.72" stroke-width="2" stroke-linecap="round"/>
+  </g>
+</svg>
