@@ -12,15 +12,15 @@
 
 <style>
   :root {
-    --bg: #f7f4ec;
+    --bg: #0B1829;
     --hero-bg: #0B1829;
-    --bg-elev: #ffffff;
-    --bg-elev-2: #efe8d6;
-    --border: #ddd4be;
-    --border-soft: #ece5d2;
-    --text: #1d1a14;
-    --text-mute: #6c6656;
-    --text-dim: #a39c88;
+    --bg-elev: rgba(255,255,255,0.055);
+    --bg-elev-2: rgba(255,255,255,0.095);
+    --border: rgba(255,255,255,0.16);
+    --border-soft: rgba(255,255,255,0.09);
+    --text: #f6f9ff;
+    --text-mute: rgba(229,236,247,0.72);
+    --text-dim: rgba(229,236,247,0.46);
     --accent: #c25e2e;
     --accent-hover: #d36a37;
     --accent-warm: #6b8d4f;
@@ -31,7 +31,7 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; background: var(--bg); }
   body {
     background: var(--bg);
     color: var(--text);
@@ -60,7 +60,7 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 18px 32px;
     backdrop-filter: blur(20px);
-    background: rgba(11,24,41,0.88);
+    background: rgba(11,24,41,0.94);
     border-bottom: 1px solid rgba(255,255,255,0.10);
   }
   nav.top .inner {
@@ -328,7 +328,7 @@
   @keyframes scroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
   /* SECTIONS */
-  section { padding: 140px 0; position: relative; }
+  section { padding: 140px 0; position: relative; background: var(--bg); }
 
   .section-head {
     display: grid;
@@ -462,7 +462,7 @@
 
   /* TEMPLATES SHOWCASE */
   .templates-section {
-    background: var(--bg-elev-2);
+    background: var(--bg);
   }
   .template-grid {
     display: grid;
@@ -725,6 +725,7 @@
 
   /* FOOTER */
   footer {
+    background: var(--bg);
     padding: 60px 0 40px;
     border-top: 1px solid var(--border-soft);
     margin-top: 80px;
