@@ -58,6 +58,27 @@
     }
     .nav-links a:hover { opacity: 1; color: var(--gold); }
 
+    .nav-actions {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .lang-switch {
+      display: inline-flex; align-items: center; gap: 3px;
+      padding: 4px;
+      border: 1px solid rgba(245,237,224,.16);
+      border-radius: 999px;
+      background: rgba(245,237,224,.06);
+    }
+    .lang-btn {
+      width: 34px; height: 30px; border: none; border-radius: 999px;
+      background: transparent; color: rgba(245,237,224,.7);
+      cursor: pointer; font-family: 'DM Sans', sans-serif;
+      font-size: .68rem; font-weight: 600; letter-spacing: .8px;
+      transition: background .2s, color .2s;
+    }
+    .lang-btn.active {
+      background: var(--gold); color: var(--espresso);
+    }
+
     .cart-btn {
       position: relative; background: var(--caramel); border: none;
       color: #fff; font-family: 'DM Sans', sans-serif;
@@ -338,11 +359,12 @@
     .cart-drawer {
       position: fixed; top: 0; right: 0; bottom: 0; width: 420px;
       max-width: 100vw; background: var(--milk); z-index: 201;
-      transform: translateX(100%); transition: transform .35s cubic-bezier(.16,1,.3,1);
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .25s ease, visibility .25s ease;
       display: flex; flex-direction: column;
       box-shadow: -20px 0 60px rgba(18,11,5,.25);
     }
-    .cart-drawer.open { transform: translateX(0); }
+    .cart-drawer.open { opacity: 1; visibility: visible; pointer-events: auto; }
 
     .cart-header {
       padding: 28px 32px; background: var(--espresso);
@@ -705,13 +727,90 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
-      nav { padding: 16px 24px; }
+      nav { padding: 16px 24px; gap: 14px; }
       .nav-links { display: none; }
-      .about-inner, .contact-inner { grid-template-columns: 1fr; }
+      .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 54px; }
+      .about-inner, .contact-inner, .menu-inner, .gallery-inner { padding: 0 24px; }
+      .about-images { height: 460px; max-width: 620px; width: 100%; margin: 0 auto; }
+      .about-img-main { height: 370px; }
+      .about-img-accent { height: 240px; }
+      #about, #menu, #gallery, #contact { padding: 86px 0; }
       .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-item { min-height: 220px; }
       .gallery-item:first-child { grid-row: span 1; }
-      .menu-inner, .gallery-inner { padding: 0 24px; }
+      .contact-map { min-height: 340px; }
       footer { flex-direction: column; gap: 16px; text-align: center; padding: 36px 24px; }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 12px 14px; }
+      nav.scrolled { padding: 10px 14px; }
+      .nav-logo { font-size: 1.35rem; letter-spacing: 1px; }
+      .nav-actions { gap: 8px; }
+      .lang-switch { padding: 3px; }
+      .lang-btn { width: 30px; height: 28px; font-size: .62rem; }
+      .cart-btn { padding: 9px 13px; font-size: 0; min-height: 38px; }
+      .cart-btn::before { content: attr(data-cart-label); font-size: .72rem; letter-spacing: 1px; }
+
+      #hero { min-height: 100svh; height: auto; padding: 110px 18px 88px; }
+      .hero-content { width: min(100%, 420px); }
+      .hero-tag { font-size: .64rem; letter-spacing: 2.8px; margin-bottom: 16px; }
+      .hero-title { font-size: clamp(3rem, 17vw, 4.7rem); }
+      .hero-sub { font-size: .94rem; margin-bottom: 30px; }
+      .hero-ctas { flex-direction: column; align-items: stretch; gap: 12px; }
+      .btn-primary, .btn-outline { width: 100%; padding: 13px 18px; }
+      .hero-scroll { bottom: 22px; }
+
+      .section-header { margin-bottom: 42px; }
+      .about-inner, .contact-inner, .menu-inner, .gallery-inner { padding: 0 18px; }
+      .about-images { height: auto; display: grid; gap: 14px; }
+      .about-img-main,
+      .about-img-accent {
+        position: static; width: 100%; height: auto; aspect-ratio: 4 / 3;
+        box-shadow: none; border: 0;
+      }
+      .about-badge { top: 50%; left: 50%; width: 82px; height: 82px; }
+      .about-features { grid-template-columns: 1fr; gap: 16px; }
+
+      .menu-tabs { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 8px; margin-bottom: 34px; scroll-snap-type: x mandatory; }
+      .tab-btn { flex: 0 0 auto; scroll-snap-align: start; padding: 10px 16px; white-space: nowrap; }
+      .menu-grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+      .menu-card-img { height: 210px; }
+      .menu-card-body { padding: 18px; }
+
+      .gallery-grid { grid-template-columns: 1fr; gap: 10px; margin-top: 34px; }
+      .gallery-item { min-height: 230px; }
+
+      .contact-item { gap: 14px; }
+      .contact-icon { width: 38px; height: 38px; }
+      .contact-hours, .busy-chart, .payment-options { padding: 28px 20px 22px; }
+      .hours-row { align-items: flex-start; gap: 8px; flex-direction: column; }
+      .busy-days { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .busy-bars { height: 78px; }
+      .busy-bar-tip { display: none; }
+      .payment-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .contact-map { min-height: 300px; }
+
+      .cart-drawer { width: 100%; }
+      .cart-header { padding: 22px 20px; }
+      .cart-items { padding: 18px 20px; }
+      .cart-footer { padding: 20px; }
+      .cart-item { align-items: flex-start; gap: 12px; }
+      .cart-item-qty { flex-direction: column; gap: 6px; }
+      .toast { width: calc(100% - 32px); text-align: center; padding: 12px 16px; }
+    }
+
+    @media (max-width: 420px) {
+      .nav-logo { font-size: 1.18rem; }
+      .lang-btn { width: 28px; }
+      .cart-btn { padding: 8px 11px; }
+      .cart-count { right: -4px; }
+      .hero-title { font-size: clamp(2.7rem, 16vw, 4rem); }
+      .menu-card-footer { align-items: flex-start; flex-direction: column; gap: 14px; }
+      .qty-ctrl { width: 100%; justify-content: space-between; }
+      .qty-btn { width: 36px; height: 36px; }
+      .payment-grid { grid-template-columns: 1fr; }
+      .busy-days { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -721,15 +820,22 @@
 <nav id="mainNav">
   <a class="nav-logo" href="#">Aroma<span> Café</span></a>
   <ul class="nav-links">
-    <li><a href="#about">Hakkımızda</a></li>
-    <li><a href="#menu">Menü</a></li>
-    <li><a href="#gallery">Galeri</a></li>
-    <li><a href="#contact">İletişim</a></li>
+    <li><a href="#about" data-i18n="nav.about">Hakkımızda</a></li>
+    <li><a href="#menu" data-i18n="nav.menu">Menü</a></li>
+    <li><a href="#gallery" data-i18n="nav.gallery">Galeri</a></li>
+    <li><a href="#contact" data-i18n="nav.contact">İletişim</a></li>
   </ul>
-  <button class="cart-btn" onclick="toggleCart()">
-    🛒 Sepetim
-    <span class="cart-count" id="cartCount">0</span>
-  </button>
+  <div class="nav-actions">
+    <div class="lang-switch" aria-label="Dil seçimi">
+      <button type="button" class="lang-btn active" data-lang="tr">TR</button>
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="ru">RU</button>
+    </div>
+    <button class="cart-btn" onclick="toggleCart()" data-cart-label="Sepetim">
+      🛒 <span data-i18n="cart.button">Sepetim</span>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -737,17 +843,17 @@
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="hero-tag">Samsun · 2018'den Bu Yana</p>
-    <h1 class="hero-title">Her yudumda<br/><em>bir hikâye</em></h1>
-    <p class="hero-sub">Özenle seçilmiş çekirdeklerden demlenen kahveler, el yapımı tatlılar ve sıcacık bir atmosfer sizi bekliyor.</p>
+    <p class="hero-tag" data-i18n="hero.tag">Samsun · 2018'den Bu Yana</p>
+    <h1 class="hero-title" data-i18n-html="hero.title">Her yudumda<br/><em>bir hikâye</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Özenle seçilmiş çekirdeklerden demlenen kahveler, el yapımı tatlılar ve sıcacık bir atmosfer sizi bekliyor.</p>
     <div class="hero-ctas">
-      <a href="#menu" class="btn-primary">Menüyü Keşfet</a>
-      <a href="#about" class="btn-outline">Hakkımızda</a>
+      <a href="#menu" class="btn-primary" data-i18n="hero.menuCta">Menüyü Keşfet</a>
+      <a href="#about" class="btn-outline" data-i18n="hero.aboutCta">Hakkımızda</a>
     </div>
   </div>
   <div class="hero-scroll">
     <div class="hero-scroll-line"></div>
-    <span>Aşağı Kaydır</span>
+    <span data-i18n="hero.scroll">Aşağı Kaydır</span>
   </div>
 </section>
 
@@ -763,34 +869,34 @@
         alt="Kahve hazırlama" loading="lazy" />
       <div class="about-badge">
         <strong>7+</strong>
-        <span>Yıldır<br/>Yanınızda</span>
+        <span data-i18n-html="about.badge">Yıldır<br/>Yanınızda</span>
       </div>
     </div>
     <div class="about-text">
       <div class="section-header">
-        <p class="section-tag">Hikâyemiz</p>
-        <h2 class="section-title">Sadece bir kafe<br/>değil, <em>bir sığınak</em></h2>
+        <p class="section-tag" data-i18n="about.tag">Hikâyemiz</p>
+        <h2 class="section-title" data-i18n-html="about.title">Sadece bir kafe<br/>değil, <em>bir sığınak</em></h2>
         <div class="section-divider"></div>
       </div>
-      <p class="about-desc">
+      <p class="about-desc" data-i18n="about.desc">
         2018'de küçük bir tutkuyla açılan Aroma Café, bugün Samsun'un en sevilen buluşma noktalarından biri hâline geldi. Her sabah taze çekilen kahvemiz, gün boyunca hazırlanan el yapımı tatlılarımız ve güler yüzlü ekibimizle sizi ağırlamaktan gurur duyuyoruz.
       </p>
       <div class="about-features">
         <div class="about-feat">
-          <strong>Özel Harmanlar</strong>
-          <span>Dünyadan seçme çekirdekler</span>
+          <strong data-i18n="about.feature1Title">Özel Harmanlar</strong>
+          <span data-i18n="about.feature1Text">Dünyadan seçme çekirdekler</span>
         </div>
         <div class="about-feat">
-          <strong>El Yapımı Tatlılar</strong>
-          <span>Her gün taze üretim</span>
+          <strong data-i18n="about.feature2Title">El Yapımı Tatlılar</strong>
+          <span data-i18n="about.feature2Text">Her gün taze üretim</span>
         </div>
         <div class="about-feat">
-          <strong>Huzurlu Ortam</strong>
-          <span>Çalışmak ya da dinlenmek için</span>
+          <strong data-i18n="about.feature3Title">Huzurlu Ortam</strong>
+          <span data-i18n="about.feature3Text">Çalışmak ya da dinlenmek için</span>
         </div>
         <div class="about-feat">
-          <strong>Ücretsiz Wi‑Fi</strong>
-          <span>Tüm gün kesintisiz</span>
+          <strong data-i18n="about.feature4Title">Ücretsiz Wi‑Fi</strong>
+          <span data-i18n="about.feature4Text">Tüm gün kesintisiz</span>
         </div>
       </div>
     </div>
@@ -801,8 +907,8 @@
 <section id="menu">
   <div class="menu-inner">
     <div class="section-header">
-      <p class="section-tag">Lezzetlerimiz</p>
-      <h2 class="section-title">Menümüzü <em>keşfedin</em></h2>
+      <p class="section-tag" data-i18n="menu.tag">Lezzetlerimiz</p>
+      <h2 class="section-title" data-i18n-html="menu.title">Menümüzü <em>keşfedin</em></h2>
       <div class="section-divider"></div>
     </div>
 
@@ -815,8 +921,8 @@
 <section id="gallery">
   <div class="gallery-inner">
     <div class="section-header" style="color:var(--cream)">
-      <p class="section-tag" style="color:var(--gold)">Atmosfer</p>
-      <h2 class="section-title" style="color:var(--cream)">Aroma'da <em>bir gün</em></h2>
+      <p class="section-tag" style="color:var(--gold)" data-i18n="gallery.tag">Atmosfer</p>
+      <h2 class="section-title" style="color:var(--cream)" data-i18n-html="gallery.title">Aroma'da <em>bir gün</em></h2>
       <div class="section-divider"></div>
     </div>
     <div class="gallery-grid">
@@ -844,29 +950,29 @@
   <div class="contact-inner">
     <div class="contact-info">
       <div class="section-header">
-        <p class="section-tag">Bize Ulaşın</p>
-        <h2 class="section-title">Her zaman<br/><em>buradayız</em></h2>
+        <p class="section-tag" data-i18n="contact.tag">Bize Ulaşın</p>
+        <h2 class="section-title" data-i18n-html="contact.title">Her zaman<br/><em>buradayız</em></h2>
         <div class="section-divider"></div>
       </div>
       <div class="contact-items">
         <div class="contact-item">
           <div class="contact-icon">📍</div>
           <div class="contact-detail">
-            <strong>Adres</strong>
+            <strong data-i18n="contact.addressTitle">Adres</strong>
             <p>Kahve Mah. Kahve Sk. No:12<br/>İlkadım / Samsun</p>
           </div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">📞</div>
           <div class="contact-detail">
-            <strong>Telefon</strong>
+            <strong data-i18n="contact.phoneTitle">Telefon</strong>
             <p>+90 362 123 45 67</p>
           </div>
         </div>
         <div class="contact-item">
           <div class="contact-icon">✉️</div>
           <div class="contact-detail">
-            <strong>E-Posta</strong>
+            <strong data-i18n="contact.emailTitle">E-Posta</strong>
             <p>merhaba@arom.com.tr</p>
           </div>
         </div>
@@ -879,16 +985,16 @@
         </div>
       </div>
       <div class="contact-hours">
-        <h3>Çalışma Saatleri</h3>
-        <div class="hours-row"><strong>Pazartesi – Cuma</strong><span>08:00 – 22:00</span></div>
-        <div class="hours-row"><strong>Cumartesi</strong><span>09:00 – 23:00</span></div>
-        <div class="hours-row"><strong>Pazar</strong><span>10:00 – 21:00</span></div>
+        <h3 data-i18n="hours.title">Çalışma Saatleri</h3>
+        <div class="hours-row"><strong data-i18n="hours.weekdays">Pazartesi – Cuma</strong><span>08:00 – 22:00</span></div>
+        <div class="hours-row"><strong data-i18n="hours.saturday">Cumartesi</strong><span>09:00 – 23:00</span></div>
+        <div class="hours-row"><strong data-i18n="hours.sunday">Pazar</strong><span>10:00 – 21:00</span></div>
       </div>
 
       <div class="busy-chart">
         <div class="busy-header">
-          <h3>Yoğunluk Saatleri</h3>
-          <span class="busy-now"><span class="busy-now-dot"></span>Şu anda: <strong id="busyNow">—</strong></span>
+          <h3 data-i18n="busy.title">Yoğunluk Saatleri</h3>
+          <span class="busy-now"><span class="busy-now-dot"></span><span data-i18n="busy.nowLabel">Şu anda:</span> <strong id="busyNow">—</strong></span>
         </div>
         <div class="busy-days" id="busyDays"></div>
         <div class="busy-bars" id="busyBars"></div>
@@ -901,19 +1007,19 @@
       </div>
 
       <div class="payment-options">
-        <h3>Ödeme Seçenekleri</h3>
+        <h3 data-i18n="payment.title">Ödeme Seçenekleri</h3>
         <div class="payment-grid">
           <div class="payment-item">
             <div class="payment-icon">💵</div>
-            <div class="payment-label">Nakit</div>
+            <div class="payment-label" data-i18n="payment.cash">Nakit</div>
           </div>
           <div class="payment-item">
             <div class="payment-icon">💳</div>
-            <div class="payment-label">Kredi Kartı</div>
+            <div class="payment-label" data-i18n="payment.credit">Kredi Kartı</div>
           </div>
           <div class="payment-item">
             <div class="payment-icon">🏦</div>
-            <div class="payment-label">Banka Kartı</div>
+            <div class="payment-label" data-i18n="payment.debit">Banka Kartı</div>
           </div>
           <div class="payment-item">
             <div class="payment-icon">🎫</div>
@@ -925,7 +1031,7 @@
           </div>
           <div class="payment-item">
             <div class="payment-icon">📱</div>
-            <div class="payment-label">Mobil Ödeme</div>
+            <div class="payment-label" data-i18n="payment.mobile">Mobil Ödeme</div>
           </div>
         </div>
       </div>
@@ -943,37 +1049,37 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Aroma<span> Café</span></div>
-  <p>© 2025 Aroma Café Samsun — Tüm hakları saklıdır.</p>
-  <p>Sevgiyle demlenmiş ☕</p>
+  <p data-i18n="footer.rights">© 2025 Aroma Café Samsun — Tüm hakları saklıdır.</p>
+  <p data-i18n="footer.tagline">Sevgiyle demlenmiş ☕</p>
 </footer>
 
 <!-- CART DRAWER -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
-    <h2>Siparişim</h2>
-    <button class="cart-close" onclick="toggleCart()">✕</button>
+    <h2 data-i18n="cart.title">Siparişim</h2>
+    <button class="cart-close" onclick="toggleCart()" aria-label="Sepeti kapat">✕</button>
   </div>
   <div class="cart-items" id="cartItems">
     <div class="cart-empty" id="cartEmpty">
       <div class="cart-empty-icon">☕</div>
-      <p>Sepetiniz boş.<br/>Menüden ürün ekleyin!</p>
+      <p data-i18n-html="cart.empty">Sepetiniz boş.<br/>Menüden ürün ekleyin!</p>
     </div>
   </div>
   <div class="cart-footer" id="cartFooter" style="display:none">
     <div class="cart-subtotal">
-      <span>Ara Toplam</span>
+      <span data-i18n="cart.subtotal">Ara Toplam</span>
       <span id="subtotalVal">₺0</span>
     </div>
     <div class="cart-subtotal">
-      <span>Servis Ücreti (ücretsiz)</span>
+      <span data-i18n="cart.service">Servis Ücreti (ücretsiz)</span>
       <span>₺0</span>
     </div>
     <div class="cart-total">
-      <span>Toplam</span>
+      <span data-i18n="cart.total">Toplam</span>
       <span id="totalVal">₺0</span>
     </div>
-    <button class="checkout-btn" onclick="clearCart()">Sepeti Temizle</button>
+    <button class="checkout-btn" onclick="clearCart()" data-i18n="cart.clear">Sepeti Temizle</button>
   </div>
 </div>
 
@@ -981,6 +1087,349 @@
 <div class="toast" id="toast"></div>
 
 <script>
+const translations = {
+  tr: {
+    pageTitle: "Aroma Café — Samsun",
+    nav: { about: "Hakkımızda", menu: "Menü", gallery: "Galeri", contact: "İletişim" },
+    cart: {
+      button: "Sepetim",
+      title: "Siparişim",
+      empty: "Sepetiniz boş.<br/>Menüden ürün ekleyin!",
+      subtotal: "Ara Toplam",
+      service: "Servis Ücreti (ücretsiz)",
+      total: "Toplam",
+      clear: "Sepeti Temizle",
+      added: "sepete eklendi ☕",
+      cleared: "Sepet temizlendi"
+    },
+    hero: {
+      tag: "Samsun · 2018'den Bu Yana",
+      title: "Her yudumda<br/><em>bir hikâye</em>",
+      sub: "Özenle seçilmiş çekirdeklerden demlenen kahveler, el yapımı tatlılar ve sıcacık bir atmosfer sizi bekliyor.",
+      menuCta: "Menüyü Keşfet",
+      aboutCta: "Hakkımızda",
+      scroll: "Aşağı Kaydır"
+    },
+    about: {
+      badge: "Yıldır<br/>Yanınızda",
+      tag: "Hikâyemiz",
+      title: "Sadece bir kafe<br/>değil, <em>bir sığınak</em>",
+      desc: "2018'de küçük bir tutkuyla açılan Aroma Café, bugün Samsun'un en sevilen buluşma noktalarından biri hâline geldi. Her sabah taze çekilen kahvemiz, gün boyunca hazırlanan el yapımı tatlılarımız ve güler yüzlü ekibimizle sizi ağırlamaktan gurur duyuyoruz.",
+      feature1Title: "Özel Harmanlar",
+      feature1Text: "Dünyadan seçme çekirdekler",
+      feature2Title: "El Yapımı Tatlılar",
+      feature2Text: "Her gün taze üretim",
+      feature3Title: "Huzurlu Ortam",
+      feature3Text: "Çalışmak ya da dinlenmek için",
+      feature4Title: "Ücretsiz Wi‑Fi",
+      feature4Text: "Tüm gün kesintisiz"
+    },
+    menu: {
+      tag: "Lezzetlerimiz",
+      title: "Menümüzü <em>keşfedin</em>",
+      categories: {
+        "En Çok Satanlar": "En Çok Satanlar",
+        "Sıcak Kahveler": "Sıcak Kahveler",
+        "Soğuk İçecekler": "Soğuk İçecekler",
+        "Sıcak İçecekler": "Sıcak İçecekler",
+        "Tatlılar": "Tatlılar",
+        "Atıştırmalıklar": "Atıştırmalıklar"
+      }
+    },
+    gallery: { tag: "Atmosfer", title: "Aroma'da <em>bir gün</em>" },
+    contact: {
+      tag: "Bize Ulaşın",
+      title: "Her zaman<br/><em>buradayız</em>",
+      addressTitle: "Adres",
+      phoneTitle: "Telefon",
+      emailTitle: "E-Posta"
+    },
+    hours: {
+      title: "Çalışma Saatleri",
+      weekdays: "Pazartesi – Cuma",
+      saturday: "Cumartesi",
+      sunday: "Pazar"
+    },
+    busy: {
+      title: "Yoğunluk Saatleri",
+      nowLabel: "Şu anda:",
+      daysShort: ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"],
+      levels: ["Sakin", "Orta yoğunluk", "Yoğun", "Çok yoğun"],
+      closed: "Kapalı"
+    },
+    payment: {
+      title: "Ödeme Seçenekleri",
+      cash: "Nakit",
+      credit: "Kredi Kartı",
+      debit: "Banka Kartı",
+      mobile: "Mobil Ödeme"
+    },
+    footer: {
+      rights: "© 2025 Aroma Café Samsun — Tüm hakları saklıdır.",
+      tagline: "Sevgiyle demlenmiş ☕"
+    }
+  },
+  en: {
+    pageTitle: "Aroma Café — Samsun",
+    nav: { about: "About", menu: "Menu", gallery: "Gallery", contact: "Contact" },
+    cart: {
+      button: "Cart",
+      title: "My Order",
+      empty: "Your cart is empty.<br/>Add something from the menu!",
+      subtotal: "Subtotal",
+      service: "Service Fee (free)",
+      total: "Total",
+      clear: "Clear Cart",
+      added: "added to cart ☕",
+      cleared: "Cart cleared"
+    },
+    hero: {
+      tag: "Samsun · Since 2018",
+      title: "A story in<br/><em>every sip</em>",
+      sub: "Carefully selected beans, handmade desserts and a warm atmosphere are waiting for you.",
+      menuCta: "Explore Menu",
+      aboutCta: "About Us",
+      scroll: "Scroll Down"
+    },
+    about: {
+      badge: "Years<br/>With You",
+      tag: "Our Story",
+      title: "Not just a café,<br/><em>a shelter</em>",
+      desc: "Opened in 2018 with a small passion, Aroma Café has become one of Samsun's favorite meeting points. We are proud to welcome you with freshly ground coffee every morning, handmade desserts throughout the day and a friendly team.",
+      feature1Title: "Signature Blends",
+      feature1Text: "Selected beans from around the world",
+      feature2Title: "Handmade Desserts",
+      feature2Text: "Freshly made every day",
+      feature3Title: "Peaceful Atmosphere",
+      feature3Text: "For working or unwinding",
+      feature4Title: "Free Wi‑Fi",
+      feature4Text: "Stable connection all day"
+    },
+    menu: {
+      tag: "Our Flavors",
+      title: "Explore <em>our menu</em>",
+      categories: {
+        "En Çok Satanlar": "Best Sellers",
+        "Sıcak Kahveler": "Hot Coffees",
+        "Soğuk İçecekler": "Cold Drinks",
+        "Sıcak İçecekler": "Hot Drinks",
+        "Tatlılar": "Desserts",
+        "Atıştırmalıklar": "Snacks"
+      }
+    },
+    gallery: { tag: "Atmosphere", title: "A day at <em>Aroma</em>" },
+    contact: {
+      tag: "Reach Us",
+      title: "We are always<br/><em>here</em>",
+      addressTitle: "Address",
+      phoneTitle: "Phone",
+      emailTitle: "Email"
+    },
+    hours: {
+      title: "Opening Hours",
+      weekdays: "Monday – Friday",
+      saturday: "Saturday",
+      sunday: "Sunday"
+    },
+    busy: {
+      title: "Popular Times",
+      nowLabel: "Right now:",
+      daysShort: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      levels: ["Calm", "Moderate", "Busy", "Very busy"],
+      closed: "Closed"
+    },
+    payment: {
+      title: "Payment Options",
+      cash: "Cash",
+      credit: "Credit Card",
+      debit: "Debit Card",
+      mobile: "Mobile Payment"
+    },
+    footer: {
+      rights: "© 2025 Aroma Café Samsun — All rights reserved.",
+      tagline: "Brewed with love ☕"
+    }
+  },
+  ru: {
+    pageTitle: "Aroma Café — Самсун",
+    nav: { about: "О нас", menu: "Меню", gallery: "Галерея", contact: "Контакты" },
+    cart: {
+      button: "Корзина",
+      title: "Мой заказ",
+      empty: "Корзина пуста.<br/>Добавьте позицию из меню!",
+      subtotal: "Промежуточный итог",
+      service: "Сервисный сбор (бесплатно)",
+      total: "Итого",
+      clear: "Очистить корзину",
+      added: "добавлено в корзину ☕",
+      cleared: "Корзина очищена"
+    },
+    hero: {
+      tag: "Самсун · С 2018 года",
+      title: "История<br/><em>в каждом глотке</em>",
+      sub: "Отборные зерна, десерты ручной работы и теплая атмосфера уже ждут вас.",
+      menuCta: "Смотреть меню",
+      aboutCta: "О нас",
+      scroll: "Листайте вниз"
+    },
+    about: {
+      badge: "Лет<br/>с вами",
+      tag: "Наша история",
+      title: "Не просто кафе,<br/><em>а уютное место</em>",
+      desc: "Aroma Café открылось в 2018 году с маленькой страсти к кофе и стало одним из любимых мест встреч в Самсуне. Мы рады встречать вас свежемолотым кофе, десертами ручной работы и теплой командой.",
+      feature1Title: "Фирменные смеси",
+      feature1Text: "Отборные зерна со всего мира",
+      feature2Title: "Десерты ручной работы",
+      feature2Text: "Свежие каждый день",
+      feature3Title: "Спокойная атмосфера",
+      feature3Text: "Для работы и отдыха",
+      feature4Title: "Бесплатный Wi‑Fi",
+      feature4Text: "Стабильная связь весь день"
+    },
+    menu: {
+      tag: "Наши вкусы",
+      title: "Откройте <em>наше меню</em>",
+      categories: {
+        "En Çok Satanlar": "Хиты продаж",
+        "Sıcak Kahveler": "Горячий кофе",
+        "Soğuk İçecekler": "Холодные напитки",
+        "Sıcak İçecekler": "Горячие напитки",
+        "Tatlılar": "Десерты",
+        "Atıştırmalıklar": "Закуски"
+      }
+    },
+    gallery: { tag: "Атмосфера", title: "День в <em>Aroma</em>" },
+    contact: {
+      tag: "Свяжитесь с нами",
+      title: "Мы всегда<br/><em>рядом</em>",
+      addressTitle: "Адрес",
+      phoneTitle: "Телефон",
+      emailTitle: "Эл. почта"
+    },
+    hours: {
+      title: "Часы работы",
+      weekdays: "Понедельник – Пятница",
+      saturday: "Суббота",
+      sunday: "Воскресенье"
+    },
+    busy: {
+      title: "Загруженность",
+      nowLabel: "Сейчас:",
+      daysShort: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"],
+      levels: ["Спокойно", "Средне", "Много гостей", "Очень много"],
+      closed: "Закрыто"
+    },
+    payment: {
+      title: "Способы оплаты",
+      cash: "Наличные",
+      credit: "Кредитная карта",
+      debit: "Дебетовая карта",
+      mobile: "Мобильная оплата"
+    },
+    footer: {
+      rights: "© 2025 Aroma Café Самсун — Все права защищены.",
+      tagline: "Сварено с любовью ☕"
+    }
+  }
+};
+
+const menuText = {
+  en: {
+    1: ["Turkish Coffee", "Brewed in a traditional cezve and served with purified water."],
+    2: ["Espresso", "A single shot with intense aroma and a rich crema."],
+    3: ["Cappuccino", "Espresso, steamed milk and dense foam in harmony."],
+    4: ["Latte", "Soft espresso, plenty of steamed milk and delicate latte art."],
+    5: ["Americano", "A classic prepared by adding hot water to espresso."],
+    6: ["Flat White", "Double ristretto meets creamy steamed milk."],
+    7: ["Cold Brew", "Cold brewed for 12 hours, smooth and full-bodied."],
+    8: ["Iced Latte", "Espresso over cold milk and ice for a refreshing break."],
+    9: ["Milkshake", "Chocolate, vanilla or strawberry; prepared to your taste."],
+    10: ["Lemonade", "Fresh lemon, mint and a little ice for a bright refreshment."],
+    11: ["Water", "Cold mineral water, 500 ml."],
+    12: ["Tea", "Black Sea tea served fresh from the pot."],
+    13: ["Herbal Tea", "Linden, mint-lemon or chamomile depending on the daily selection."],
+    14: ["Hot Chocolate", "Thick and creamy, made with Belgian chocolate."],
+    15: ["Matcha Latte", "Japanese matcha tea with gently steamed milk."],
+    16: ["Cheesecake", "Creamy New York style, served with fresh fruit sauce."],
+    17: ["Tiramisu", "The Italian classic with espresso-soaked ladyfingers and mascarpone."],
+    18: ["Brownie", "Warm chocolate cake served with vanilla ice cream."],
+    19: ["Waffle", "Crispy waffle topped with Nutella, banana and strawberry."],
+    20: ["Muffin", "Freshly baked daily, with chocolate or fruit."],
+    21: ["Croissant", "Buttery layered French pastry; plain or with cheese."],
+    22: ["Sandwich", "Chicken-avocado or tuna in multigrain bread."],
+    23: ["Toast", "Classic café toast prepared with kashar cheese and tomato."],
+    24: ["Cookie", "Daily baked chocolate chip or cinnamon cookie."]
+  },
+  ru: {
+    1: ["Кофе по-турецки", "Готовится в традиционной джезве и подается с очищенной водой."],
+    2: ["Эспрессо", "Один шот с насыщенным ароматом и плотной крема."],
+    3: ["Капучино", "Гармония эспрессо, парового молока и густой пены."],
+    4: ["Латте", "Мягкий эспрессо, много парового молока и нежный латте-арт."],
+    5: ["Американо", "Классика: эспрессо с добавлением горячей воды."],
+    6: ["Флэт уайт", "Двойной ристретто с кремовым паровым молоком."],
+    7: ["Колд брю", "12 часов холодного заваривания, мягкий и насыщенный вкус."],
+    8: ["Айс латте", "Эспрессо с холодным молоком и льдом для освежающей паузы."],
+    9: ["Милкшейк", "Шоколадный, ванильный или клубничный на ваш выбор."],
+    10: ["Лимонад", "Свежий лимон, мята и немного льда для яркой свежести."],
+    11: ["Вода", "Холодная минеральная вода, 500 мл."],
+    12: ["Чай", "Черноморский чай, свежая подача из чайника."],
+    13: ["Травяной чай", "Липа, мята-лимон или ромашка по выбору дня."],
+    14: ["Горячий шоколад", "Густой и кремовый, приготовлен из бельгийского шоколада."],
+    15: ["Матча латте", "Японский чай матча с нежным паровым молоком."],
+    16: ["Чизкейк", "Кремовый нью-йоркский стиль с соусом из свежих ягод."],
+    17: ["Тирамису", "Итальянская классика с савоярди, эспрессо и маскарпоне."],
+    18: ["Брауни", "Теплый шоколадный пирог с ванильным мороженым."],
+    19: ["Вафля", "Хрустящая вафля с Nutella, бананом и клубникой."],
+    20: ["Маффин", "Свежая выпечка дня, шоколадная или фруктовая."],
+    21: ["Круассан", "Слоеная французская выпечка с маслом; простой или с сыром."],
+    22: ["Сэндвич", "Курица-авокадо или тунец на мультизерновом хлебе."],
+    23: ["Тост", "Классический кафе-тост с сыром кашар и томатом."],
+    24: ["Печенье", "Свежая выпечка дня: шоколадная крошка или корица."]
+  }
+};
+
+let activeLang = "tr";
+
+function t(key) {
+  return key.split('.').reduce((value, part) => value?.[part], translations[activeLang]) ?? key;
+}
+
+function translateStatic() {
+  document.documentElement.lang = activeLang;
+  document.title = translations[activeLang].pageTitle;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    el.textContent = t(el.dataset.i18n);
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    el.innerHTML = t(el.dataset.i18nHtml);
+  });
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === activeLang);
+  });
+  document.querySelector('.cart-btn')?.setAttribute('data-cart-label', t('cart.button'));
+}
+
+function categoryLabel(category) {
+  return translations[activeLang].menu.categories[category] || category;
+}
+
+function itemText(item) {
+  const translated = menuText[activeLang]?.[item.id];
+  return {
+    name: translated?.[0] || item.name,
+    desc: translated?.[1] || item.desc,
+  };
+}
+
+function applyLanguage(lang) {
+  activeLang = translations[lang] ? lang : "tr";
+  translateStatic();
+  renderTabs();
+  renderGrid();
+  updateCartUI();
+  renderBusy();
+}
+
 /* ─── MENU DATA ─── */
 const menuData = {
   "En Çok Satanlar": [
@@ -1038,7 +1487,7 @@ function renderTabs() {
   Object.keys(menuData).forEach(cat => {
     const btn = document.createElement('button');
     btn.className = 'tab-btn' + (cat === activeCategory ? ' active' : '');
-    btn.textContent = cat;
+    btn.textContent = categoryLabel(cat);
     btn.onclick = () => { activeCategory = cat; renderTabs(); renderGrid(); };
     tabs.appendChild(btn);
   });
@@ -1050,6 +1499,7 @@ function renderGrid() {
   grid.innerHTML = '';
   menuData[activeCategory].forEach(item => {
     const qty = cart[item.id]?.qty || 0;
+    const text = itemText(item);
     const card = document.createElement('div');
     card.className = 'menu-card';
 
@@ -1058,17 +1508,17 @@ function renderGrid() {
               onmouseenter="playMenuVideo(this)"
               onmouseleave="pauseMenuVideo(this)">
            <video src="${item.video}#t=0.1" muted loop playsinline preload="metadata"
-                  aria-label="${item.name}"></video>
+                  aria-label="${text.name}"></video>
          </div>`
       : `<div class="menu-card-img">
-           <img src="${item.img}" alt="${item.name}" loading="lazy" />
+           <img src="${item.img}" alt="${text.name}" loading="lazy" />
          </div>`;
 
     card.innerHTML = `
       ${mediaHtml}
       <div class="menu-card-body">
-        <div class="menu-card-name">${item.name}</div>
-        <div class="menu-card-desc">${item.desc}</div>
+        <div class="menu-card-name">${text.name}</div>
+        <div class="menu-card-desc">${text.desc}</div>
         <div class="menu-card-footer">
           <div class="menu-card-price">₺${item.price}</div>
           <div class="qty-ctrl">
@@ -1115,7 +1565,7 @@ function changeQty(id, delta) {
   const el = document.getElementById('qty-' + id);
   if (el) el.textContent = cart[id]?.qty || 0;
 
-  if (delta > 0 && found) showToast(`${found.name} sepete eklendi ☕`);
+  if (delta > 0 && found) showToast(`${itemText(found).name} ${t('cart.added')}`);
   updateCartUI();
 }
 
@@ -1141,12 +1591,13 @@ function updateCartUI() {
     cartEmptyEl.style.display = 'none';
     cartFooter.style.display  = 'block';
     items.forEach(({ item, qty }) => {
+      const text = itemText(item);
       const div = document.createElement('div');
       div.className = 'cart-item';
       div.innerHTML = `
-        <img class="cart-item-img" src="${item.img}" alt="${item.name}" />
+        <img class="cart-item-img" src="${item.img}" alt="${text.name}" />
         <div class="cart-item-info">
-          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-name">${text.name}</div>
           <div class="cart-item-price">₺${item.price} × ${qty} = <strong>₺${item.price * qty}</strong></div>
         </div>
         <div class="cart-item-qty">
@@ -1176,7 +1627,7 @@ function clearCart() {
   cart = {};
   updateCartUI();
   renderGrid();
-  showToast('Sepet temizlendi');
+  showToast(t('cart.cleared'));
 }
 
 /* ─── TOAST ─── */
@@ -1212,10 +1663,11 @@ function todayIdx() {
   return d === 0 ? 6 : d - 1;
 }
 function levelText(v) {
-  if (v < 30) return 'Sakin';
-  if (v < 60) return 'Orta yoğunluk';
-  if (v < 80) return 'Yoğun';
-  return 'Çok yoğun';
+  const levels = t('busy.levels');
+  if (v < 30) return levels[0];
+  if (v < 60) return levels[1];
+  if (v < 80) return levels[2];
+  return levels[3];
 }
 // Yoğunluk yüzdesine göre renk: 0% → açık #FFDF84, 100% → siyaha yakın espresso
 function busyColor(v) {
@@ -1236,13 +1688,14 @@ function renderBusy() {
   // Gün butonları
   const daysEl = document.getElementById('busyDays');
   daysEl.innerHTML = '';
+  const localizedDays = t('busy.daysShort');
   dayShort.forEach((s, i) => {
     const btn = document.createElement('button');
     let cls = 'busy-day-btn';
     if (i === activeBusyIdx) cls += ' active';
     if (i === tIdx) cls += ' today';
     btn.className = cls;
-    btn.textContent = s;
+    btn.textContent = localizedDays[i] || s;
     btn.onclick = () => { activeBusyIdx = i; renderBusy(); };
     daysEl.appendChild(btn);
   });
@@ -1268,15 +1721,15 @@ function renderBusy() {
   if (nowH >= 8 && nowH <= 23) {
     nowEl.textContent = levelText(todayData[nowH - 8]);
   } else {
-    nowEl.textContent = 'Kapalı';
+    nowEl.textContent = t('busy.closed');
   }
 }
 
 /* ─── INIT ─── */
-renderTabs();
-renderGrid();
-updateCartUI();
-renderBusy();
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+});
+applyLanguage('tr');
 </script>
 </body>
 </html>
