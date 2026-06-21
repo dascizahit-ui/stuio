@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AkademiPlus – Eğitim & Kurs Merkezi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #12234a;
+    --gold: #F5A623;
+    --gold-light: #FFD580;
+    --cream: #F8F6F0;
+    --light: #E8EDF5;
+    --text: #2D3748;
+    --muted: #718096;
+    --white: #ffffff;
+    --success: #48BB78;
+    --radius: 16px;
+    --shadow: 0 8px 40px rgba(10,22,40,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,22,40,0.96);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(245,166,35,0.15);
+    padding: 0 5%;
+    height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background 0.3s;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--gold); }
+  .nav-links {
+    display: flex; align-items: center; gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.78);
+    text-decoration: none;
+    font-size: 0.9rem; font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--navy) !important;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 700 !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
+
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px;
+  }
+  .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a6e 100%);
+    display: flex; align-items: center;
+    padding: 120px 5% 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-dots {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(245,166,35,0.07) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .hero-circle-1 {
+    position: absolute; right: -80px; top: -80px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,166,35,0.12);
+  }
+  .hero-circle-2 {
+    position: absolute; right: 60px; top: 60px;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,166,35,0.08);
+  }
+  .hero-glow {
+    position: absolute; right: 120px; top: 50%;
+    transform: translateY(-50%);
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-content { position: relative; z-index: 2; max-width: 640px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(245,166,35,0.15);
+    border: 1px solid rgba(245,166,35,0.3);
+    color: var(--gold);
+    padding: 7px 16px; border-radius: 100px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px;
+    text-transform: uppercase; margin-bottom: 28px;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 5vw, 4rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--white); margin-bottom: 24px;
+  }
+  .hero h1 em { color: var(--gold); font-style: normal; }
+  .hero p {
+    font-size: 1.1rem; line-height: 1.75;
+    color: rgba(255,255,255,0.68);
+    margin-bottom: 40px; max-width: 520px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy);
+    padding: 15px 32px; border-radius: 10px;
+    font-weight: 700; font-size: 0.95rem;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,0.35); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 15px 32px; border-radius: 10px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; border: 1.5px solid rgba(255,255,255,0.3); cursor: pointer;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    display: flex; gap: 40px; margin-top: 56px;
+    padding-top: 36px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-item {}
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 700;
+    color: var(--gold); display: block;
+  }
+  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+
+  .hero-visual {
+    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 16px; z-index: 2;
+  }
+  .hero-card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px; padding: 18px 22px;
+    color: var(--white); min-width: 220px;
+    animation: floatCard 3s ease-in-out infinite;
+  }
+  .hero-card:nth-child(2) { animation-delay: 1s; margin-left: 30px; }
+  .hero-card:nth-child(3) { animation-delay: 2s; }
+  @keyframes floatCard {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .card-icon { font-size: 1.4rem; margin-bottom: 8px; }
+  .card-title { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-bottom: 3px; letter-spacing: 0.5px; text-transform: uppercase; }
+  .card-value { font-weight: 700; font-size: 1rem; }
+  .card-sub { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+
+  /* ─── WAVE ─── */
+  .wave-divider { display: block; width: 100%; overflow: hidden; line-height: 0; }
+  .wave-divider svg { display: block; }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 90px 5%; }
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700; line-height: 1.2;
+    color: var(--navy); margin-bottom: 18px;
+  }
+  .section-desc {
+    font-size: 1rem; line-height: 1.75; color: var(--muted);
+    max-width: 560px;
+  }
+  .section-header { margin-bottom: 56px; }
+  .section-header.center { text-align: center; }
+  .section-header.center .section-desc { margin: 0 auto; }
+
+  /* ─── KURSLAR ─── */
+  .courses-section { background: var(--cream); }
+  .courses-filter {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px;
+  }
+  .filter-btn {
+    padding: 9px 20px; border-radius: 100px;
+    border: 1.5px solid #D1D9E8;
+    background: transparent; cursor: pointer;
+    font-size: 0.85rem; font-weight: 500; color: var(--muted);
+    transition: all 0.2s; font-family: 'Inter', sans-serif;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--navy); color: var(--white);
+    border-color: var(--navy);
+  }
+
+  .courses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .course-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(10,22,40,0.07);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .course-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .course-img {
+    height: 180px; position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 4rem;
+  }
+  .course-img.math { background: linear-gradient(135deg, #667EEA, #764BA2); }
+  .course-img.lang { background: linear-gradient(135deg, #f093fb, #f5576c); }
+  .course-img.science { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+  .course-img.lit { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+  .course-img.hist { background: linear-gradient(135deg, #fa709a, #fee140); }
+  .course-img.art { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
+  .course-badge {
+    position: absolute; top: 12px; left: 12px;
+    background: rgba(0,0,0,0.3); backdrop-filter: blur(8px);
+    color: #fff; font-size: 0.72rem; font-weight: 700;
+    padding: 4px 12px; border-radius: 100px; letter-spacing: 0.5px;
+  }
+  .course-body { padding: 22px; }
+  .course-category {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+  }
+  .course-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 10px; line-height: 1.35;
+  }
+  .course-meta {
+    display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+  }
+  .course-meta span {
+    font-size: 0.78rem; color: var(--muted);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .course-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 22px;
+    border-top: 1px solid var(--light);
+  }
+  .course-price { font-weight: 700; font-size: 1rem; color: var(--navy); }
+  .course-price span { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+  .enroll-btn {
+    background: var(--navy); color: var(--white);
+    padding: 8px 18px; border-radius: 8px;
+    font-size: 0.82rem; font-weight: 600;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .enroll-btn:hover { background: var(--gold); color: var(--navy); transform: translateY(-1px); }
+
+  /* ─── TAKVİM ─── */
+  .calendar-section { background: var(--white); }
+  .calendar-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  
+  .cal-widget {
+    background: var(--navy);
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(10,22,40,0.25);
+  }
+  .cal-header {
+    background: rgba(245,166,35,0.12);
+    padding: 24px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cal-month {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700; color: var(--white);
+  }
+  .cal-nav { display: flex; gap: 8px; }
+  .cal-nav button {
+    background: rgba(255,255,255,0.1); border: none;
+    color: var(--white); width: 34px; height: 34px;
+    border-radius: 8px; cursor: pointer; font-size: 1rem;
+    transition: background 0.2s;
+  }
+  .cal-nav button:hover { background: rgba(245,166,35,0.25); }
+  .cal-days-head {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    padding: 14px 20px 8px;
+  }
+  .cal-days-head span {
+    text-align: center; font-size: 0.72rem; font-weight: 700;
+    color: rgba(255,255,255,0.35); letter-spacing: 1px; text-transform: uppercase;
+  }
+  .cal-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    padding: 0 20px 24px; gap: 4px;
+  }
+  .cal-day {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; color: rgba(255,255,255,0.6);
+    border-radius: 8px; cursor: pointer; transition: all 0.15s;
+    position: relative;
+  }
+  .cal-day:hover { background: rgba(255,255,255,0.08); color: var(--white); }
+  .cal-day.today { background: var(--gold); color: var(--navy); font-weight: 700; }
+  .cal-day.has-event::after {
+    content: ''; position: absolute; bottom: 4px;
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--gold);
+  }
+  .cal-day.today.has-event::after { background: var(--navy); }
+  .cal-day.other-month { color: rgba(255,255,255,0.2); }
+
+  .events-list { display: flex; flex-direction: column; gap: 16px; }
+  .events-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 8px;
+  }
+  .events-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 28px; }
+  .event-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 18px; border-radius: 12px;
+    background: var(--cream);
+    border-left: 4px solid transparent;
+    transition: all 0.2s; cursor: pointer;
+  }
+  .event-item:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(10,22,40,0.08); }
+  .event-item.math { border-left-color: #667EEA; }
+  .event-item.lang { border-left-color: #f5576c; }
+  .event-item.science { border-left-color: #4facfe; }
+  .event-item.hist { border-left-color: #fa709a; }
+  .event-date {
+    background: var(--navy); color: var(--white);
+    border-radius: 10px; padding: 8px 12px;
+    text-align: center; min-width: 52px; flex-shrink: 0;
+  }
+  .event-day { font-size: 1.4rem; font-weight: 700; line-height: 1; }
+  .event-month { font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); }
+  .event-info {}
+  .event-name { font-weight: 600; font-size: 0.95rem; color: var(--navy); margin-bottom: 4px; }
+  .event-meta { font-size: 0.8rem; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; }
+  .event-meta span::before { content: '• '; }
+  .event-meta span:first-child::before { content: ''; }
+
+  /* ─── ÖĞRETMENLER ─── */
+  .teachers-section { background: var(--cream); }
+  .teachers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+  }
+  .teacher-card {
+    background: var(--white);
+    border-radius: 20px; padding: 32px 24px;
+    text-align: center;
+    box-shadow: 0 2px 20px rgba(10,22,40,0.06);
+    transition: all 0.25s; position: relative; overflow: hidden;
+  }
+  .teacher-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform: scaleX(0); transition: transform 0.3s;
+  }
+  .teacher-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+  .teacher-card:hover::before { transform: scaleX(1); }
+  .teacher-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    margin: 0 auto 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; font-weight: 700; color: var(--white);
+    background: linear-gradient(135deg, var(--navy), #2a4a8a);
+    border: 3px solid var(--light);
+  }
+  .teacher-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 5px;
+  }
+  .teacher-subject {
+    font-size: 0.8rem; font-weight: 600;
+    color: var(--gold); letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .teacher-bio {
+    font-size: 0.82rem; line-height: 1.6;
+    color: var(--muted); margin-bottom: 16px;
+  }
+  .teacher-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 4px; }
+  .teacher-rating { font-size: 0.78rem; color: var(--muted); }
+  .teacher-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 14px; }
+  .teacher-tag {
+    background: var(--light); color: var(--navy);
+    font-size: 0.7rem; font-weight: 600;
+    padding: 3px 10px; border-radius: 100px;
+  }
+
+  /* ─── KAYIT ─── */
+  .register-section {
+    background: linear-gradient(135deg, var(--navy) 0%, #1a3a6e 100%);
+    position: relative; overflow: hidden;
+  }
+  .register-section::before {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(245,166,35,0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .register-wrapper {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px;
+    align-items: center; position: relative; z-index: 1;
+  }
+  .register-info {}
+  .register-info .section-title { color: var(--white); }
+  .register-info .section-desc { color: rgba(255,255,255,0.6); }
+  .register-perks { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .perk {
+    display: flex; align-items: flex-start; gap: 14px;
+  }
+  .perk-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(245,166,35,0.15);
+    border: 1px solid rgba(245,166,35,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .perk-text h4 { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
+  .perk-text p { font-size: 0.8rem; color: rgba(255,255,255,0.45); }
+
+  .register-form {
+    background: var(--white);
+    border-radius: 24px; padding: 40px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+  }
+  .form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 6px;
+  }
+  .form-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 28px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 7px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label {
+    font-size: 0.78rem; font-weight: 700;
+    color: var(--navy); letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 12px 16px; border-radius: 10px;
+    border: 1.5px solid #D1D9E8;
+    font-size: 0.9rem; font-family: 'Inter', sans-serif;
+    color: var(--text); background: var(--cream);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(245,166,35,0.12);
+    background: var(--white);
+  }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .form-submit {
+    width: 100%; padding: 15px;
+    background: var(--navy); color: var(--white);
+    border: none; border-radius: 12px;
+    font-size: 1rem; font-weight: 700;
+    cursor: pointer; margin-top: 24px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .form-submit:hover { background: var(--gold); color: var(--navy); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(245,166,35,0.3); }
+  .form-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 12px; }
+
+  /* ─── SUCCESS MSG ─── */
+  .success-msg {
+    display: none; text-align: center; padding: 40px 24px;
+  }
+  .success-icon { font-size: 4rem; margin-bottom: 16px; }
+  .success-msg h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; color: var(--navy); margin-bottom: 8px;
+  }
+  .success-msg p { color: var(--muted); font-size: 0.9rem; }
+
+  /* ─── NEDEN BİZ ─── */
+  .why-section { background: var(--white); }
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .why-card {
+    padding: 32px 24px; border-radius: 16px;
+    background: var(--cream);
+    border: 1px solid transparent;
+    transition: all 0.25s;
+  }
+  .why-card:hover { border-color: var(--gold); background: var(--white); box-shadow: 0 8px 32px rgba(245,166,35,0.1); }
+  .why-icon { font-size: 2.2rem; margin-bottom: 18px; }
+  .why-title { font-weight: 700; font-size: 1rem; color: var(--navy); margin-bottom: 8px; }
+  .why-desc { font-size: 0.85rem; line-height: 1.65; color: var(--muted); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--navy);
+    padding: 64px 5% 32px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px; margin-bottom: 48px;
+  }
+  .footer-brand .logo { font-size: 1.4rem; margin-bottom: 14px; display: block; }
+  .footer-desc { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 20px; }
+  .footer-socials { display: flex; gap: 12px; }
+  .social-btn {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.6); font-size: 0.9rem;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .social-btn:hover { background: var(--gold); color: var(--navy); }
+  .footer-col h4 {
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; color: rgba(255,255,255,0.4);
+    margin-bottom: 18px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a {
+    font-size: 0.85rem; color: rgba(255,255,255,0.6);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(10,22,40,0.7); backdrop-filter: blur(8px);
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-box {
+    background: var(--white); border-radius: 24px;
+    padding: 40px; max-width: 480px; width: 100%;
+    position: relative;
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .modal-close {
+    position: absolute; top: 18px; right: 18px;
+    background: var(--light); border: none;
+    width: 36px; height: 36px; border-radius: 50%;
+    font-size: 1.1rem; cursor: pointer; color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: #D1D9E8; }
+  .modal-course-tag {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+  }
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 16px;
+  }
+  .modal-details { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+  .modal-detail { display: flex; align-items: center; gap: 12px; font-size: 0.88rem; color: var(--text); }
+  .modal-detail-icon { font-size: 1.1rem; width: 24px; text-align: center; }
+  .modal-action { width: 100%; padding: 14px; background: var(--navy); color: var(--white); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+  .modal-action:hover { background: var(--gold); color: var(--navy); }
+
+  /* ─── MOBILE NAV ─── */
+  .mobile-menu {
+    display: none;
+    position: fixed; inset: 0; z-index: 999;
+    background: var(--navy);
+    padding: 100px 5% 40px;
+    flex-direction: column; gap: 24px;
+  }
+  .mobile-menu.active { display: flex; }
+  .mobile-menu a {
+    color: rgba(255,255,255,0.8); text-decoration: none;
+    font-size: 1.3rem; font-weight: 500;
+    padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero-visual { display: none; }
+    .calendar-wrapper { grid-template-columns: 1fr; }
+    .register-wrapper { grid-template-columns: 1fr; gap: 40px; }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: auto; }
+  }
+  @media (max-width: 560px) {
+    section { padding: 60px 5%; }
+    .hero-stats { flex-wrap: wrap; gap: 24px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .hero { padding: 100px 5% 60px; }
+  }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+    background: var(--navy); color: var(--white);
+    padding: 14px 22px; border-radius: 12px;
+    font-size: 0.88rem; font-weight: 500;
+    box-shadow: 0 8px 32px rgba(10,22,40,0.25);
+    display: flex; align-items: center; gap: 10px;
+    transform: translateY(80px); opacity: 0;
+    transition: all 0.3s ease;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+  .toast-icon { color: var(--gold); font-size: 1.1rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">Akademi<span>Plus</span></a>
+  <ul class="nav-links">
+    <li><a href="#kurslar">Kurslar</a></li>
+    <li><a href="#takvim">Takvim</a></li>
+    <li><a href="#ogretmenler">Öğretmenler</a></li>
+    <li><a href="#neden">Neden Biz</a></li>
+    <li><a href="#kayit" class="nav-cta">Kayıt Ol</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#kurslar" onclick="toggleMenu()">Kurslar</a>
+  <a href="#takvim" onclick="toggleMenu()">Takvim</a>
+  <a href="#ogretmenler" onclick="toggleMenu()">Öğretmenler</a>
+  <a href="#neden" onclick="toggleMenu()">Neden Biz</a>
+  <a href="#kayit" onclick="toggleMenu()" style="color:var(--gold);font-weight:700">Kayıt Ol →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-dots"></div>
+  <div class="hero-circle-1"></div>
+  <div class="hero-circle-2"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">Türkiye'nin Öncü Eğitim Merkezi</div>
+    <h1>Geleceğini<br><em>Bizimle</em><br>İnşa Et</h1>
+    <p>YKS, LGS ve özel kurslarda uzman kadromuzla öğrencilerin hedeflerine ulaşmalarına rehberlik ediyoruz. Her adımda yanınızdayız.</p>
+    <div class="hero-actions">
+      <a href="#kurslar" class="btn-primary">Kurslara Göz At <span>→</span></a>
+      <a href="#kayit" class="btn-outline">Ücretsiz Deneme ✦</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number" data-count="3200">0</span>
+        <span class="stat-label">Mutlu Öğrenci</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-count="48">0</span>
+        <span class="stat-label">Aktif Kurs</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-count="97">0</span>
+        <span class="stat-label">% Başarı Oranı</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating cards -->
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-icon">🏆</div>
+      <div class="card-title">Bu Yıl</div>
+      <div class="card-value">286 Öğrenci</div>
+      <div class="card-sub">üniversite kazandı</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-icon">⭐</div>
+      <div class="card-title">Ortalama Puan</div>
+      <div class="card-value">4.9 / 5.0</div>
+      <div class="card-sub">öğrenci memnuniyeti</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-icon">📅</div>
+      <div class="card-title">Sonraki Başlangıç</div>
+      <div class="card-value">7 Temmuz 2025</div>
+      <div class="card-sub">yeni dönem açılışı</div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE -->
+<div class="wave-divider" style="background:var(--cream);margin-top:-2px">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="width:100%;height:60px">
+    <path fill="#ffffff" d="M0,60 C360,0 1080,0 1440,60 L1440,0 L0,0 Z"/>
+  </svg>
+</div>
+
+<!-- KURSLAR -->
+<section id="kurslar" class="courses-section">
+  <div class="section-header">
+    <div class="section-label">Eğitim Programları</div>
+    <h2 class="section-title">Tüm Kurslarımız</h2>
+    <p class="section-desc">YKS hazırlıktan dil kurslarına, sanat atölyelerinden birebir özel derslere kadar 48 farklı program.</p>
+  </div>
+
+  <div class="courses-filter">
+    <button class="filter-btn active" onclick="filterCourses('all',this)">Tümü</button>
+    <button class="filter-btn" onclick="filterCourses('yks',this)">YKS Hazırlık</button>
+    <button class="filter-btn" onclick="filterCourses('lgs',this)">LGS Hazırlık</button>
+    <button class="filter-btn" onclick="filterCourses('dil',this)">Dil Kursları</button>
+    <button class="filter-btn" onclick="filterCourses('fen',this)">Fen Bilimleri</button>
+    <button class="filter-btn" onclick="filterCourses('sanat',this)">Sanat & Kültür</button>
+  </div>
+
+  <div class="courses-grid" id="coursesGrid">
+    <!-- Cards injected by JS -->
+  </div>
+</section>
+
+<!-- TAKVİM -->
+<section id="takvim" class="calendar-section">
+  <div class="calendar-wrapper">
+    <div>
+      <div class="section-label">Ders Takvimi</div>
+      <h2 class="section-title">Etkinlik & Ders Programı</h2>
+      <p class="section-desc" style="margin-bottom:0">Tüm ders tarihlerini ve özel etkinlikleri takip edin.</p>
+      <div class="cal-widget" style="margin-top:32px">
+        <div class="cal-header">
+          <div class="cal-month" id="calMonthLabel">Haziran 2025</div>
+          <div class="cal-nav">
+            <button onclick="changeMonth(-1)">‹</button>
+            <button onclick="changeMonth(1)">›</button>
+          </div>
+        </div>
+        <div class="cal-days-head">
+          <span>Pzt</span><span>Sal</span><span>Çar</span><span>Per</span><span>Cum</span><span>Cmt</span><span>Paz</span>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="events-title">Yaklaşan Etkinlikler</div>
+      <div class="events-sub">Haziran – Temmuz 2025 programı</div>
+      <div class="events-list" id="eventsList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ÖĞRETMENLER -->
+<section id="ogretmenler" class="teachers-section">
+  <div class="section-header center">
+    <div class="section-label">Kadromuz</div>
+    <h2 class="section-title">Uzman Öğretmenlerimiz</h2>
+    <p class="section-desc">Her biri kendi alanında yılların deneyimine sahip, öğrenci odaklı eğitimcilerden oluşan kadromuz.</p>
+  </div>
+  <div class="teachers-grid" id="teachersGrid"></div>
+</section>
+
+<!-- NEDEN BİZ -->
+<section id="neden" class="why-section">
+  <div class="section-header center">
+    <div class="section-label">Farkımız</div>
+    <h2 class="section-title">Neden AkademiPlus?</h2>
+    <p class="section-desc">Öğrencilerimizin başarısı için standart bir dershane deneyiminin çok ötesine geçiyoruz.</p>
+  </div>
+  <div class="why-grid">
+    <div class="why-card reveal">
+      <div class="why-icon">🎯</div>
+      <div class="why-title">Kişiselleştirilmiş Öğrenme</div>
+      <div class="why-desc">Her öğrencinin öğrenme hızı ve tarzı farklıdır. Bireysel planlar oluşturarak potansiyeli ortaya çıkarıyoruz.</div>
+    </div>
+    <div class="why-card reveal reveal-delay-1">
+      <div class="why-icon">👩‍🏫</div>
+      <div class="why-title">Uzman Kadro</div>
+      <div class="why-desc">Tüm öğretmenlerimiz alanlarında en az 5 yıl deneyime sahip, lisansüstü eğitimli akademisyenlerdir.</div>
+    </div>
+    <div class="why-card reveal reveal-delay-2">
+      <div class="why-icon">📊</div>
+      <div class="why-title">Sürekli Takip</div>
+      <div class="why-desc">Haftalık gelişim raporları ve anlık bildirimlerle aileleri daima bilgilendiriyoruz.</div>
+    </div>
+    <div class="why-card reveal reveal-delay-3">
+      <div class="why-icon">💻</div>
+      <div class="why-title">Hibrit Eğitim</div>
+      <div class="why-desc">Online ve yüz yüze eğitimi birleştiren esnek sistemimizle zaman ve mekan kısıtlaması ortadan kalkıyor.</div>
+    </div>
+  </div>
+</section>
+
+<!-- KAYIT -->
+<section id="kayit" class="register-section">
+  <div class="register-wrapper">
+    <div class="register-info reveal">
+      <div class="section-label" style="color:var(--gold-light)">Online Kayıt</div>
+      <h2 class="section-title">Hemen Başla,<br>Geleceğini Şekillendir</h2>
+      <p class="section-desc">Formu doldurun, danışmanımız 24 saat içinde sizi arasın. İlk ders ücretsiz!</p>
+      <div class="register-perks">
+        <div class="perk">
+          <div class="perk-icon">🎁</div>
+          <div class="perk-text">
+            <h4>İlk Ders Ücretsiz</h4>
+            <p>Kayıt olmadan önce kursumuzu deneyin.</p>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">📚</div>
+          <div class="perk-text">
+            <h4>Kaynak Desteği</h4>
+            <p>Tüm kurs materyalleri kayıt ücretsiz dahildir.</p>
+          </div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">🔄</div>
+          <div class="perk-text">
+            <h4>Esnek Saatler</h4>
+            <p>Programınıza uygun ders saati seçin.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="register-form" id="registerForm">
+      <div class="form-title">Kayıt Formu</div>
+      <div class="form-sub">Tüm alanlar zorunludur. Bilgileriniz güvende.</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Ad</label>
+          <input type="text" id="firstName" placeholder="Adınız">
+        </div>
+        <div class="form-group">
+          <label>Soyad</label>
+          <input type="text" id="lastName" placeholder="Soyadınız">
+        </div>
+        <div class="form-group">
+          <label>E-posta</label>
+          <input type="email" id="email" placeholder="ornek@mail.com">
+        </div>
+        <div class="form-group">
+          <label>Telefon</label>
+          <input type="tel" id="phone" placeholder="05XX XXX XX XX">
+        </div>
+        <div class="form-group full">
+          <label>İlgilendiğiniz Kurs</label>
+          <select id="courseSelect">
+            <option value="">Kurs Seçin…</option>
+            <option>YKS Matematik</option>
+            <option>YKS Türkçe & Edebiyat</option>
+            <option>YKS Fen Bilimleri</option>
+            <option>LGS Tam Hazırlık</option>
+            <option>İngilizce – A1'den C1'e</option>
+            <option>Almanca Başlangıç</option>
+            <option>Fizik Olimpiyat Hazırlık</option>
+            <option>Resim & Sanat Atölyesi</option>
+            <option>Özel Ders (Birebir)</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Mesajınız (İsteğe Bağlı)</label>
+          <textarea id="message" placeholder="Özel bir isteğiniz veya sorunuz varsa buraya yazın…"></textarea>
+        </div>
+      </div>
+      <button class="form-submit" onclick="submitForm()">
+        <span>Kayıt Talebini Gönder</span> <span>→</span>
+      </button>
+      <p class="form-note">🔒 Kişisel verileriniz KVKK kapsamında korunmaktadır.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo">Akademi<span>Plus</span></span>
+      <p class="footer-desc">İstanbul'un kalbinde, Türkiye'nin her yerine ulaşan eğitim merkezi. 2010'dan bu yana binlerce öğrencinin geleceğine rehberlik ediyoruz.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn">IG</a>
+        <a href="#" class="social-btn">TW</a>
+        <a href="#" class="social-btn">YT</a>
+        <a href="#" class="social-btn">LI</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Kurslar</h4>
+      <ul>
+        <li><a href="#">YKS Hazırlık</a></li>
+        <li><a href="#">LGS Hazırlık</a></li>
+        <li><a href="#">Dil Kursları</a></li>
+        <li><a href="#">Fen Bilimleri</a></li>
+        <li><a href="#">Özel Dersler</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kurumsal</h4>
+      <ul>
+        <li><a href="#">Hakkımızda</a></li>
+        <li><a href="#">Kadromuz</a></li>
+        <li><a href="#">Başarı Hikayeleri</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">İletişim</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>İletişim</h4>
+      <ul>
+        <li><a href="#">📍 Kadıköy, İstanbul</a></li>
+        <li><a href="#">📞 0212 345 67 89</a></li>
+        <li><a href="#">✉️ info@akademiplus.com</a></li>
+        <li><a href="#">🕐 Pzt–Cmt 08:00–21:00</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 AkademiPlus Eğitim Merkezi. Tüm hakları saklıdır.</p>
+    <p><a href="#" style="color:rgba(255,255,255,0.3);text-decoration:none">Gizlilik Politikası</a> · <a href="#" style="color:rgba(255,255,255,0.3);text-decoration:none">Kullanım Koşulları</a></p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-course-tag" id="modalTag"></div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-details" id="modalDetails"></div>
+    <button class="modal-action" onclick="goToRegister()">Bu Kursa Kayıt Ol →</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <span class="toast-icon">✓</span>
+  <span id="toastMsg">İşlem başarılı!</span>
+</div>
+
+<script>
+// ─── DATA ───
+const courses = [
+  { id:1, cat:'yks', badge:'YKS', title:'Matematik Olimpiyat & YKS', subject:'Matematik', icon:'➗', colorClass:'math', duration:'9 Ay', level:'İleri', sessions:'5 gün/hafta', price:'₺2.800', period:'/ay' },
+  { id:2, cat:'dil', badge:'DİL', title:'İngilizce A1'den C1'e Tam Program', subject:'Yabancı Dil', icon:'🇬🇧', colorClass:'lang', duration:'12 Ay', level:'Tüm Seviyeler', sessions:'3 gün/hafta', price:'₺1.600', period:'/ay' },
+  { id:3, cat:'fen', badge:'FEN', title:'Fizik & Kimya YKS Hazırlık', subject:'Fen Bilimleri', icon:'⚗️', colorClass:'science', duration:'8 Ay', level:'Orta–İleri', sessions:'4 gün/hafta', price:'₺2.400', period:'/ay' },
+  { id:4, cat:'yks', badge:'YKS', title:'Türkçe & Edebiyat', subject:'Türk Dili', icon:'📖', colorClass:'lit', duration:'10 Ay', level:'Her Seviye', sessions:'3 gün/hafta', price:'₺2.200', period:'/ay' },
+  { id:5, cat:'lgs', badge:'LGS', title:'LGS Tam Hazırlık Paketi', subject:'8. Sınıf Hazırlık', icon:'🎓', colorClass:'hist', duration:'6 Ay', level:'Temel', sessions:'5 gün/hafta', price:'₺3.000', period:'/ay' },
+  { id:6, cat:'sanat', badge:'SANAT', title:'Resim & Plastik Sanatlar Atölyesi', subject:'Güzel Sanatlar', icon:'🎨', colorClass:'art', duration:'Sürekli', level:'Her Yaş', sessions:'2 gün/hafta', price:'₺900', period:'/ay' },
+];
+
+const events = [
+  { day:'21', month:'Haz', name:'YKS Matematik – Deneme Sınavı', cat:'math', time:'10:00 – 13:00', teacher:'Dr. Kemal Arslan', room:'Salon A' },
+  { day:'24', month:'Haz', name:'İngilizce Speaking Club', cat:'lang', time:'16:00 – 18:00', teacher:'Ms. Emily Clarke', room:'Dil Lab' },
+  { day:'26', month:'Haz', name:'Fizik YKS Sprint Kamp', cat:'science', time:'09:00 – 17:00', teacher:'Prof. Şule Demir', room:'Salon B' },
+  { day:'28', month:'Haz', name:'LGS Veli Bilgilendirme Toplantısı', cat:'hist', time:'14:00 – 15:30', teacher:'Müdür Öğr.', room:'Konferans' },
+  { day:'05', month:'Tem', name:'Yeni Dönem Kayıt Başlangıcı', cat:'math', time:'Tüm Gün', teacher:'—', room:'Ofis' },
+];
+
+const teachers = [
+  { name:'Dr. Kemal Arslan', subject:'Matematik', initials:'KA', bio:'Boğaziçi Üniversitesi matematik doktoru. 12 yıllık YKS deneyimi.', rating:5, reviews:214, tags:['YKS','Olimpiyat','Calculus'] },
+  { name:'Prof. Şule Demir', subject:'Fizik & Kimya', initials:'ŞD', bio:'ODTÜ Fizik Bölümü mezunu, 200+ YKS 1. derece öğrencisi yetiştirdi.', rating:5, reviews:188, tags:['YKS','Kimya','Fizik'] },
+  { name:'Ms. Emily Clarke', subject:'İngilizce', initials:'EC', bio:'Cambridge CELTA sertifikalı, 8 yıl Türkiye deneyimine sahip native speaker.', rating:5, reviews:176, tags:['IELTS','Speaking','YDS'] },
+  { name:'Öğr. Ayşe Kaya', subject:'Türkçe & Edebiyat', initials:'AK', bio:'Ankara Üniversitesi TDE mezunu, dil bilgisi ve anlama uzmanı.', rating:5, reviews:143, tags:['YKS','Edebiyat','Yazarlık'] },
+  { name:'Öğr. Mert Yıldız', subject:'LGS Matematik', initials:'MY', bio:'8 yıllık ortaokul deneyimi, öğrencileri sevdirerek öğretme yaklaşımı.', rating:4, reviews:98, tags:['LGS','Ortaokul','Oyunlu'] },
+  { name:'Öğr. Zeynep Şahin', subject:'Sanat & Tasarım', initials:'ZŞ', bio:'Mimar Sinan Güzel Sanatlar Akademisi mezunu, dijital ve geleneksel sanat.', rating:5, reviews:87, tags:['Resim','Grafik','Atölye'] },
+  { name:'Öğr. Can Türkoğlu', subject:'Almanca', initials:'CT', bio:'Heidelberg Üniversitesi mezunu, Goethe sertifikalı dil eğitmeni.', rating:4, reviews:65, tags:['Goethe','A1–C2','Konuşma'] },
+  { name:'Dr. Hande Çelik', subject:'Biyoloji', initials:'HÇ', bio:'Tıp biyolojisi doktoru, LGS ve YKS fen bilimleri şampiyonu.', rating:5, reviews:122, tags:['Biyoloji','YKS','Anatomi'] },
+];
+
+// ─── RENDER COURSES ───
+function renderCourses(filter='all') {
+  const grid = document.getElementById('coursesGrid');
+  const filtered = filter === 'all' ? courses : courses.filter(c => c.cat === filter);
+  grid.innerHTML = filtered.map(c => `
+    <div class="course-card reveal" onclick="openModal(${c.id})">
+      <div class="course-img ${c.colorClass}">
+        <span style="filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3))">${c.icon}</span>
+        <span class="course-badge">${c.badge}</span>
+      </div>
+      <div class="course-body">
+        <div class="course-category">${c.subject}</div>
+        <div class="course-name">${c.title}</div>
+        <div class="course-meta">
+          <span>📅 ${c.duration}</span>
+          <span>📊 ${c.level}</span>
+          <span>🕐 ${c.sessions}</span>
+        </div>
+      </div>
+      <div class="course-footer">
+        <div class="course-price">${c.price} <span>${c.period}</span></div>
+        <button class="enroll-btn" onclick="event.stopPropagation(); openModal(${c.id})">Detaylar</button>
+      </div>
+    </div>
+  `).join('');
+  setTimeout(() => {
+    grid.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }, 50);
+}
+
+function filterCourses(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderCourses(cat);
+}
+
+// ─── RENDER EVENTS ───
+function renderEvents() {
+  document.getElementById('eventsList').innerHTML = events.map(e => `
+    <div class="event-item ${e.cat} reveal">
+      <div class="event-date">
+        <div class="event-day">${e.day}</div>
+        <div class="event-month">${e.month}</div>
+      </div>
+      <div class="event-info">
+        <div class="event-name">${e.name}</div>
+        <div class="event-meta">
+          <span>${e.time}</span>
+          <span>${e.teacher}</span>
+          <span>${e.room}</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── RENDER TEACHERS ───
+function renderTeachers() {
+  document.getElementById('teachersGrid').innerHTML = teachers.map(t => `
+    <div class="teacher-card reveal">
+      <div class="teacher-avatar">${t.initials}</div>
+      <div class="teacher-name">${t.name}</div>
+      <div class="teacher-subject">${t.subject}</div>
+      <div class="teacher-bio">${t.bio}</div>
+      <div class="teacher-stars">${'★'.repeat(t.rating)}${'☆'.repeat(5-t.rating)}</div>
+      <div class="teacher-rating">${t.reviews} değerlendirme</div>
+      <div class="teacher-tags">${t.tags.map(tag => `<span class="teacher-tag">${tag}</span>`).join('')}</div>
+    </div>
+  `).join('');
+}
+
+// ─── CALENDAR ───
+let calDate = new Date(2025, 5, 1);
+const eventDays = [21, 24, 26, 28];
+const months = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+
+function renderCalendar() {
+  const year = calDate.getFullYear();
+  const month = calDate.getMonth();
+  document.getElementById('calMonthLabel').textContent = `${months[month]} ${year}`;
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const offset = firstDay === 0 ? 6 : firstDay - 1;
+  const prevDays = new Date(year, month, 0).getDate();
+  let html = '';
+  for (let i=offset-1; i>=0; i--) {
+    html += `<div class="cal-day other-month">${prevDays - i}</div>`;
+  }
+  const today = new Date();
+  for (let d=1; d<=daysInMonth; d++) {
+    const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
+    const hasEvent = eventDays.includes(d) && month === 5;
+    html += `<div class="cal-day ${isToday?'today':''} ${hasEvent?'has-event':''}">${d}</div>`;
+  }
+  document.getElementById('calGrid').innerHTML = html;
+}
+
+function changeMonth(dir) {
+  calDate.setMonth(calDate.getMonth() + dir);
+  renderCalendar();
+}
+
+// ─── MODAL ───
+function openModal(id) {
+  const c = courses.find(x => x.id === id);
+  if (!c) return;
+  document.getElementById('modalTag').textContent = c.subject;
+  document.getElementById('modalTitle').textContent = c.title;
+  document.getElementById('modalDetails').innerHTML = `
+    <div class="modal-detail"><span class="modal-detail-icon">📅</span> Süre: ${c.duration}</div>
+    <div class="modal-detail"><span class="modal-detail-icon">🕐</span> Program: ${c.sessions}</div>
+    <div class="modal-detail"><span class="modal-detail-icon">📊</span> Seviye: ${c.level}</div>
+    <div class="modal-detail"><span class="modal-detail-icon">💳</span> Ücret: ${c.price} ${c.period}</div>
+    <div class="modal-detail"><span class="modal-detail-icon">📍</span> Yüz yüze + Online hibrit</div>
+  `;
+  document.getElementById('modalOverlay').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+function goToRegister() {
+  closeModal();
+  document.getElementById('kayit').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ─── FORM ───
+function submitForm() {
+  const fields = ['firstName','lastName','email','phone','courseSelect'];
+  let valid = true;
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) {
+      el.style.borderColor = '#FC8181';
+      el.style.boxShadow = '0 0 0 3px rgba(252,129,129,0.15)';
+      valid = false;
+      setTimeout(() => { el.style.borderColor = '#D1D9E8'; el.style.boxShadow = 'none'; }, 2000);
+    }
+  });
+  if (!valid) { showToast('Lütfen tüm alanları doldurun.', true); return; }
+  const form = document.getElementById('registerForm');
+  form.innerHTML = `
+    <div class="success-msg" style="display:block">
+      <div class="success-icon">🎉</div>
+      <h3>Kaydınız Alındı!</h3>
+      <p>Danışmanımız en geç <strong>24 saat</strong> içinde sizi arayacaktır.<br>Güvenilir bir eğitim yolculuğuna hoş geldiniz!</p>
+    </div>
+  `;
+  showToast('Kaydınız başarıyla gönderildi!');
+}
+
+// ─── TOAST ───
+function showToast(msg, isError=false) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  t.style.background = isError ? '#c0392b' : 'var(--navy)';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ─── SCROLL REVEAL ───
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+
+function observeReveal() {
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
+
+// ─── COUNTER ANIMATION ───
+function animateCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = +el.dataset.count;
+    let current = 0;
+    const step = Math.ceil(target / 60);
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = current.toLocaleString('tr-TR') + (target === 97 ? '%+' : '+');
+      if (current >= target) clearInterval(timer);
+    }, 28);
+  });
+}
+
+// ─── MOBILE MENU ───
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('active');
+}
+
+// ─── INIT ───
+document.addEventListener('DOMContentLoaded', () => {
+  renderCourses();
+  renderEvents();
+  renderTeachers();
+  renderCalendar();
+  observeReveal();
+
+  const heroObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { animateCounters(); heroObserver.disconnect(); }
+  }, { threshold: 0.4 });
+  heroObserver.observe(document.querySelector('.hero-stats'));
+
+  // Continuous reveal observation (for dynamically added cards)
+  const mutObs = new MutationObserver(() => observeReveal());
+  mutObs.observe(document.body, { childList: true, subtree: true });
+});
+
+// Close mobile menu on outside click
+document.addEventListener('click', e => {
+  const menu = document.getElementById('mobileMenu');
+  const hamburger = document.getElementById('hamburger');
+  if (menu.classList.contains('active') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+    menu.classList.remove('active');
+  }
+});
+</script>
+</body>
+</html>
