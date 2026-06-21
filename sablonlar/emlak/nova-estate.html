@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Estate — Modern Emlak</title>
+<meta name="description" content="Nova Estate ile hayalinizdeki eve ulaşın. Modern ilan vitrini, filtreli arama, harita ve uzman danışman kadrosu.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f3;
+    --surface: #ffffff;
+    --surface-2: #f0eee9;
+    --ink: #16181d;
+    --ink-soft: #4a4d55;
+    --muted: #8b8d94;
+    --accent: #2f6f5e;
+    --accent-d: #1f4d41;
+    --accent-l: #e6f0ec;
+    --gold: #c2974e;
+    --line: rgba(22,24,29,0.09);
+    --shadow-s: 0 2px 14px rgba(22,24,29,0.06);
+    --shadow-m: 0 16px 44px rgba(22,24,29,0.1);
+    --shadow-l: 0 30px 70px rgba(22,24,29,0.14);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --r: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); overflow-x: hidden; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--surface-2); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+
+  .container { max-width: 1240px; margin: 0 auto; padding: 0 32px; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 20px 0; transition: all 0.35s ease; }
+  nav.scrolled { background: rgba(247,246,243,0.9); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); padding: 14px 0; }
+  .nav-inner { max-width: 1240px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; letter-spacing: 0.02em; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--ink-soft); transition: color 0.2s; position: relative; }
+  .nav-links a::after { content: ''; position: absolute; left: 0; bottom: -5px; width: 0; height: 2px; background: var(--accent); transition: width 0.3s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta { background: var(--accent); color: #fff; padding: 11px 24px; border-radius: 100px; font-size: 0.82rem; font-weight: 600; transition: all 0.25s; }
+  .nav-cta:hover { background: var(--accent-d); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+  .hamburger span { width: 26px; height: 2px; background: var(--ink); border-radius: 2px; transition: 0.3s; }
+
+  /* HERO */
+  .hero { position: relative; padding: 160px 0 90px; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -10%; right: -5%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(47,111,94,0.1) 0%, transparent 70%); filter: blur(40px); pointer-events: none; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-l); color: var(--accent-d); padding: 8px 16px; border-radius: 100px; font-size: 0.76rem; font-weight: 600; letter-spacing: 0.04em; margin-bottom: 26px; }
+  .hero-tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .hero h1 { font-family: var(--serif); font-size: clamp(2.8rem, 5.5vw, 4.6rem); font-weight: 600; line-height: 1.05; letter-spacing: -0.01em; margin-bottom: 24px; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub { font-size: 1.08rem; color: var(--ink-soft); max-width: 480px; margin-bottom: 40px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+  .btn-primary { background: var(--accent); color: #fff; padding: 15px 32px; border-radius: 100px; font-size: 0.92rem; font-weight: 600; transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; font-family: var(--sans); }
+  .btn-primary:hover { background: var(--accent-d); transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(47,111,94,0.5); }
+  .btn-ghost { background: transparent; color: var(--ink); padding: 15px 32px; border-radius: 100px; font-size: 0.92rem; font-weight: 600; border: 1px solid var(--line); transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-stats { display: flex; gap: 48px; }
+  .hero-stat-n { font-family: var(--serif); font-size: 2.4rem; font-weight: 600; color: var(--accent); line-height: 1; }
+  .hero-stat-l { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+
+  .hero-visual { position: relative; }
+  .hero-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 24px; box-shadow: var(--shadow-l); }
+  .hero-float { position: absolute; background: var(--surface); border-radius: 16px; padding: 18px 22px; box-shadow: var(--shadow-m); display: flex; align-items: center; gap: 14px; }
+  .hero-float.top { top: 30px; left: -28px; animation: floaty 4s ease-in-out infinite; }
+  .hero-float.bottom { bottom: 36px; right: -22px; animation: floaty 4s ease-in-out 1.5s infinite; }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  .hf-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-l); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .hf-icon svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+  .hf-num { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; line-height: 1; }
+  .hf-label { font-size: 0.72rem; color: var(--muted); }
+
+  /* SEARCH BAR */
+  .search-bar { background: var(--surface); border-radius: var(--r); box-shadow: var(--shadow-m); padding: 14px; display: grid; grid-template-columns: repeat(3, 1fr) auto; gap: 8px; max-width: 1000px; margin: -45px auto 0; position: relative; z-index: 10; }
+  .search-field { display: flex; flex-direction: column; padding: 10px 16px; border-radius: 10px; transition: background 0.2s; }
+  .search-field:hover { background: var(--surface-2); }
+  .search-field label { font-size: 0.68rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .search-field select { border: none; background: transparent; font-family: var(--sans); font-size: 0.92rem; color: var(--ink); font-weight: 500; outline: none; cursor: pointer; }
+  .search-go { background: var(--accent); border: none; border-radius: 12px; color: #fff; padding: 0 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--sans); font-weight: 600; font-size: 0.9rem; transition: background 0.2s; }
+  .search-go:hover { background: var(--accent-d); }
+  .search-go svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2; }
+
+  /* SECTIONS */
+  section { padding: 100px 0; }
+  .sec-head { margin-bottom: 50px; }
+  .sec-head.center { text-align: center; }
+  .sec-tag { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 600; display: block; margin-bottom: 12px; }
+  .sec-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; line-height: 1.15; }
+  .sec-title em { font-style: italic; color: var(--accent); }
+  .sec-head-row { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; }
+
+  /* FILTER TABS */
+  .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-tab { background: var(--surface); border: 1px solid var(--line); color: var(--ink-soft); padding: 10px 22px; border-radius: 100px; font-family: var(--sans); font-size: 0.82rem; font-weight: 500; cursor: pointer; transition: all 0.25s; }
+  .filter-tab:hover { border-color: var(--accent); color: var(--accent); }
+  .filter-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* LISTINGS */
+  .listings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 44px; }
+  .listing { background: var(--surface); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-s); transition: all 0.35s ease; cursor: pointer; opacity: 0; transform: translateY(28px); }
+  .listing.visible { opacity: 1; transform: translateY(0); }
+  .listing:hover { box-shadow: var(--shadow-l); transform: translateY(-8px); }
+  .listing-img { position: relative; aspect-ratio: 4/3; overflow: hidden; }
+  .listing-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+  .listing:hover .listing-img img { transform: scale(1.08); }
+  .listing-badge { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); padding: 6px 14px; border-radius: 100px; font-size: 0.72rem; font-weight: 600; color: var(--accent-d); }
+  .listing-fav { position: absolute; top: 14px; right: 14px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+  .listing-fav svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 1.8; transition: all 0.2s; }
+  .listing-fav:hover { transform: scale(1.1); }
+  .listing-fav.active svg { fill: #e2574c; stroke: #e2574c; }
+  .listing-body { padding: 24px; }
+  .listing-price { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; color: var(--ink); }
+  .listing-price span { font-size: 0.85rem; color: var(--muted); font-family: var(--sans); font-weight: 400; }
+  .listing-title { font-size: 1.05rem; font-weight: 600; margin: 8px 0 4px; }
+  .listing-loc { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--muted); }
+  .listing-loc svg { width: 15px; height: 15px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+  .listing-meta { display: flex; gap: 18px; margin-top: 18px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .listing-meta-item { display: flex; align-items: center; gap: 7px; font-size: 0.82rem; color: var(--ink-soft); }
+  .listing-meta-item svg { width: 17px; height: 17px; stroke: var(--ink-soft); fill: none; stroke-width: 1.7; }
+
+  /* FEATURES */
+  .features { background: var(--surface); }
+  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 44px; }
+  .feature { text-align: center; padding: 36px 24px; border-radius: var(--r); transition: all 0.3s; }
+  .feature:hover { background: var(--surface-2); transform: translateY(-6px); }
+  .feature-icon { width: 60px; height: 60px; margin: 0 auto 20px; border-radius: 16px; background: var(--accent-l); display: flex; align-items: center; justify-content: center; }
+  .feature-icon svg { width: 28px; height: 28px; stroke: var(--accent); fill: none; stroke-width: 1.7; }
+  .feature h3 { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; margin-bottom: 10px; }
+  .feature p { font-size: 0.9rem; color: var(--ink-soft); }
+
+  /* AGENTS */
+  .agents-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 44px; }
+  .agent { background: var(--surface); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-s); transition: all 0.35s; }
+  .agent:hover { box-shadow: var(--shadow-m); transform: translateY(-6px); }
+  .agent-img { aspect-ratio: 1; overflow: hidden; }
+  .agent-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%); transition: all 0.4s; }
+  .agent:hover .agent-img img { filter: grayscale(0); transform: scale(1.04); }
+  .agent-body { padding: 22px; text-align: center; }
+  .agent-name { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; }
+  .agent-role { font-size: 0.78rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+  .agent-socials { display: flex; justify-content: center; gap: 10px; margin-top: 16px; }
+  .agent-social { width: 34px; height: 34px; border-radius: 50%; background: var(--surface-2); display: flex; align-items: center; justify-content: center; transition: all 0.2s; font-size: 0.72rem; font-weight: 600; color: var(--ink-soft); }
+  .agent-social:hover { background: var(--accent); color: #fff; }
+
+  /* CTA */
+  .cta { background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%); border-radius: 28px; padding: 70px 56px; text-align: center; color: #fff; position: relative; overflow: hidden; }
+  .cta::before { content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%); }
+  .cta h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; margin-bottom: 16px; position: relative; }
+  .cta p { font-size: 1.05rem; opacity: 0.85; max-width: 500px; margin: 0 auto 36px; position: relative; }
+  .cta .btn-primary { background: #fff; color: var(--accent-d); position: relative; }
+  .cta .btn-primary:hover { background: var(--surface-2); }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 70px 0 32px; margin-top: 100px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 50px; margin-bottom: 50px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; color: #fff; margin-bottom: 16px; }
+  .footer-logo span { color: var(--gold); }
+  .footer-about { font-size: 0.9rem; line-height: 1.7; max-width: 280px; }
+  .footer-col h5 { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 11px; }
+  .footer-col ul li a { font-size: 0.88rem; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: rgba(255,255,255,0.45); flex-wrap: wrap; gap: 12px; }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* MOBILE MENU */
+  .mobile-menu { display: none; position: fixed; inset: 0; z-index: 950; background: var(--bg); padding: 100px 32px 40px; flex-direction: column; gap: 4px; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 1.3rem; font-weight: 500; padding: 16px 0; border-bottom: 1px solid var(--line); }
+
+  /* RESPONSIVE */
+  @media (max-width: 1024px) {
+    .listings, .features-grid, .agents-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+  }
+  @media (max-width: 820px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { max-width: 480px; margin: 0 auto; width: 100%; }
+    .search-bar { grid-template-columns: 1fr 1fr; }
+    .search-go { grid-column: span 2; padding: 16px; }
+  }
+  @media (max-width: 680px) {
+    .container, .nav-inner { padding: 0 22px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 70px 0; }
+    .listings, .features-grid, .agents-grid { grid-template-columns: 1fr; }
+    .hero { padding: 130px 0 70px; }
+    .hero-stats { gap: 32px; }
+    .search-bar { grid-template-columns: 1fr; margin-top: 30px; }
+    .search-go { grid-column: span 1; }
+    .cta { padding: 50px 28px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .hero-float.top { left: 0; }
+    .hero-float.bottom { right: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">Nova<span>Estate</span></a>
+    <ul class="nav-links">
+      <li><a href="#ilanlar">İlanlar</a></li>
+      <li><a href="#hizmetler">Hizmetler</a></li>
+      <li><a href="#danismanlar">Danışmanlar</a></li>
+      <li><a href="#iletisim">İletişim</a></li>
+    </ul>
+    <a href="#iletisim" class="nav-cta">Ücretsiz Değerleme</a>
+    <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#ilanlar">İlanlar</a>
+  <a href="#hizmetler">Hizmetler</a>
+  <a href="#danismanlar">Danışmanlar</a>
+  <a href="#iletisim">İletişim</a>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="hero-tag">Türkiye'nin modern emlak platformu</span>
+      <h1>Hayalinizdeki eve <em>bir adım</em> daha yakın.</h1>
+      <p class="hero-sub">Binlerce seçkin ilan, uzman danışman kadrosu ve şeffaf süreçlerle aradığınız mülkü Nova Estate ile kolayca bulun.</p>
+      <div class="hero-actions">
+        <a href="#ilanlar" class="btn-primary">İlanları Keşfet <span>→</span></a>
+        <a href="#iletisim" class="btn-ghost">Danışmanla Görüş</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="hero-stat-n">2.400+</div><div class="hero-stat-l">Aktif İlan</div></div>
+        <div><div class="hero-stat-n">980</div><div class="hero-stat-l">Mutlu Aile</div></div>
+        <div><div class="hero-stat-n">15</div><div class="hero-stat-l">Yıllık Tecrübe</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=900&q=85" alt="Modern villa" loading="lazy" onerror="this.style.opacity=0">
+      <div class="hero-float top">
+        <div class="hf-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg></div>
+        <div><div class="hf-num">2.400+</div><div class="hf-label">Satılık & Kiralık</div></div>
+      </div>
+      <div class="hero-float bottom">
+        <div class="hf-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div><div class="hf-num">%98</div><div class="hf-label">Memnuniyet</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- SEARCH BAR -->
+<div class="container">
+  <div class="search-bar">
+    <div class="search-field">
+      <label>İşlem</label>
+      <select><option>Satılık</option><option>Kiralık</option><option>Günlük Kiralık</option></select>
+    </div>
+    <div class="search-field">
+      <label>Konum</label>
+      <select><option>Tüm Şehirler</option><option>İstanbul</option><option>Ankara</option><option>İzmir</option><option>Bodrum</option><option>Antalya</option></select>
+    </div>
+    <div class="search-field">
+      <label>Emlak Tipi</label>
+      <select><option>Tümü</option><option>Daire</option><option>Villa</option><option>Müstakil Ev</option><option>Arsa</option><option>İş Yeri</option></select>
+    </div>
+    <button class="search-go"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>Ara</button>
+  </div>
+</div>
+
+<!-- LISTINGS -->
+<section id="ilanlar">
+  <div class="container">
+    <div class="sec-head sec-head-row">
+      <div>
+        <span class="sec-tag">Öne Çıkan İlanlar</span>
+        <h2 class="sec-title">Seçkin <em>mülkler</em></h2>
+      </div>
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-tab active" data-filter="all">Tümü</button>
+        <button class="filter-tab" data-filter="villa">Villa</button>
+        <button class="filter-tab" data-filter="daire">Daire</button>
+        <button class="filter-tab" data-filter="mustakil">Müstakil</button>
+      </div>
+    </div>
+    <div class="listings" id="listings"></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="hizmetler">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="sec-tag">Neden Nova Estate</span>
+      <h2 class="sec-title">Size sunduğumuz <em>ayrıcalıklar</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <h3>Doğrulanmış İlanlar</h3>
+        <p>Her ilan ekibimizce kontrol edilir, gerçek ve güncel bilgiler sunulur.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Şeffaf Fiyatlama</h3>
+        <p>Gizli ücret yok. Tüm masraf ve komisyonları baştan netleştiriyoruz.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h3>Uzman Danışmanlar</h3>
+        <p>Bölgesini iyi tanıyan, deneyimli danışmanlarla doğru kararlar verin.</p>
+      </div>
+      <div class="feature reveal">
+        <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6l2 13h9l2-8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg></div>
+        <h3>Kredi Desteği</h3>
+        <p>Anlaşmalı bankalarla en uygun konut kredisi seçeneklerine ulaşın.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section id="danismanlar">
+  <div class="container">
+    <div class="sec-head center">
+      <span class="sec-tag">Ekibimiz</span>
+      <h2 class="sec-title">Uzman <em>danışmanlarımız</em></h2>
+    </div>
+    <div class="agents-grid">
+      <div class="agent reveal">
+        <div class="agent-img"><img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&q=80" alt="Danışman" loading="lazy" onerror="this.parentElement.style.background='var(--accent-l)'"></div>
+        <div class="agent-body"><div class="agent-name">Elif Yıldız</div><div class="agent-role">Kıdemli Danışman</div><div class="agent-socials"><span class="agent-social">in</span><span class="agent-social">IG</span><span class="agent-social">@</span></div></div>
+      </div>
+      <div class="agent reveal">
+        <div class="agent-img"><img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&q=80" alt="Danışman" loading="lazy" onerror="this.parentElement.style.background='var(--accent-l)'"></div>
+        <div class="agent-body"><div class="agent-name">Burak Demir</div><div class="agent-role">Satış Uzmanı</div><div class="agent-socials"><span class="agent-social">in</span><span class="agent-social">IG</span><span class="agent-social">@</span></div></div>
+      </div>
+      <div class="agent reveal">
+        <div class="agent-img"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&q=80" alt="Danışman" loading="lazy" onerror="this.parentElement.style.background='var(--accent-l)'"></div>
+        <div class="agent-body"><div class="agent-name">Selin Kaya</div><div class="agent-role">Portföy Yöneticisi</div><div class="agent-socials"><span class="agent-social">in</span><span class="agent-social">IG</span><span class="agent-social">@</span></div></div>
+      </div>
+      <div class="agent reveal">
+        <div class="agent-img"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80" alt="Danışman" loading="lazy" onerror="this.parentElement.style.background='var(--accent-l)'"></div>
+        <div class="agent-body"><div class="agent-name">Mert Aslan</div><div class="agent-role">Kiralama Uzmanı</div><div class="agent-socials"><span class="agent-social">in</span><span class="agent-social">IG</span><span class="agent-social">@</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="iletisim">
+  <div class="container">
+    <div class="cta">
+      <h2>Mülkünüzü değerlendirelim</h2>
+      <p>Ücretsiz ekspertiz ve değerleme için hemen başvurun. Uzman ekibimiz 24 saat içinde size dönüş yapsın.</p>
+      <a href="tel:+902120000000" class="btn-primary">Ücretsiz Değerleme Al <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Nova<span>Estate</span></div>
+        <p class="footer-about">Modern emlak deneyimi. Doğrulanmış ilanlar, uzman danışmanlar ve şeffaf süreçlerle hayalinizdeki eve ulaşın.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Keşfet</h5>
+        <ul><li><a href="#ilanlar">Satılık</a></li><li><a href="#ilanlar">Kiralık</a></li><li><a href="#ilanlar">Projeler</a></li><li><a href="#ilanlar">Arsa</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>Kurumsal</h5>
+        <ul><li><a href="#hizmetler">Hakkımızda</a></li><li><a href="#danismanlar">Ekibimiz</a></li><li><a href="#">Kariyer</a></li><li><a href="#iletisim">İletişim</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>İletişim</h5>
+        <ul><li><a href="tel:+902120000000">+90 (212) 000 00 00</a></li><li><a href="mailto:info@novaestate.com">info@novaestate.com</a></li><li>Levent, İstanbul</li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Nova Estate. Tüm hakları saklıdır.</span>
+      <span>Gizlilik · Kullanım Koşulları</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+
+  // Listings data
+  const listings = [
+    { cat:'villa', badge:'Satılık', price:'₺18.500.000', title:'Deniz Manzaralı Modern Villa', loc:'Bodrum, Muğla', img:'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80', beds:5, baths:4, area:'420 m²' },
+    { cat:'daire', badge:'Satılık', price:'₺6.250.000', title:'Şehir Merkezinde Lüks Daire', loc:'Şişli, İstanbul', img:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80', beds:3, baths:2, area:'145 m²' },
+    { cat:'mustakil', badge:'Kiralık', price:'₺45.000', title:'Bahçeli Müstakil Ev', loc:'Çankaya, Ankara', img:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80', beds:4, baths:3, area:'260 m²' },
+    { cat:'villa', badge:'Satılık', price:'₺24.900.000', title:'Havuzlu Tasarım Villa', loc:'Çeşme, İzmir', img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80', beds:6, baths:5, area:'510 m²' },
+    { cat:'daire', badge:'Kiralık', price:'₺32.000', title:'Boğaz Manzaralı Rezidans', loc:'Beşiktaş, İstanbul', img:'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80', beds:2, baths:1, area:'98 m²' },
+    { cat:'mustakil', badge:'Satılık', price:'₺9.750.000', title:'Doğayla İç İçe Taş Ev', loc:'Şile, İstanbul', img:'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=600&q=80', beds:4, baths:2, area:'215 m²' }
+  ];
+
+  const bedIcon = '<svg viewBox="0 0 24 24"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>';
+  const bathIcon = '<svg viewBox="0 0 24 24"><path d="M4 12h16a1 1 0 0 1 1 1v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2"/><path d="M10 7h2"/></svg>';
+  const areaIcon = '<svg viewBox="0 0 24 24"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z"/></svg>';
+  const pinIcon = '<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+  const heartIcon = '<svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
+
+  function renderListings(filter) {
+    const wrap = document.getElementById('listings');
+    wrap.innerHTML = '';
+    listings.filter(l => filter === 'all' || l.cat === filter).forEach((l, i) => {
+      const card = document.createElement('div');
+      card.className = 'listing';
+      card.style.transitionDelay = (i * 0.06) + 's';
+      card.innerHTML = `
+        <div class="listing-img">
+          <img src="${l.img}" alt="${l.title}" loading="lazy" onerror="this.style.opacity=0">
+          <span class="listing-badge">${l.badge}</span>
+          <button class="listing-fav" aria-label="Favori">${heartIcon}</button>
+        </div>
+        <div class="listing-body">
+          <div class="listing-price">${l.price} ${l.badge==='Kiralık'?'<span>/ ay</span>':''}</div>
+          <div class="listing-title">${l.title}</div>
+          <div class="listing-loc">${pinIcon}${l.loc}</div>
+          <div class="listing-meta">
+            <span class="listing-meta-item">${bedIcon}${l.beds} Oda</span>
+            <span class="listing-meta-item">${bathIcon}${l.baths} Banyo</span>
+            <span class="listing-meta-item">${areaIcon}${l.area}</span>
+          </div>
+        </div>`;
+      wrap.appendChild(card);
+      requestAnimationFrame(() => setTimeout(() => card.classList.add('visible'), 30));
+      card.querySelector('.listing-fav').addEventListener('click', e => { e.stopPropagation(); e.currentTarget.classList.toggle('active'); });
+    });
+  }
+  renderListings('all');
+
+  document.getElementById('filterTabs').addEventListener('click', e => {
+    if (!e.target.classList.contains('filter-tab')) return;
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    e.target.classList.add('active');
+    renderListings(e.target.dataset.filter);
+  });
+
+  // Reveal on scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

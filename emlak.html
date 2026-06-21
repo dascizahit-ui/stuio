@@ -131,7 +131,7 @@
   .templates { padding: 80px 0 120px; }
   .template-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
   .template-card {
@@ -152,12 +152,13 @@
     box-shadow: 0 30px 60px -22px rgba(110,82,46,0.28);
   }
   .template-card.wide {
-    grid-column: span 12;
+    grid-column: span 2;
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
   }
   @media (max-width: 900px) {
-    .template-card.wide { display: flex; flex-direction: column; }
+    .template-grid { grid-template-columns: 1fr; }
+    .template-card.wide { grid-column: span 1; display: flex; flex-direction: column; }
   }
 
   @media (max-width: 768px) {
@@ -227,6 +228,7 @@
 
   /* PREVIEW BACKGROUNDS */
   .preview-lumina { background: linear-gradient(135deg, #14110a 0%, #070707 100%); }
+  .preview-nova { background: linear-gradient(135deg, #f7f6f3 0%, #e6f0ec 100%); }
 
   /* FOOTER */
   footer {
@@ -268,7 +270,7 @@
   <div class="wrap">
     <div class="template-grid">
 
-      <a href="sablonlar/emlak/emlak.html" class="template-card wide" target="_blank">
+      <a href="sablonlar/emlak/emlak.html" class="template-card" target="_blank">
         <div class="template-preview preview-lumina">
           <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
             <defs>
@@ -304,6 +306,43 @@
             <div class="template-features">
               <span>İlan vitrini</span>
               <span>Harita</span>
+              <span>Filtreleme</span>
+              <span>Danışman</span>
+            </div>
+          </div>
+          <span class="template-tag">Emlak</span>
+        </div>
+      </a>
+
+      <a href="sablonlar/emlak/nova-estate.html" class="template-card" target="_blank">
+        <div class="template-preview preview-nova">
+          <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="ng1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#f7f6f3"/>
+                <stop offset="100%" stop-color="#e6f0ec"/>
+              </linearGradient>
+            </defs>
+            <rect width="900" height="520" fill="url(#ng1)"/>
+            <circle cx="730" cy="160" r="150" fill="#2f6f5e" opacity="0.07"/>
+            <text x="86" y="120" font-family="sans-serif" font-size="13" fill="#2f6f5e" letter-spacing="3" font-weight="600">MODERN EMLAK</text>
+            <text x="86" y="240" font-family="serif" font-size="78" fill="#16181d">Nova</text>
+            <text x="86" y="312" font-family="serif" font-style="italic" font-size="64" fill="#2f6f5e">Estate.</text>
+            <line x1="86" y1="352" x2="230" y2="352" stroke="#2f6f5e" stroke-width="2"/>
+            <text x="86" y="398" font-family="sans-serif" font-size="13" fill="#8b8d94" letter-spacing="2">ARAMA · İLAN · DANIŞMAN · KREDİ</text>
+            <rect x="600" y="180" width="220" height="150" rx="16" fill="#ffffff" stroke="#2f6f5e" stroke-width="1" opacity="0.9"/>
+            <rect x="620" y="200" width="180" height="80" rx="8" fill="#2f6f5e" opacity="0.12"/>
+            <rect x="620" y="294" width="90" height="10" rx="5" fill="#2f6f5e" opacity="0.5"/>
+            <text x="620" y="324" font-family="serif" font-size="15" fill="#16181d">₺ 6.250.000</text>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Nova Estate</h3>
+            <p>Açık ve ferah modern tasarım: filtreli arama çubuğu, animasyonlu ilan kartları, danışman kadrosu ve değerleme çağrısı.</p>
+            <div class="template-features">
+              <span>Akıllı arama</span>
+              <span>Favoriler</span>
               <span>Filtreleme</span>
               <span>Danışman</span>
             </div>
