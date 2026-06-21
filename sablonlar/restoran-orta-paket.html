@@ -685,6 +685,70 @@
             color: rgba(243, 237, 228, 0.25);
         }
 
+        /* ========== PAYMENT OPTIONS ========== */
+        .payment-section {
+            padding: var(--space-section) 0;
+            background: var(--clr-bg);
+        }
+
+        .payment-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .payment-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            background: var(--clr-card);
+            border: 1px solid var(--clr-border);
+            border-radius: var(--radius);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .payment-item:hover {
+            border-color: var(--clr-accent);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .payment-icon {
+            width: 42px;
+            height: 42px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--clr-accent);
+            stroke-width: 1.8;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .payment-label {
+            font-size: var(--fs-small);
+            font-weight: 500;
+            color: var(--clr-text);
+            letter-spacing: 0.3px;
+        }
+
         /* ========== ANIMATIONS ========== */
         @keyframes fadeUp {
             to { opacity: 1; transform: translateY(0); }
@@ -904,6 +968,42 @@
                 <div class="contact-icon">🕐</div>
                 <h3>Çalışma Saatleri</h3>
                 <p>Pzt – Cum: 11:00 – 22:00<br>Cmt – Paz: 10:00 – 23:00</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ÖDEME SEÇENEKLERİ ===== -->
+<section class="payment-section" id="odeme">
+    <div class="container">
+        <div class="payment-header">
+            <div class="section-label">Kolaylık</div>
+            <div class="section-title">Ödeme <em>Seçenekleri</em></div>
+        </div>
+        <div class="payment-grid">
+            <div class="payment-item">
+                <div class="payment-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v12M8 10h8M9 14h6" stroke-width="1.6"/></svg></div>
+                <div class="payment-label">Nakit</div>
+            </div>
+            <div class="payment-item">
+                <div class="payment-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                <div class="payment-label">Kredi Kartı</div>
+            </div>
+            <div class="payment-item">
+                <div class="payment-icon"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+                <div class="payment-label">Banka Kartı</div>
+            </div>
+            <div class="payment-item">
+                <div class="payment-icon"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div>
+                <div class="payment-label">Setcard</div>
+            </div>
+            <div class="payment-item">
+                <div class="payment-icon"><svg viewBox="0 0 24 24"><path d="M3 11h18M5 11V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5"/><path d="M12 11v7M8 18h8"/><circle cx="8" cy="18" r="1"/><circle cx="16" cy="18" r="1"/></svg></div>
+                <div class="payment-label">Ticket</div>
+            </div>
+            <div class="payment-item">
+                <div class="payment-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+                <div class="payment-label">Mobil Ödeme</div>
             </div>
         </div>
     </div>

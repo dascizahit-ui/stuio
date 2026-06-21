@@ -23,6 +23,7 @@
     <li><a href="iletisim.html" data-i18n="nav.contact">İletişim</a></li>
     <li><a href="#rezervasyon" class="nav-reserve" data-i18n="nav.reserve">Rezervasyon</a></li>
   </ul>
+  <button class="cart-nav-btn" onclick="toggleCart()">Sepet <span class="cart-count" id="cartCount">0</span></button>
   <div class="lang-switch" aria-label="Dil seçimi">
     <button type="button" class="lang-btn active" data-lang="tr">TR</button>
     <button type="button" class="lang-btn" data-lang="en">EN</button>
@@ -291,6 +292,91 @@
     <button type="submit" class="res-btn" data-i18n="reservation.submit">Rezervasyon Yap</button>
   </form>
 </section>
+
+<!-- BUSY CHART & PAYMENT -->
+<section class="busy-section">
+  <div style="max-width:700px;margin:0 auto;">
+    <p class="section-label">Yoğunluk</p>
+    <h2 class="section-title" style="margin-bottom:30px;"><span>Anlık</span> <em>Doluluk</em></h2>
+    <div class="busy-chart">
+      <div class="busy-header">
+        <h3>Yoğunluk Saatleri</h3>
+        <span class="busy-now"><span class="busy-now-dot"></span>Şu anda: <strong id="busyNow">—</strong></span>
+      </div>
+      <div class="busy-days" id="busyDays"></div>
+      <div class="busy-bars" id="busyBars"></div>
+      <div class="busy-axis">
+        <span>12:00</span>
+        <span>15:00</span>
+        <span>19:00</span>
+        <span>23:00</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="payment-section">
+  <div style="text-align:center;">
+    <p class="section-label" style="justify-content:center;">Kolaylık</p>
+    <h2 class="section-title"><span>Ödeme</span> <em>Seçenekleri</em></h2>
+  </div>
+  <div class="payment-grid">
+    <div class="payment-item">
+      <div class="payment-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v12M8 10h8M9 14h6" stroke-width="1.6"/></svg></div>
+      <div class="payment-label">Nakit</div>
+    </div>
+    <div class="payment-item">
+      <div class="payment-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+      <div class="payment-label">Kredi Kartı</div>
+    </div>
+    <div class="payment-item">
+      <div class="payment-icon"><svg viewBox="0 0 24 24"><path d="M3 3h18v18H3z" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+      <div class="payment-label">Banka Kartı</div>
+    </div>
+    <div class="payment-item">
+      <div class="payment-icon"><svg viewBox="0 0 24 24"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div>
+      <div class="payment-label">Setcard</div>
+    </div>
+    <div class="payment-item">
+      <div class="payment-icon"><svg viewBox="0 0 24 24"><path d="M3 11h18M5 11V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5"/><path d="M12 11v7M8 18h8"/><circle cx="8" cy="18" r="1"/><circle cx="16" cy="18" r="1"/></svg></div>
+      <div class="payment-label">Ticket</div>
+    </div>
+    <div class="payment-item">
+      <div class="payment-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+      <div class="payment-label">Mobil Ödeme</div>
+    </div>
+  </div>
+</section>
+
+<!-- CART DRAWER -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-header">
+    <h2>Siparişim</h2>
+    <button class="cart-close" onclick="toggleCart()" aria-label="Sepeti kapat">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty-icon">✦</div>
+      <p>Sepetiniz boş.<br>Menüden ürün ekleyin.</p>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-subtotal">
+      <span>Ara Toplam</span>
+      <span id="subtotalVal">₺0</span>
+    </div>
+    <div class="cart-subtotal">
+      <span>Servis Ücreti</span>
+      <span>₺0</span>
+    </div>
+    <div class="cart-total">
+      <span>Toplam</span>
+      <span id="totalVal">₺0</span>
+    </div>
+    <button class="checkout-btn" onclick="clearCart()">Sepeti Temizle</button>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
