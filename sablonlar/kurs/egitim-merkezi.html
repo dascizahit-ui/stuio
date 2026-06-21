@@ -4,679 +4,353 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AkademiPlus – Eğitim & Kurs Merkezi</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --navy: #0A1628;
-    --navy-mid: #12234a;
-    --gold: #F5A623;
-    --gold-light: #FFD580;
-    --cream: #F8F6F0;
-    --light: #E8EDF5;
-    --text: #2D3748;
-    --muted: #718096;
-    --white: #ffffff;
-    --success: #48BB78;
-    --radius: 16px;
-    --shadow: 0 8px 40px rgba(10,22,40,0.12);
-  }
+:root {
+  --navy:#0A1628; --navy-mid:#12234a; --navy-light:#1e3a6e;
+  --gold:#F5A623; --gold-light:#FFD580;
+  --cream:#F8F6F0; --light:#E8EDF5;
+  --text:#2D3748; --muted:#718096; --white:#ffffff;
+  --green:#48BB78; --red:#FC8181;
+  --radius:16px; --shadow:0 8px 40px rgba(10,22,40,0.13);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden;}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,22,40,0.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(245,166,35,0.15);padding:0 5%;height:72px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--white);letter-spacing:-0.5px;text-decoration:none;}
+.logo span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none;}
+.nav-links a{color:rgba(255,255,255,0.78);text-decoration:none;font-size:0.88rem;font-weight:500;transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.nav-cta{background:var(--gold);color:var(--navy)!important;padding:10px 22px;border-radius:8px;font-weight:700!important;transition:all .2s!important;}
+.nav-cta:hover{background:var(--gold-light)!important;transform:translateY(-1px);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.hamburger span{width:24px;height:2px;background:var(--white);border-radius:2px;transition:.3s;}
+.mobile-menu{display:none;position:fixed;inset:0;z-index:999;background:var(--navy);padding:100px 5% 40px;flex-direction:column;gap:0;}
+.mobile-menu.active{display:flex;}
+.mobile-menu a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:1.2rem;font-weight:500;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.08);transition:color .2s;}
+.mobile-menu a:hover{color:var(--gold);}
 
-  html { scroll-behavior: smooth; }
+/* ── HERO ── */
+.hero{min-height:100vh;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 55%,#1a3a6e 100%);display:flex;align-items:center;padding:120px 5% 80px;position:relative;overflow:hidden;}
+.hero-bg-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(245,166,35,0.07) 1px,transparent 1px);background-size:40px 40px;}
+.hero-circle-1{position:absolute;right:-80px;top:-80px;width:520px;height:520px;border-radius:50%;border:1px solid rgba(245,166,35,0.1);}
+.hero-circle-2{position:absolute;right:70px;top:70px;width:360px;height:360px;border-radius:50%;border:1px solid rgba(245,166,35,0.07);}
+.hero-glow{position:absolute;right:100px;top:50%;transform:translateY(-50%);width:440px;height:440px;background:radial-gradient(circle,rgba(245,166,35,0.11) 0%,transparent 70%);border-radius:50%;}
+.hero-content{position:relative;z-index:2;max-width:620px;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,0.13);border:1px solid rgba(245,166,35,0.3);color:var(--gold);padding:7px 16px;border-radius:100px;font-size:0.78rem;font-weight:700;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:28px;}
+.hero-badge::before{content:'●';font-size:0.45rem;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4rem);font-weight:900;line-height:1.1;color:var(--white);margin-bottom:24px;}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero>div>p{font-size:1.05rem;line-height:1.78;color:rgba(255,255,255,0.65);margin-bottom:40px;max-width:500px;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-primary{background:var(--gold);color:var(--navy);padding:14px 30px;border-radius:10px;font-weight:700;font-size:0.92rem;text-decoration:none;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(245,166,35,0.35);}
+.btn-outline{background:transparent;color:var(--white);padding:14px 30px;border-radius:10px;font-weight:600;font-size:0.92rem;text-decoration:none;border:1.5px solid rgba(255,255,255,0.28);cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px;}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.hero-stats{display:flex;gap:40px;margin-top:52px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);flex-wrap:wrap;}
+.stat-number{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);display:block;}
+.stat-label{font-size:0.78rem;color:rgba(255,255,255,0.45);letter-spacing:0.5px;margin-top:2px;}
+.hero-visual{position:absolute;right:5%;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:14px;z-index:2;}
+.hero-card{background:rgba(255,255,255,0.08);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:18px 22px;color:var(--white);min-width:230px;animation:floatCard 3s ease-in-out infinite;}
+.hero-card:nth-child(2){animation-delay:1s;margin-left:28px;}
+.hero-card:nth-child(3){animation-delay:2s;}
+@keyframes floatCard{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+.card-icon{font-size:1.4rem;margin-bottom:8px;}
+.card-title{font-size:0.72rem;color:rgba(255,255,255,0.5);margin-bottom:3px;letter-spacing:0.5px;text-transform:uppercase;}
+.card-value{font-weight:700;font-size:1rem;}
+.card-sub{font-size:0.75rem;color:rgba(255,255,255,0.4);margin-top:2px;}
 
-  body {
-    font-family: 'Inter', sans-serif;
-    color: var(--text);
-    background: var(--white);
-    overflow-x: hidden;
-  }
+/* ── SECTIONS ── */
+section{padding:90px 5%;}
+.section-label{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.7rem);font-weight:700;line-height:1.2;color:var(--navy);margin-bottom:16px;}
+.section-desc{font-size:0.97rem;line-height:1.75;color:var(--muted);max-width:560px;}
+.section-header{margin-bottom:52px;}
+.section-header.center{text-align:center;}
+.section-header.center .section-desc{margin:0 auto;}
 
-  /* ─── NAVBAR ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    background: rgba(10,22,40,0.96);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(245,166,35,0.15);
-    padding: 0 5%;
-    height: 72px;
-    display: flex; align-items: center; justify-content: space-between;
-    transition: background 0.3s;
-  }
-  .logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem; font-weight: 700;
-    color: var(--white);
-    letter-spacing: -0.5px;
-  }
-  .logo span { color: var(--gold); }
-  .nav-links {
-    display: flex; align-items: center; gap: 36px;
-    list-style: none;
-  }
-  .nav-links a {
-    color: rgba(255,255,255,0.78);
-    text-decoration: none;
-    font-size: 0.9rem; font-weight: 500;
-    letter-spacing: 0.3px;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--gold); }
-  .nav-cta {
-    background: var(--gold);
-    color: var(--navy) !important;
-    padding: 10px 22px;
-    border-radius: 8px;
-    font-weight: 700 !important;
-    transition: background 0.2s, transform 0.2s !important;
-  }
-  .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
+/* ── KURSLAR ── */
+.courses-section{background:var(--cream);}
+.courses-filter{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px;}
+.filter-btn{padding:9px 20px;border-radius:100px;border:1.5px solid #D1D9E8;background:transparent;cursor:pointer;font-size:0.83rem;font-weight:500;color:var(--muted);transition:all .2s;font-family:'Inter',sans-serif;}
+.filter-btn.active,.filter-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy);}
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:22px;}
+.course-card{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:0 2px 14px rgba(10,22,40,0.07);transition:transform .25s,box-shadow .25s;cursor:pointer;}
+.course-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+.course-img{height:170px;position:relative;display:flex;align-items:center;justify-content:center;font-size:3.6rem;}
+.course-img.math{background:linear-gradient(135deg,#667EEA,#764BA2);}
+.course-img.lang{background:linear-gradient(135deg,#f093fb,#f5576c);}
+.course-img.science{background:linear-gradient(135deg,#4facfe,#00c6ff);}
+.course-img.lit{background:linear-gradient(135deg,#43e97b,#38f9d7);}
+.course-img.hist{background:linear-gradient(135deg,#fa709a,#fee140);}
+.course-img.art{background:linear-gradient(135deg,#a18cd1,#fbc2eb);}
+.course-img.ger{background:linear-gradient(135deg,#f7971e,#ffd200);}
+.course-img.bio{background:linear-gradient(135deg,#11998e,#38ef7d);}
+.course-img.comp{background:linear-gradient(135deg,#0f0c29,#302b63);}
+.course-img.music{background:linear-gradient(135deg,#e96c50,#fa7268);}
+.course-img.sport{background:linear-gradient(135deg,#1d976c,#93f9b9);}
+.course-img.psych{background:linear-gradient(135deg,#834d9b,#d04ed6);}
+.course-badge{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.28);backdrop-filter:blur(8px);color:#fff;font-size:0.7rem;font-weight:700;padding:4px 12px;border-radius:100px;letter-spacing:0.5px;}
+.course-body{padding:20px 22px;}
+.course-category{font-size:0.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+.course-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:10px;line-height:1.35;}
+.course-teacher{font-size:0.8rem;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.course-meta{display:flex;gap:14px;flex-wrap:wrap;}
+.course-meta span{font-size:0.76rem;color:var(--muted);display:flex;align-items:center;gap:4px;}
+.course-footer{display:flex;align-items:center;justify-content:space-between;padding:13px 22px;border-top:1px solid var(--light);}
+.course-price{font-weight:700;font-size:0.98rem;color:var(--navy);}
+.course-price span{font-size:0.73rem;color:var(--muted);font-weight:400;}
+.enroll-btn{background:var(--navy);color:var(--white);padding:8px 18px;border-radius:8px;font-size:0.8rem;font-weight:600;border:none;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;}
+.enroll-btn:hover{background:var(--gold);color:var(--navy);transform:translateY(-1px);}
 
-  .hamburger {
-    display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px;
-  }
-  .hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
+/* ── TAKVİM ── */
+.calendar-section{background:var(--white);}
+.calendar-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.cal-widget{background:var(--navy);border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(10,22,40,0.22);}
+.cal-header{background:rgba(245,166,35,0.1);padding:22px 26px;display:flex;align-items:center;justify-content:space-between;}
+.cal-month{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);}
+.cal-nav{display:flex;gap:8px;}
+.cal-nav button{background:rgba(255,255,255,0.1);border:none;color:var(--white);width:34px;height:34px;border-radius:8px;cursor:pointer;font-size:1rem;transition:background .2s;}
+.cal-nav button:hover{background:rgba(245,166,35,0.25);}
+.cal-days-head{display:grid;grid-template-columns:repeat(7,1fr);padding:14px 18px 8px;}
+.cal-days-head span{text-align:center;font-size:0.68rem;font-weight:700;color:rgba(255,255,255,0.32);letter-spacing:1px;text-transform:uppercase;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);padding:0 18px 22px;gap:3px;}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0.82rem;color:rgba(255,255,255,0.58);border-radius:8px;cursor:pointer;transition:all .15s;position:relative;font-family:'Inter',sans-serif;}
+.cal-day:hover{background:rgba(255,255,255,0.08);color:var(--white);}
+.cal-day.today{background:var(--gold);color:var(--navy);font-weight:700;}
+.cal-day.has-event::after{content:'';position:absolute;bottom:3px;width:4px;height:4px;border-radius:50%;background:var(--gold);}
+.cal-day.today.has-event::after{background:var(--navy);}
+.cal-day.other-month{color:rgba(255,255,255,0.18);}
+.events-list{display:flex;flex-direction:column;gap:14px;}
+.events-title{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.events-sub{font-size:0.87rem;color:var(--muted);margin-bottom:26px;}
+.event-item{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:12px;background:var(--cream);border-left:4px solid transparent;transition:all .2s;cursor:pointer;}
+.event-item:hover{transform:translateX(4px);box-shadow:0 4px 20px rgba(10,22,40,0.08);}
+.event-item.cl-math{border-left-color:#667EEA;}
+.event-item.cl-lang{border-left-color:#f5576c;}
+.event-item.cl-science{border-left-color:#4facfe;}
+.event-item.cl-hist{border-left-color:#fa709a;}
+.event-item.cl-bio{border-left-color:#11998e;}
+.event-item.cl-art{border-left-color:#a18cd1;}
+.event-date{background:var(--navy);color:var(--white);border-radius:10px;padding:8px 10px;text-align:center;min-width:50px;flex-shrink:0;}
+.event-day{font-size:1.35rem;font-weight:700;line-height:1;}
+.event-month{font-size:0.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);}
+.event-name{font-weight:600;font-size:0.92rem;color:var(--navy);margin-bottom:5px;}
+.event-meta{font-size:0.77rem;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;}
+.event-meta span+span::before{content:'·';margin-right:2px;}
 
-  /* ─── HERO ─── */
-  .hero {
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #1a3a6e 100%);
-    display: flex; align-items: center;
-    padding: 120px 5% 80px;
-    position: relative; overflow: hidden;
-  }
-  .hero-bg-dots {
-    position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(245,166,35,0.07) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-  .hero-circle-1 {
-    position: absolute; right: -80px; top: -80px;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    border: 1px solid rgba(245,166,35,0.12);
-  }
-  .hero-circle-2 {
-    position: absolute; right: 60px; top: 60px;
-    width: 350px; height: 350px;
-    border-radius: 50%;
-    border: 1px solid rgba(245,166,35,0.08);
-  }
-  .hero-glow {
-    position: absolute; right: 120px; top: 50%;
-    transform: translateY(-50%);
-    width: 420px; height: 420px;
-    background: radial-gradient(circle, rgba(245,166,35,0.12) 0%, transparent 70%);
-    border-radius: 50%;
-  }
+/* ── ÖĞRETMENLER ── */
+.teachers-section{background:var(--cream);}
+.teachers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:22px;}
+.teacher-card{background:var(--white);border-radius:20px;padding:30px 22px;text-align:center;box-shadow:0 2px 18px rgba(10,22,40,0.06);transition:all .25s;position:relative;overflow:hidden;}
+.teacher-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-light));transform:scaleX(0);transition:transform .3s;transform-origin:left;}
+.teacher-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+.teacher-card:hover::before{transform:scaleX(1);}
+.teacher-avatar{width:82px;height:82px;border-radius:50%;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:1.7rem;font-weight:700;color:var(--white);border:3px solid var(--light);}
+.av-blue{background:linear-gradient(135deg,#12234a,#2a4a8a);}
+.av-purple{background:linear-gradient(135deg,#764BA2,#667EEA);}
+.av-teal{background:linear-gradient(135deg,#11998e,#38ef7d);}
+.av-rose{background:linear-gradient(135deg,#f5576c,#f093fb);}
+.av-amber{background:linear-gradient(135deg,#f7971e,#ffd200);}
+.av-indigo{background:linear-gradient(135deg,#4facfe,#00c6ff);}
+.av-green{background:linear-gradient(135deg,#1d976c,#93f9b9);}
+.av-plum{background:linear-gradient(135deg,#834d9b,#d04ed6);}
+.av-orange{background:linear-gradient(135deg,#e96c50,#ffd200);}
+.av-dark{background:linear-gradient(135deg,#302b63,#0f0c29);}
+.teacher-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--navy);margin-bottom:4px;}
+.teacher-subject{font-size:0.75rem;font-weight:700;color:var(--gold);letter-spacing:0.5px;margin-bottom:10px;}
+.teacher-exp{font-size:0.75rem;color:var(--muted);margin-bottom:8px;}
+.teacher-bio{font-size:0.8rem;line-height:1.6;color:var(--muted);margin-bottom:14px;}
+.teacher-stars{color:var(--gold);font-size:0.82rem;margin-bottom:2px;}
+.teacher-rating{font-size:0.75rem;color:var(--muted);margin-bottom:12px;}
+.teacher-tags{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;}
+.teacher-tag{background:var(--light);color:var(--navy);font-size:0.68rem;font-weight:600;padding:3px 9px;border-radius:100px;}
 
-  .hero-content { position: relative; z-index: 2; max-width: 640px; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(245,166,35,0.15);
-    border: 1px solid rgba(245,166,35,0.3);
-    color: var(--gold);
-    padding: 7px 16px; border-radius: 100px;
-    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.5px;
-    text-transform: uppercase; margin-bottom: 28px;
-  }
-  .hero-badge::before { content: '●'; font-size: 0.5rem; }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.6rem, 5vw, 4rem);
-    font-weight: 900; line-height: 1.1;
-    color: var(--white); margin-bottom: 24px;
-  }
-  .hero h1 em { color: var(--gold); font-style: normal; }
-  .hero p {
-    font-size: 1.1rem; line-height: 1.75;
-    color: rgba(255,255,255,0.68);
-    margin-bottom: 40px; max-width: 520px;
-  }
-  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--gold);
-    color: var(--navy);
-    padding: 15px 32px; border-radius: 10px;
-    font-weight: 700; font-size: 0.95rem;
-    text-decoration: none; border: none; cursor: pointer;
-    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
-  }
-  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,166,35,0.35); }
-  .btn-outline {
-    background: transparent;
-    color: var(--white);
-    padding: 15px 32px; border-radius: 10px;
-    font-weight: 600; font-size: 0.95rem;
-    text-decoration: none; border: 1.5px solid rgba(255,255,255,0.3); cursor: pointer;
-    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
-  }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+/* ── FİYATLANDIRMA ── */
+.pricing-section{background:var(--white);}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:960px;margin:0 auto;}
+.price-card{border-radius:20px;padding:36px 28px;position:relative;transition:transform .25s,box-shadow .25s;}
+.price-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);}
+.price-card.basic{background:var(--cream);border:1.5px solid #D1D9E8;}
+.price-card.pro{background:var(--navy);border:1.5px solid var(--gold);}
+.price-card.elite{background:var(--cream);border:1.5px solid #D1D9E8;}
+.price-popular{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:0.7rem;font-weight:800;padding:4px 18px;border-radius:100px;letter-spacing:0.5px;white-space:nowrap;}
+.price-plan{font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;}
+.price-card.basic .price-plan,.price-card.elite .price-plan{color:var(--muted);}
+.price-card.pro .price-plan{color:var(--gold);}
+.price-amount{margin-bottom:6px;}
+.price-amount strong{font-family:'Playfair Display',serif;font-size:2.4rem;font-weight:700;}
+.price-card.basic .price-amount strong,.price-card.elite .price-amount strong{color:var(--navy);}
+.price-card.pro .price-amount strong{color:var(--white);}
+.price-period{font-size:0.82rem;}
+.price-card.basic .price-period,.price-card.elite .price-period{color:var(--muted);}
+.price-card.pro .price-period{color:rgba(255,255,255,0.55);}
+.price-desc{font-size:0.82rem;line-height:1.6;margin:12px 0 22px;}
+.price-card.basic .price-desc,.price-card.elite .price-desc{color:var(--muted);}
+.price-card.pro .price-desc{color:rgba(255,255,255,0.6);}
+.price-divider{height:1px;margin-bottom:22px;}
+.price-card.basic .price-divider,.price-card.elite .price-divider{background:#D1D9E8;}
+.price-card.pro .price-divider{background:rgba(255,255,255,0.12);}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+.price-features li{font-size:0.84rem;display:flex;align-items:flex-start;gap:10px;}
+.price-card.basic .price-features li,.price-card.elite .price-features li{color:var(--text);}
+.price-card.pro .price-features li{color:rgba(255,255,255,0.82);}
+.price-features li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px;}
+.price-features li.off::before{content:'✗';color:#CBD5E0;}
+.price-features li.off{color:var(--muted)!important;opacity:0.7;}
+.price-btn{width:100%;padding:14px;border-radius:10px;font-size:0.9rem;font-weight:700;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:all .2s;}
+.price-card.basic .price-btn,.price-card.elite .price-btn{background:var(--navy);color:var(--white);}
+.price-card.basic .price-btn:hover,.price-card.elite .price-btn:hover{background:var(--gold);color:var(--navy);}
+.price-card.pro .price-btn{background:var(--gold);color:var(--navy);}
+.price-card.pro .price-btn:hover{background:var(--gold-light);}
 
-  .hero-stats {
-    display: flex; gap: 40px; margin-top: 56px;
-    padding-top: 36px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-  .stat-item {}
-  .stat-number {
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem; font-weight: 700;
-    color: var(--gold); display: block;
-  }
-  .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); letter-spacing: 0.5px; }
+/* ── BAŞARI HİKAYELERİ ── */
+.testimonials-section{background:linear-gradient(135deg,var(--navy) 0%,#1a3a6e 100%);position:relative;overflow:hidden;}
+.testimonials-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(245,166,35,0.05) 1px,transparent 1px);background-size:32px 32px;}
+.testimonials-section .section-title{color:var(--white);}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;position:relative;z-index:1;}
+.testi-card{background:rgba(255,255,255,0.07);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);border-radius:18px;padding:26px;}
+.testi-stars{color:var(--gold);font-size:0.9rem;margin-bottom:14px;}
+.testi-text{font-size:0.88rem;line-height:1.7;color:rgba(255,255,255,0.78);margin-bottom:20px;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:700;color:var(--white);flex-shrink:0;}
+.testi-name{font-weight:600;font-size:0.88rem;color:var(--white);}
+.testi-info{font-size:0.75rem;color:rgba(255,255,255,0.45);margin-top:1px;}
 
-  .hero-visual {
-    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 16px; z-index: 2;
-  }
-  .hero-card {
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 14px; padding: 18px 22px;
-    color: var(--white); min-width: 220px;
-    animation: floatCard 3s ease-in-out infinite;
-  }
-  .hero-card:nth-child(2) { animation-delay: 1s; margin-left: 30px; }
-  .hero-card:nth-child(3) { animation-delay: 2s; }
-  @keyframes floatCard {
-    0%,100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-  }
-  .card-icon { font-size: 1.4rem; margin-bottom: 8px; }
-  .card-title { font-size: 0.78rem; color: rgba(255,255,255,0.55); margin-bottom: 3px; letter-spacing: 0.5px; text-transform: uppercase; }
-  .card-value { font-weight: 700; font-size: 1rem; }
-  .card-sub { font-size: 0.78rem; color: rgba(255,255,255,0.45); }
+/* ── NEDEN BİZ ── */
+.why-section{background:var(--white);}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.why-card{padding:30px 22px;border-radius:16px;background:var(--cream);border:1.5px solid transparent;transition:all .25s;}
+.why-card:hover{border-color:var(--gold);background:var(--white);box-shadow:0 8px 32px rgba(245,166,35,0.1);}
+.why-icon{font-size:2.1rem;margin-bottom:16px;}
+.why-title{font-weight:700;font-size:0.97rem;color:var(--navy);margin-bottom:8px;}
+.why-desc{font-size:0.82rem;line-height:1.65;color:var(--muted);}
 
-  /* ─── WAVE ─── */
-  .wave-divider { display: block; width: 100%; overflow: hidden; line-height: 0; }
-  .wave-divider svg { display: block; }
+/* ── SSS ── */
+.faq-section{background:var(--cream);}
+.faq-wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;}
+.faq-item{background:var(--white);border-radius:12px;overflow:hidden;border:1.5px solid transparent;transition:border-color .2s;}
+.faq-item.open{border-color:var(--gold);}
+.faq-q{padding:20px 24px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;font-weight:600;font-size:0.93rem;color:var(--navy);}
+.faq-icon{font-size:1.2rem;color:var(--gold);transition:transform .3s;flex-shrink:0;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s;}
+.faq-item.open .faq-a{max-height:300px;}
+.faq-a p{padding:0 24px 20px;font-size:0.87rem;line-height:1.72;color:var(--muted);}
 
-  /* ─── SECTION COMMONS ─── */
-  section { padding: 90px 5%; }
-  .section-label {
-    display: inline-block;
-    font-size: 0.75rem; font-weight: 700;
-    letter-spacing: 2px; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 14px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 700; line-height: 1.2;
-    color: var(--navy); margin-bottom: 18px;
-  }
-  .section-desc {
-    font-size: 1rem; line-height: 1.75; color: var(--muted);
-    max-width: 560px;
-  }
-  .section-header { margin-bottom: 56px; }
-  .section-header.center { text-align: center; }
-  .section-header.center .section-desc { margin: 0 auto; }
+/* ── İLETİŞİM ── */
+.contact-section{background:var(--white);}
+.contact-wrapper{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start;}
+.contact-info{display:flex;flex-direction:column;gap:24px;}
+.contact-card{background:var(--cream);border-radius:14px;padding:22px;display:flex;align-items:flex-start;gap:16px;}
+.contact-card-icon{width:46px;height:46px;border-radius:12px;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+.contact-card h4{font-weight:700;font-size:0.9rem;color:var(--navy);margin-bottom:4px;}
+.contact-card p{font-size:0.83rem;color:var(--muted);line-height:1.6;}
+.map-placeholder{background:linear-gradient(135deg,#E8EDF5,#D1D9E8);border-radius:14px;height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--muted);font-size:0.85rem;margin-top:8px;}
+.map-placeholder .map-icon{font-size:2rem;}
 
-  /* ─── KURSLAR ─── */
-  .courses-section { background: var(--cream); }
-  .courses-filter {
-    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 40px;
-  }
-  .filter-btn {
-    padding: 9px 20px; border-radius: 100px;
-    border: 1.5px solid #D1D9E8;
-    background: transparent; cursor: pointer;
-    font-size: 0.85rem; font-weight: 500; color: var(--muted);
-    transition: all 0.2s; font-family: 'Inter', sans-serif;
-  }
-  .filter-btn.active, .filter-btn:hover {
-    background: var(--navy); color: var(--white);
-    border-color: var(--navy);
-  }
+/* ── KAYIT ── */
+.register-section{background:linear-gradient(135deg,var(--navy) 0%,#1e3a6e 100%);position:relative;overflow:hidden;}
+.register-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(245,166,35,0.05) 1px,transparent 1px);background-size:32px 32px;}
+.register-wrapper{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:center;position:relative;z-index:1;}
+.register-info .section-title{color:var(--white);}
+.register-info .section-desc{color:rgba(255,255,255,0.58);}
+.register-perks{margin-top:30px;display:flex;flex-direction:column;gap:14px;}
+.perk{display:flex;align-items:flex-start;gap:14px;}
+.perk-icon{width:40px;height:40px;border-radius:10px;background:rgba(245,166,35,0.13);border:1px solid rgba(245,166,35,0.25);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.perk-text h4{font-size:0.88rem;font-weight:600;color:var(--white);margin-bottom:2px;}
+.perk-text p{font-size:0.78rem;color:rgba(255,255,255,0.42);}
+.register-form{background:var(--white);border-radius:24px;padding:38px;box-shadow:0 32px 80px rgba(0,0,0,0.25);}
+.form-title{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.form-sub{font-size:0.82rem;color:var(--muted);margin-bottom:26px;}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.form-group{display:flex;flex-direction:column;gap:6px;}
+.form-group.full{grid-column:1/-1;}
+.form-group label{font-size:0.72rem;font-weight:700;color:var(--navy);letter-spacing:0.5px;text-transform:uppercase;}
+.form-group input,.form-group select,.form-group textarea{padding:11px 14px;border-radius:10px;border:1.5px solid #D1D9E8;font-size:0.88rem;font-family:'Inter',sans-serif;color:var(--text);background:var(--cream);transition:all .2s;outline:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,166,35,0.12);background:var(--white);}
+.form-group textarea{resize:vertical;min-height:85px;}
+.form-submit{width:100%;padding:14px;background:var(--navy);color:var(--white);border:none;border-radius:12px;font-size:0.97rem;font-weight:700;cursor:pointer;margin-top:22px;font-family:'Inter',sans-serif;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;}
+.form-submit:hover{background:var(--gold);color:var(--navy);transform:translateY(-1px);box-shadow:0 8px 24px rgba(245,166,35,0.3);}
+.form-note{font-size:0.73rem;color:var(--muted);text-align:center;margin-top:10px;}
+.success-msg{text-align:center;padding:32px 16px;}
+.success-icon{font-size:3.5rem;margin-bottom:14px;}
+.success-msg h3{font-family:'Playfair Display',serif;font-size:1.45rem;color:var(--navy);margin-bottom:8px;}
+.success-msg p{color:var(--muted);font-size:0.88rem;line-height:1.6;}
 
-  .courses-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
-  }
-  .course-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: 0 2px 16px rgba(10,22,40,0.07);
-    transition: transform 0.25s, box-shadow 0.25s;
-    cursor: pointer;
-  }
-  .course-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
-  .course-img {
-    height: 180px; position: relative;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 4rem;
-  }
-  .course-img.math { background: linear-gradient(135deg, #667EEA, #764BA2); }
-  .course-img.lang { background: linear-gradient(135deg, #f093fb, #f5576c); }
-  .course-img.science { background: linear-gradient(135deg, #4facfe, #00f2fe); }
-  .course-img.lit { background: linear-gradient(135deg, #43e97b, #38f9d7); }
-  .course-img.hist { background: linear-gradient(135deg, #fa709a, #fee140); }
-  .course-img.art { background: linear-gradient(135deg, #a18cd1, #fbc2eb); }
-  .course-badge {
-    position: absolute; top: 12px; left: 12px;
-    background: rgba(0,0,0,0.3); backdrop-filter: blur(8px);
-    color: #fff; font-size: 0.72rem; font-weight: 700;
-    padding: 4px 12px; border-radius: 100px; letter-spacing: 0.5px;
-  }
-  .course-body { padding: 22px; }
-  .course-category {
-    font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
-  }
-  .course-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.15rem; font-weight: 700;
-    color: var(--navy); margin-bottom: 10px; line-height: 1.35;
-  }
-  .course-meta {
-    display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
-  }
-  .course-meta span {
-    font-size: 0.78rem; color: var(--muted);
-    display: flex; align-items: center; gap: 5px;
-  }
-  .course-footer {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 22px;
-    border-top: 1px solid var(--light);
-  }
-  .course-price { font-weight: 700; font-size: 1rem; color: var(--navy); }
-  .course-price span { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
-  .enroll-btn {
-    background: var(--navy); color: var(--white);
-    padding: 8px 18px; border-radius: 8px;
-    font-size: 0.82rem; font-weight: 600;
-    border: none; cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-    font-family: 'Inter', sans-serif;
-  }
-  .enroll-btn:hover { background: var(--gold); color: var(--navy); transform: translateY(-1px); }
+/* ── FOOTER ── */
+footer{background:var(--navy);padding:64px 5% 28px;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px;}
+.footer-brand .logo{font-size:1.4rem;margin-bottom:14px;display:block;}
+.footer-desc{font-size:0.83rem;color:rgba(255,255,255,0.42);line-height:1.72;margin-bottom:20px;}
+.footer-socials{display:flex;gap:10px;}
+.social-btn{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.58);font-size:0.78rem;font-weight:700;text-decoration:none;transition:all .2s;}
+.social-btn:hover{background:var(--gold);color:var(--navy);}
+.footer-col h4{font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-col ul li a{font-size:0.83rem;color:rgba(255,255,255,0.55);text-decoration:none;transition:color .2s;}
+.footer-col ul li a:hover{color:var(--gold);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.footer-bottom p{font-size:0.78rem;color:rgba(255,255,255,0.28);}
+.footer-bottom a{color:rgba(255,255,255,0.28);text-decoration:none;}
+.footer-bottom a:hover{color:var(--gold);}
 
-  /* ─── TAKVİM ─── */
-  .calendar-section { background: var(--white); }
-  .calendar-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-  
-  .cal-widget {
-    background: var(--navy);
-    border-radius: 20px; overflow: hidden;
-    box-shadow: 0 20px 60px rgba(10,22,40,0.25);
-  }
-  .cal-header {
-    background: rgba(245,166,35,0.12);
-    padding: 24px 28px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .cal-month {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem; font-weight: 700; color: var(--white);
-  }
-  .cal-nav { display: flex; gap: 8px; }
-  .cal-nav button {
-    background: rgba(255,255,255,0.1); border: none;
-    color: var(--white); width: 34px; height: 34px;
-    border-radius: 8px; cursor: pointer; font-size: 1rem;
-    transition: background 0.2s;
-  }
-  .cal-nav button:hover { background: rgba(245,166,35,0.25); }
-  .cal-days-head {
-    display: grid; grid-template-columns: repeat(7, 1fr);
-    padding: 14px 20px 8px;
-  }
-  .cal-days-head span {
-    text-align: center; font-size: 0.72rem; font-weight: 700;
-    color: rgba(255,255,255,0.35); letter-spacing: 1px; text-transform: uppercase;
-  }
-  .cal-grid {
-    display: grid; grid-template-columns: repeat(7, 1fr);
-    padding: 0 20px 24px; gap: 4px;
-  }
-  .cal-day {
-    aspect-ratio: 1;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 0.85rem; color: rgba(255,255,255,0.6);
-    border-radius: 8px; cursor: pointer; transition: all 0.15s;
-    position: relative;
-  }
-  .cal-day:hover { background: rgba(255,255,255,0.08); color: var(--white); }
-  .cal-day.today { background: var(--gold); color: var(--navy); font-weight: 700; }
-  .cal-day.has-event::after {
-    content: ''; position: absolute; bottom: 4px;
-    width: 4px; height: 4px; border-radius: 50%;
-    background: var(--gold);
-  }
-  .cal-day.today.has-event::after { background: var(--navy); }
-  .cal-day.other-month { color: rgba(255,255,255,0.2); }
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;z-index:2000;background:rgba(10,22,40,0.72);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;}
+.modal-overlay.active{display:flex;}
+.modal-box{background:var(--white);border-radius:22px;padding:36px;max-width:500px;width:100%;position:relative;animation:modalIn .3s ease;}
+@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--light);border:none;width:34px;height:34px;border-radius:50%;font-size:1rem;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.modal-close:hover{background:#D1D9E8;}
+.modal-course-tag{font-size:0.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+.modal-title{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.modal-teacher{font-size:0.82rem;color:var(--muted);margin-bottom:16px;}
+.modal-details{display:flex;flex-direction:column;gap:10px;margin-bottom:14px;padding:16px;background:var(--cream);border-radius:12px;}
+.modal-detail{display:flex;align-items:center;gap:12px;font-size:0.86rem;color:var(--text);}
+.modal-detail-icon{font-size:1.05rem;width:22px;text-align:center;}
+.modal-desc{font-size:0.84rem;line-height:1.65;color:var(--muted);margin-bottom:20px;}
+.modal-action{width:100%;padding:13px;background:var(--navy);color:var(--white);border:none;border-radius:10px;font-size:0.92rem;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;transition:all .2s;}
+.modal-action:hover{background:var(--gold);color:var(--navy);}
 
-  .events-list { display: flex; flex-direction: column; gap: 16px; }
-  .events-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; font-weight: 700;
-    color: var(--navy); margin-bottom: 8px;
-  }
-  .events-sub { font-size: 0.9rem; color: var(--muted); margin-bottom: 28px; }
-  .event-item {
-    display: flex; gap: 16px; align-items: flex-start;
-    padding: 18px; border-radius: 12px;
-    background: var(--cream);
-    border-left: 4px solid transparent;
-    transition: all 0.2s; cursor: pointer;
-  }
-  .event-item:hover { transform: translateX(4px); box-shadow: 0 4px 20px rgba(10,22,40,0.08); }
-  .event-item.math { border-left-color: #667EEA; }
-  .event-item.lang { border-left-color: #f5576c; }
-  .event-item.science { border-left-color: #4facfe; }
-  .event-item.hist { border-left-color: #fa709a; }
-  .event-date {
-    background: var(--navy); color: var(--white);
-    border-radius: 10px; padding: 8px 12px;
-    text-align: center; min-width: 52px; flex-shrink: 0;
-  }
-  .event-day { font-size: 1.4rem; font-weight: 700; line-height: 1; }
-  .event-month { font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); }
-  .event-info {}
-  .event-name { font-weight: 600; font-size: 0.95rem; color: var(--navy); margin-bottom: 4px; }
-  .event-meta { font-size: 0.8rem; color: var(--muted); display: flex; gap: 12px; flex-wrap: wrap; }
-  .event-meta span::before { content: '• '; }
-  .event-meta span:first-child::before { content: ''; }
+/* ── TOAST ── */
+.toast{position:fixed;bottom:26px;right:26px;z-index:9999;background:var(--navy);color:var(--white);padding:13px 20px;border-radius:12px;font-size:0.86rem;font-weight:500;box-shadow:0 8px 32px rgba(10,22,40,0.25);display:flex;align-items:center;gap:10px;transform:translateY(80px);opacity:0;transition:all .3s ease;max-width:320px;}
+.toast.show{transform:translateY(0);opacity:1;}
+.toast-icon{color:var(--gold);font-size:1.05rem;flex-shrink:0;}
 
-  /* ─── ÖĞRETMENLER ─── */
-  .teachers-section { background: var(--cream); }
-  .teachers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 24px;
-  }
-  .teacher-card {
-    background: var(--white);
-    border-radius: 20px; padding: 32px 24px;
-    text-align: center;
-    box-shadow: 0 2px 20px rgba(10,22,40,0.06);
-    transition: all 0.25s; position: relative; overflow: hidden;
-  }
-  .teacher-card::before {
-    content: ''; position: absolute;
-    top: 0; left: 0; right: 0; height: 4px;
-    background: linear-gradient(90deg, var(--gold), var(--gold-light));
-    transform: scaleX(0); transition: transform 0.3s;
-  }
-  .teacher-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
-  .teacher-card:hover::before { transform: scaleX(1); }
-  .teacher-avatar {
-    width: 80px; height: 80px; border-radius: 50%;
-    margin: 0 auto 16px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 2rem; font-weight: 700; color: var(--white);
-    background: linear-gradient(135deg, var(--navy), #2a4a8a);
-    border: 3px solid var(--light);
-  }
-  .teacher-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; font-weight: 700;
-    color: var(--navy); margin-bottom: 5px;
-  }
-  .teacher-subject {
-    font-size: 0.8rem; font-weight: 600;
-    color: var(--gold); letter-spacing: 0.5px;
-    margin-bottom: 12px;
-  }
-  .teacher-bio {
-    font-size: 0.82rem; line-height: 1.6;
-    color: var(--muted); margin-bottom: 16px;
-  }
-  .teacher-stars { color: var(--gold); font-size: 0.85rem; margin-bottom: 4px; }
-  .teacher-rating { font-size: 0.78rem; color: var(--muted); }
-  .teacher-tags { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; margin-top: 14px; }
-  .teacher-tag {
-    background: var(--light); color: var(--navy);
-    font-size: 0.7rem; font-weight: 600;
-    padding: 3px 10px; border-radius: 100px;
-  }
+/* ── ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-delay-1{transition-delay:.1s;}
+.reveal-delay-2{transition-delay:.2s;}
+.reveal-delay-3{transition-delay:.3s;}
+.reveal-delay-4{transition-delay:.4s;}
 
-  /* ─── KAYIT ─── */
-  .register-section {
-    background: linear-gradient(135deg, var(--navy) 0%, #1a3a6e 100%);
-    position: relative; overflow: hidden;
-  }
-  .register-section::before {
-    content: ''; position: absolute; inset: 0;
-    background-image: radial-gradient(circle, rgba(245,166,35,0.05) 1px, transparent 1px);
-    background-size: 32px 32px;
-  }
-  .register-wrapper {
-    display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px;
-    align-items: center; position: relative; z-index: 1;
-  }
-  .register-info {}
-  .register-info .section-title { color: var(--white); }
-  .register-info .section-desc { color: rgba(255,255,255,0.6); }
-  .register-perks { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
-  .perk {
-    display: flex; align-items: flex-start; gap: 14px;
-  }
-  .perk-icon {
-    width: 40px; height: 40px; border-radius: 10px;
-    background: rgba(245,166,35,0.15);
-    border: 1px solid rgba(245,166,35,0.25);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem; flex-shrink: 0;
-  }
-  .perk-text h4 { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 2px; }
-  .perk-text p { font-size: 0.8rem; color: rgba(255,255,255,0.45); }
-
-  .register-form {
-    background: var(--white);
-    border-radius: 24px; padding: 40px;
-    box-shadow: 0 32px 80px rgba(0,0,0,0.25);
-  }
-  .form-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem; font-weight: 700;
-    color: var(--navy); margin-bottom: 6px;
-  }
-  .form-sub { font-size: 0.85rem; color: var(--muted); margin-bottom: 28px; }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-group { display: flex; flex-direction: column; gap: 7px; }
-  .form-group.full { grid-column: 1 / -1; }
-  .form-group label {
-    font-size: 0.78rem; font-weight: 700;
-    color: var(--navy); letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    padding: 12px 16px; border-radius: 10px;
-    border: 1.5px solid #D1D9E8;
-    font-size: 0.9rem; font-family: 'Inter', sans-serif;
-    color: var(--text); background: var(--cream);
-    transition: border-color 0.2s, box-shadow 0.2s;
-    outline: none;
-  }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(245,166,35,0.12);
-    background: var(--white);
-  }
-  .form-group textarea { resize: vertical; min-height: 90px; }
-  .form-submit {
-    width: 100%; padding: 15px;
-    background: var(--navy); color: var(--white);
-    border: none; border-radius: 12px;
-    font-size: 1rem; font-weight: 700;
-    cursor: pointer; margin-top: 24px;
-    font-family: 'Inter', sans-serif;
-    transition: all 0.2s;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-  }
-  .form-submit:hover { background: var(--gold); color: var(--navy); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(245,166,35,0.3); }
-  .form-note { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 12px; }
-
-  /* ─── SUCCESS MSG ─── */
-  .success-msg {
-    display: none; text-align: center; padding: 40px 24px;
-  }
-  .success-icon { font-size: 4rem; margin-bottom: 16px; }
-  .success-msg h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; color: var(--navy); margin-bottom: 8px;
-  }
-  .success-msg p { color: var(--muted); font-size: 0.9rem; }
-
-  /* ─── NEDEN BİZ ─── */
-  .why-section { background: var(--white); }
-  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .why-card {
-    padding: 32px 24px; border-radius: 16px;
-    background: var(--cream);
-    border: 1px solid transparent;
-    transition: all 0.25s;
-  }
-  .why-card:hover { border-color: var(--gold); background: var(--white); box-shadow: 0 8px 32px rgba(245,166,35,0.1); }
-  .why-icon { font-size: 2.2rem; margin-bottom: 18px; }
-  .why-title { font-weight: 700; font-size: 1rem; color: var(--navy); margin-bottom: 8px; }
-  .why-desc { font-size: 0.85rem; line-height: 1.65; color: var(--muted); }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--navy);
-    padding: 64px 5% 32px;
-  }
-  .footer-grid {
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 40px; margin-bottom: 48px;
-  }
-  .footer-brand .logo { font-size: 1.4rem; margin-bottom: 14px; display: block; }
-  .footer-desc { font-size: 0.85rem; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 20px; }
-  .footer-socials { display: flex; gap: 12px; }
-  .social-btn {
-    width: 38px; height: 38px; border-radius: 10px;
-    background: rgba(255,255,255,0.08);
-    display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,0.6); font-size: 0.9rem;
-    text-decoration: none; transition: all 0.2s;
-  }
-  .social-btn:hover { background: var(--gold); color: var(--navy); }
-  .footer-col h4 {
-    font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px;
-    text-transform: uppercase; color: rgba(255,255,255,0.4);
-    margin-bottom: 18px;
-  }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-col ul li a {
-    font-size: 0.85rem; color: rgba(255,255,255,0.6);
-    text-decoration: none; transition: color 0.2s;
-  }
-  .footer-col ul li a:hover { color: var(--gold); }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.08);
-    padding-top: 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 12px;
-  }
-  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
-
-  /* ─── SCROLL ANIMATIONS ─── */
-  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-
-  /* ─── MODAL ─── */
-  .modal-overlay {
-    position: fixed; inset: 0; z-index: 2000;
-    background: rgba(10,22,40,0.7); backdrop-filter: blur(8px);
-    display: none; align-items: center; justify-content: center; padding: 20px;
-  }
-  .modal-overlay.active { display: flex; }
-  .modal-box {
-    background: var(--white); border-radius: 24px;
-    padding: 40px; max-width: 480px; width: 100%;
-    position: relative;
-    animation: modalIn 0.3s ease;
-  }
-  @keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-  .modal-close {
-    position: absolute; top: 18px; right: 18px;
-    background: var(--light); border: none;
-    width: 36px; height: 36px; border-radius: 50%;
-    font-size: 1.1rem; cursor: pointer; color: var(--text);
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.2s;
-  }
-  .modal-close:hover { background: #D1D9E8; }
-  .modal-course-tag {
-    font-size: 0.72rem; font-weight: 700; letter-spacing: 1px;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
-  }
-  .modal-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; font-weight: 700;
-    color: var(--navy); margin-bottom: 16px;
-  }
-  .modal-details { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
-  .modal-detail { display: flex; align-items: center; gap: 12px; font-size: 0.88rem; color: var(--text); }
-  .modal-detail-icon { font-size: 1.1rem; width: 24px; text-align: center; }
-  .modal-action { width: 100%; padding: 14px; background: var(--navy); color: var(--white); border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
-  .modal-action:hover { background: var(--gold); color: var(--navy); }
-
-  /* ─── MOBILE NAV ─── */
-  .mobile-menu {
-    display: none;
-    position: fixed; inset: 0; z-index: 999;
-    background: var(--navy);
-    padding: 100px 5% 40px;
-    flex-direction: column; gap: 24px;
-  }
-  .mobile-menu.active { display: flex; }
-  .mobile-menu a {
-    color: rgba(255,255,255,0.8); text-decoration: none;
-    font-size: 1.3rem; font-weight: 500;
-    padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1);
-    transition: color 0.2s;
-  }
-  .mobile-menu a:hover { color: var(--gold); }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 900px) {
-    .hero-visual { display: none; }
-    .calendar-wrapper { grid-template-columns: 1fr; }
-    .register-wrapper { grid-template-columns: 1fr; gap: 40px; }
-    .why-grid { grid-template-columns: repeat(2, 1fr); }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-    .nav-links { display: none; }
-    .hamburger { display: flex; }
-    .form-grid { grid-template-columns: 1fr; }
-    .form-group.full { grid-column: auto; }
-  }
-  @media (max-width: 560px) {
-    section { padding: 60px 5%; }
-    .hero-stats { flex-wrap: wrap; gap: 24px; }
-    .why-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .hero { padding: 100px 5% 60px; }
-  }
-
-  /* ─── TOAST ─── */
-  .toast {
-    position: fixed; bottom: 28px; right: 28px; z-index: 9999;
-    background: var(--navy); color: var(--white);
-    padding: 14px 22px; border-radius: 12px;
-    font-size: 0.88rem; font-weight: 500;
-    box-shadow: 0 8px 32px rgba(10,22,40,0.25);
-    display: flex; align-items: center; gap: 10px;
-    transform: translateY(80px); opacity: 0;
-    transition: all 0.3s ease;
-  }
-  .toast.show { transform: translateY(0); opacity: 1; }
-  .toast-icon { color: var(--gold); font-size: 1.1rem; }
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .hero-visual{display:none;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .pricing-grid .price-card.pro{order:-1;}
+}
+@media(max-width:900px){
+  .calendar-wrapper,.register-wrapper,.contact-wrapper{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  .form-grid{grid-template-columns:1fr;}
+  .form-group.full{grid-column:auto;}
+}
+@media(max-width:600px){
+  section{padding:60px 5%;}
+  .hero{padding:100px 5% 60px;}
+  .hero-stats{flex-wrap:wrap;gap:22px;}
+  .why-grid,.footer-grid{grid-template-columns:1fr;}
+  .pricing-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
@@ -688,7 +362,9 @@
     <li><a href="#kurslar">Kurslar</a></li>
     <li><a href="#takvim">Takvim</a></li>
     <li><a href="#ogretmenler">Öğretmenler</a></li>
-    <li><a href="#neden">Neden Biz</a></li>
+    <li><a href="#fiyatlar">Fiyatlar</a></li>
+    <li><a href="#sss">SSS</a></li>
+    <li><a href="#iletisim">İletişim</a></li>
     <li><a href="#kayit" class="nav-cta">Kayıt Ol</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -696,13 +372,15 @@
   </div>
 </nav>
 
-<!-- MOBILE MENU -->
+<!-- MOBİL MENÜ -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#kurslar" onclick="toggleMenu()">Kurslar</a>
   <a href="#takvim" onclick="toggleMenu()">Takvim</a>
   <a href="#ogretmenler" onclick="toggleMenu()">Öğretmenler</a>
-  <a href="#neden" onclick="toggleMenu()">Neden Biz</a>
-  <a href="#kayit" onclick="toggleMenu()" style="color:var(--gold);font-weight:700">Kayıt Ol →</a>
+  <a href="#fiyatlar" onclick="toggleMenu()">Fiyatlar</a>
+  <a href="#sss" onclick="toggleMenu()">SSS</a>
+  <a href="#iletisim" onclick="toggleMenu()">İletişim</a>
+  <a href="#kayit" onclick="toggleMenu()" style="color:var(--gold);font-weight:700;">Kayıt Ol →</a>
 </div>
 
 <!-- HERO -->
@@ -711,32 +389,33 @@
   <div class="hero-circle-1"></div>
   <div class="hero-circle-2"></div>
   <div class="hero-glow"></div>
-
   <div class="hero-content">
     <div class="hero-badge">Türkiye'nin Öncü Eğitim Merkezi</div>
     <h1>Geleceğini<br><em>Bizimle</em><br>İnşa Et</h1>
-    <p>YKS, LGS ve özel kurslarda uzman kadromuzla öğrencilerin hedeflerine ulaşmalarına rehberlik ediyoruz. Her adımda yanınızdayız.</p>
+    <p>YKS, LGS ve özel programlarda uzman kadromuzla öğrencilerin hedeflerine ulaşmalarına rehberlik ediyoruz. Her adımda yanınızdayız.</p>
     <div class="hero-actions">
-      <a href="#kurslar" class="btn-primary">Kurslara Göz At <span>→</span></a>
+      <a href="#kurslar" class="btn-primary">Kurslara Göz At →</a>
       <a href="#kayit" class="btn-outline">Ücretsiz Deneme ✦</a>
     </div>
     <div class="hero-stats">
       <div class="stat-item">
-        <span class="stat-number" data-count="3200">0</span>
+        <span class="stat-number" data-count="3200" data-suffix="+">0</span>
         <span class="stat-label">Mutlu Öğrenci</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number" data-count="48">0</span>
+        <span class="stat-number" data-count="48" data-suffix="+">0</span>
         <span class="stat-label">Aktif Kurs</span>
       </div>
       <div class="stat-item">
-        <span class="stat-number" data-count="97">0</span>
-        <span class="stat-label">% Başarı Oranı</span>
+        <span class="stat-number" data-count="97" data-suffix="%">0</span>
+        <span class="stat-label">Başarı Oranı</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-count="15" data-suffix=" yıl">0</span>
+        <span class="stat-label">Deneyim</span>
       </div>
     </div>
   </div>
-
-  <!-- Floating cards -->
   <div class="hero-visual">
     <div class="hero-card">
       <div class="card-icon">🏆</div>
@@ -759,21 +438,13 @@
   </div>
 </section>
 
-<!-- WAVE -->
-<div class="wave-divider" style="background:var(--cream);margin-top:-2px">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 60" preserveAspectRatio="none" style="width:100%;height:60px">
-    <path fill="#ffffff" d="M0,60 C360,0 1080,0 1440,60 L1440,0 L0,0 Z"/>
-  </svg>
-</div>
-
 <!-- KURSLAR -->
 <section id="kurslar" class="courses-section">
   <div class="section-header">
     <div class="section-label">Eğitim Programları</div>
     <h2 class="section-title">Tüm Kurslarımız</h2>
-    <p class="section-desc">YKS hazırlıktan dil kurslarına, sanat atölyelerinden birebir özel derslere kadar 48 farklı program.</p>
+    <p class="section-desc">YKS hazırlıktan dil kurslarına, sanat atölyelerinden birebir özel derslere kadar 48 farklı program. Tüm yaş gruplarına uygun.</p>
   </div>
-
   <div class="courses-filter">
     <button class="filter-btn active" onclick="filterCourses('all',this)">Tümü</button>
     <button class="filter-btn" onclick="filterCourses('yks',this)">YKS Hazırlık</button>
@@ -781,11 +452,10 @@
     <button class="filter-btn" onclick="filterCourses('dil',this)">Dil Kursları</button>
     <button class="filter-btn" onclick="filterCourses('fen',this)">Fen Bilimleri</button>
     <button class="filter-btn" onclick="filterCourses('sanat',this)">Sanat & Kültür</button>
+    <button class="filter-btn" onclick="filterCourses('bilgisayar',this)">Bilgisayar</button>
+    <button class="filter-btn" onclick="filterCourses('ozel',this)">Özel Dersler</button>
   </div>
-
-  <div class="courses-grid" id="coursesGrid">
-    <!-- Cards injected by JS -->
-  </div>
+  <div class="courses-grid" id="coursesGrid"></div>
 </section>
 
 <!-- TAKVİM -->
@@ -794,10 +464,10 @@
     <div>
       <div class="section-label">Ders Takvimi</div>
       <h2 class="section-title">Etkinlik & Ders Programı</h2>
-      <p class="section-desc" style="margin-bottom:0">Tüm ders tarihlerini ve özel etkinlikleri takip edin.</p>
+      <p class="section-desc" style="margin-bottom:0">Tüm ders tarihlerini, sınav takvimini ve özel etkinlikleri kolayca takip edin.</p>
       <div class="cal-widget" style="margin-top:32px">
         <div class="cal-header">
-          <div class="cal-month" id="calMonthLabel">Haziran 2025</div>
+          <div class="cal-month" id="calMonthLabel"></div>
           <div class="cal-nav">
             <button onclick="changeMonth(-1)">‹</button>
             <button onclick="changeMonth(1)">›</button>
@@ -809,7 +479,6 @@
         <div class="cal-grid" id="calGrid"></div>
       </div>
     </div>
-
     <div>
       <div class="events-title">Yaklaşan Etkinlikler</div>
       <div class="events-sub">Haziran – Temmuz 2025 programı</div>
@@ -823,9 +492,29 @@
   <div class="section-header center">
     <div class="section-label">Kadromuz</div>
     <h2 class="section-title">Uzman Öğretmenlerimiz</h2>
-    <p class="section-desc">Her biri kendi alanında yılların deneyimine sahip, öğrenci odaklı eğitimcilerden oluşan kadromuz.</p>
+    <p class="section-desc">Her biri kendi alanında yılların deneyimine sahip, öğrenci odaklı eğitimcilerden oluşan kadromuz. Akademik başarı için doğru rehberler.</p>
   </div>
   <div class="teachers-grid" id="teachersGrid"></div>
+</section>
+
+<!-- FİYATLAR -->
+<section id="fiyatlar" class="pricing-section">
+  <div class="section-header center">
+    <div class="section-label">Fiyatlandırma</div>
+    <h2 class="section-title">Şeffaf ve Uygun Fiyatlar</h2>
+    <p class="section-desc">Her bütçeye uygun paketlerle kaliteli eğitime erişin. İlk ay %20 indirimli!</p>
+  </div>
+  <div class="pricing-grid" id="pricingGrid"></div>
+</section>
+
+<!-- BAŞARI HİKAYELERİ -->
+<section class="testimonials-section">
+  <div class="section-header center" style="position:relative;z-index:1">
+    <div class="section-label" style="color:var(--gold-light)">Başarı Hikayeleri</div>
+    <h2 class="section-title">Öğrencilerimiz Ne Diyor?</h2>
+    <p class="section-desc" style="color:rgba(255,255,255,0.55);margin:0 auto">Binlerce başarılı öğrencimizin deneyimlerinden bir seçki.</p>
+  </div>
+  <div class="testimonials-grid" id="testiGrid"></div>
 </section>
 
 <!-- NEDEN BİZ -->
@@ -833,28 +522,109 @@
   <div class="section-header center">
     <div class="section-label">Farkımız</div>
     <h2 class="section-title">Neden AkademiPlus?</h2>
-    <p class="section-desc">Öğrencilerimizin başarısı için standart bir dershane deneyiminin çok ötesine geçiyoruz.</p>
+    <p class="section-desc">Standart bir dershane deneyiminin çok ötesinde, öğrenci merkezli bir yaklaşımla başarıyı birlikte inşa ediyoruz.</p>
   </div>
   <div class="why-grid">
-    <div class="why-card reveal">
-      <div class="why-icon">🎯</div>
-      <div class="why-title">Kişiselleştirilmiş Öğrenme</div>
-      <div class="why-desc">Her öğrencinin öğrenme hızı ve tarzı farklıdır. Bireysel planlar oluşturarak potansiyeli ortaya çıkarıyoruz.</div>
+    <div class="why-card reveal"><div class="why-icon">🎯</div><div class="why-title">Kişiselleştirilmiş Plan</div><div class="why-desc">Her öğrenci için bireysel öğrenme planı oluşturuyoruz. Hız ve tarz farkı gözetilerek güçlü yönler ön plana çıkarılır.</div></div>
+    <div class="why-card reveal reveal-delay-1"><div class="why-icon">👩‍🏫</div><div class="why-title">Uzman Kadro</div><div class="why-desc">Tüm öğretmenlerimiz lisansüstü eğitimli ve alanında en az 7 yıl deneyimlidir. Seçim sürecimiz son derece titizdir.</div></div>
+    <div class="why-card reveal reveal-delay-2"><div class="why-icon">📊</div><div class="why-title">Sürekli Takip</div><div class="why-desc">Haftalık gelişim raporları, anlık SMS bildirimleri ve veli toplantılarıyla her adımda bilgilendiriyoruz.</div></div>
+    <div class="why-card reveal reveal-delay-3"><div class="why-icon">💻</div><div class="why-title">Hibrit Eğitim</div><div class="why-desc">Online ve yüz yüze eğitimi birleştiren esnek sistemimizle zaman ve mekân kısıtlaması ortadan kalkıyor.</div></div>
+    <div class="why-card reveal"><div class="why-icon">📚</div><div class="why-title">Zengin İçerik</div><div class="why-desc">Kurs materyalleri, video arşivi, deneme sınavları ve interaktif alıştırmalar ile kapsamlı bir öğrenme ortamı sunuyoruz.</div></div>
+    <div class="why-card reveal reveal-delay-1"><div class="why-icon">🤝</div><div class="why-title">Veli İletişimi</div><div class="why-desc">Velilerimiz her zaman döngünün içinde. Ayda bir birebir veli görüşmeleri ve anlık iletişim kanallarımız mevcuttur.</div></div>
+    <div class="why-card reveal reveal-delay-2"><div class="why-icon">🏅</div><div class="why-title">Sertifika</div><div class="why-desc">Tamamlanan tüm kurslar için Milli Eğitim onaylı sertifika düzenlenmektedir. Özgeçmişinize değer katın.</div></div>
+    <div class="why-card reveal reveal-delay-3"><div class="why-icon">🔁</div><div class="why-title">Ders Tekrarı</div><div class="why-desc">Kaçırılan dersler için kayıt arşivi ve telafi dersleri mevcuttur. Hiçbir ders geride bırakılmaz.</div></div>
+  </div>
+</section>
+
+<!-- SSS -->
+<section id="sss" class="faq-section">
+  <div class="section-header center">
+    <div class="section-label">Sık Sorulan Sorular</div>
+    <h2 class="section-title">Merak Ettikleriniz</h2>
+    <p class="section-desc">Aşağıda bulamadığınız sorularınız için bize ulaşabilirsiniz.</p>
+  </div>
+  <div class="faq-wrap" id="faqWrap"></div>
+</section>
+
+<!-- İLETİŞİM -->
+<section id="iletisim" class="contact-section">
+  <div class="section-header">
+    <div class="section-label">Bize Ulaşın</div>
+    <h2 class="section-title">İletişim</h2>
+    <p class="section-desc">Sorularınız için aşağıdaki kanallardan bize ulaşabilirsiniz. Ekibimiz en geç 2 saat içinde yanıt verir.</p>
+  </div>
+  <div class="contact-wrapper">
+    <div class="contact-info">
+      <div class="contact-card reveal">
+        <div class="contact-card-icon">📍</div>
+        <div>
+          <h4>Adres</h4>
+          <p>Moda Caddesi No:42, Kadıköy<br>İstanbul, 34710</p>
+        </div>
+      </div>
+      <div class="contact-card reveal reveal-delay-1">
+        <div class="contact-card-icon">📞</div>
+        <div>
+          <h4>Telefon</h4>
+          <p>0212 345 67 89<br>0532 000 11 22 (WhatsApp)</p>
+        </div>
+      </div>
+      <div class="contact-card reveal reveal-delay-2">
+        <div class="contact-card-icon">✉️</div>
+        <div>
+          <h4>E-posta</h4>
+          <p>info@akademiplus.com<br>kayit@akademiplus.com</p>
+        </div>
+      </div>
+      <div class="contact-card reveal reveal-delay-3">
+        <div class="contact-card-icon">🕐</div>
+        <div>
+          <h4>Çalışma Saatleri</h4>
+          <p>Pazartesi – Cumartesi: 08:00 – 21:00<br>Pazar: 10:00 – 18:00</p>
+        </div>
+      </div>
+      <div class="map-placeholder reveal">
+        <div class="map-icon">🗺️</div>
+        <span>Kadıköy, İstanbul</span>
+        <span style="font-size:0.75rem">Haritada Görüntüle →</span>
+      </div>
     </div>
-    <div class="why-card reveal reveal-delay-1">
-      <div class="why-icon">👩‍🏫</div>
-      <div class="why-title">Uzman Kadro</div>
-      <div class="why-desc">Tüm öğretmenlerimiz alanlarında en az 5 yıl deneyime sahip, lisansüstü eğitimli akademisyenlerdir.</div>
-    </div>
-    <div class="why-card reveal reveal-delay-2">
-      <div class="why-icon">📊</div>
-      <div class="why-title">Sürekli Takip</div>
-      <div class="why-desc">Haftalık gelişim raporları ve anlık bildirimlerle aileleri daima bilgilendiriyoruz.</div>
-    </div>
-    <div class="why-card reveal reveal-delay-3">
-      <div class="why-icon">💻</div>
-      <div class="why-title">Hibrit Eğitim</div>
-      <div class="why-desc">Online ve yüz yüze eğitimi birleştiren esnek sistemimizle zaman ve mekan kısıtlaması ortadan kalkıyor.</div>
+    <div class="register-form reveal">
+      <div class="form-title">Mesaj Gönderin</div>
+      <div class="form-sub">Danışmanımız en kısa sürede dönüş yapacaktır.</div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Ad Soyad</label>
+          <input type="text" id="cName" placeholder="Adınız Soyadınız">
+        </div>
+        <div class="form-group">
+          <label>Telefon</label>
+          <input type="tel" id="cPhone" placeholder="05XX XXX XX XX">
+        </div>
+        <div class="form-group full">
+          <label>E-posta</label>
+          <input type="email" id="cEmail" placeholder="ornek@mail.com">
+        </div>
+        <div class="form-group full">
+          <label>Konu</label>
+          <select id="cSubject">
+            <option value="">Konu Seçin…</option>
+            <option>Kurs Bilgisi</option>
+            <option>Kayıt İşlemleri</option>
+            <option>Fiyat Teklifi</option>
+            <option>Öğretmen Kadrosu</option>
+            <option>Diğer</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Mesajınız</label>
+          <textarea id="cMsg" placeholder="Sormak istediğiniz her şeyi buraya yazabilirsiniz…"></textarea>
+        </div>
+      </div>
+      <button class="form-submit" onclick="submitContact()">
+        <span>Mesajı Gönder</span><span>→</span>
+      </button>
+      <p class="form-note">🔒 Bilgileriniz gizli tutulur. Spam gönderilmez.</p>
     </div>
   </div>
 </section>
@@ -865,35 +635,17 @@
     <div class="register-info reveal">
       <div class="section-label" style="color:var(--gold-light)">Online Kayıt</div>
       <h2 class="section-title">Hemen Başla,<br>Geleceğini Şekillendir</h2>
-      <p class="section-desc">Formu doldurun, danışmanımız 24 saat içinde sizi arasın. İlk ders ücretsiz!</p>
+      <p class="section-desc">Formu doldurun, danışmanımız 24 saat içinde sizi arasın. İlk ders tamamen ücretsiz!</p>
       <div class="register-perks">
-        <div class="perk">
-          <div class="perk-icon">🎁</div>
-          <div class="perk-text">
-            <h4>İlk Ders Ücretsiz</h4>
-            <p>Kayıt olmadan önce kursumuzu deneyin.</p>
-          </div>
-        </div>
-        <div class="perk">
-          <div class="perk-icon">📚</div>
-          <div class="perk-text">
-            <h4>Kaynak Desteği</h4>
-            <p>Tüm kurs materyalleri kayıt ücretsiz dahildir.</p>
-          </div>
-        </div>
-        <div class="perk">
-          <div class="perk-icon">🔄</div>
-          <div class="perk-text">
-            <h4>Esnek Saatler</h4>
-            <p>Programınıza uygun ders saati seçin.</p>
-          </div>
-        </div>
+        <div class="perk"><div class="perk-icon">🎁</div><div class="perk-text"><h4>İlk Ders Ücretsiz</h4><p>Kayıt olmadan önce kursumuzu deneyin, sonra karar verin.</p></div></div>
+        <div class="perk"><div class="perk-icon">📚</div><div class="perk-text"><h4>Kaynak Desteği Dahil</h4><p>Tüm kurs materyalleri ve ders notları kayıt ücretine dahildir.</p></div></div>
+        <div class="perk"><div class="perk-icon">🔄</div><div class="perk-text"><h4>Esnek Saatler</h4><p>Programınıza uygun ders saati seçin, istediğinizde değiştirin.</p></div></div>
+        <div class="perk"><div class="perk-icon">💳</div><div class="perk-text"><h4>Taksit İmkânı</h4><p>12 aya varan taksit seçeneğiyle bütçenize uygun ödeme yapın.</p></div></div>
       </div>
     </div>
-
-    <div class="register-form" id="registerForm">
+    <div class="register-form reveal reveal-delay-1" id="registerForm">
       <div class="form-title">Kayıt Formu</div>
-      <div class="form-sub">Tüm alanlar zorunludur. Bilgileriniz güvende.</div>
+      <div class="form-sub">Tüm alanları doldurmanız gereklidir. Verileriniz güvende.</div>
       <div class="form-grid">
         <div class="form-group">
           <label>Ad</label>
@@ -912,27 +664,44 @@
           <input type="tel" id="phone" placeholder="05XX XXX XX XX">
         </div>
         <div class="form-group full">
+          <label>Doğum Tarihi</label>
+          <input type="date" id="birthdate">
+        </div>
+        <div class="form-group full">
           <label>İlgilendiğiniz Kurs</label>
           <select id="courseSelect">
             <option value="">Kurs Seçin…</option>
-            <option>YKS Matematik</option>
-            <option>YKS Türkçe & Edebiyat</option>
-            <option>YKS Fen Bilimleri</option>
-            <option>LGS Tam Hazırlık</option>
+            <option>YKS – Matematik</option>
+            <option>YKS – Türkçe &amp; Edebiyat</option>
+            <option>YKS – Fen Bilimleri (Fizik/Kimya/Biyoloji)</option>
+            <option>YKS – Sosyal Bilimler</option>
+            <option>LGS Tam Hazırlık Paketi</option>
             <option>İngilizce – A1'den C1'e</option>
-            <option>Almanca Başlangıç</option>
+            <option>Almanca Başlangıç &amp; Orta</option>
             <option>Fizik Olimpiyat Hazırlık</option>
-            <option>Resim & Sanat Atölyesi</option>
+            <option>Bilgisayar &amp; Kodlama</option>
+            <option>Resim &amp; Sanat Atölyesi</option>
+            <option>Müzik (Piyano / Gitar)</option>
             <option>Özel Ders (Birebir)</option>
           </select>
         </div>
         <div class="form-group full">
-          <label>Mesajınız (İsteğe Bağlı)</label>
-          <textarea id="message" placeholder="Özel bir isteğiniz veya sorunuz varsa buraya yazın…"></textarea>
+          <label>Tercih Ettiğiniz Ders Saati</label>
+          <select id="timeSlot">
+            <option value="">Saat Seçin…</option>
+            <option>Sabah (08:00 – 12:00)</option>
+            <option>Öğlen (12:00 – 16:00)</option>
+            <option>Akşam (16:00 – 20:00)</option>
+            <option>Esnek / Danışmanla Belirleyelim</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Eklemek İstedikleriniz</label>
+          <textarea id="message" placeholder="Özel bir isteğiniz veya sorunuz varsa buraya yazabilirsiniz…"></textarea>
         </div>
       </div>
       <button class="form-submit" onclick="submitForm()">
-        <span>Kayıt Talebini Gönder</span> <span>→</span>
+        <span>Kayıt Talebini Gönder</span><span>→</span>
       </button>
       <p class="form-note">🔒 Kişisel verileriniz KVKK kapsamında korunmaktadır.</p>
     </div>
@@ -943,12 +712,13 @@
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <span class="logo">Akademi<span>Plus</span></span>
-      <p class="footer-desc">İstanbul'un kalbinde, Türkiye'nin her yerine ulaşan eğitim merkezi. 2010'dan bu yana binlerce öğrencinin geleceğine rehberlik ediyoruz.</p>
+      <a href="#" class="logo">Akademi<span>Plus</span></a>
+      <p class="footer-desc">İstanbul Kadıköy merkezli, Türkiye'nin her yerine ulaşan eğitim merkezi. 2010'dan bu yana binlerce öğrencinin geleceğine rehberlik ediyoruz.</p>
       <div class="footer-socials">
         <a href="#" class="social-btn">IG</a>
         <a href="#" class="social-btn">TW</a>
         <a href="#" class="social-btn">YT</a>
+        <a href="#" class="social-btn">TK</a>
         <a href="#" class="social-btn">LI</a>
       </div>
     </div>
@@ -959,6 +729,8 @@
         <li><a href="#">LGS Hazırlık</a></li>
         <li><a href="#">Dil Kursları</a></li>
         <li><a href="#">Fen Bilimleri</a></li>
+        <li><a href="#">Sanat Atölyeleri</a></li>
+        <li><a href="#">Bilgisayar Kursları</a></li>
         <li><a href="#">Özel Dersler</a></li>
       </ul>
     </div>
@@ -966,35 +738,44 @@
       <h4>Kurumsal</h4>
       <ul>
         <li><a href="#">Hakkımızda</a></li>
-        <li><a href="#">Kadromuz</a></li>
+        <li><a href="#">Öğretmen Kadrosu</a></li>
         <li><a href="#">Başarı Hikayeleri</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">İletişim</a></li>
+        <li><a href="#">Blog & Haberler</a></li>
+        <li><a href="#">Kariyer</a></li>
+        <li><a href="#">Basın Odası</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>İletişim</h4>
       <ul>
-        <li><a href="#">📍 Kadıköy, İstanbul</a></li>
+        <li><a href="#">📍 Moda Cad. 42, Kadıköy</a></li>
         <li><a href="#">📞 0212 345 67 89</a></li>
+        <li><a href="#">📱 0532 000 11 22</a></li>
         <li><a href="#">✉️ info@akademiplus.com</a></li>
         <li><a href="#">🕐 Pzt–Cmt 08:00–21:00</a></li>
+        <li><a href="#">🕐 Pazar 10:00–18:00</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 AkademiPlus Eğitim Merkezi. Tüm hakları saklıdır.</p>
-    <p><a href="#" style="color:rgba(255,255,255,0.3);text-decoration:none">Gizlilik Politikası</a> · <a href="#" style="color:rgba(255,255,255,0.3);text-decoration:none">Kullanım Koşulları</a></p>
+    <p>© 2025 AkademiPlus Eğitim Merkezi A.Ş. Tüm hakları saklıdır.</p>
+    <p>
+      <a href="#">Gizlilik Politikası</a> ·
+      <a href="#">Kullanım Koşulları</a> ·
+      <a href="#">KVKK Aydınlatma Metni</a>
+    </p>
   </div>
 </footer>
 
-<!-- MODAL -->
+<!-- KURS MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">✕</button>
     <div class="modal-course-tag" id="modalTag"></div>
     <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-teacher" id="modalTeacher"></div>
     <div class="modal-details" id="modalDetails"></div>
+    <div class="modal-desc" id="modalDesc"></div>
     <button class="modal-action" onclick="goToRegister()">Bu Kursa Kayıt Ol →</button>
   </div>
 </div>
@@ -1006,40 +787,114 @@
 </div>
 
 <script>
-// ─── DATA ───
+// ═══════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════
+
 const courses = [
-  { id:1, cat:'yks', badge:'YKS', title:'Matematik Olimpiyat & YKS', subject:'Matematik', icon:'➗', colorClass:'math', duration:'9 Ay', level:'İleri', sessions:'5 gün/hafta', price:'₺2.800', period:'/ay' },
-  { id:2, cat:'dil', badge:'DİL', title:'İngilizce A1'den C1'e Tam Program', subject:'Yabancı Dil', icon:'🇬🇧', colorClass:'lang', duration:'12 Ay', level:'Tüm Seviyeler', sessions:'3 gün/hafta', price:'₺1.600', period:'/ay' },
-  { id:3, cat:'fen', badge:'FEN', title:'Fizik & Kimya YKS Hazırlık', subject:'Fen Bilimleri', icon:'⚗️', colorClass:'science', duration:'8 Ay', level:'Orta–İleri', sessions:'4 gün/hafta', price:'₺2.400', period:'/ay' },
-  { id:4, cat:'yks', badge:'YKS', title:'Türkçe & Edebiyat', subject:'Türk Dili', icon:'📖', colorClass:'lit', duration:'10 Ay', level:'Her Seviye', sessions:'3 gün/hafta', price:'₺2.200', period:'/ay' },
-  { id:5, cat:'lgs', badge:'LGS', title:'LGS Tam Hazırlık Paketi', subject:'8. Sınıf Hazırlık', icon:'🎓', colorClass:'hist', duration:'6 Ay', level:'Temel', sessions:'5 gün/hafta', price:'₺3.000', period:'/ay' },
-  { id:6, cat:'sanat', badge:'SANAT', title:'Resim & Plastik Sanatlar Atölyesi', subject:'Güzel Sanatlar', icon:'🎨', colorClass:'art', duration:'Sürekli', level:'Her Yaş', sessions:'2 gün/hafta', price:'₺900', period:'/ay' },
+  { id:1,  cat:'yks',         badge:'YKS',    title:'Matematik – YKS Tam Hazırlık',          subject:'Matematik',        icon:'➗', colorClass:'math',    duration:'9 Ay',    level:'Orta–İleri',    sessions:'5 gün/hafta', price:'₺2.800', period:'/ay', teacher:'Dr. Kemal Arslan',   desc:'Temel konulardan olimpiyat seviyesine kadar kapsamlı YKS matematik programı. Konuların tamamı video arşivi ve haftalık denemelerle pekiştirilir.' },
+  { id:2,  cat:'yks',         badge:'YKS',    title:'Türkçe & Edebiyat YKS',                 subject:'Türk Dili',        icon:'📖', colorClass:'lit',     duration:'10 Ay',   level:'Her Seviye',    sessions:'3 gün/hafta', price:'₺2.200', period:'/ay', teacher:'Öğr. Ayşe Kaya',    desc:'Anlama, anlatım ve edebiyat tarihi konularını derinlemesine ele alan YKS odaklı program. Her hafta deneme ve soru çözüm seansları içerir.' },
+  { id:3,  cat:'yks',         badge:'YKS',    title:'Fizik & Kimya YKS Sprint',               subject:'Fen Bilimleri',    icon:'⚗️', colorClass:'science', duration:'8 Ay',    level:'Orta–İleri',    sessions:'4 gün/hafta', price:'₺2.400', period:'/ay', teacher:'Prof. Şule Demir',   desc:'Fizik ve kimyayı birlikte ele alan yoğun YKS hazırlık programı. Laboratuvar deneyleriyle konular somutlaştırılır.' },
+  { id:4,  cat:'yks',         badge:'YKS',    title:'Sosyal Bilimler (Tarih/Coğrafya)',       subject:'Sosyal Bilimler',  icon:'🌍', colorClass:'hist',    duration:'8 Ay',    level:'Başlangıç–İleri',sessions:'3 gün/hafta', price:'₺2.000', period:'/ay', teacher:'Öğr. Emre Doğan',   desc:'YKS sosyal bilimlerin tamamını kapsayan, harita ve görsel destekli sistematik hazırlık programı.' },
+  { id:5,  cat:'yks',         badge:'YKS',    title:'Biyoloji YKS Hazırlık',                 subject:'Biyoloji',         icon:'🔬', colorClass:'bio',     duration:'9 Ay',    level:'Orta–İleri',    sessions:'3 gün/hafta', price:'₺2.200', period:'/ay', teacher:'Dr. Hande Çelik',    desc:'YKS biyoloji müfredatının tümünü kapsayan, animasyon destekli görsel öğrenme programı.' },
+  { id:6,  cat:'lgs',         badge:'LGS',    title:'LGS Tam Hazırlık Paketi',               subject:'8. Sınıf',         icon:'🎓', colorClass:'hist',    duration:'6 Ay',    level:'Temel',         sessions:'5 gün/hafta', price:'₺3.000', period:'/ay', teacher:'Öğr. Mert Yıldız',  desc:'8. sınıf müfredatını derinlemesine ele alan, motivasyon odaklı LGS hazırlık paketi. Tüm dersler tek çatı altında.' },
+  { id:7,  cat:'lgs',         badge:'LGS',    title:'LGS Matematik Kampı',                   subject:'7–8. Sınıf Matematik',icon:'🧮',colorClass:'math',   duration:'4 Ay',    level:'Temel–Orta',    sessions:'3 gün/hafta', price:'₺1.600', period:'/ay', teacher:'Öğr. Mert Yıldız',  desc:'LGS matematik sorularını oyun tabanlı öğrenmeyle ele alan eğlenceli ve etkili hazırlık programı.' },
+  { id:8,  cat:'dil',         badge:'DİL',    title:'İngilizce A1\'den C1\'e',               subject:'Yabancı Dil',      icon:'🇬🇧', colorClass:'lang',   duration:'12 Ay',   level:'Tüm Seviyeler', sessions:'3 gün/hafta', price:'₺1.600', period:'/ay', teacher:'Ms. Emily Clarke',   desc:'CEFR standartlarına göre yapılandırılmış kapsamlı İngilizce programı. Native speaker öğretmenlerle gerçek dil deneyimi.' },
+  { id:9,  cat:'dil',         badge:'DİL',    title:'Almanca A1–B2',                         subject:'Almanca',          icon:'🇩🇪', colorClass:'ger',    duration:'10 Ay',   level:'Başlangıç–Orta',sessions:'2 gün/hafta', price:'₺1.400', period:'/ay', teacher:'Öğr. Can Türkoğlu', desc:'Goethe sertifika sınavlarına hazırlık imkânı sunan sistematik Almanca programı.' },
+  { id:10, cat:'dil',         badge:'DİL',    title:'İngilizce IELTS / YDS Hazırlık',        subject:'Sınav Hazırlığı',  icon:'📝', colorClass:'lang',    duration:'6 Ay',    level:'B2+',           sessions:'3 gün/hafta', price:'₺2.000', period:'/ay', teacher:'Ms. Emily Clarke',   desc:'IELTS ve YDS sınavlarına yönelik yoğun pratik programı. Okuma, yazma, dinleme ve konuşma becerilerinin tümü geliştirilir.' },
+  { id:11, cat:'fen',         badge:'FEN',    title:'Fizik Olimpiyat Hazırlık',              subject:'Olimpiyat Fiziği', icon:'🚀', colorClass:'science', duration:'Dönemlik', level:'İleri',         sessions:'2 gün/hafta', price:'₺2.600', period:'/ay', teacher:'Prof. Şule Demir',   desc:'TÜBİTAK ve uluslararası fizik olimpiyatlarına hazırlayan ileri seviye program. Problem çözme ve analitik düşünme odaklı.' },
+  { id:12, cat:'sanat',       badge:'SANAT',  title:'Resim & Plastik Sanatlar Atölyesi',     subject:'Görsel Sanatlar',  icon:'🎨', colorClass:'art',     duration:'Sürekli', level:'Her Yaş',       sessions:'2 gün/hafta', price:'₺900',  period:'/ay', teacher:'Öğr. Zeynep Şahin', desc:'Geleneksel ve dijital resim tekniklerini keşfedin. Güzel sanatlar fakültesi sınavlarına da hazırlık imkânı sunulur.' },
+  { id:13, cat:'sanat',       badge:'SANAT',  title:'Piyano & Müzik Teorisi',                subject:'Müzik',            icon:'🎹', colorClass:'music',   duration:'Sürekli', level:'Başlangıç+',    sessions:'2 gün/hafta', price:'₺1.100', period:'/ay', teacher:'Öğr. Selin Ak',     desc:'Klasik ve modern piyano repertuarı ile müzik teorisi bir arada. Tüm yaş gruplarına uygun gruplar mevcuttur.' },
+  { id:14, cat:'bilgisayar',  badge:'BİLGİ',  title:'Python & Kodlama (Gençler)',            subject:'Bilgisayar Bilimi', icon:'💻', colorClass:'comp',   duration:'6 Ay',    level:'10–17 Yaş',    sessions:'2 gün/hafta', price:'₺1.200', period:'/ay', teacher:'Öğr. Alper Çetin',  desc:'Scratch\'tan Python\'a gençlere yönelik kodlama yolculuğu. Proje tabanlı öğrenmeyle kendi oyunlarını ve uygulamalarını yap.' },
+  { id:15, cat:'bilgisayar',  badge:'BİLGİ',  title:'Web Geliştirme Temelleri',              subject:'Web & Tasarım',    icon:'🌐', colorClass:'comp',    duration:'5 Ay',    level:'Başlangıç',    sessions:'2 gün/hafta', price:'₺1.400', period:'/ay', teacher:'Öğr. Alper Çetin',  desc:'HTML, CSS ve JavaScript temelleriyle kendi web siteni sıfırdan oluştur. Portföy projesi ile kursu tamamla.' },
+  { id:16, cat:'ozel',        badge:'ÖZEL',   title:'Birebir Özel Ders (Her Konu)',          subject:'Özel Program',     icon:'🎯', colorClass:'lit',     duration:'Esnek',   level:'Her Seviye',    sessions:'Belirlenir',  price:'₺400',  period:'/saat', teacher:'Kadro Seçimi',      desc:'Öğrencinin ihtiyaçlarına göre tamamen kişiselleştirilmiş birebir ders programı. Konu, gün ve saat tamamen size bağlı.' },
 ];
 
 const events = [
-  { day:'21', month:'Haz', name:'YKS Matematik – Deneme Sınavı', cat:'math', time:'10:00 – 13:00', teacher:'Dr. Kemal Arslan', room:'Salon A' },
-  { day:'24', month:'Haz', name:'İngilizce Speaking Club', cat:'lang', time:'16:00 – 18:00', teacher:'Ms. Emily Clarke', room:'Dil Lab' },
-  { day:'26', month:'Haz', name:'Fizik YKS Sprint Kamp', cat:'science', time:'09:00 – 17:00', teacher:'Prof. Şule Demir', room:'Salon B' },
-  { day:'28', month:'Haz', name:'LGS Veli Bilgilendirme Toplantısı', cat:'hist', time:'14:00 – 15:30', teacher:'Müdür Öğr.', room:'Konferans' },
-  { day:'05', month:'Tem', name:'Yeni Dönem Kayıt Başlangıcı', cat:'math', time:'Tüm Gün', teacher:'—', room:'Ofis' },
+  { day:'21', month:'Haz', name:'YKS Matematik Genel Denemesi',     cat:'cl-math',    time:'10:00–13:00', teacher:'Dr. K. Arslan', room:'Salon A' },
+  { day:'23', month:'Haz', name:'İngilizce Speaking Club',           cat:'cl-lang',    time:'16:00–18:00', teacher:'Ms. E. Clarke', room:'Dil Lab' },
+  { day:'25', month:'Haz', name:'Fizik YKS Sprint Kamp – Gün 1',    cat:'cl-science', time:'09:00–17:00', teacher:'Prof. Ş. Demir', room:'Salon B' },
+  { day:'26', month:'Haz', name:'Fizik YKS Sprint Kamp – Gün 2',    cat:'cl-science', time:'09:00–17:00', teacher:'Prof. Ş. Demir', room:'Salon B' },
+  { day:'28', month:'Haz', name:'LGS Veli Bilgilendirme Toplantısı',cat:'cl-hist',    time:'14:00–15:30', teacher:'Müdür',         room:'Konferans' },
+  { day:'30', month:'Haz', name:'Resim Atölyesi Sergi Günü',         cat:'cl-art',     time:'17:00–20:00', teacher:'Öğr. Z. Şahin', room:'Sergi Salonu' },
+  { day:'05', month:'Tem', name:'Yeni Dönem Kayıt Başlangıcı',       cat:'cl-math',    time:'Tüm Gün',     teacher:'—',             room:'Ofis' },
+  { day:'07', month:'Tem', name:'Biyoloji YKS Denemesi',             cat:'cl-bio',     time:'10:00–12:00', teacher:'Dr. H. Çelik',  room:'Salon C' },
 ];
 
 const teachers = [
-  { name:'Dr. Kemal Arslan', subject:'Matematik', initials:'KA', bio:'Boğaziçi Üniversitesi matematik doktoru. 12 yıllık YKS deneyimi.', rating:5, reviews:214, tags:['YKS','Olimpiyat','Calculus'] },
-  { name:'Prof. Şule Demir', subject:'Fizik & Kimya', initials:'ŞD', bio:'ODTÜ Fizik Bölümü mezunu, 200+ YKS 1. derece öğrencisi yetiştirdi.', rating:5, reviews:188, tags:['YKS','Kimya','Fizik'] },
-  { name:'Ms. Emily Clarke', subject:'İngilizce', initials:'EC', bio:'Cambridge CELTA sertifikalı, 8 yıl Türkiye deneyimine sahip native speaker.', rating:5, reviews:176, tags:['IELTS','Speaking','YDS'] },
-  { name:'Öğr. Ayşe Kaya', subject:'Türkçe & Edebiyat', initials:'AK', bio:'Ankara Üniversitesi TDE mezunu, dil bilgisi ve anlama uzmanı.', rating:5, reviews:143, tags:['YKS','Edebiyat','Yazarlık'] },
-  { name:'Öğr. Mert Yıldız', subject:'LGS Matematik', initials:'MY', bio:'8 yıllık ortaokul deneyimi, öğrencileri sevdirerek öğretme yaklaşımı.', rating:4, reviews:98, tags:['LGS','Ortaokul','Oyunlu'] },
-  { name:'Öğr. Zeynep Şahin', subject:'Sanat & Tasarım', initials:'ZŞ', bio:'Mimar Sinan Güzel Sanatlar Akademisi mezunu, dijital ve geleneksel sanat.', rating:5, reviews:87, tags:['Resim','Grafik','Atölye'] },
-  { name:'Öğr. Can Türkoğlu', subject:'Almanca', initials:'CT', bio:'Heidelberg Üniversitesi mezunu, Goethe sertifikalı dil eğitmeni.', rating:4, reviews:65, tags:['Goethe','A1–C2','Konuşma'] },
-  { name:'Dr. Hande Çelik', subject:'Biyoloji', initials:'HÇ', bio:'Tıp biyolojisi doktoru, LGS ve YKS fen bilimleri şampiyonu.', rating:5, reviews:122, tags:['Biyoloji','YKS','Anatomi'] },
+  { name:'Dr. Kemal Arslan',   subject:'Matematik',        av:'av-blue',   initials:'KA', exp:'12 yıl deneyim', bio:'Boğaziçi Üniversitesi matematik doktoru. YKS\'de 200+ birinci yetiştirdi. Olimpiyat hazırlık programının kurucusu.', rating:5, reviews:214, tags:['YKS','Olimpiyat','Analiz'] },
+  { name:'Prof. Şule Demir',   subject:'Fizik & Kimya',    av:'av-purple', initials:'ŞD', exp:'15 yıl deneyim', bio:'ODTÜ Fizik Bölümü mezunu, TÜBİTAK araştırmacısı. Öğrencilerini TÜBİTAK ve uluslararası olimpiyatlara taşıdı.', rating:5, reviews:188, tags:['Fizik','Kimya','YKS'] },
+  { name:'Ms. Emily Clarke',   subject:'İngilizce',        av:'av-rose',   initials:'EC', exp:'8 yıl deneyim',  bio:'Cambridge CELTA sertifikalı İngiliz ana dil konuşmacısı. IELTS ve YDS\'de yüksek başarı oranı.', rating:5, reviews:176, tags:['IELTS','Speaking','YDS'] },
+  { name:'Öğr. Ayşe Kaya',    subject:'Türkçe & Edebiyat',av:'av-teal',   initials:'AK', exp:'10 yıl deneyim', bio:'Ankara Üniversitesi TDE mezunu. Yazarlık, anlama ve anlatım konularında uzmanlaşmış.', rating:5, reviews:143, tags:['YKS','Edebiyat','Dil Bilgisi'] },
+  { name:'Öğr. Mert Yıldız',  subject:'LGS Matematik',    av:'av-amber',  initials:'MY', exp:'8 yıl deneyim',  bio:'Ortaokul öğrencilerine yönelik oyun tabanlı matematik öğretim metodunun geliştiricisi.', rating:4, reviews:98,  tags:['LGS','Ortaokul','Oyunlu Öğrenme'] },
+  { name:'Öğr. Zeynep Şahin', subject:'Sanat & Tasarım',  av:'av-plum',   initials:'ZŞ', exp:'9 yıl deneyim',  bio:'Mimar Sinan Güzel Sanatlar Akademisi mezunu. Dijital ve geleneksel resim; güzel sanatlar fakültesi koçluğu.', rating:5, reviews:87,  tags:['Resim','Grafik','GSAS'] },
+  { name:'Öğr. Can Türkoğlu', subject:'Almanca',           av:'av-indigo', initials:'CT', exp:'7 yıl deneyim',  bio:'Heidelberg Üniversitesi mezunu, Goethe sertifikalı dil eğitmeni. A1\'den C2\'ye tüm seviyeler.', rating:4, reviews:65,  tags:['Goethe','A1–C2','Konuşma'] },
+  { name:'Dr. Hande Çelik',   subject:'Biyoloji',          av:'av-green',  initials:'HÇ', exp:'11 yıl deneyim', bio:'Tıp biyolojisi doktoru. LGS ve YKS biyoloji alanında şampiyon öğrenciler yetiştirdi.', rating:5, reviews:122, tags:['Biyoloji','YKS','Anatomi'] },
+  { name:'Öğr. Alper Çetin',  subject:'Bilgisayar & Kodlama',av:'av-dark', initials:'AC', exp:'6 yıl deneyim', bio:'Yazılım mühendisi ve eğitimci. Python, web geliştirme ve genç yeteneklere yönelik kodlama eğitimleri.', rating:5, reviews:77,  tags:['Python','Web','Scratch'] },
+  { name:'Öğr. Emre Doğan',   subject:'Tarih & Coğrafya',  av:'av-orange', initials:'ED', exp:'9 yıl deneyim',  bio:'ODTÜ Tarih mezunu, harita ve görsel destekli sosyal bilimler öğretimi konusunda uzman.', rating:4, reviews:89,  tags:['Tarih','Coğrafya','YKS'] },
 ];
 
-// ─── RENDER COURSES ───
+const pricing = [
+  {
+    plan:'Temel',
+    type:'basic',
+    price:'₺1.500',
+    period:'aylık',
+    desc:'Tek bir dersi derinlemesine çalışmak isteyen öğrenciler için.',
+    features:['1 Ders Seçimi','Haftalık 3 Oturum','Ders Materyalleri Dahil','Online Soru-Cevap','Aylık Gelişim Raporu','Grup Dersi (12 Kişi)','✗ Birebir Ders','✗ Video Arşivi Erişimi'],
+    btn:'Paketi Seç',
+    popular:false
+  },
+  {
+    plan:'Profesyonel',
+    type:'pro',
+    price:'₺2.800',
+    period:'aylık',
+    desc:'En çok tercih edilen paket. YKS/LGS\'e hazırlananlar için ideal.',
+    features:['3 Ders Seçimi','Haftalık 5 Oturum','Tüm Materyaller Dahil','7/24 Online Destek','Haftalık Gelişim Raporu','Grup + 2 Birebir Ders','Video Arşivi Tam Erişim','Aylık Veli Görüşmesi'],
+    btn:'Hemen Başla',
+    popular:true
+  },
+  {
+    plan:'Elit',
+    type:'elite',
+    price:'₺4.500',
+    period:'aylık',
+    desc:'Maksimum başarı hedefleyenler için sınırsız program.',
+    features:['Sınırsız Ders Seçimi','Günlük Oturum','Tüm Materyaller Dahil','7/24 Öncelikli Destek','Günlük Gelişim Raporu','Sınırsız Birebir Ders','Video & Arşiv Tam Erişim','Haftalık Veli Görüşmesi'],
+    btn:'Paketi Seç',
+    popular:false
+  }
+];
+
+const testimonials = [
+  { stars:5, text:'AkademiPlus sayesinde YKS\'de matematikte 145 net yaptım. Dr. Arslan\'ın dersleri gerçekten fark yaratıyor, her sorunun arkasındaki mantığı öğrettiler.', name:'Berk Yılmaz', info:'Boğaziçi Üniversitesi, İşletme – 2024', av:'av-blue' },
+  { stars:5, text:'İngilizce gruplarda her şey İngilizce konuşuluyor. Bu sayede 6 ayda IELTS 7.5 aldım. Emily Hoca\'nın metodu gerçekten işe yarıyor!', name:'Selin Kara', info:'IELTS 7.5 | Yurt Dışı Başvurusu', av:'av-rose' },
+  { stars:5, text:'Oğlum LGS\'de tüm Türkiye genelinde ilk 1000\'e girdi. Mert Hoca\'nın öğretme yöntemi çocuklar için çok etkili, hiç sıkılmadan ders çalışıyor.', name:'Fatma Demir (Veli)', info:'LGS 2024 – Türkiye 847.', av:'av-teal' },
+  { stars:5, text:'Resim atölyesinde bir yılda hem teknik hem de ifade özgürlüğü kazandım. Güzel Sanatlar Fakültesi sınavını başarıyla geçtim.', name:'İpek Çelik', info:'Mimar Sinan GSGF, Resim Bölümü', av:'av-plum' },
+  { stars:5, text:'Fizik ve kimyayı hiç sevmezdim. Prof. Demir\'in dersleri sayesinde her ikisini de sevip YKS\'de yüksek net yaptım. Gerçek bir dönüşüm yaşadım.', name:'Onur Arslan', info:'ODTÜ, Makine Mühendisliği – 2024', av:'av-purple' },
+  { stars:4, text:'Python kursunu bitirdikten sonra kendi web sitem var! Alper Hoca her adımı sabırla anlattı, hiç sıkılmadan öğrendim. Herkese tavsiye ederim.', name:'Ege Yıldırım', info:'Web Geliştirme Kursu Mezunu, 16 yaş', av:'av-dark' },
+];
+
+const faqs = [
+  { q:'Kayıt için ne yapmalıyım?', a:'Sitemizin kayıt formunu doldurmanız yeterlidir. Danışmanımız 24 saat içinde sizi arayarak kurs seçimi ve başlangıç tarihi konusunda bilgi verecektir.' },
+  { q:'Dersler yüz yüze mi yoksa online mı?', a:'Her iki seçeneği de sunuyoruz. Hibrit sistemimizle hem yüz yüze hem de online katılım mümkündür. Kayıt sırasında tercihlerinizi belirtebilirsiniz.' },
+  { q:'Grup dersleri kaç kişilik?', a:'Standart gruplarımız en fazla 12 kişiden oluşur. Bu sayıyı bilerek sınırlı tutuyoruz; her öğrenciye yeterli ilginin gösterilebilmesi için.' },
+  { q:'Kaçırdığım dersleri telafi edebilir miyim?', a:'Evet! Tüm dersler kayıt altına alınır. Video arşivimizden istediğiniz zaman tekrar izleyebilir; ayrıca haftada bir telafi dersi imkânı mevcuttur.' },
+  { q:'Deneme sınavları düzenliyor musunuz?', a:'YKS ve LGS programlarında haftada bir deneme sınavı uygulanır. Sonuçlar analiz edilerek bireysel zayıf noktalara odaklanılır.' },
+  { q:'Taksit seçeneği var mı?', a:'Evet, 3, 6 ve 12 ay taksit seçeneklerimiz mevcuttur. Ödeme planı konusunda danışmanımızla görüşebilirsiniz.' },
+  { q:'Özel ders fiyatları nedir?', a:'Birebir özel ders ücretleri saat bazında belirlenir. Seçilen öğretmene ve konuya göre değişmekle birlikte saatlik fiyatlarımız 350–600 TL aralığındadır.' },
+  { q:'Sertifika verilecek mi?', a:'Tamamlanan her kurs için Milli Eğitim onaylı katılım sertifikası düzenlenmektedir. Sertifikanızı dijital veya basılı olarak alabilirsiniz.' },
+];
+
+// ═══════════════════════════════════════
+//  RENDER FUNCTIONS
+// ═══════════════════════════════════════
+
 function renderCourses(filter='all') {
   const grid = document.getElementById('coursesGrid');
-  const filtered = filter === 'all' ? courses : courses.filter(c => c.cat === filter);
-  grid.innerHTML = filtered.map(c => `
+  const list = filter === 'all' ? courses : courses.filter(c => c.cat === filter);
+  grid.innerHTML = list.map(c => `
     <div class="course-card reveal" onclick="openModal(${c.id})">
       <div class="course-img ${c.colorClass}">
         <span style="filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3))">${c.icon}</span>
@@ -1048,6 +903,7 @@ function renderCourses(filter='all') {
       <div class="course-body">
         <div class="course-category">${c.subject}</div>
         <div class="course-name">${c.title}</div>
+        <div class="course-teacher">👤 ${c.teacher}</div>
         <div class="course-meta">
           <span>📅 ${c.duration}</span>
           <span>📊 ${c.level}</span>
@@ -1056,13 +912,10 @@ function renderCourses(filter='all') {
       </div>
       <div class="course-footer">
         <div class="course-price">${c.price} <span>${c.period}</span></div>
-        <button class="enroll-btn" onclick="event.stopPropagation(); openModal(${c.id})">Detaylar</button>
+        <button class="enroll-btn" onclick="event.stopPropagation();openModal(${c.id})">Detaylar</button>
       </div>
-    </div>
-  `).join('');
-  setTimeout(() => {
-    grid.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-  }, 50);
+    </div>`).join('');
+  setTimeout(() => grid.querySelectorAll('.reveal').forEach(el => el.classList.add('visible')), 50);
 }
 
 function filterCourses(cat, btn) {
@@ -1071,7 +924,6 @@ function filterCourses(cat, btn) {
   renderCourses(cat);
 }
 
-// ─── RENDER EVENTS ───
 function renderEvents() {
   document.getElementById('eventsList').innerHTML = events.map(e => `
     <div class="event-item ${e.cat} reveal">
@@ -1087,47 +939,95 @@ function renderEvents() {
           <span>${e.room}</span>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
-// ─── RENDER TEACHERS ───
 function renderTeachers() {
   document.getElementById('teachersGrid').innerHTML = teachers.map(t => `
     <div class="teacher-card reveal">
-      <div class="teacher-avatar">${t.initials}</div>
+      <div class="teacher-avatar ${t.av}">${t.initials}</div>
       <div class="teacher-name">${t.name}</div>
       <div class="teacher-subject">${t.subject}</div>
+      <div class="teacher-exp">🎓 ${t.exp}</div>
       <div class="teacher-bio">${t.bio}</div>
       <div class="teacher-stars">${'★'.repeat(t.rating)}${'☆'.repeat(5-t.rating)}</div>
       <div class="teacher-rating">${t.reviews} değerlendirme</div>
-      <div class="teacher-tags">${t.tags.map(tag => `<span class="teacher-tag">${tag}</span>`).join('')}</div>
-    </div>
-  `).join('');
+      <div class="teacher-tags">${t.tags.map(g => `<span class="teacher-tag">${g}</span>`).join('')}</div>
+    </div>`).join('');
 }
 
-// ─── CALENDAR ───
+function renderPricing() {
+  document.getElementById('pricingGrid').innerHTML = pricing.map(p => `
+    <div class="price-card ${p.type} reveal">
+      ${p.popular ? '<div class="price-popular">⭐ En Popüler</div>' : ''}
+      <div class="price-plan">${p.plan}</div>
+      <div class="price-amount"><strong>${p.price}</strong></div>
+      <div class="price-period">${p.period} · KDV dahil</div>
+      <div class="price-desc">${p.desc}</div>
+      <div class="price-divider"></div>
+      <ul class="price-features">
+        ${p.features.map(f => `<li class="${f.startsWith('✗') ? 'off' : ''}">${f.replace('✗ ','')}</li>`).join('')}
+      </ul>
+      <button class="price-btn" onclick="document.getElementById('kayit').scrollIntoView({behavior:'smooth'})">${p.btn}</button>
+    </div>`).join('');
+}
+
+function renderTestimonials() {
+  document.getElementById('testiGrid').innerHTML = testimonials.map(t => `
+    <div class="testi-card reveal">
+      <div class="testi-stars">${'★'.repeat(t.stars)}</div>
+      <div class="testi-text">"${t.text}"</div>
+      <div class="testi-author">
+        <div class="testi-avatar ${t.av}">${t.name[0]}</div>
+        <div>
+          <div class="testi-name">${t.name}</div>
+          <div class="testi-info">${t.info}</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function renderFAQ() {
+  document.getElementById('faqWrap').innerHTML = faqs.map((f, i) => `
+    <div class="faq-item" id="faq${i}">
+      <div class="faq-q" onclick="toggleFAQ(${i})">
+        <span>${f.q}</span>
+        <span class="faq-icon">+</span>
+      </div>
+      <div class="faq-a"><p>${f.a}</p></div>
+    </div>`).join('');
+}
+
+function toggleFAQ(i) {
+  const item = document.getElementById('faq' + i);
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ═══════════════════════════════════════
+//  CALENDAR
+// ═══════════════════════════════════════
+
+const MONTHS = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
 let calDate = new Date(2025, 5, 1);
-const eventDays = [21, 24, 26, 28];
-const months = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+const eventDaysMap = { '2025-5': [21,23,25,26,28,30], '2025-6': [5,7] };
 
 function renderCalendar() {
-  const year = calDate.getFullYear();
-  const month = calDate.getMonth();
-  document.getElementById('calMonthLabel').textContent = `${months[month]} ${year}`;
-  const firstDay = new Date(year, month, 1).getDay();
-  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const y = calDate.getFullYear(), m = calDate.getMonth();
+  document.getElementById('calMonthLabel').textContent = MONTHS[m] + ' ' + y;
+  const firstDay = new Date(y, m, 1).getDay();
+  const total = new Date(y, m+1, 0).getDate();
   const offset = firstDay === 0 ? 6 : firstDay - 1;
-  const prevDays = new Date(year, month, 0).getDate();
-  let html = '';
-  for (let i=offset-1; i>=0; i--) {
-    html += `<div class="cal-day other-month">${prevDays - i}</div>`;
-  }
+  const prevTotal = new Date(y, m, 0).getDate();
+  const evDays = eventDaysMap[y+'-'+m] || [];
   const today = new Date();
-  for (let d=1; d<=daysInMonth; d++) {
-    const isToday = d === today.getDate() && month === today.getMonth() && year === today.getFullYear();
-    const hasEvent = eventDays.includes(d) && month === 5;
-    html += `<div class="cal-day ${isToday?'today':''} ${hasEvent?'has-event':''}">${d}</div>`;
+  let html = '';
+  for (let i = offset - 1; i >= 0; i--) html += `<div class="cal-day other-month">${prevTotal - i}</div>`;
+  for (let d = 1; d <= total; d++) {
+    const isToday = d === today.getDate() && m === today.getMonth() && y === today.getFullYear();
+    const hasEv = evDays.includes(d);
+    html += `<div class="cal-day${isToday ? ' today' : ''}${hasEv ? ' has-event' : ''}">${d}</div>`;
   }
   document.getElementById('calGrid').innerHTML = html;
 }
@@ -1137,19 +1037,23 @@ function changeMonth(dir) {
   renderCalendar();
 }
 
-// ─── MODAL ───
+// ═══════════════════════════════════════
+//  MODAL
+// ═══════════════════════════════════════
+
 function openModal(id) {
   const c = courses.find(x => x.id === id);
   if (!c) return;
   document.getElementById('modalTag').textContent = c.subject;
   document.getElementById('modalTitle').textContent = c.title;
+  document.getElementById('modalTeacher').textContent = '👤 ' + c.teacher;
   document.getElementById('modalDetails').innerHTML = `
     <div class="modal-detail"><span class="modal-detail-icon">📅</span> Süre: ${c.duration}</div>
     <div class="modal-detail"><span class="modal-detail-icon">🕐</span> Program: ${c.sessions}</div>
     <div class="modal-detail"><span class="modal-detail-icon">📊</span> Seviye: ${c.level}</div>
     <div class="modal-detail"><span class="modal-detail-icon">💳</span> Ücret: ${c.price} ${c.period}</div>
-    <div class="modal-detail"><span class="modal-detail-icon">📍</span> Yüz yüze + Online hibrit</div>
-  `;
+    <div class="modal-detail"><span class="modal-detail-icon">📍</span> Yüz yüze + Online hibrit</div>`;
+  document.getElementById('modalDesc').textContent = c.desc;
   document.getElementById('modalOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
@@ -1163,97 +1067,132 @@ function closeModal(e) {
 
 function goToRegister() {
   closeModal();
-  document.getElementById('kayit').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => document.getElementById('kayit').scrollIntoView({behavior:'smooth'}), 150);
 }
 
-// ─── FORM ───
-function submitForm() {
-  const fields = ['firstName','lastName','email','phone','courseSelect'];
-  let valid = true;
-  fields.forEach(id => {
+// ═══════════════════════════════════════
+//  FORMS
+// ═══════════════════════════════════════
+
+function validateFields(ids) {
+  let ok = true;
+  ids.forEach(id => {
     const el = document.getElementById(id);
-    if (!el.value.trim()) {
-      el.style.borderColor = '#FC8181';
-      el.style.boxShadow = '0 0 0 3px rgba(252,129,129,0.15)';
-      valid = false;
-      setTimeout(() => { el.style.borderColor = '#D1D9E8'; el.style.boxShadow = 'none'; }, 2000);
+    if (!el || !el.value.trim()) {
+      if (el) { el.style.borderColor = 'var(--red)'; el.style.boxShadow = '0 0 0 3px rgba(252,129,129,0.15)'; }
+      ok = false;
+      setTimeout(() => { if(el){el.style.borderColor='#D1D9E8';el.style.boxShadow='none';} }, 2200);
     }
   });
-  if (!valid) { showToast('Lütfen tüm alanları doldurun.', true); return; }
-  const form = document.getElementById('registerForm');
-  form.innerHTML = `
-    <div class="success-msg" style="display:block">
+  return ok;
+}
+
+function submitForm() {
+  if (!validateFields(['firstName','lastName','email','phone','courseSelect','timeSlot'])) {
+    showToast('Lütfen tüm zorunlu alanları doldurun.', true);
+    return;
+  }
+  document.getElementById('registerForm').innerHTML = `
+    <div class="success-msg">
       <div class="success-icon">🎉</div>
       <h3>Kaydınız Alındı!</h3>
-      <p>Danışmanımız en geç <strong>24 saat</strong> içinde sizi arayacaktır.<br>Güvenilir bir eğitim yolculuğuna hoş geldiniz!</p>
-    </div>
-  `;
-  showToast('Kaydınız başarıyla gönderildi!');
+      <p>Danışmanımız en geç <strong>24 saat</strong> içinde sizi arayacaktır.<br>Güvenilir bir eğitim yolculuğuna hoş geldiniz, başarılar dileriz!</p>
+    </div>`;
+  showToast('Kayıt talebiniz başarıyla iletildi!');
 }
 
-// ─── TOAST ───
+function submitContact() {
+  if (!validateFields(['cName','cPhone','cEmail','cSubject','cMsg'])) {
+    showToast('Lütfen tüm alanları doldurun.', true);
+    return;
+  }
+  ['cName','cPhone','cEmail','cSubject','cMsg'].forEach(id => { const el=document.getElementById(id); if(el)el.value=''; });
+  showToast('Mesajınız başarıyla gönderildi. En geç 2 saat içinde dönüş yapılacaktır.');
+}
+
+// ═══════════════════════════════════════
+//  TOAST
+// ═══════════════════════════════════════
+
 function showToast(msg, isError=false) {
   const t = document.getElementById('toast');
+  const icon = t.querySelector('.toast-icon');
   document.getElementById('toastMsg').textContent = msg;
   t.style.background = isError ? '#c0392b' : 'var(--navy)';
+  icon.textContent = isError ? '⚠' : '✓';
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3500);
+  setTimeout(() => t.classList.remove('show'), 3800);
 }
 
-// ─── SCROLL REVEAL ───
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
+// ═══════════════════════════════════════
+//  SCROLL REVEAL
+// ═══════════════════════════════════════
 
-function observeReveal() {
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+
+function observeAll() {
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => revealObs.observe(el));
 }
 
-// ─── COUNTER ANIMATION ───
+// ═══════════════════════════════════════
+//  COUNTERS
+// ═══════════════════════════════════════
+
 function animateCounters() {
   document.querySelectorAll('[data-count]').forEach(el => {
     const target = +el.dataset.count;
-    let current = 0;
-    const step = Math.ceil(target / 60);
-    const timer = setInterval(() => {
-      current = Math.min(current + step, target);
-      el.textContent = current.toLocaleString('tr-TR') + (target === 97 ? '%+' : '+');
-      if (current >= target) clearInterval(timer);
-    }, 28);
+    const suffix = el.dataset.suffix || '+';
+    let cur = 0;
+    const step = Math.max(1, Math.ceil(target / 55));
+    const t = setInterval(() => {
+      cur = Math.min(cur + step, target);
+      el.textContent = cur.toLocaleString('tr-TR') + suffix;
+      if (cur >= target) clearInterval(t);
+    }, 25);
   });
 }
 
-// ─── MOBILE MENU ───
+// ═══════════════════════════════════════
+//  MOBILE MENU
+// ═══════════════════════════════════════
+
 function toggleMenu() {
   document.getElementById('mobileMenu').classList.toggle('active');
 }
 
-// ─── INIT ───
+document.addEventListener('click', e => {
+  const menu = document.getElementById('mobileMenu');
+  const ham = document.getElementById('hamburger');
+  if (menu.classList.contains('active') && !menu.contains(e.target) && !ham.contains(e.target))
+    menu.classList.remove('active');
+});
+
+// ═══════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════
+
 document.addEventListener('DOMContentLoaded', () => {
   renderCourses();
   renderEvents();
   renderTeachers();
+  renderPricing();
+  renderTestimonials();
+  renderFAQ();
   renderCalendar();
-  observeReveal();
 
-  const heroObserver = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) { animateCounters(); heroObserver.disconnect(); }
-  }, { threshold: 0.4 });
-  heroObserver.observe(document.querySelector('.hero-stats'));
+  setTimeout(observeAll, 100);
+  new MutationObserver(observeAll).observe(document.body, { childList: true, subtree: true });
 
-  // Continuous reveal observation (for dynamically added cards)
-  const mutObs = new MutationObserver(() => observeReveal());
-  mutObs.observe(document.body, { childList: true, subtree: true });
+  const heroObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { animateCounters(); heroObs.disconnect(); }
+  }, { threshold: 0.3 });
+  heroObs.observe(document.querySelector('.hero-stats'));
 });
 
-// Close mobile menu on outside click
-document.addEventListener('click', e => {
-  const menu = document.getElementById('mobileMenu');
-  const hamburger = document.getElementById('hamburger');
-  if (menu.classList.contains('active') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
-    menu.classList.remove('active');
-  }
-});
+// Keyboard modal close
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 </body>
 </html>
