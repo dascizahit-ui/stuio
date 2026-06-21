@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diş Kliniği Şablonları — Zetta Studio</title>
+<meta name="description" content="Diş klinikleri ve ağız sağlığı merkezleri için tedavi sayfaları, doktor kadrosu ve online randevu sistemi içeren web sitesi şablonları.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg: #0B1829;
+    --bg-elev: rgba(255,255,255,0.055);
+    --bg-elev-2: rgba(255,255,255,0.095);
+    --border: rgba(255,255,255,0.16);
+    --border-soft: rgba(255,255,255,0.09);
+    --text: #f6f9ff;
+    --text-mute: rgba(229,236,247,0.72);
+    --text-dim: rgba(229,236,247,0.46);
+    --accent: #c25e2e;
+    --accent-hover: #d36a37;
+    --on-accent: #fdf9f0;
+    --serif: "Instrument Serif", "Times New Roman", serif;
+    --sans: "Manrope", -apple-system, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1;
+    opacity: 0.022;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+
+  /* NAV */
+  nav.top {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 32px;
+    backdrop-filter: blur(20px);
+    background: rgba(11,24,41,0.92);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  nav.top .inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--serif);
+    font-size: 26px; font-style: italic;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .logo span { color: var(--accent); }
+  .nav-cta {
+    padding: 10px 18px;
+    background: var(--accent); color: var(--on-accent);
+    border-radius: 100px;
+    font-size: 13px; font-weight: 600;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .nav-cta:hover { transform: translateY(-1px); background: var(--accent-hover); }
+
+  /* HERO */
+  .hero { padding: 140px 0 80px; position: relative; overflow: hidden; text-align: center; }
+  .hero::after {
+    content: ""; position: absolute;
+    top: 10%; right: -8%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(56,150,200,0.12) 0%, transparent 70%);
+    filter: blur(60px); pointer-events: none;
+  }
+  .hero::before {
+    content: ""; position: absolute;
+    bottom: -8%; left: -8%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(107,141,79,0.08) 0%, transparent 70%);
+    filter: blur(70px); pointer-events: none;
+  }
+
+  h1.hero-title {
+    font-family: var(--serif);
+    font-size: clamp(48px, 8vw, 96px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+  h1.hero-title em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-mute);
+    max-width: 560px;
+    margin: 0 auto 48px;
+    line-height: 1.6;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 16px 32px;
+    background: var(--accent); color: var(--on-accent);
+    border-radius: 100px;
+    font-size: 15px; font-weight: 600;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px -10px rgba(194,94,46,0.42);
+  }
+
+  /* TEMPLATES */
+  .templates { padding: 80px 0 120px; }
+  .template-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .template-card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border-soft);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.4s, border-color 0.3s, box-shadow 0.4s;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column;
+  }
+  .template-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    box-shadow: 0 30px 60px -22px rgba(194,94,46,0.28);
+  }
+  @media (max-width: 900px) {
+    .template-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav.top { padding: 16px 24px; }
+    .wrap { padding: 0 24px; }
+    .hero { padding: 100px 0 60px; }
+    .templates { padding: 60px 0 80px; }
+  }
+
+  .template-preview {
+    aspect-ratio: 16/10;
+    position: relative;
+    overflow: hidden;
+  }
+  .template-preview svg { width: 100%; height: 100%; display: block; }
+  .template-preview::after {
+    content: "Şablonu aç →";
+    position: absolute;
+    bottom: 16px; right: 16px;
+    background: var(--accent); color: var(--on-accent);
+    padding: 10px 16px;
+    border-radius: 100px;
+    font-size: 12px; font-weight: 600;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    box-shadow: 0 8px 22px -8px rgba(194,94,46,0.55);
+  }
+  .template-card:hover .template-preview::after { opacity: 1; transform: translateY(0); }
+
+  .template-info { padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  .template-info h3 { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -0.01em; }
+  .template-info p { font-size: 13px; color: var(--text-mute); margin-top: 4px; }
+  .template-features {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+  }
+  .template-features span {
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-mute); border: 1px solid var(--border); border-radius: 999px; padding: 7px 10px;
+  }
+  .template-tag {
+    font-size: 11px; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--border-soft);
+    text-align: center;
+  }
+  footer p { font-size: 13px; color: var(--text-dim); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="top">
+  <div class="inner">
+    <a href="index.html" class="logo">zetta studio<span>.</span></a>
+    <a href="index.html#iletisim" class="nav-cta">Teklif Al</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <h1 class="hero-title">
+      Diş Kliniği<br><em>Şablonları</em>
+    </h1>
+    <p class="hero-sub">
+      Tedavi sayfaları, doktor kadrosu, online randevu sistemi ve hasta yorumlarıyla diş klinikleri için modern web siteleri.
+    </p>
+    <a href="index.html#iletisim" class="btn-primary">
+      Teklif İste
+      <span>→</span>
+    </a>
+  </div>
+</header>
+
+<!-- TEMPLATES -->
+<section class="templates">
+  <div class="wrap">
+    <div class="template-grid">
+
+      <a href="sablonlar/dis-klinigi/dentalux.html" class="template-card" target="_blank">
+        <div class="template-preview">
+          <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="dg1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#e8f4f8"/>
+                <stop offset="100%" stop-color="#d0e8f0"/>
+              </linearGradient>
+            </defs>
+            <rect width="700" height="440" fill="url(#dg1)"/>
+            <circle cx="560" cy="150" r="140" fill="#1a9fc4" opacity="0.08"/>
+            <text x="60" y="110" font-family="sans-serif" font-size="13" fill="#1a9fc4" letter-spacing="3" font-weight="600">AĞIZ & DİŞ SAĞLIĞI</text>
+            <text x="60" y="230" font-family="serif" font-size="74" fill="#14323d">Denta</text>
+            <text x="60" y="302" font-family="serif" font-style="italic" font-size="62" fill="#1a9fc4">lux.</text>
+            <line x1="60" y1="342" x2="210" y2="342" stroke="#1a9fc4" stroke-width="2"/>
+            <text x="60" y="388" font-family="sans-serif" font-size="13" fill="#5a7884" letter-spacing="2">TEDAVİLER · DOKTORLAR · RANDEVU</text>
+            <circle cx="540" cy="240" r="60" fill="#fff" opacity="0.6"/>
+            <path d="M540 210c-12 0-18 9-18 21 0 9 3 15 6 21 3 3 6 12 12 12s9-9 12-12c3-6 6-12 6-21 0-12-6-21-18-21z" fill="#1a9fc4" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Dentalux</h3>
+            <p>Açık, ferah klinik tasarımı — tedavi kartları, doktor kadrosu ve online randevu formu</p>
+            <div class="template-features">
+              <span>Randevu</span>
+              <span>Tedaviler</span>
+              <span>Doktorlar</span>
+              <span>SSS</span>
+            </div>
+          </div>
+          <span class="template-tag">Klinik</span>
+        </div>
+      </a>
+
+      <a href="sablonlar/dis-klinigi/perla-dental.html" class="template-card" target="_blank">
+        <div class="template-preview">
+          <svg viewBox="0 0 700 440" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="dg2" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#0f2a3d"/>
+                <stop offset="100%" stop-color="#071620"/>
+              </linearGradient>
+            </defs>
+            <rect width="700" height="440" fill="url(#dg2)"/>
+            <circle cx="540" cy="200" r="150" fill="#4fd1c5" opacity="0.08"/>
+            <text x="60" y="110" font-family="sans-serif" font-size="13" fill="#4fd1c5" letter-spacing="3" font-weight="600">PREMIUM DENTAL CARE</text>
+            <text x="60" y="230" font-family="serif" font-size="72" fill="#f0f8fa">Perla</text>
+            <text x="60" y="302" font-family="serif" font-style="italic" font-size="60" fill="#4fd1c5">Dental.</text>
+            <line x1="60" y1="342" x2="210" y2="342" stroke="#4fd1c5" stroke-width="2"/>
+            <text x="60" y="388" font-family="sans-serif" font-size="13" fill="#7da3b0" letter-spacing="2">İMPLANT · ORTODONTİ · ESTETİK</text>
+          </svg>
+        </div>
+        <div class="template-info">
+          <div>
+            <h3>Perla Dental</h3>
+            <p>Premium koyu tema — estetik diş hekimliği, implant ve ortodonti odaklı lüks klinik</p>
+            <div class="template-features">
+              <span>Randevu</span>
+              <span>Estetik</span>
+              <span>İmplant</span>
+              <span>Galeri</span>
+            </div>
+          </div>
+          <span class="template-tag">Klinik</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <p>© 2025 Zetta Studio. Tüm hakları saklıdır.</p>
+  </div>
+</footer>
+
+</body>
+</html>

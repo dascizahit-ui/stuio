@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dentalux — Ağız ve Diş Sağlığı Kliniği</title>
+<meta name="description" content="Dentalux ağız ve diş sağlığı kliniği. Modern tedaviler, uzman hekimler ve online randevu ile gülüşünüze değer katıyoruz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4fafb;
+    --surface: #ffffff;
+    --surface-2: #e8f4f8;
+    --ink: #14323d;
+    --ink-soft: #4a6571;
+    --muted: #8aa3ad;
+    --accent: #1a9fc4;
+    --accent-d: #137d9c;
+    --accent-l: #e1f3f8;
+    --line: rgba(20,50,61,0.08);
+    --shadow-s: 0 2px 14px rgba(20,50,61,0.05);
+    --shadow-m: 0 16px 44px rgba(20,50,61,0.1);
+    --shadow-l: 0 30px 70px rgba(20,50,61,0.14);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --r: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); overflow-x: hidden; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--surface-2); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 20px 0; transition: all 0.35s; }
+  nav.scrolled { background: rgba(244,250,251,0.92); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); padding: 13px 0; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .logo span { color: var(--accent); }
+  .logo svg { width: 26px; height: 26px; fill: var(--accent); }
+  .nav-links { display: flex; gap: 34px; list-style: none; }
+  .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--ink-soft); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { background: var(--accent); color: #fff; padding: 11px 24px; border-radius: 100px; font-size: 0.82rem; font-weight: 600; transition: all 0.25s; }
+  .nav-cta:hover { background: var(--accent-d); transform: translateY(-1px); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+  .hamburger span { width: 26px; height: 2px; background: var(--ink); border-radius: 2px; transition: 0.3s; }
+
+  /* HERO */
+  .hero { position: relative; padding: 150px 0 90px; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; top: -10%; right: -5%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(26,159,196,0.1) 0%, transparent 70%); pointer-events: none; }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-l); color: var(--accent-d); padding: 8px 16px; border-radius: 100px; font-size: 0.76rem; font-weight: 600; margin-bottom: 24px; }
+  .hero-tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .hero h1 { font-family: var(--serif); font-size: clamp(2.8rem, 5.5vw, 4.6rem); font-weight: 600; line-height: 1.05; margin-bottom: 22px; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub { font-size: 1.08rem; color: var(--ink-soft); max-width: 480px; margin-bottom: 36px; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+  .btn-primary { background: var(--accent); color: #fff; padding: 15px 32px; border-radius: 100px; font-size: 0.92rem; font-weight: 600; transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; font-family: var(--sans); }
+  .btn-primary:hover { background: var(--accent-d); transform: translateY(-2px); box-shadow: 0 14px 30px -10px rgba(26,159,196,0.5); }
+  .btn-ghost { background: transparent; color: var(--ink); padding: 15px 32px; border-radius: 100px; font-size: 0.92rem; font-weight: 600; border: 1px solid var(--line); transition: all 0.25s; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-trust { display: flex; gap: 40px; }
+  .trust-n { font-family: var(--serif); font-size: 2.2rem; font-weight: 600; color: var(--accent); line-height: 1; }
+  .trust-l { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+  .hero-visual { position: relative; }
+  .hero-img { width: 100%; aspect-ratio: 4/4.4; object-fit: cover; border-radius: 24px; box-shadow: var(--shadow-l); }
+  .hero-badge-float { position: absolute; bottom: 30px; left: -24px; background: var(--surface); border-radius: 16px; padding: 18px 22px; box-shadow: var(--shadow-m); display: flex; align-items: center; gap: 14px; animation: floaty 4s ease-in-out infinite; }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  .hbf-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--accent-l); display: flex; align-items: center; justify-content: center; }
+  .hbf-icon svg { width: 24px; height: 24px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+  .hbf-num { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; line-height: 1; }
+  .hbf-label { font-size: 0.72rem; color: var(--muted); }
+
+  /* SECTIONS */
+  section { padding: 100px 0; }
+  .sec-head { text-align: center; margin-bottom: 56px; }
+  .sec-tag { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 600; display: block; margin-bottom: 12px; }
+  .sec-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; line-height: 1.15; }
+  .sec-title em { font-style: italic; color: var(--accent); }
+  .sec-desc { font-size: 1rem; color: var(--ink-soft); max-width: 540px; margin: 14px auto 0; }
+
+  /* TREATMENTS */
+  .treatments { background: var(--surface); }
+  .treat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .treat { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); padding: 34px 28px; transition: all 0.35s; }
+  .treat:hover { transform: translateY(-8px); box-shadow: var(--shadow-m); border-color: transparent; }
+  .treat-icon { width: 60px; height: 60px; border-radius: 16px; background: var(--accent-l); display: flex; align-items: center; justify-content: center; margin-bottom: 22px; }
+  .treat-icon svg { width: 30px; height: 30px; stroke: var(--accent); fill: none; stroke-width: 1.6; }
+  .treat h3 { font-family: var(--serif); font-size: 1.5rem; font-weight: 600; margin-bottom: 10px; }
+  .treat p { font-size: 0.9rem; color: var(--ink-soft); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .about-img { aspect-ratio: 5/4; border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-m); }
+  .about-img img { width: 100%; height: 100%; object-fit: cover; }
+  .about-list { display: grid; gap: 18px; margin-top: 28px; }
+  .about-item { display: flex; gap: 14px; align-items: flex-start; }
+  .about-check { width: 26px; height: 26px; border-radius: 50%; background: var(--accent-l); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+  .about-check svg { width: 14px; height: 14px; stroke: var(--accent); fill: none; stroke-width: 2.5; }
+  .about-item-t { font-weight: 600; font-size: 0.96rem; }
+  .about-item-d { font-size: 0.86rem; color: var(--ink-soft); }
+
+  /* DOCTORS */
+  .doctors { background: var(--surface); }
+  .doctors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .doctor { background: var(--bg); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow-s); transition: all 0.35s; }
+  .doctor:hover { transform: translateY(-6px); box-shadow: var(--shadow-m); }
+  .doctor-img { aspect-ratio: 1; overflow: hidden; }
+  .doctor-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+  .doctor:hover .doctor-img img { transform: scale(1.05); }
+  .doctor-body { padding: 24px; text-align: center; }
+  .doctor-name { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; }
+  .doctor-role { font-size: 0.8rem; color: var(--accent); margin-top: 4px; }
+
+  /* APPOINTMENT */
+  .appointment { background: linear-gradient(135deg, var(--accent-d) 0%, var(--accent) 100%); }
+  .appt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .appt-info h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; color: #fff; margin-bottom: 16px; }
+  .appt-info p { color: rgba(255,255,255,0.85); margin-bottom: 28px; }
+  .appt-contact { display: grid; gap: 16px; }
+  .appt-contact-item { display: flex; align-items: center; gap: 14px; color: #fff; }
+  .appt-contact-item svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 1.8; flex-shrink: 0; }
+  .appt-form { background: var(--surface); border-radius: 24px; padding: 40px; box-shadow: var(--shadow-l); }
+  .appt-form h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; margin-bottom: 22px; }
+  .form-field { margin-bottom: 16px; }
+  .form-field label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 6px; }
+  .form-field input, .form-field select { width: 100%; padding: 13px 16px; border: 1px solid var(--line); border-radius: 10px; font-family: var(--sans); font-size: 0.9rem; color: var(--ink); outline: none; transition: border-color 0.2s; background: var(--bg); }
+  .form-field input:focus, .form-field select:focus { border-color: var(--accent); }
+  .appt-form .btn-primary { width: 100%; justify-content: center; margin-top: 8px; }
+  .appt-success { display: none; text-align: center; padding: 30px 0; }
+  .appt-success.show { display: block; }
+  .appt-success-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--accent-l); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+  .appt-success-icon svg { width: 32px; height: 32px; stroke: var(--accent); fill: none; stroke-width: 2; }
+  .appt-success h3 { margin-bottom: 8px; }
+  .appt-success p { color: var(--ink-soft); font-size: 0.9rem; }
+
+  /* FAQ */
+  .faq-list { max-width: 760px; margin: 0 auto; display: grid; gap: 14px; }
+  .faq-item { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; cursor: pointer; transition: border-color 0.2s; }
+  .faq-item:hover { border-color: var(--accent); }
+  .faq-q { padding: 22px 26px; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1rem; gap: 16px; }
+  .faq-q span { color: var(--accent); font-size: 1.5rem; transition: transform 0.3s; flex-shrink: 0; }
+  .faq-item.open .faq-q span { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+  .faq-a p { padding: 0 26px 22px; color: var(--ink-soft); font-size: 0.92rem; }
+  .faq-item.open .faq-a { max-height: 220px; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: rgba(255,255,255,0.7); padding: 70px 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 50px; margin-bottom: 50px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; color: #fff; margin-bottom: 16px; }
+  .footer-logo span { color: var(--accent); }
+  .footer-about { font-size: 0.9rem; line-height: 1.7; max-width: 280px; }
+  .footer-col h5 { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; margin-bottom: 20px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 11px; }
+  .footer-col ul li a { font-size: 0.88rem; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--accent); }
+  .footer-bottom { padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 0.8rem; color: rgba(255,255,255,0.45); flex-wrap: wrap; gap: 12px; }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .mobile-menu { display: none; position: fixed; inset: 0; z-index: 950; background: var(--bg); padding: 100px 32px 40px; flex-direction: column; gap: 4px; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 1.3rem; font-weight: 500; padding: 16px 0; border-bottom: 1px solid var(--line); }
+
+  @media (max-width: 1024px) {
+    .treat-grid, .doctors-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+  }
+  @media (max-width: 820px) {
+    .hero-grid, .about-grid, .appt-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual, .about-img { max-width: 480px; margin: 0 auto; width: 100%; }
+  }
+  @media (max-width: 680px) {
+    .container, .nav-inner { padding: 0 22px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 70px 0; }
+    .treat-grid, .doctors-grid { grid-template-columns: 1fr; }
+    .hero { padding: 120px 0 70px; }
+    .hero-trust { gap: 28px; }
+    .appt-form { padding: 28px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .hero-badge-float { left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 6 5 6 9c0 3 1 5 2 7 1 1 2 4 4 4s3-3 4-4c1-2 2-4 2-7 0-4-2-7-6-7z"/></svg>Denta<span>lux</span></a>
+    <ul class="nav-links">
+      <li><a href="#tedaviler">Tedaviler</a></li>
+      <li><a href="#hakkimizda">Hakkımızda</a></li>
+      <li><a href="#doktorlar">Doktorlar</a></li>
+      <li><a href="#sss">S.S.S</a></li>
+    </ul>
+    <a href="#randevu" class="nav-cta">Randevu Al</a>
+    <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#tedaviler">Tedaviler</a>
+  <a href="#hakkimizda">Hakkımızda</a>
+  <a href="#doktorlar">Doktorlar</a>
+  <a href="#sss">S.S.S</a>
+  <a href="#randevu">Randevu Al</a>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="hero-tag">Ağız ve Diş Sağlığı Merkezi</span>
+      <h1>Sağlıklı gülüşler <em>burada</em> başlar.</h1>
+      <p class="hero-sub">Modern teknoloji ve uzman hekim kadromuzla ağız ve diş sağlığınız için konforlu, güvenli ve ağrısız tedaviler sunuyoruz.</p>
+      <div class="hero-actions">
+        <a href="#randevu" class="btn-primary">Hemen Randevu Al <span>→</span></a>
+        <a href="#tedaviler" class="btn-ghost">Tedavilerimiz</a>
+      </div>
+      <div class="hero-trust">
+        <div><div class="trust-n">15K+</div><div class="trust-l">Mutlu Hasta</div></div>
+        <div><div class="trust-n">20+</div><div class="trust-l">Yıllık Tecrübe</div></div>
+        <div><div class="trust-n">8</div><div class="trust-l">Uzman Hekim</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=85" alt="Diş kliniği" loading="lazy" onerror="this.style.opacity=0">
+      <div class="hero-badge-float">
+        <div class="hbf-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div><div class="hbf-num">%98</div><div class="hbf-label">Hasta Memnuniyeti</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TREATMENTS -->
+<section class="treatments" id="tedaviler">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Hizmetlerimiz</span>
+      <h2 class="sec-title">Sunduğumuz <em>tedaviler</em></h2>
+      <p class="sec-desc">Ağız ve diş sağlığınız için ihtiyacınız olan tüm tedavileri tek çatı altında bulabilirsiniz.</p>
+    </div>
+    <div class="treat-grid">
+      <div class="treat reveal">
+        <div class="treat-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8 2 6 5 6 9c0 3 1 5 2 7 1 1 2 4 4 4s3-3 4-4c1-2 2-4 2-7 0-4-2-7-6-7z"/></svg></div>
+        <h3>İmplant Tedavisi</h3>
+        <p>Eksik dişlerinize doğal görünümlü, kalıcı ve konforlu implant çözümleri.</p>
+      </div>
+      <div class="treat reveal">
+        <div class="treat-icon"><svg viewBox="0 0 24 24"><path d="M3 12h18M12 3v18" /><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Ortodonti</h3>
+        <p>Şeffaf plak ve diş teli ile diş dizilim bozukluklarına estetik çözümler.</p>
+      </div>
+      <div class="treat reveal">
+        <div class="treat-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1-6-4.5h7.6z"/></svg></div>
+        <h3>Diş Beyazlatma</h3>
+        <p>Profesyonel beyazlatma ile gülüşünüze ışıltı ve doğal beyazlık katın.</p>
+      </div>
+      <div class="treat reveal">
+        <div class="treat-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 9h6v6H9z"/></svg></div>
+        <h3>Zirkonyum Kaplama</h3>
+        <p>Doğal diş görünümünde, dayanıklı ve estetik zirkonyum kaplamalar.</p>
+      </div>
+      <div class="treat reveal">
+        <div class="treat-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M5 8c0-3 3-5 7-5s7 2 7 5"/></svg></div>
+        <h3>Kanal Tedavisi</h3>
+        <p>Ağrısız, modern tekniklerle dişlerinizi kaybetmeden kurtarın.</p>
+      </div>
+      <div class="treat reveal">
+        <div class="treat-icon"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-8-8"/><path d="M12 8v4l3 2"/></svg></div>
+        <h3>Çocuk Diş Hekimliği</h3>
+        <p>Çocuklarınız için eğlenceli, korkutmayan ve güvenli diş sağlığı hizmeti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="hakkimizda">
+  <div class="container about-grid">
+    <div class="about-img reveal">
+      <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=800&q=85" alt="Klinik" loading="lazy" onerror="this.parentElement.style.background='var(--accent-l)'">
+    </div>
+    <div class="reveal">
+      <span class="sec-tag">Neden Dentalux</span>
+      <h2 class="sec-title" style="text-align:left;">Konforunuz <em>önceliğimiz</em></h2>
+      <p style="color:var(--ink-soft);margin-top:14px;">Hasta odaklı yaklaşımımız, steril ortamımız ve son teknoloji cihazlarımızla tedavi sürecinizi keyifli hale getiriyoruz.</p>
+      <div class="about-list">
+        <div class="about-item"><div class="about-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div><div class="about-item-t">Steril ve Hijyenik Ortam</div><div class="about-item-d">En yüksek sterilizasyon standartlarıyla güvenli tedavi.</div></div></div>
+        <div class="about-item"><div class="about-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div><div class="about-item-t">Son Teknoloji Cihazlar</div><div class="about-item-d">Dijital görüntüleme ve ağrısız tedavi sistemleri.</div></div></div>
+        <div class="about-item"><div class="about-check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div><div><div class="about-item-t">Uzman Hekim Kadrosu</div><div class="about-item-d">Alanında deneyimli, ilgili ve güler yüzlü ekip.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section class="doctors" id="doktorlar">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Ekibimiz</span>
+      <h2 class="sec-title">Uzman <em>hekimlerimiz</em></h2>
+    </div>
+    <div class="doctors-grid">
+      <div class="doctor reveal">
+        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&q=80" alt="Doktor" loading="lazy" onerror="this.parentElement.style.background='var(--accent-l)'"></div>
+        <div class="doctor-body"><div class="doctor-name">Dr. Ayşe Demir</div><div class="doctor-role">Ortodonti Uzmanı</div></div>
+      </div>
+      <div class="doctor reveal">
+        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=500&q=80" alt="Doktor" loading="lazy" onerror="this.parentElement.style.background='var(--accent-l)'"></div>
+        <div class="doctor-body"><div class="doctor-name">Dr. Mehmet Yılmaz</div><div class="doctor-role">İmplantoloji</div></div>
+      </div>
+      <div class="doctor reveal">
+        <div class="doctor-img"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&q=80" alt="Doktor" loading="lazy" onerror="this.parentElement.style.background='var(--accent-l)'"></div>
+        <div class="doctor-body"><div class="doctor-name">Dr. Zeynep Kaya</div><div class="doctor-role">Estetik Diş Hekimi</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section class="appointment" id="randevu">
+  <div class="container appt-grid">
+    <div class="appt-info">
+      <h2>Randevunuzu oluşturun</h2>
+      <p>Formu doldurun, en kısa sürede sizinle iletişime geçelim. Sağlıklı bir gülüş için ilk adımı atın.</p>
+      <div class="appt-contact">
+        <div class="appt-contact-item"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1.05.34 2.07.63 3.07a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.01-1.01a2 2 0 0 1 2.11-.45c1 .29 2.02.5 3.07.63A2 2 0 0 1 22 16.92z"/></svg>+90 (212) 555 00 00</div>
+        <div class="appt-contact-item"><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>randevu@dentalux.com</div>
+        <div class="appt-contact-item"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Bağdat Cad. No:124, Kadıköy / İstanbul</div>
+      </div>
+    </div>
+    <div class="appt-form">
+      <form id="apptForm">
+        <h3>Online Randevu</h3>
+        <div class="form-field"><label>Ad Soyad</label><input type="text" required placeholder="Adınız Soyadınız"></div>
+        <div class="form-field"><label>Telefon</label><input type="tel" required placeholder="05XX XXX XX XX"></div>
+        <div class="form-field"><label>Tedavi</label><select><option>İmplant</option><option>Ortodonti</option><option>Diş Beyazlatma</option><option>Zirkonyum Kaplama</option><option>Kanal Tedavisi</option><option>Genel Muayene</option></select></div>
+        <div class="form-field"><label>Tarih</label><input type="date" required></div>
+        <button type="submit" class="btn-primary">Randevu Talep Et <span>→</span></button>
+      </form>
+      <div class="appt-success" id="apptSuccess">
+        <div class="appt-success-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Talebiniz Alındı!</h3>
+        <p>En kısa sürede sizi arayarak randevunuzu onaylayacağız.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="sss">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Merak Edilenler</span>
+      <h2 class="sec-title">Sık sorulan <em>sorular</em></h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q">İmplant tedavisi ağrılı mıdır? <span>+</span></div><div class="faq-a"><p>İmplant tedavisi lokal anestezi altında yapıldığı için işlem sırasında ağrı hissetmezsiniz. İşlem sonrası hafif hassasiyet olabilir, bu da ağrı kesicilerle kolayca kontrol edilir.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Diş beyazlatma kalıcı mıdır? <span>+</span></div><div class="faq-a"><p>Diş beyazlatma sonuçları beslenme ve ağız bakımı alışkanlıklarınıza bağlı olarak 1-3 yıl arası kalıcı olabilir. Düzenli bakımla bu süre uzatılabilir.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Tedaviler için ödeme seçenekleri var mı? <span>+</span></div><div class="faq-a"><p>Evet, nakit, kredi kartı ve taksitli ödeme seçeneklerimiz mevcuttur. Anlaşmalı bankalarla uygun taksit imkanları sunuyoruz.</p></div></div>
+      <div class="faq-item"><div class="faq-q">Çocuğum için ilk diş muayenesi ne zaman olmalı? <span>+</span></div><div class="faq-a"><p>İlk diş muayenesinin, ilk dişin çıkmasından sonra ya da en geç 1 yaşında yapılması önerilir. Erken kontroller ileride oluşabilecek sorunları önler.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Denta<span>lux</span></div>
+        <p class="footer-about">Modern teknoloji ve uzman kadromuzla ağız ve diş sağlığınız için buradayız. Sağlıklı gülüşler için doğru adres.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Tedaviler</h5>
+        <ul><li><a href="#tedaviler">İmplant</a></li><li><a href="#tedaviler">Ortodonti</a></li><li><a href="#tedaviler">Beyazlatma</a></li><li><a href="#tedaviler">Zirkonyum</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>Kurumsal</h5>
+        <ul><li><a href="#hakkimizda">Hakkımızda</a></li><li><a href="#doktorlar">Hekimler</a></li><li><a href="#sss">S.S.S</a></li><li><a href="#randevu">Randevu</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>İletişim</h5>
+        <ul><li><a href="tel:+902125550000">+90 (212) 555 00 00</a></li><li><a href="mailto:randevu@dentalux.com">randevu@dentalux.com</a></li><li>Kadıköy, İstanbul</li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Dentalux Diş Kliniği. Tüm hakları saklıdır.</span>
+      <span>Gizlilik · KVKK</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+
+  // FAQ
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q').addEventListener('click', () => item.classList.toggle('open'));
+  });
+
+  // Appointment form
+  document.getElementById('apptForm').addEventListener('submit', e => {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('apptSuccess').classList.add('show');
+  });
+
+  // Reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

@@ -273,17 +273,17 @@
   <div class="search-bar">
     <div class="search-field">
       <label>İşlem</label>
-      <select><option>Satılık</option><option>Kiralık</option><option>Günlük Kiralık</option></select>
+      <select id="searchDeal"><option value="all">Tümü</option><option value="Satılık">Satılık</option><option value="Kiralık">Kiralık</option></select>
     </div>
     <div class="search-field">
       <label>Konum</label>
-      <select><option>Tüm Şehirler</option><option>İstanbul</option><option>Ankara</option><option>İzmir</option><option>Bodrum</option><option>Antalya</option></select>
+      <select id="searchCity"><option value="all">Tüm Şehirler</option><option>İstanbul</option><option>Ankara</option><option>İzmir</option><option>Muğla</option></select>
     </div>
     <div class="search-field">
       <label>Emlak Tipi</label>
-      <select><option>Tümü</option><option>Daire</option><option>Villa</option><option>Müstakil Ev</option><option>Arsa</option><option>İş Yeri</option></select>
+      <select id="searchType"><option value="all">Tümü</option><option value="villa">Villa</option><option value="daire">Daire</option><option value="mustakil">Müstakil Ev</option></select>
     </div>
-    <button class="search-go"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>Ara</button>
+    <button class="search-go" id="searchGo"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg>Ara</button>
   </div>
 </div>
 
@@ -424,12 +424,12 @@
 
   // Listings data
   const listings = [
-    { cat:'villa', badge:'Satılık', price:'₺18.500.000', title:'Deniz Manzaralı Modern Villa', loc:'Bodrum, Muğla', img:'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80', beds:5, baths:4, area:'420 m²' },
-    { cat:'daire', badge:'Satılık', price:'₺6.250.000', title:'Şehir Merkezinde Lüks Daire', loc:'Şişli, İstanbul', img:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80', beds:3, baths:2, area:'145 m²' },
-    { cat:'mustakil', badge:'Kiralık', price:'₺45.000', title:'Bahçeli Müstakil Ev', loc:'Çankaya, Ankara', img:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80', beds:4, baths:3, area:'260 m²' },
-    { cat:'villa', badge:'Satılık', price:'₺24.900.000', title:'Havuzlu Tasarım Villa', loc:'Çeşme, İzmir', img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80', beds:6, baths:5, area:'510 m²' },
-    { cat:'daire', badge:'Kiralık', price:'₺32.000', title:'Boğaz Manzaralı Rezidans', loc:'Beşiktaş, İstanbul', img:'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80', beds:2, baths:1, area:'98 m²' },
-    { cat:'mustakil', badge:'Satılık', price:'₺9.750.000', title:'Doğayla İç İçe Taş Ev', loc:'Şile, İstanbul', img:'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=600&q=80', beds:4, baths:2, area:'215 m²' }
+    { cat:'villa', city:'Muğla', badge:'Satılık', price:'₺18.500.000', title:'Deniz Manzaralı Modern Villa', loc:'Bodrum, Muğla', img:'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80', beds:5, baths:4, area:'420 m²' },
+    { cat:'daire', city:'İstanbul', badge:'Satılık', price:'₺6.250.000', title:'Şehir Merkezinde Lüks Daire', loc:'Şişli, İstanbul', img:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80', beds:3, baths:2, area:'145 m²' },
+    { cat:'mustakil', city:'Ankara', badge:'Kiralık', price:'₺45.000', title:'Bahçeli Müstakil Ev', loc:'Çankaya, Ankara', img:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80', beds:4, baths:3, area:'260 m²' },
+    { cat:'villa', city:'İzmir', badge:'Satılık', price:'₺24.900.000', title:'Havuzlu Tasarım Villa', loc:'Çeşme, İzmir', img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80', beds:6, baths:5, area:'510 m²' },
+    { cat:'daire', city:'İstanbul', badge:'Kiralık', price:'₺32.000', title:'Boğaz Manzaralı Rezidans', loc:'Beşiktaş, İstanbul', img:'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80', beds:2, baths:1, area:'98 m²' },
+    { cat:'mustakil', city:'İstanbul', badge:'Satılık', price:'₺9.750.000', title:'Doğayla İç İçe Taş Ev', loc:'Şile, İstanbul', img:'https://images.unsplash.com/photo-1576941089067-2de3c901e126?w=600&q=80', beds:4, baths:2, area:'215 m²' }
   ];
 
   const bedIcon = '<svg viewBox="0 0 24 24"><path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>';
@@ -438,13 +438,17 @@
   const pinIcon = '<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
   const heartIcon = '<svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
 
-  function renderListings(filter) {
+  function renderListings(items) {
     const wrap = document.getElementById('listings');
     wrap.innerHTML = '';
-    listings.filter(l => filter === 'all' || l.cat === filter).forEach((l, i) => {
+    if (!items.length) {
+      wrap.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:var(--muted);padding:40px 0;">Bu kritere uygun ilan bulunamadı.</p>';
+      return;
+    }
+    items.forEach((l, i) => {
       const card = document.createElement('div');
-      card.className = 'listing';
-      card.style.transitionDelay = (i * 0.06) + 's';
+      card.className = 'listing visible';
+      card.style.transitionDelay = (i * 0.05) + 's';
       card.innerHTML = `
         <div class="listing-img">
           <img src="${l.img}" alt="${l.title}" loading="lazy" onerror="this.style.opacity=0">
@@ -462,17 +466,49 @@
           </div>
         </div>`;
       wrap.appendChild(card);
-      requestAnimationFrame(() => setTimeout(() => card.classList.add('visible'), 30));
       card.querySelector('.listing-fav').addEventListener('click', e => { e.stopPropagation(); e.currentTarget.classList.toggle('active'); });
     });
   }
-  renderListings('all');
 
+  let activeCat = 'all';
+  function applyFilters() {
+    const deal = document.getElementById('searchDeal').value;
+    const city = document.getElementById('searchCity').value;
+    const type = document.getElementById('searchType').value;
+    const filtered = listings.filter(l =>
+      (activeCat === 'all' || l.cat === activeCat) &&
+      (deal === 'all' || l.badge === deal) &&
+      (city === 'all' || l.city === city) &&
+      (type === 'all' || l.cat === type)
+    );
+    renderListings(filtered);
+  }
+
+  renderListings(listings);
+
+  // Filter tabs
   document.getElementById('filterTabs').addEventListener('click', e => {
-    if (!e.target.classList.contains('filter-tab')) return;
+    const tab = e.target.closest('.filter-tab');
+    if (!tab) return;
     document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-    e.target.classList.add('active');
-    renderListings(e.target.dataset.filter);
+    tab.classList.add('active');
+    activeCat = tab.dataset.filter;
+    document.getElementById('searchType').value = (activeCat === 'all') ? 'all' : activeCat;
+    applyFilters();
+  });
+
+  // Search bar
+  document.getElementById('searchGo').addEventListener('click', () => {
+    const type = document.getElementById('searchType').value;
+    activeCat = type;
+    document.querySelectorAll('.filter-tab').forEach(t =>
+      t.classList.toggle('active', t.dataset.filter === (type === 'all' ? 'all' : type))
+    );
+    applyFilters();
+    document.getElementById('ilanlar').scrollIntoView({ behavior: 'smooth' });
+  });
+  ['searchDeal','searchCity','searchType'].forEach(id => {
+    document.getElementById(id).addEventListener('change', applyFilters);
   });
 
   // Reveal on scroll
