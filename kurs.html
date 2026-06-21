@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Emlak Şablonları — Zetta Studio</title>
-<meta name="description" content="Emlak ofisleri için hazır web sitesi şablonları. İlan vitrini, harita, filtreli arama ve danışman profilleri.">
+<title>Eğitim & Kurs Şablonları — Zetta Studio</title>
+<meta name="description" content="Dershane, kurs ve eğitim kurumları için hazır web sitesi şablonları. Kayıt formu, öğretmen kadrosu, program takvimi ve daha fazlası.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,14 +84,14 @@
     content: ""; position: absolute;
     top: 10%; right: -8%;
     width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(194,94,46,0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%);
     filter: blur(60px); pointer-events: none;
   }
   .hero::before {
     content: ""; position: absolute;
     bottom: -8%; left: -8%;
     width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(107,141,79,0.08) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%);
     filter: blur(70px); pointer-events: none;
   }
 
@@ -144,34 +144,27 @@
     text-decoration: none;
     color: inherit;
     display: flex; flex-direction: column;
-    box-shadow: 0 1px 0 rgba(28,24,20,0.04);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.04);
   }
   .template-card:hover {
     transform: translateY(-8px);
     border-color: var(--accent);
-    box-shadow: 0 30px 60px -22px rgba(110,82,46,0.28);
+    box-shadow: 0 30px 60px -22px rgba(194,94,46,0.28);
   }
-  .template-card.wide {
-    grid-column: span 12;
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-  }
+  .template-card.full { grid-column: span 12; }
   @media (max-width: 900px) {
-    .template-card.wide { display: flex; flex-direction: column; }
+    .template-card.full { grid-column: span 12; }
   }
-
   @media (max-width: 768px) {
     nav.top { padding: 16px 24px; }
     .wrap { padding: 0 24px; }
     .hero { padding: 100px 0 60px; }
-    .hero-title { margin-bottom: 20px; }
-    .hero-sub { margin-bottom: 36px; }
     .templates { padding: 60px 0 80px; }
   }
 
   .template-preview {
-    aspect-ratio: 16/10;
-    background: var(--bg-elev-2);
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     position: relative;
     overflow: hidden;
   }
@@ -192,30 +185,8 @@
   .template-card:hover .template-preview::after { opacity: 1; transform: translateY(0); }
 
   .template-info { padding: 24px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-  .template-card.wide .template-info {
-    padding: 34px;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-  }
   .template-info h3 { font-family: var(--serif); font-size: 24px; font-weight: 400; letter-spacing: -0.01em; }
-  .template-card.wide .template-info h3 { font-size: clamp(30px, 4vw, 44px); }
   .template-info p { font-size: 13px; color: var(--text-mute); margin-top: 4px; }
-  .template-features {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 18px;
-  }
-  .template-features span {
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--text-mute);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 7px 10px;
-  }
   .template-tag {
     font-size: 11px; color: var(--accent);
     text-transform: uppercase; letter-spacing: 0.1em;
@@ -224,9 +195,6 @@
     border: 1px solid var(--border);
     border-radius: 100px;
   }
-
-  /* PREVIEW BACKGROUNDS */
-  .preview-lumina { background: linear-gradient(135deg, #14110a 0%, #070707 100%); }
 
   /* FOOTER */
   footer {
@@ -251,10 +219,10 @@
 <header class="hero">
   <div class="wrap">
     <h1 class="hero-title">
-      Emlak<br><em>Şablonları</em>
+      Eğitim &amp; Kurs<br><em>Şablonları</em>
     </h1>
     <p class="hero-sub">
-      İlan vitrini, harita, filtreli arama ve danışman profilleri — emlak ofisleriniz için hazır çözümler.
+      Dershane, kurs merkezi ve eğitim kurumları için kayıt formu, program takvimi ve öğretmen kadrosu içeren modern web siteleri.
     </p>
     <a href="index.html#iletisim" class="btn-primary">
       Teklif İste
@@ -268,47 +236,40 @@
   <div class="wrap">
     <div class="template-grid">
 
-      <a href="sablonlar/emlak/emlak.html" class="template-card wide" target="_blank">
-        <div class="template-preview preview-lumina">
-          <svg viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <a href="sablonlar/kurs/zirve_akademi_index.html" class="template-card full" target="_blank">
+        <div class="template-preview">
+          <svg viewBox="0 0 1200 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
             <defs>
-              <linearGradient id="lg1" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stop-color="#1c1810"/>
-                <stop offset="55%" stop-color="#0d0c08"/>
-                <stop offset="100%" stop-color="#070707"/>
+              <linearGradient id="kg1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0%" stop-color="#0f172a"/>
+                <stop offset="100%" stop-color="#1e3a5f"/>
               </linearGradient>
-              <radialGradient id="lgGlow" cx="74%" cy="34%" r="48%">
-                <stop offset="0%" stop-color="#c9a46e" stop-opacity="0.32"/>
-                <stop offset="100%" stop-color="#c9a46e" stop-opacity="0"/>
-              </radialGradient>
             </defs>
-            <rect width="900" height="520" fill="url(#lg1)"/>
-            <rect width="900" height="520" fill="url(#lgGlow)"/>
-            <rect x="58" y="58" width="784" height="404" fill="none" stroke="#c9a46e" stroke-width="1" opacity="0.35"/>
-            <text x="86" y="124" font-family="serif" font-size="14" fill="#c9a46e" letter-spacing="6" opacity="0.85">LUMINA</text>
-            <text x="86" y="252" font-family="serif" font-size="80" fill="#f3ede4">Premium</text>
-            <text x="86" y="328" font-family="serif" font-style="italic" font-size="72" fill="#c9a46e">Estate.</text>
-            <line x1="86" y1="370" x2="240" y2="370" stroke="#c9a46e" stroke-width="2"/>
-            <text x="86" y="415" font-family="sans-serif" font-size="13" fill="#a89270" letter-spacing="3">VITRIN · İLANLAR · HARITA · DANIŞMAN</text>
-            <rect x="650" y="160" width="160" height="200" fill="none" stroke="#c9a46e" stroke-width="1" opacity="0.45"/>
-            <rect x="660" y="170" width="140" height="100" fill="#c9a46e" opacity="0.10"/>
-            <line x1="660" y1="290" x2="800" y2="290" stroke="#c9a46e" stroke-width="1" opacity="0.5"/>
-            <text x="670" y="320" font-family="serif" font-size="14" fill="#e8d5b0" opacity="0.85">₺ 12.500.000</text>
-            <text x="670" y="345" font-family="sans-serif" font-size="10" fill="#a89270" letter-spacing="2">BEBEK · ISTANBUL</text>
+            <rect width="1200" height="500" fill="url(#kg1)"/>
+            <circle cx="900" cy="200" r="180" fill="#2563eb" opacity="0.08"/>
+            <circle cx="200" cy="400" r="120" fill="#f59e0b" opacity="0.06"/>
+            <text x="80" y="120" font-family="sans-serif" font-size="14" fill="#f59e0b" letter-spacing="4">EĞİTİM</text>
+            <text x="80" y="220" font-family="serif" font-size="72" fill="#f8fafc">Zirve</text>
+            <text x="80" y="300" font-family="serif" font-style="italic" font-size="72" fill="#2563eb">Akademi</text>
+            <line x1="80" y1="340" x2="240" y2="340" stroke="#f59e0b" stroke-width="2"/>
+            <text x="80" y="385" font-family="sans-serif" font-size="14" fill="#94a3b8" letter-spacing="2">LGS · YKS · KAYIT · TAKVİM</text>
+            <rect x="700" y="100" width="380" height="300" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+            <text x="740" y="160" font-family="sans-serif" font-size="12" fill="#94a3b8">Sınav Takvimi</text>
+            <rect x="740" y="180" width="300" height="8" rx="4" fill="rgba(37,99,235,0.3)"/>
+            <rect x="740" y="180" width="180" height="8" rx="4" fill="#2563eb"/>
+            <text x="740" y="230" font-family="sans-serif" font-size="12" fill="#94a3b8">Başarı Oranı</text>
+            <rect x="740" y="250" width="300" height="8" rx="4" fill="rgba(245,158,11,0.3)"/>
+            <rect x="740" y="250" width="250" height="8" rx="4" fill="#f59e0b"/>
+            <text x="740" y="300" font-family="sans-serif" font-size="12" fill="#94a3b8">Kayıtlı Öğrenci</text>
+            <text x="740" y="340" font-family="serif" font-size="42" fill="#f8fafc">1200+</text>
           </svg>
         </div>
         <div class="template-info">
           <div>
-            <h3>Lumina Estate</h3>
-            <p>Premium emlak ofisleri için çok bölümlü vitrin: lüks ilan kartları, harita, danışman profilleri ve filtreli arama.</p>
-            <div class="template-features">
-              <span>İlan vitrini</span>
-              <span>Harita</span>
-              <span>Filtreleme</span>
-              <span>Danışman</span>
-            </div>
+            <h3>Zirve Akademi</h3>
+            <p>LGS & YKS hazırlık dershanesi — öğretmen kadrosu, başarı istatistikleri, sınav takvimi ve online kayıt formu</p>
           </div>
-          <span class="template-tag">Emlak</span>
+          <span class="template-tag">Eğitim</span>
         </div>
       </a>
 
