@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noir Aesthetics — Medikal Estetik Merkezi</title>
+<meta name="description" content="Noir Aesthetics medikal estetik merkezi. Lazer, dolgu, cilt gençleştirme ve anti-aging tedavilerinde uzman kadro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #100c0e;
+    --bg-2: #1a1518;
+    --surface: #221c20;
+    --surface-2: #2b242a;
+    --ink: #f4ecdf;
+    --ink-soft: #b8aa9c;
+    --muted: #8a7d72;
+    --accent: #c9a96e;
+    --accent-d: #b08f54;
+    --accent-soft: rgba(201,169,110,0.12);
+    --line: rgba(255,255,255,0.09);
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', -apple-system, sans-serif;
+    --r: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--bg); color: var(--ink); overflow-x: hidden; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-2); }
+  ::-webkit-scrollbar-thumb { background: var(--accent-d); border-radius: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 22px 0; transition: all 0.35s; }
+  nav.scrolled { background: rgba(16,12,14,0.9); backdrop-filter: blur(18px); border-bottom: 1px solid var(--line); padding: 14px 0; }
+  .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between; }
+  .logo { font-family: var(--serif); font-size: 1.8rem; font-weight: 600; letter-spacing: 0.06em; }
+  .logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 11px 26px; border-radius: 100px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.25s; }
+  .nav-cta:hover { background: var(--accent); color: var(--bg); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+  .hamburger span { width: 26px; height: 2px; background: var(--accent); border-radius: 2px; transition: 0.3s; }
+
+  /* HERO */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1600&q=85') center/cover; opacity: 0.2; }
+  .hero-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, var(--bg) 28%, rgba(16,12,14,0.55) 100%); }
+  .hero-orb { position: absolute; border-radius: 50%; filter: blur(90px); pointer-events: none; }
+  .ho1 { width: 480px; height: 480px; background: var(--accent); opacity: 0.1; top: -120px; right: -100px; }
+  .ho2 { width: 300px; height: 300px; background: #7a5c9e; opacity: 0.07; bottom: 40px; left: -80px; }
+  .hero-content { position: relative; z-index: 2; max-width: 740px; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 0.74rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 26px; }
+  .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--accent); }
+  .hero h1 { font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.6rem); font-weight: 500; line-height: 1.04; margin-bottom: 26px; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub { font-size: 1.1rem; color: var(--ink-soft); max-width: 540px; margin-bottom: 42px; font-weight: 300; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 56px; }
+  .btn-primary { background: var(--accent); color: var(--bg); padding: 16px 36px; border-radius: 100px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px; border: none; cursor: pointer; font-family: var(--sans); }
+  .btn-primary:hover { background: var(--accent-d); transform: translateY(-2px); box-shadow: 0 14px 34px -10px rgba(201,169,110,0.5); }
+  .btn-ghost { background: transparent; color: var(--ink); padding: 16px 36px; border-radius: 100px; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--line); transition: all 0.25s; }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-stats { display: flex; gap: 56px; }
+  .hs-n { font-family: var(--serif); font-size: 2.6rem; font-weight: 600; color: var(--accent); line-height: 1; }
+  .hs-l { font-size: 0.76rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; }
+
+  /* SECTIONS */
+  section { padding: 110px 0; }
+  .sec-head { text-align: center; margin-bottom: 60px; }
+  .sec-tag { font-size: 0.74rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 14px; }
+  .sec-title { font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 500; line-height: 1.12; }
+  .sec-title em { font-style: italic; color: var(--accent); }
+  .sec-desc { font-size: 1rem; color: var(--ink-soft); max-width: 540px; margin: 16px auto 0; font-weight: 300; }
+
+  /* SERVICES */
+  .services { background: var(--bg-2); }
+  .serv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .serv { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 36px 30px; transition: all 0.35s; position: relative; overflow: hidden; }
+  .serv::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.35s; }
+  .serv:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 24px 50px rgba(0,0,0,0.35); }
+  .serv:hover::before { transform: scaleX(1); }
+  .serv-icon { width: 58px; height: 58px; border-radius: 50%; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 22px; }
+  .serv-icon svg { width: 28px; height: 28px; stroke: var(--accent); fill: none; stroke-width: 1.6; }
+  .serv h3 { font-family: var(--serif); font-size: 1.55rem; font-weight: 600; margin-bottom: 10px; }
+  .serv p { font-size: 0.9rem; color: var(--ink-soft); margin-bottom: 14px; }
+  .serv-price { font-size: 0.84rem; font-weight: 600; color: var(--accent); letter-spacing: 0.04em; }
+
+  /* GALLERY */
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; gap: 14px; }
+  .gallery-item { overflow: hidden; border-radius: 12px; position: relative; cursor: pointer; }
+  .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .gallery-item:hover img { transform: scale(1.08); }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-item:nth-child(4) { grid-column: span 2; }
+
+  /* STATS */
+  .stats-band { background: var(--surface); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; text-align: center; }
+  .stat-n { font-family: var(--serif); font-size: clamp(2.4rem, 4vw, 3.4rem); font-weight: 600; color: var(--accent); line-height: 1; }
+  .stat-l { font-size: 0.84rem; color: var(--ink-soft); margin-top: 8px; }
+
+  /* TEAM */
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .team-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; transition: all 0.35s; }
+  .team-card:hover { transform: translateY(-6px); border-color: var(--accent); }
+  .team-img { aspect-ratio: 1; overflow: hidden; }
+  .team-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(25%); transition: all 0.4s; }
+  .team-card:hover .team-img img { filter: grayscale(0); transform: scale(1.04); }
+  .team-body { padding: 24px; text-align: center; }
+  .team-name { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
+  .team-role { font-size: 0.78rem; color: var(--accent); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 5px; }
+
+  /* APPOINTMENT */
+  .appt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .appt-info h2 { font-family: var(--serif); font-size: clamp(2.2rem, 4.5vw, 3.4rem); font-weight: 500; margin-bottom: 18px; }
+  .appt-info h2 em { font-style: italic; color: var(--accent); }
+  .appt-info p { color: var(--ink-soft); margin-bottom: 30px; font-weight: 300; }
+  .appt-contact { display: grid; gap: 18px; }
+  .appt-contact-item { display: flex; align-items: center; gap: 16px; }
+  .acc-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .acc-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 1.8; }
+  .acc-label { font-size: 0.74rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .acc-val { font-size: 0.96rem; font-weight: 500; }
+  .appt-form { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 42px; }
+  .appt-form h3 { font-family: var(--serif); font-size: 1.7rem; font-weight: 600; margin-bottom: 24px; }
+  .form-field { margin-bottom: 18px; }
+  .form-field label { display: block; font-size: 0.74rem; font-weight: 500; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 7px; }
+  .form-field input, .form-field select { width: 100%; padding: 14px 16px; border: 1px solid var(--line); border-radius: 10px; font-family: var(--sans); font-size: 0.9rem; color: var(--ink); outline: none; transition: border-color 0.2s; background: var(--bg-2); }
+  .form-field input::placeholder { color: var(--muted); }
+  .form-field input:focus, .form-field select:focus { border-color: var(--accent); }
+  .form-field select option { background: var(--bg-2); }
+  .appt-form .btn-primary { width: 100%; justify-content: center; margin-top: 8px; }
+  .appt-success { display: none; text-align: center; padding: 30px 0; }
+  .appt-success.show { display: block; }
+  .appt-success-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--accent-soft); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+  .appt-success-icon svg { width: 32px; height: 32px; stroke: var(--accent); fill: none; stroke-width: 2; }
+  .appt-success h3 { margin-bottom: 8px; }
+  .appt-success p { color: var(--ink-soft); font-size: 0.9rem; }
+
+  /* FOOTER */
+  footer { background: #0a0708; color: var(--ink-soft); padding: 70px 0 32px; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 50px; margin-bottom: 50px; }
+  .footer-logo { font-family: var(--serif); font-size: 1.8rem; font-weight: 600; color: var(--ink); margin-bottom: 16px; }
+  .footer-logo span { color: var(--accent); font-style: italic; }
+  .footer-about { font-size: 0.9rem; line-height: 1.7; max-width: 280px; font-weight: 300; }
+  .footer-col h5 { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 11px; }
+  .footer-col ul li a { font-size: 0.88rem; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--accent); }
+  .footer-bottom { padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); flex-wrap: wrap; gap: 12px; }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  .mobile-menu { display: none; position: fixed; inset: 0; z-index: 950; background: var(--bg); padding: 100px 32px 40px; flex-direction: column; gap: 4px; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 1.3rem; font-weight: 500; padding: 16px 0; border-bottom: 1px solid var(--line); }
+
+  @media (max-width: 1024px) {
+    .serv-grid, .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+  }
+  @media (max-width: 820px) {
+    .appt-grid { grid-template-columns: 1fr; gap: 40px; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item:nth-child(1) { grid-column: span 2; }
+    .gallery-item:nth-child(4) { grid-column: span 1; }
+  }
+  @media (max-width: 680px) {
+    .container, .nav-inner { padding: 0 22px; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 70px 0; }
+    .serv-grid, .team-grid, .stats-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 32px; flex-wrap: wrap; }
+    .appt-form { padding: 28px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
+    .gallery-item:nth-child(1), .gallery-item:nth-child(4) { grid-column: span 1; grid-row: span 1; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">Noir<span>Aesthetics</span></a>
+    <ul class="nav-links">
+      <li><a href="#tedaviler">Tedaviler</a></li>
+      <li><a href="#galeri">Galeri</a></li>
+      <li><a href="#ekip">Uzmanlar</a></li>
+      <li><a href="#randevu">İletişim</a></li>
+    </ul>
+    <a href="#randevu" class="nav-cta">Randevu</a>
+    <button class="hamburger" id="hamburger" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#tedaviler">Tedaviler</a>
+  <a href="#galeri">Galeri</a>
+  <a href="#ekip">Uzmanlar</a>
+  <a href="#randevu">İletişim</a>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orb ho1"></div>
+  <div class="hero-orb ho2"></div>
+  <div class="container hero-content">
+    <span class="hero-tag">Medikal Estetik Merkezi</span>
+    <h1>Zamansız bir <em>zarafet</em><br>için buradayız.</h1>
+    <p class="hero-sub">Lazer, dolgu, cilt gençleştirme ve anti-aging tedavilerinde uzman hekim kadromuz ve son teknoloji cihazlarımızla doğal sonuçlar sunuyoruz.</p>
+    <div class="hero-actions">
+      <a href="#randevu" class="btn-primary">Randevu Al <span>→</span></a>
+      <a href="#tedaviler" class="btn-ghost">Tedavilerimiz</a>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hs-n">18+</div><div class="hs-l">Yıl Tecrübe</div></div>
+      <div><div class="hs-n">30K</div><div class="hs-l">Uygulama</div></div>
+      <div><div class="hs-n">%98</div><div class="hs-l">Memnuniyet</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- SERVICES -->
+<section class="services" id="tedaviler">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Uzmanlık Alanlarımız</span>
+      <h2 class="sec-title">Medikal <em>tedaviler</em></h2>
+      <p class="sec-desc">Bilimsel temelli, güvenli ve doğal görünümlü estetik çözümler.</p>
+    </div>
+    <div class="serv-grid">
+      <div class="serv reveal">
+        <div class="serv-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="5"/></svg></div>
+        <h3>Lazer Epilasyon</h3>
+        <p>Tüm cilt tiplerine uygun, ağrısız ve kalıcı tüy azaltma teknolojisi.</p>
+        <div class="serv-price">₺800'den başlayan</div>
+      </div>
+      <div class="serv reveal">
+        <div class="serv-icon"><svg viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5 5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></svg></div>
+        <h3>Dudak & Yüz Dolgu</h3>
+        <p>Hyaluronik asit dolgularıyla doğal hacim ve dengeli yüz hatları.</p>
+        <div class="serv-price">₺3.500'den başlayan</div>
+      </div>
+      <div class="serv reveal">
+        <div class="serv-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
+        <h3>Botoks</h3>
+        <p>Mimik kırışıklıklarına karşı doğal ifadeyi koruyan uygulamalar.</p>
+        <div class="serv-price">₺2.800'den başlayan</div>
+      </div>
+      <div class="serv reveal">
+        <div class="serv-icon"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.5 5.7 21l2.3-7.1-6-4.5h7.6z"/></svg></div>
+        <h3>Cilt Gençleştirme</h3>
+        <p>Altın iğne, mezoterapi ve PRP ile cildin canlanmasını sağlayın.</p>
+        <div class="serv-price">₺2.000'den başlayan</div>
+      </div>
+      <div class="serv reveal">
+        <div class="serv-icon"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-8-8"/><path d="M12 8v4l3 2"/></svg></div>
+        <h3>Anti-Aging</h3>
+        <p>Yaşa karşı bütüncül tedavi protokolleriyle dinç ve sağlıklı bir görünüm.</p>
+        <div class="serv-price">₺4.500'den başlayan</div>
+      </div>
+      <div class="serv reveal">
+        <div class="serv-icon"><svg viewBox="0 0 24 24"><path d="M3 12c2-4 6-7 9-7s7 3 9 7c-2 4-6 7-9 7s-7-3-9-7z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Leke Tedavisi</h3>
+        <p>Lazer ve özel bakımlarla cilt tonu eşitsizliği ve lekelere çözüm.</p>
+        <div class="serv-price">₺1.500'den başlayan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-band">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="reveal"><div class="stat-n">18+</div><div class="stat-l">Yıllık Deneyim</div></div>
+      <div class="reveal"><div class="stat-n">30.000</div><div class="stat-l">Başarılı Uygulama</div></div>
+      <div class="reveal"><div class="stat-n">6</div><div class="stat-l">Uzman Hekim</div></div>
+      <div class="reveal"><div class="stat-n">%98</div><div class="stat-l">Memnuniyet Oranı</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="galeri">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Merkezimiz</span>
+      <h2 class="sec-title">Lüks ve <em>konfor</em></h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80" alt="Merkez" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)'"></div>
+      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&q=80" alt="Uygulama" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)'"></div>
+      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=500&q=80" alt="Cihaz" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)'"></div>
+      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80" alt="Oda" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)'"></div>
+      <div class="gallery-item reveal"><img src="https://images.unsplash.com/photo-1583912267550-d6c2ac3196c0?w=500&q=80" alt="Bakım" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)'"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section style="background:var(--bg-2);" id="ekip">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-tag">Ekibimiz</span>
+      <h2 class="sec-title">Uzman <em>kadromuz</em></h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-img"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=500&q=80" alt="Uzman" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)'"></div>
+        <div class="team-body"><div class="team-name">Dr. Leyla Arman</div><div class="team-role">Medikal Estetik</div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-img"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&q=80" alt="Uzman" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)'"></div>
+        <div class="team-body"><div class="team-name">Dr. Kaan Yücel</div><div class="team-role">Dermatoloji</div></div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-img"><img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&q=80" alt="Uzman" loading="lazy" onerror="this.parentElement.style.background='var(--surface-2)'"></div>
+        <div class="team-body"><div class="team-name">Dr. Nil Aydın</div><div class="team-role">Lazer Uzmanı</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section id="randevu">
+  <div class="container appt-grid">
+    <div class="appt-info">
+      <span class="sec-tag">İletişim</span>
+      <h2>Randevu <em>oluşturun</em></h2>
+      <p>Size özel tedavi planı için ücretsiz ön görüşme oluşturun. Uzman ekibimiz en kısa sürede sizinle iletişime geçsin.</p>
+      <div class="appt-contact">
+        <div class="appt-contact-item"><div class="acc-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1.05.34 2.07.63 3.07a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.01-1.01a2 2 0 0 1 2.11-.45c1 .29 2.02.5 3.07.63A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="acc-label">Telefon</div><div class="acc-val">+90 (212) 222 00 00</div></div></div>
+        <div class="appt-contact-item"><div class="acc-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><path d="M22 6l-10 7L2 6"/></svg></div><div><div class="acc-label">E-posta</div><div class="acc-val">info@noiraesthetics.com</div></div></div>
+        <div class="appt-contact-item"><div class="acc-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="acc-label">Adres</div><div class="acc-val">Nişantaşı, İstanbul</div></div></div>
+      </div>
+    </div>
+    <div class="appt-form">
+      <form id="apptForm">
+        <h3>Online Randevu</h3>
+        <div class="form-field"><label>Ad Soyad</label><input type="text" required placeholder="Adınız Soyadınız"></div>
+        <div class="form-field"><label>Telefon</label><input type="tel" required placeholder="05XX XXX XX XX"></div>
+        <div class="form-field"><label>Tedavi</label><select><option>Lazer Epilasyon</option><option>Dudak & Yüz Dolgu</option><option>Botoks</option><option>Cilt Gençleştirme</option><option>Anti-Aging</option><option>Leke Tedavisi</option></select></div>
+        <div class="form-field"><label>Tercih Edilen Tarih</label><input type="date" required></div>
+        <button type="submit" class="btn-primary">Randevu Talep Et <span>→</span></button>
+      </form>
+      <div class="appt-success" id="apptSuccess">
+        <div class="appt-success-icon"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Talebiniz Alındı!</h3>
+        <p>En kısa sürede sizi arayarak randevunuzu onaylayacağız.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">Noir<span>Aesthetics</span></div>
+        <p class="footer-about">Medikal estetik alanında bilimsel, güvenli ve doğal sonuçlar. Zamansız bir zarafet için uzman kadromuzla yanınızdayız.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Tedaviler</h5>
+        <ul><li><a href="#tedaviler">Lazer</a></li><li><a href="#tedaviler">Dolgu</a></li><li><a href="#tedaviler">Botoks</a></li><li><a href="#tedaviler">Anti-Aging</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>Kurumsal</h5>
+        <ul><li><a href="#galeri">Galeri</a></li><li><a href="#ekip">Uzmanlar</a></li><li><a href="#randevu">İletişim</a></li><li><a href="#">KVKK</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h5>İletişim</h5>
+        <ul><li><a href="tel:+902122220000">+90 (212) 222 00 00</a></li><li><a href="mailto:info@noiraesthetics.com">info@noiraesthetics.com</a></li><li>Nişantaşı, İstanbul</li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Noir Aesthetics. Tüm hakları saklıdır.</span>
+      <span>Gizlilik · KVKK</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+
+  document.getElementById('apptForm').addEventListener('submit', e => {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('apptSuccess').classList.add('show');
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
