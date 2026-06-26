@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zette Studio — Bağlantılar</title>
+    <meta
+      name="description"
+      content="Zette Studio ile iletişime geçin: web sitesi, WhatsApp, Instagram, e-posta ve telefon."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg: #0b1829;
+        --bg-2: #0e2035;
+        --card: rgba(255, 255, 255, 0.055);
+        --card-hover: rgba(255, 255, 255, 0.1);
+        --border: rgba(255, 255, 255, 0.12);
+        --text: #f6f9ff;
+        --text-mute: rgba(229, 236, 247, 0.66);
+        --accent: #c25e2e;
+        --serif: "Instrument Serif", "Times New Roman", serif;
+        --sans: "Manrope", -apple-system, sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        min-height: 100vh;
+        background:
+          radial-gradient(
+            circle at 50% 0%,
+            rgba(194, 94, 46, 0.14) 0%,
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 0% 100%,
+            rgba(107, 141, 79, 0.1) 0%,
+            transparent 40%
+          ),
+          var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 48px 20px 40px;
+      }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.025;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 440px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* HEADER */
+      .avatar {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #13243b, #1c3050);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--serif);
+        font-size: 2.6rem;
+        font-style: italic;
+        color: var(--accent);
+        margin-bottom: 20px;
+        box-shadow: 0 18px 50px -18px rgba(0, 0, 0, 0.6);
+      }
+      .brand {
+        font-family: var(--serif);
+        font-size: 2rem;
+        font-style: italic;
+        letter-spacing: -0.01em;
+        margin-bottom: 6px;
+      }
+      .brand span {
+        color: var(--accent);
+      }
+      .tagline {
+        font-size: 0.95rem;
+        color: var(--text-mute);
+        text-align: center;
+        line-height: 1.55;
+        max-width: 340px;
+        margin-bottom: 34px;
+      }
+
+      /* LINKS */
+      .links {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .link {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        padding: 17px 20px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        color: var(--text);
+        text-decoration: none;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease,
+          border-color 0.2s ease;
+        position: relative;
+      }
+      .link:hover {
+        transform: translateY(-3px);
+        background: var(--card-hover);
+        border-color: var(--accent);
+      }
+      .link-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .link-icon svg {
+        width: 22px;
+        height: 22px;
+      }
+      .link-text {
+        flex: 1;
+      }
+      .link-title {
+        font-size: 0.98rem;
+        font-weight: 600;
+      }
+      .link-sub {
+        font-size: 0.78rem;
+        color: var(--text-mute);
+        margin-top: 1px;
+      }
+      .link-arrow {
+        color: var(--text-mute);
+        font-size: 1.1rem;
+        transition:
+          transform 0.2s,
+          color 0.2s;
+      }
+      .link:hover .link-arrow {
+        transform: translateX(4px);
+        color: var(--accent);
+      }
+
+      /* icon colors */
+      .ic-web {
+        background: rgba(194, 94, 46, 0.16);
+      }
+      .ic-web svg {
+        stroke: #e0823f;
+        fill: none;
+        stroke-width: 1.8;
+      }
+      .ic-wa {
+        background: rgba(37, 211, 102, 0.15);
+      }
+      .ic-wa svg {
+        fill: #25d366;
+      }
+      .ic-ig {
+        background: rgba(225, 48, 108, 0.15);
+      }
+      .ic-ig svg {
+        stroke: #e1306c;
+        fill: none;
+        stroke-width: 1.8;
+      }
+      .ic-mail {
+        background: rgba(124, 156, 255, 0.15);
+      }
+      .ic-mail svg {
+        stroke: #7c9cff;
+        fill: none;
+        stroke-width: 1.8;
+      }
+      .ic-phone {
+        background: rgba(245, 200, 80, 0.15);
+      }
+      .ic-phone svg {
+        stroke: #f5c850;
+        fill: none;
+        stroke-width: 1.8;
+      }
+
+      /* CTA highlight (web) */
+      .link.primary {
+        background: linear-gradient(135deg, var(--accent), #a84e26);
+        border-color: transparent;
+      }
+      .link.primary .link-sub {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .link.primary .link-icon {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      .link.primary .link-icon svg {
+        stroke: #fff;
+      }
+      .link.primary .link-arrow {
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .link.primary:hover {
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+
+      /* FOOTER */
+      footer {
+        margin-top: 38px;
+        text-align: center;
+        font-size: 0.78rem;
+        color: rgba(229, 236, 247, 0.4);
+      }
+      footer a {
+        color: rgba(229, 236, 247, 0.55);
+        text-decoration: none;
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .avatar,
+      .brand,
+      .tagline,
+      .link,
+      footer {
+        animation: rise 0.5s ease backwards;
+      }
+      .brand {
+        animation-delay: 0.05s;
+      }
+      .tagline {
+        animation-delay: 0.1s;
+      }
+      .link:nth-child(1) {
+        animation-delay: 0.15s;
+      }
+      .link:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .link:nth-child(3) {
+        animation-delay: 0.25s;
+      }
+      .link:nth-child(4) {
+        animation-delay: 0.3s;
+      }
+      .link:nth-child(5) {
+        animation-delay: 0.35s;
+      }
+      footer {
+        animation-delay: 0.4s;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="avatar">z</div>
+      <h1 class="brand">zette studio<span>.</span></h1>
+      <p class="tagline">
+        Sektörünüze özel, hızlı ve modern web siteleri. Aşağıdan bize ulaşın
+        veya çalışmalarımıza göz atın.
+      </p>
+
+      <div class="links">
+        <!-- WEB SITESI (vurgulu) -->
+        <a
+          href="https://zettestduio.com"
+          class="link primary"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="link-icon"
+            ><svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10" />
+              <path
+                d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"
+              /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-title">Web Sitemiz</span>
+            <span class="link-sub">Şablonları ve hizmetleri keşfet</span>
+          </span>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <!-- WHATSAPP -->
+        <a
+          href="https://wa.me/905510246930"
+          class="link"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="link-icon ic-wa"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.6-.8-2.7-1.4-3.7-3.2-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3M12 2a10 10 0 0 0-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1 0 12 2z"
+              /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-title">WhatsApp</span>
+            <span class="link-sub">Hemen yazın, hızlı dönüş</span>
+          </span>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <!-- INSTAGRAM -->
+        <a
+          href="https://www.instagram.com/zettestudio"
+          class="link"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="link-icon ic-ig"
+            ><svg viewBox="0 0 24 24">
+              <rect x="2" y="2" width="20" height="20" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r="1"
+                fill="#e1306c"
+                stroke="none"
+              /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-title">Instagram</span>
+            <span class="link-sub">@zettestudio</span>
+          </span>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <!-- EMAIL -->
+        <a href="mailto:zettestudia@gmail.com" class="link">
+          <span class="link-icon ic-mail"
+            ><svg viewBox="0 0 24 24">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="M22 6l-10 7L2 6" /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-title">E-posta</span>
+            <span class="link-sub">zettestudia@gmail.com</span>
+          </span>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <!-- TELEFON -->
+        <a href="tel:+905510246930" class="link">
+          <span class="link-icon ic-phone"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13 1.05.34 2.07.63 3.07a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.01-1.01a2 2 0 0 1 2.11-.45c1 .29 2.02.5 3.07.63A2 2 0 0 1 22 16.92z"
+              /></svg
+          ></span>
+          <span class="link-text">
+            <span class="link-title">Telefon</span>
+            <span class="link-sub">+90 551 024 69 30</span>
+          </span>
+          <span class="link-arrow">→</span>
+        </a>
+      </div>
+
+      <footer>
+        © 2026 zette studio ·
+        <a href="https://zettestduio.com">zettestduio.com</a>
+      </footer>
+    </div>
+  </body>
+</html>

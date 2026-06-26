@@ -1,0 +1,10 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+sqladmin==0.20.1
+SQLAlchemy==2.0.36
+itsdangerous==2.2.0
+python-multipart==0.0.20
+passlib[bcrypt]==1.7.4
+bcrypt==4.2.1
+jinja2==3.1.5
+pydantic==2.10.4
