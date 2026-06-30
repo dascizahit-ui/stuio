@@ -2,8 +2,10 @@
 from __future__ import annotations
 
 import os
+import time
+from collections import defaultdict
 
-from fastapi import Depends, FastAPI, HTTPException
+from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from sqladmin import Admin
 from sqlalchemy.orm import Session
@@ -15,15 +17,49 @@ from .schemas import ContactIn, FAQOut, SectorOut, SocialLinkOut, TemplateOut, W
 
 SECRET_KEY = os.getenv("SECRET_KEY", "change-this-secret-in-production")
 
-app = FastAPI(title="Zette Studio API", version="1.0.0", docs_url="/api/docs", openapi_url="/api/openapi.json")
+# Üretimde docs/openapi kapalı (ENABLE_DOCS=1 ile açılabilir)
+_docs_enabled = os.getenv("ENABLE_DOCS", "0") == "1"
 
-# Statik siteyle aynı origin'de çalışacak; yine de gevşek CORS (gerekirse kısılır)
+app = FastAPI(
+    title="Zette Studio API",
+    version="1.0.0",
+    docs_url="/api/docs" if _docs_enabled else None,
+    redoc_url=None,
+    openapi_url="/api/openapi.json" if _docs_enabled else None,
+)
+
+# Sadece kendi alan adlarımıza izin ver
+ALLOWED_ORIGINS = [
+    "https://zettestduio.com",
+    "https://www.zettestduio.com",
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
+    allow_origins=ALLOWED_ORIGINS,
+    allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+# ───── Basit IP tabanlı rate limit (iletişim formu için) ─────
+_RATE: dict[str, list[float]] = defaultdict(list)
+_RATE_WINDOW = 60.0      # saniye
+_RATE_MAX = 4            # bu pencerede izin verilen mesaj sayısı
+
+
+def _client_ip(request: Request) -> str:
+    # Cloudflare → nginx → uvicorn zinciri; gerçek IP forward header'larında
+    fwd = request.headers.get("cf-connecting-ip") or request.headers.get("x-forwarded-for")
+    if fwd:
+        return fwd.split(",")[0].strip()
+    return request.client.host if request.client else "unknown"
+
+
+def _rate_ok(ip: str) -> bool:
+    now = time.time()
+    hits = [t for t in _RATE[ip] if now - t < _RATE_WINDOW]
+    hits.append(now)
+    _RATE[ip] = hits
+    return len(hits) <= _RATE_MAX
 
 
 @app.on_event("startup")
@@ -99,15 +135,23 @@ def get_works(db: Session = Depends(get_db)):
 
 
 @app.post("/api/contact")
-def post_contact(payload: ContactIn, db: Session = Depends(get_db)):
+def post_contact(payload: ContactIn, request: Request, db: Session = Depends(get_db)):
+    # Honeypot: gizli "website" alanı doluysa bot kabul et (sessizce başarı dön, kaydetme)
+    if (payload.website or "").strip():
+        return {"ok": True, "message": "Mesajınız alındı."}
+
+    # Rate limit
+    if not _rate_ok(_client_ip(request)):
+        raise HTTPException(status_code=429, detail="Çok fazla istek. Lütfen biraz sonra tekrar deneyin.")
+
     if not (payload.name or payload.phone or payload.email):
         raise HTTPException(status_code=400, detail="En az bir iletişim bilgisi girin.")
     msg = ContactMessage(
-        name=payload.name.strip(),
-        phone=payload.phone.strip(),
-        email=payload.email.strip(),
-        sector=payload.sector.strip(),
-        message=payload.message.strip(),
+        name=payload.name.strip()[:160],
+        phone=payload.phone.strip()[:60],
+        email=payload.email.strip()[:160],
+        sector=payload.sector.strip()[:120],
+        message=payload.message.strip()[:4000],
     )
     db.add(msg)
     db.commit()

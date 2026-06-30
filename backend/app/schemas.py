@@ -10,6 +10,7 @@ class ContactIn(BaseModel):
     email: str = Field(default="", max_length=160)
     sector: str = Field(default="", max_length=120)
     message: str = Field(default="", max_length=4000)
+    website: str = Field(default="", max_length=200)  # honeypot — gerçek kullanıcı boş bırakır
 
 
 class SocialLinkOut(BaseModel):
