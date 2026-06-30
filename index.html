@@ -4,7 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zette Studio — Sektörünüze Özel Web Siteleri</title>
-<meta name="description" content="Estetikten avukatlığa, restorandan emlağa — işletmenize birebir uyan, hızlı ve modern web siteleri.">
+<meta name="description" content="Estetikten avukatlığa, restorandan emlağa — işletmenize birebir uyan, hızlı ve modern web siteleri. E-ticaret, CRM ve özel yazılım çözümleri.">
+<meta name="theme-color" content="#0B1829">
+<link rel="canonical" href="https://zettestduio.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230B1829'/%3E%3Ctext x='50' y='74' font-family='Georgia,serif' font-style='italic' font-size='66' fill='%23c25e2e' text-anchor='middle'%3Ez%3C/text%3E%3C/svg%3E">
+
+<!-- Sosyal paylaşım önizlemesi -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Zette Studio — Sektörünüze Özel Web Siteleri">
+<meta property="og:description" content="İşletmenize birebir uyan, hızlı ve modern web siteleri. E-ticaret, CRM ve özel yazılım çözümleri.">
+<meta property="og:url" content="https://zettestduio.com/">
+<meta property="og:image" content="https://zettestduio.com/z_logo_vector.svg">
+<meta property="og:locale" content="tr_TR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Zette Studio — Sektörünüze Özel Web Siteleri">
+<meta name="twitter:description" content="İşletmenize birebir uyan, hızlı ve modern web siteleri.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,8 +100,31 @@
     transition: transform 0.2s, background 0.2s;
   }
   .nav-cta:hover { transform: translateY(-1px); background: var(--accent-hover); }
+
+  /* Mobil hamburger */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 6px; z-index: 110;
+  }
+  .hamburger span { width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: transform .3s, opacity .3s; }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-nav {
+    display: none; position: fixed; inset: 0; z-index: 105;
+    background: rgba(11,24,41,0.98); backdrop-filter: blur(12px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 30px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a { color: #fff; font-family: var(--serif); font-style: italic; font-size: 2rem; }
+  .mobile-nav a.m-cta {
+    font-family: var(--sans); font-style: normal; font-size: 1rem; font-weight: 600;
+    background: var(--accent); color: var(--on-accent); padding: 14px 32px; border-radius: 100px;
+  }
   @media (max-width: 768px) {
     .nav-links { display: none; }
+    nav.top .nav-cta { display: none; }
+    .hamburger { display: flex; }
     .hero { padding: 120px 0 60px; }
     .wrap { padding: 0 24px; }
     nav.top { padding: 16px 24px; }
@@ -884,12 +921,25 @@
     <a href="#" class="logo">zette studio<span>.</span></a>
     <div class="nav-links">
       <a href="#sektorler">Sektörler</a>
+      <a href="#cozumler">Çözümler</a>
       <a href="#nasil">Nasıl Çalışır</a>
       <a href="#sss">SSS</a>
     </div>
     <a href="#iletisim" class="nav-cta">Teklif Al</a>
+    <button class="hamburger" id="hamburger" aria-label="Menüyü aç" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<!-- MOBİL MENÜ -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#sektorler">Sektörler</a>
+  <a href="#cozumler">Çözümler</a>
+  <a href="#nasil">Nasıl Çalışır</a>
+  <a href="#sss">SSS</a>
+  <a href="#iletisim" class="m-cta">Teklif Al</a>
+</div>
 
 <!-- HERO -->
 <header class="hero">
@@ -1394,6 +1444,27 @@
       obs.observe(el);
     });
   }
+</script>
+
+<!-- BACKEND ENTEGRASYONU -->
+<script>
+  // Mobil menü toggle
+  (function () {
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileNav');
+    if (!btn || !menu) return;
+    const close = () => {
+      btn.classList.remove('open'); menu.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false'); document.body.style.overflow = '';
+    };
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', close));
+  })();
 </script>
 
 <!-- BACKEND ENTEGRASYONU -->
