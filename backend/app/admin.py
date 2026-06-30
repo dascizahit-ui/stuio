@@ -14,6 +14,7 @@ from .models import (
     SiteSetting,
     SocialLink,
     Template,
+    Work,
 )
 from .security import verify_password
 
@@ -167,10 +168,30 @@ class AdminUserAdmin(ModelView, model=AdminUser):
     }
 
 
+class WorkAdmin(ModelView, model=Work):
+    name = "İş / Referans"
+    name_plural = "Yaptığımız İşler"
+    icon = "fa-solid fa-briefcase"
+    column_list = [Work.sort_order, Work.title, Work.category, Work.url, Work.is_active]
+    column_sortable_list = [Work.sort_order, Work.title]
+    column_searchable_list = [Work.title, Work.category]
+    form_columns = [
+        Work.title, Work.category, Work.description, Work.url,
+        Work.image_url, Work.is_active, Work.sort_order,
+    ]
+    column_labels = {
+        Work.title: "Proje / Müşteri Adı", Work.category: "Kategori",
+        Work.description: "Açıklama", Work.url: "Site Linki",
+        Work.image_url: "Görsel URL (opsiyonel)", Work.is_active: "Aktif",
+        Work.sort_order: "Sıra",
+    }
+
+
 ALL_VIEWS = [
     SiteSettingAdmin,
     SectorAdmin,
     TemplateAdmin,
+    WorkAdmin,
     SocialLinkAdmin,
     FAQAdmin,
     ContactMessageAdmin,

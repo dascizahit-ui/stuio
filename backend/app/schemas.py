@@ -53,3 +53,14 @@ class FAQOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class WorkOut(BaseModel):
+    title: str
+    category: str
+    description: str
+    url: str
+    image_url: str
+
+    class Config:
+        from_attributes = True

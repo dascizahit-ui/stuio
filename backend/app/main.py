@@ -10,8 +10,8 @@ from sqlalchemy.orm import Session
 
 from .admin import ALL_VIEWS, AdminAuth
 from .database import engine, get_db, init_db
-from .models import FAQ, ContactMessage, Sector, SiteSetting, SocialLink, Template
-from .schemas import ContactIn, FAQOut, SectorOut, SocialLinkOut, TemplateOut
+from .models import FAQ, ContactMessage, Sector, SiteSetting, SocialLink, Template, Work
+from .schemas import ContactIn, FAQOut, SectorOut, SocialLinkOut, TemplateOut, WorkOut
 
 SECRET_KEY = os.getenv("SECRET_KEY", "change-this-secret-in-production")
 
@@ -84,6 +84,16 @@ def get_faq(db: Session = Depends(get_db)):
         db.query(FAQ)
         .filter(FAQ.is_active == True)  # noqa: E712
         .order_by(FAQ.sort_order)
+        .all()
+    )
+
+
+@app.get("/api/works", response_model=list[WorkOut])
+def get_works(db: Session = Depends(get_db)):
+    return (
+        db.query(Work)
+        .filter(Work.is_active == True)  # noqa: E712
+        .order_by(Work.sort_order)
         .all()
     )
 

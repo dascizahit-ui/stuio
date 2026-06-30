@@ -117,3 +117,21 @@ class ContactMessage(Base):
 
     def __str__(self) -> str:
         return f"{self.name} ({self.created_at:%d.%m.%Y})"
+
+
+class Work(Base):
+    """Yaptığımız İşler / referans projeler."""
+    __tablename__ = "works"
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String(160), nullable=False)          # Proje / müşteri adı
+    category = Column(String(120), nullable=False, default="")  # Örn: "Restoran", "E-Ticaret"
+    description = Column(Text, nullable=False, default="")
+    url = Column(String(255), nullable=False, default="")        # Canlı site linki
+    image_url = Column(String(255), nullable=False, default="")  # Önizleme görseli (opsiyonel)
+    is_active = Column(Boolean, default=True, nullable=False)
+    sort_order = Column(Integer, default=0, nullable=False)
+
+    def __str__(self) -> str:
+        return self.title
+
